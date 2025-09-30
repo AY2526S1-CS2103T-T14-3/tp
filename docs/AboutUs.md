@@ -23,9 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/maybeweijun.png" width="200px">
 
-
 [[github](https://github.com/maybeweijun)]
-
 
 * Role: Coder
 
@@ -37,19 +35,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jean Doe
+### Chen Junyao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chewymochi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ChewyMochi)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
 ### Louis Teng
 
-<img src="images/louist3ng" width="200px">
+<img src="images/louist3ng.png" width="200px">
 
 [[github](http://github.com/louist3ng)]
 [[portfolio](team/louist3ng.md)]

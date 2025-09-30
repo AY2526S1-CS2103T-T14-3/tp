@@ -11,8 +11,7 @@
   memory. It helps food enthusiasts to remember their favourites and keep track of places that they may want to visit.
 
 * The project is built on top of a software project for a desktop application (called _AddressBook_) used for managing
-  contact
-  details.
+  contact details.
     * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
     * It comes with a **reasonable level of user and developer documentation**.
 

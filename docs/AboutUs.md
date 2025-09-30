@@ -15,21 +15,20 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/maybeweijun.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+
 [[github](https://github.com/maybeweijun)]
-[[portfolio](team/johndoe.md)]
+
 
 * Role: Coder
 
-### Jane Doe
+### Christopher Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/christopherchong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/christopherchong)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Project Advisor
+
 
 ### Johnny Doe
 

@@ -11,6 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+### Justin Chan
+
+<img src="images/chanism0808.png" width="200px">
+
+[[github](https://github.com/chanism0808)]
+
+* Role: Project Advisor
+
 ### Tan Wei Jun
 
 <img src="images/maybeweijun.png" width="200px">
@@ -28,16 +36,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/christopherchong)]
 
 * Role: Project Advisor
-
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
 
 ### Jean Doe
 

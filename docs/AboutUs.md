@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### John D
 
 <img src="images/johndoe.png" width="200px">
 
@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Louis Teng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/louist3ng" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/louist3ng)]
+[[portfolio](team/louist3ng.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Idk
+* Responsibilities: Idk

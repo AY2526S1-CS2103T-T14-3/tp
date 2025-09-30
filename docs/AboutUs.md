@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Tan Wei Jun
 
 <img src="images/maybeweijun.png" width="200px">
 

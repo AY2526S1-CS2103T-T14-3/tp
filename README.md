@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/AY2526S1-CS2103T-T14-3/tp/branch/master/graph/badge.svg?token=35M98WNX0N)](https://codecov.io/gh/AY2526S1-CS2103T-T14-3/tp)
+[![Java CI](https://github.com/AY2526S1-CS2103T-T14-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S1-CS2103T-T14-3/tp/actions/workflows/gradle.yml)
 
 ![Ui](docs/images/Ui.png)
 

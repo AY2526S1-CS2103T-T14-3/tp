@@ -11,51 +11,44 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Justin Chan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chanism0808.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chanism0808)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Tan Wei Jun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/maybeweijun.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/maybeweijun)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Coder
 
-### Johnny Doe
+### Christopher Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/christopherchong.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/christopherchong)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Project Advisor
 
-### Jean Doe
+### Chen Junyao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chewymochi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ChewyMochi)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Louis Teng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/louist3ng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/louist3ng)]
+[[portfolio](team/louist3ng.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Idk
+* Responsibilities: Idk

@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# FoodTrail Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,42 +274,46 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* food lovers who want to keep track of restaurants they have visited or are interested in
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+* maintain a curated record of dining experiences
+* eliminates the need for scattered notes or relying on memory
+* helps to keep track of favourite restaurants
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                      | So that I can…​                                                       |
+|----------|---------|-----------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | user    | list all restaurants              | see all the places that I have been to                                |
+| `* * *`  | user    | add a new restaurant              | document my experience at a place that I have been to                 |
+| `* * *`  | user    | remove an existing entry          | remove a place that I do not want to visit                            |
+| `* *`    | user    | save added restaurants to a file  | access past data in different sessions                                |
+| `* *`    | user    | mark an address as visited        | differentiate between places that I have visited or have yet to visit |
+| `*`      | user    | find restaurants that are near me | see if there are any places to eat around me                          |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FoodTrail` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list restaurants
+2.  FoodTrail shows a list of restaurants
+3.  User requests to delete a specific restaurants in the list
+4.  FoodTrail deletes the restaurants
 
     Use case ends.
 
@@ -321,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FoodTrail shows an error message.
 
       Use case resumes at step 2.
 
@@ -330,16 +334,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 100 restaurants without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Response to any user action should be within 3 seconds.
+5.  The user interface should be intuitive enough for users who are not IT-savvy.
+6.  The source code should be open-source.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **CLI**: Refers to Command Line Interface, a text-based method for users to interact with the program
+* **GUI**: Refers to Graphical User Interface, a user-friendly visual mechanism that allows users to interact with the system
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

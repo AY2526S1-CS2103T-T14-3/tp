@@ -279,6 +279,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* food lovers that are young adults ranging from 21 to early 30s
 
 **Value proposition**: 
 

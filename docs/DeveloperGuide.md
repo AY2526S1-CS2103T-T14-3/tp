@@ -279,6 +279,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* food lovers that are young adults ranging from 21 to early 30s
 
 **Value proposition**: 
 
@@ -340,18 +341,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 100 restaurants without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Response to any user action should be within 3 seconds.
-5.  The user interface should be intuitive enough for users who are not IT-savvy.
-6.  The source code should be open-source.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 100 restaurants without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Response to any user action should be within 3 seconds.
+5. User interface should have clear prompts and informative error messages.
+6. Source code should be open-source.
+7. Code should be well-commented, and a user guide should be provided.
+8. Features should be implemented in separate modules for easier debugging and updates.
+9. Error messages should suggest corrective action, not just report failure.
+10. Program should not crash upon encountering errors.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **CLI**: Refers to Command Line Interface, a text-based method for users to interact with the program
 * **GUI**: Refers to Graphical User Interface, a user-friendly visual mechanism that allows users to interact with the system
   

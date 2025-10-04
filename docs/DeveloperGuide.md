@@ -291,16 +291,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                      | So that I can…​                                                       |
-|----------|---------|-----------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | user    | list all restaurants              | see all the places that I have been to                                |
-| `* * *`  | user    | add a new restaurant              | document my experience at a place that I have been to                 |
-| `* * *`  | user    | remove an existing entry          | remove a place that I do not want to visit                            |
-| `* *`    | user    | save added restaurants to a file  | access past data in different sessions                                |
-| `* *`    | user    | mark an address as visited        | differentiate between places that I have visited or have yet to visit |
-| `*`      | user    | find restaurants that are near me | see if there are any places to eat around me                          |
-
-*{More to be added}*
+| Priority | As a …​     | I want to …​                          | So that I can…​                                                       |
+|----------|-------------|---------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | user        | list all restaurants                  | see all the places that I have been to                                |
+| `* * *`  | user        | add a new restaurant                  | document my experience at a place that I have been to                 |
+| `* * *`  | user        | remove an existing restaurant         | remove a place that I do not want to visit                            |
+| `* *`    | user        | save added restaurants to a file      | access past data in different sessions                                |
+| `* *`    | user        | mark an address as visited            | differentiate between places that I have visited or have yet to visit |
+| `* *`    | user        | tag a restaurant                      | remember what food was memorable at that place                        |
+| `* *`    | user        | add a picture to a restaurant         | remember what the food looked like                                    |
+| `* *`    | expert user | edit the address of a restaurant      | update the new location of the restaurant after it has moved.         |
+| `* *`    | user        | rate the food quality at a restaurant | remember my experience at that place                                  |
+| `* *`    | user        | view the user guide easily            | learn more about the product as and when I need                       |
+| `* *`    | user        | filter restaurants                    | find all restaurants that has a specific food                         |
+| `*`      | user        | find restaurants that are near me     | see if there are any places to eat around me                          |
 
 ### Use cases
 

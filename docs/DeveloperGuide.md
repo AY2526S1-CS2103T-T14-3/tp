@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **CLI**: Refers to Command Line Interface, a text-based method for users to interact with the program
 * **GUI**: Refers to Graphical User Interface, a user-friendly visual mechanism that allows users to interact with the system
   

@@ -330,8 +330,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>lists restaurants (UC01)</u>.
-2. User requests to mark a specific restaurants in the list as visited.
+1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+2. User requests to mark a specific restaurant in the list as visited.
 3. FoodTrail marks the specified restaurant as visited.
 
     Use case ends.
@@ -352,8 +352,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User <u>lists restaurants (UC01)</u>.
-2. User requests to delete a specific restaurants in the list.
+1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+2. User requests to delete a specific restaurant in the list.
 3. FoodTrail deletes the specified restaurant.
 
     Use case ends.

@@ -344,10 +344,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* *a. FoodTrail app crash.
-
-  Use case ends.
-
 **Use case: UC03 - Delete a restaurant**
 
 **MSS**
@@ -365,10 +361,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. FoodTrail shows an error message.
 
       Use case resumes at step 2.
-
-* *a. FoodTrail app crash.
-  
-  Use case ends.
 
 ### Non-Functional Requirements
 

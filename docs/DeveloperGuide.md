@@ -311,14 +311,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `FoodTrail` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a restaurant**
+**Use case: UC01 - List restaurants**
 
 **MSS**
 
-1.  User requests to list restaurants
-2.  FoodTrail shows a list of restaurants
-3.  User requests to delete a specific restaurants in the list
-4.  FoodTrail deletes the restaurants
+1. User requests to list restaurants.
+2. FoodTrail shows a list of restaurants.
 
     Use case ends.
 
@@ -327,6 +325,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+
+**Use case: UC02 - Mark a restaurant as visited**
+
+**MSS**
+
+1. User <u>lists restaurants (UC01)</u>.
+2. User requests to mark a specific restaurants in the list as visited.
+3. FoodTrail marks the specified restaurant as visited.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. FoodTrail shows an error message.
+
+      Use case resumes at step 2.
+
+* *a. FoodTrail app crash
+
+  Use case ends
+
+**Use case: UC03 - Delete a restaurant**
+
+**MSS**
+
+1. User <u>lists restaurants (UC01)</u>.
+2. User requests to delete a specific restaurants in the list
+3. FoodTrail deletes the specified restaurant
+
+    Use case ends.
+
+**Extensions**
 
 * 3a. The given index is invalid.
 
@@ -337,7 +369,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * *a. FoodTrail app crash
   
   Use case ends
-*{More to be added}*
 
 ### Non-Functional Requirements
 

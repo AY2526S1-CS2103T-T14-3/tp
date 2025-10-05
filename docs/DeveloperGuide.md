@@ -313,14 +313,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC01 - List restaurants**
 
-**MSS**
+MSS:
 
 1. User requests to list restaurants.
 2. FoodTrail shows a list of restaurants.
 
     Use case ends.
 
-**Extensions**
+Extensions:
 
 * 2a. The list is empty.
 
@@ -329,25 +329,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC02 - Add a restaurant**
 
-**MSS**
+MSS:
 
 1. User enters details of the restaurant to be added.
 2. FoodTrail adds the restaurant to the list.
 
    Use case ends.
 
-**Extensions**
+Extensions:
 
-* 2a. The syntax is invalid.
+* 2a. There are missing parameters or invalid syntax.
 
-    * 2a1. FoodTrail shows an error message.
-
+    * 2a1.  FoodTrail shows an error message, notifying the user about the syntax for add.
+  
       Use case resumes at step 1.
 
 
 **Use case: UC03 - Delete a restaurant**
 
-**MSS**
+MSS:
 
 1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
 2. User requests to delete a specific restaurant in the list.
@@ -355,17 +355,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+Extensions:
 
 * 3a. The given index is invalid.
 
-    * 3a1. FoodTrail shows an error message.
+    * 3a1. FoodTrail shows an error message, notifying the user about the invalid index.
 
       Use case resumes at step 2.
 
+
 **Use case: UC04 - Mark a restaurant as visited**
 
-**MSS**
+MSS:
 
 1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
 2. User requests to mark a specific restaurant in the list as visited.
@@ -373,17 +374,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+Extensions:
 
 * 3a. The given index is invalid.
 
-    * 3a1. FoodTrail shows an error message.
+    * 3a1. FoodTrail shows an error message, notifying the user about the invalid index.
 
       Use case resumes at step 2.
 
+
 **Use case: UC05 - Tag a restaurant**
 
-**MSS**
+MSS:
 
 1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
 2. User requests to tag a specified restaurant in the list with a specified tag.
@@ -391,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
+Extensions:
 
 * 3a. No index or tag was provided.
 
@@ -399,9 +401,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-* 3a. The given index is invalid.
 
-    * 3a1. FoodTrail shows an error message.
+* 3b. The given index is invalid.
+
+    * 3b1. FoodTrail shows an error message, notifying the user about the invalid index.
 
       Use case resumes at step 2.
 

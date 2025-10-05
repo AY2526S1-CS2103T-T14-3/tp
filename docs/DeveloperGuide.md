@@ -344,17 +344,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* *a. FoodTrail app crash
+* *a. FoodTrail app crash.
 
-  Use case ends
+  Use case ends.
 
 **Use case: UC03 - Delete a restaurant**
 
 **MSS**
 
 1. User <u>lists restaurants (UC01)</u>.
-2. User requests to delete a specific restaurants in the list
-3. FoodTrail deletes the specified restaurant
+2. User requests to delete a specific restaurants in the list.
+3. FoodTrail deletes the specified restaurant.
 
     Use case ends.
 
@@ -366,9 +366,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* *a. FoodTrail app crash
+* *a. FoodTrail app crash.
   
-  Use case ends
+  Use case ends.
 
 ### Non-Functional Requirements
 

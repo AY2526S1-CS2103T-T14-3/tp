@@ -395,7 +395,7 @@ MSS:
 
 Extensions:
 
-* 3a. No index or tag was provided.
+* 3a. There is missing index or tag.
 
     * 3a1. FoodTrail shows an error message, instructing the user to provide an index and tag.
 

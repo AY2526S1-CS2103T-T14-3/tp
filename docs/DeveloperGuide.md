@@ -326,23 +326,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC02 - Mark a restaurant as visited**
+
+**Use case: UC02 - Add a restaurant**
 
 **MSS**
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
-2. User requests to mark a specific restaurant in the list as visited.
-3. FoodTrail marks the specified restaurant as visited.
+1. User enters details of the restaurant to be added.
+2. FoodTrail adds the restaurant to the list.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 2a. The syntax is invalid.
 
-    * 3a1. FoodTrail shows an error message.
+    * 2a1. FoodTrail shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
+
 
 **Use case: UC03 - Delete a restaurant**
 
@@ -355,6 +356,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. FoodTrail shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC04 - Mark a restaurant as visited**
+
+**MSS**
+
+1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+2. User requests to mark a specific restaurant in the list as visited.
+3. FoodTrail marks the specified restaurant as visited.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. FoodTrail shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC05 - Tag a restaurant**
+
+**MSS**
+
+1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+2. User requests to tag a specified restaurant in the list with a specified tag.
+3. FoodTrail tags the restaurant with the provided tag.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. No index or tag was provided.
+
+    * 3a1. FoodTrail shows an error message, instructing the user to provide an index and tag.
+
+    Use case resumes at step 2.
 
 * 3a. The given index is invalid.
 

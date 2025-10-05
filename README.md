@@ -1,6 +1,6 @@
 [![codecov](https://codecov.io/gh/AY2526S1-CS2103T-T14-3/tp/branch/master/graph/badge.svg?token=35M98WNX0N)](https://codecov.io/gh/AY2526S1-CS2103T-T14-3/tp)
 [![Java CI](https://github.com/AY2526S1-CS2103T-T14-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S1-CS2103T-T14-3/tp/actions/workflows/gradle.yml)
-
+ 
 ![Ui](docs/images/Ui.png)
 
 
@@ -10,9 +10,8 @@
 * FoodTrail maintains a curated record of dining experiences. It eliminates the need for scattered notes or relying on
   memory. It helps food enthusiasts to remember their favourites and keep track of places that they may want to visit.
 
-* The project is built on top of a software project for a desktop application (called _AddressBook_) used for managing 
-  contact 
-  details.
+* The project is built on top of a software project for a desktop application (called _AddressBook_) used for managing
+  contact details.
     * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
     * It comes with a **reasonable level of user and developer documentation**.
 

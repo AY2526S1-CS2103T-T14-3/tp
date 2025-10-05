@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# FoodTrail Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,42 +274,51 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* food lovers who want to keep track of restaurants they have visited or are interested in
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* food lovers that are young adults ranging from 21 to early 30s
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+* maintain a curated record of dining experiences
+* eliminates the need for scattered notes or relying on memory
+* helps to keep track of favourite restaurants
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​     | I want to …​                          | So that I can…​                                                       |
+|----------|-------------|---------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | user        | list all restaurants                  | see all the places that I have been to                                |
+| `* * *`  | user        | add a new restaurant                  | document my experience at a place that I have been to                 |
+| `* * *`  | user        | remove an existing restaurant         | remove a place that I do not want to visit                            |
+| `* *`    | user        | save added restaurants to a file      | access past data in different sessions                                |
+| `* *`    | user        | mark an address as visited            | differentiate between places that I have visited or have yet to visit |
+| `* *`    | user        | tag a restaurant                      | remember what food was memorable at that place                        |
+| `* *`    | user        | add a picture to a restaurant         | remember what the food looked like                                    |
+| `* *`    | expert user | edit the address of a restaurant      | update the new location of the restaurant after it has moved.         |
+| `* *`    | user        | rate the food quality at a restaurant | remember my experience at that place                                  |
+| `* *`    | user        | view the user guide easily            | learn more about the product as and when I need                       |
+| `* *`    | user        | filter restaurants                    | find all restaurants that has a specific food                         |
+| `*`      | user        | find restaurants that are near me     | see if there are any places to eat around me                          |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FoodTrail` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a restaurant**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list restaurants
+2.  FoodTrail shows a list of restaurants
+3.  User requests to delete a specific restaurants in the list
+4.  FoodTrail deletes the restaurants
 
     Use case ends.
 
@@ -321,25 +330,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FoodTrail shows an error message.
 
       Use case resumes at step 2.
 
+* *a. FoodTrail app crash
+  
+  Use case ends
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 100 restaurants without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Response to any user action should be within 3 seconds.
+5. User interface should have clear prompts and informative error messages.
+6. Source code should be open-source.
+7. Code should be well-commented, and a user guide should be provided.
+8. Features should be implemented in separate modules for easier debugging and updates.
+9. Error messages should suggest corrective action, not just report failure.
+10. Program should not crash upon encountering errors.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **CLI**: Refers to Command Line Interface, a text-based method for users to interact with the program
+* **GUI**: Refers to Graphical User Interface, a user-friendly visual mechanism that allows users to interact with the system
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -370,17 +388,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a restaurant
 
-1. Deleting a person while all persons are being shown
+1. Deleting a restaurant while all restaurants are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

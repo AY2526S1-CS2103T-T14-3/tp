@@ -423,7 +423,7 @@ Extensions:
 
 ### Glossary
 
-* **API**: The public set of methods a component exposes (e.g., Logic#execute), independent of its implementation
+* **API**: The public set of methods a component exposes, independent of its implementation
 * **Architecture Diagram**: High-level overview of components and their relationships
 * **CLI**: Refers to Command Line Interface, a text-based method for users to interact with the program
 * **FXML**: XML files describing JavaFX UI layouts (e.g., MainWindow.fxml)

@@ -423,12 +423,18 @@ Extensions:
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **API**: The public set of methods a component exposes, independent of its implementation
+* **Architecture Diagram**: High-level overview of components and their relationships
 * **CLI**: Refers to Command Line Interface, a text-based method for users to interact with the program
+* **FXML**: XML files describing JavaFX UI layouts 
 * **GUI**: Refers to Graphical User Interface, a user-friendly visual mechanism that allows users to interact with the system
-  
---------------------------------------------------------------------------------------------------------------------
+* **JAR**: Packaged executable of the app
+* **JavaFX**: GUI framework used to build the app’s interface
+* **JSON**: Text format used to serialize FoodTrail data and user preferences
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **MSS (Main Success Scenario)**: The normal, no-errors path in a use case
 
+--------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.

@@ -66,11 +66,11 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case TagCommand.COMMAND_WORD:
-            return new TagCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

@@ -21,4 +21,5 @@ public class TagCommandTest {
     public void execute() {
         assertCommandFailure(new TagCommand(), model, MESSAGE_NOT_IMPLEMENTED_YET);
     }
+
 }

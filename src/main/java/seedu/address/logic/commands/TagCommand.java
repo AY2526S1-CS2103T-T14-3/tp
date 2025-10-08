@@ -9,7 +9,7 @@ import seedu.address.model.Model;
  * Changes the tag of an existing person in the address book.
  */
 
-public class TagCommand extends Command{
+public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the tag of the restaurant identified "

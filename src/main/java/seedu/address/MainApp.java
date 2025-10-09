@@ -15,15 +15,15 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FoodTrail;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFoodTrail;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.FoodTrailStorage;
+import seedu.address.storage.JsonFoodTrailStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -57,7 +57,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        FoodTrailStorage addressBookStorage = new JsonFoodTrailStorage(userPrefs.getFoodTrailFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -73,21 +73,21 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getFoodTrailFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyFoodTrail> foodTrailOptional;
+        ReadOnlyFoodTrail initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            foodTrailOptional = storage.readFoodTrail();
+            if (!foodTrailOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getFoodTrailFilePath()
+                        + " populated with a sample FoodTrail.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = foodTrailOptional.orElseGet(SampleDataUtil::getSampleFoodTrail);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getFoodTrailFilePath() + " could not be loaded."
+                    + " Will be starting with an empty FoodTrail.");
+            initialData = new FoodTrail();
         }
 
         return new ModelManager(initialData, userPrefs);

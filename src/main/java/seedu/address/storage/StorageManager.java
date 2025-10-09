@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFoodTrail;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
@@ -17,14 +17,14 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private FoodTrailStorage foodTrailStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code FoodTrailStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(FoodTrailStorage foodTrailStorage, UserPrefsStorage userPrefsStorage) {
+        this.foodTrailStorage = foodTrailStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -49,30 +49,30 @@ public class StorageManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getFoodTrailFilePath() {
+        return foodTrailStorage.getFoodTrailFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyFoodTrail> readFoodTrail() throws DataLoadingException {
+        return readFoodTrail(foodTrailStorage.getFoodTrailFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyFoodTrail> readFoodTrail(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return foodTrailStorage.readFoodTrail(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveFoodTrail(ReadOnlyFoodTrail foodTrail) throws IOException {
+        saveFoodTrail(foodTrail, foodTrailStorage.getFoodTrailFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveFoodTrail(ReadOnlyFoodTrail foodTrail, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        foodTrailStorage.saveFoodTrail(foodTrail, filePath);
     }
 
 }

@@ -26,6 +26,7 @@ import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -39,6 +40,14 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_tag() throws Exception {
+        final Tag tag = new Tag("friend");
+        TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + CliSyntax.PREFIX_TAG + tag.tagName);
+        assertEquals(new TagCommand(INDEX_FIRST_PERSON, tag), command);
     }
 
     @Test
@@ -88,12 +97,6 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
-
-    @Test
-    public void parseCommand_remark() throws Exception {
-        assertTrue(parser.parseCommand(TagCommand.COMMAND_WORD) instanceof TagCommand);
-    }
-
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

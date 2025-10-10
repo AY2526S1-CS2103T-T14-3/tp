@@ -17,21 +17,27 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t14-3.github.io/tp/UserGuide.html";
-    public static final String USER_COMMANDS = "Commands List:  \n"
-            + "Add \n"
-            + "add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]\n"
-            + "eg : add n/McDonald's a/1 Jelebu Road, Bukit Panjang Plaza #02-01, 677743 hp/68928572 \n\n"
-            + "List \n"
-            + "list\n\n"
-            + "Delete\n"
-            + "delete <index>\n"
-            + "eg : delete 3\n\n"
-            + "Find \n"
-            + "find <keyword>\n"
-            + "eg : find Mcdonald\n\n"
-            + "Tag \n"
-            + "tag <index> #<tag>\n"
-            + "eg : tag 3 #fantastic\n";
+    public static final String USER_COMMANDS = """
+            Commands List:
+            Add a restaurant
+            add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]
+            eg : add n/McDonald's a/1 Jelebu Road, Bukit Panjang Plaza #02-01, 677743 hp/68928572
+           
+            List all restaurants
+            list
+            
+            Delete a restaurant
+            delete <index>
+            eg : delete 3
+            
+            Find a restaurant
+            find <keyword>
+            eg : find Mcdonald
+            
+            Tag a restaurant
+            tag <index> #<tag>
+            eg : tag 3 #fantastic
+            """;
 
     public static final String HELP_MESSAGE = USER_COMMANDS + "\nRefer to the user guide:\n" + USERGUIDE_URL;
 

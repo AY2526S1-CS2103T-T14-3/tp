@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_KFC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.MCDONALDS;
 import static seedu.address.testutil.TypicalPersons.KOI;
+import static seedu.address.testutil.TypicalPersons.MCDONALDS;
 
 import org.junit.jupiter.api.Test;
 
@@ -88,7 +88,8 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + MCDONALDS.getName() + ", phone=" + MCDONALDS.getPhone()
+        String expected = Person.class.getCanonicalName() + "{name=" + MCDONALDS.getName()
+                + ", phone=" + MCDONALDS.getPhone()
                 + ", address=" + MCDONALDS.getAddress() + ", tags=" + MCDONALDS.getTags() + "}";
         assertEquals(expected, MCDONALDS.toString());
     }

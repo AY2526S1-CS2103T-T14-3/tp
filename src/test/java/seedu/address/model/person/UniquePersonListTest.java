@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.MCDONALDS;
 import static seedu.address.testutil.TypicalPersons.KOI;
+import static seedu.address.testutil.TypicalPersons.MCDONALDS;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,8 +42,8 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(MCDONALDS);
-        Person editedMcdonalds = new PersonBuilder(MCDONALDS).withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD)
-                .build();
+        Person editedMcdonalds = new PersonBuilder(MCDONALDS)
+                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(uniquePersonList.contains(editedMcdonalds));
     }
 
@@ -85,8 +85,8 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(MCDONALDS);
-        Person editedMcdonalds = new PersonBuilder(MCDONALDS).withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD)
-                .build();
+        Person editedMcdonalds = new PersonBuilder(MCDONALDS)
+                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
         uniquePersonList.setPerson(MCDONALDS, editedMcdonalds);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(editedMcdonalds);

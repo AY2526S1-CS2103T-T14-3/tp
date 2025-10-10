@@ -36,7 +36,8 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_JOLLIBEE.equals(DESC_KFC));
 
         // different name -> returns false
-        EditPersonDescriptor editedJollibee = new EditPersonDescriptorBuilder(DESC_JOLLIBEE).withName(VALID_NAME_KFC).build();
+        EditPersonDescriptor editedJollibee = new EditPersonDescriptorBuilder(DESC_JOLLIBEE)
+                .withName(VALID_NAME_KFC).build();
         assertFalse(DESC_JOLLIBEE.equals(editedJollibee));
 
         // different phone -> returns false

@@ -52,7 +52,8 @@ public class TypicalPersons {
             .withAddress("1 Bt Batok Central, #01-07, Singapore 658713").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person JOLLIBEE = new PersonBuilder().withName(VALID_NAME_JOLLIBEE).withPhone(VALID_PHONE_JOLLIBEE)
+    public static final Person JOLLIBEE = new PersonBuilder().withName(VALID_NAME_JOLLIBEE)
+            .withPhone(VALID_PHONE_JOLLIBEE)
             .withAddress(VALID_ADDRESS_JOLLIBEE).withTags(VALID_TAG_HALAL).build();
     public static final Person KFC = new PersonBuilder().withName(VALID_NAME_KFC).withPhone(VALID_PHONE_KFC)
             .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD, VALID_TAG_HALAL)

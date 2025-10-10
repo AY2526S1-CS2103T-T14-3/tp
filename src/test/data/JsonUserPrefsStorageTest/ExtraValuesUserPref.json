@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "foodTrailFilePath" : "foodtrail.json"
+  "addressBookFilePath" : "addressbook.json"
 }

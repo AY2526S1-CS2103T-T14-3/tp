@@ -9,17 +9,17 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.person.Person;
 
 /**
- * Deletes a restaurant identified using its displayed index in FoodTrail.
+ * Deletes a person identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the restaurant identified by the index number used in the displayed restaurant list.\n"
+            + ": Deletes the Restaurant identified by the index number used in the displayed restaurant list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -34,15 +34,15 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Restaurant> lastShownList = model.getFilteredRestaurantList();
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Restaurant restaurantToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteRestaurant(restaurantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, Messages.format(restaurantToDelete)));
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override

@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.restaurant.Restaurant;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +35,54 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' foodtrail file path.
      */
-    Path getAddressBookFilePath();
+    Path getFoodTrailFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' foodtrail file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setFoodTrailFilePath(Path foodTrailFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces foodtrail data with the data in {@code foodTrail}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setFoodTrail(ReadOnlyFoodTrail foodTrail);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyFoodTrail getFoodTrail();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a Restaurant with the same identity as {@code Restaurant} exists in the food trail.
      */
-    boolean hasPerson(Person person);
+    boolean hasRestaurant(Restaurant restaurant);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given Restaurant.
+     * The Restaurant must exist in the food trail.
      */
-    void deletePerson(Person target);
+    void deleteRestaurant(Restaurant target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given Restaurant.
+     * {@code Restaurant} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addRestaurant(Restaurant restaurant);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given Restaurant {@code target} with {@code editedRestaurant}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The Restaurant identity of {@code editedRestaurant} must not be the same as
+     *  another existing Restaurant in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setRestaurant(Restaurant target, Restaurant editedRestaurant);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered Restaurant list */
+    ObservableList<Restaurant> getFilteredRestaurantList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered Restaurant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
 }

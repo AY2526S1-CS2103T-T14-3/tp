@@ -10,7 +10,6 @@ import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
-
 /**
  * Controller for a help page
  */
@@ -21,22 +20,18 @@ public class HelpWindow extends UiPart<Stage> {
             Commands List:
             Add a restaurant
             add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]
-            eg : add n/McDonald's a/1 Jelebu Road, Bukit Panjang Plaza #02-01, 677743 hp/68928572
-           
+            eg : add n/McDonald's a/1 Jelebu Road, Bukit Panjang Plaza #02-01, 677743 hp/68928572\n
             List all restaurants
-            list
-            
+            list\n
             Delete a restaurant
             delete <index>
-            eg : delete 3
-            
+            eg : delete 3\n
             Find a restaurant
             find <keyword>
-            eg : find Mcdonald
-            
+            eg : find Mcdonald\n
             Tag a restaurant
             tag <index> #<tag>
-            eg : tag 3 #fantastic
+            eg : tag 3 #fantastic\n
             """;
 
     public static final String HELP_MESSAGE = USER_COMMANDS + "\nRefer to the user guide:\n" + USERGUIDE_URL;

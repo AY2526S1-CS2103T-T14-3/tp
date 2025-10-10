@@ -130,7 +130,7 @@ public class PersonContainsKeywordsPredicateTest {
         // Non-matching keyword for all attributes
         predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withTags("friend").build()));
+                .withAddress("Main Street").withTags("friend").build()));
     }
 
     @Test

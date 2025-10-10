@@ -37,7 +37,7 @@ public class TagCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Tag> newTags = new HashSet<>(firstPerson.getTags());
         newTags.add(new Tag(TAG_STUB));
-        Person editedPerson = new Person(firstPerson.getName(), firstPerson.getPhone(), firstPerson.getEmail(),
+        Person editedPerson = new Person(firstPerson.getName(), firstPerson.getPhone(),
                 firstPerson.getAddress(), newTags);
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, new Tag(TAG_STUB));
@@ -66,7 +66,6 @@ public class TagCommandTest {
         Set<Tag> newTags = new HashSet<>(personInFilteredList.getTags());
         newTags.add(new Tag(TAG_STUB));
         Person editedPerson = new Person(personInFilteredList.getName(), personInFilteredList.getPhone(),
-                personInFilteredList.getEmail(),
                 personInFilteredList.getAddress(), newTags);
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, new Tag(TAG_STUB));

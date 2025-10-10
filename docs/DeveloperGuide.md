@@ -281,7 +281,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 * food lovers that are young adults ranging from 21 to early 30s
 
-**Value proposition**: 
+**Value proposition**:
 
 * maintain a curated record of dining experiences
 * eliminates the need for scattered notes or relying on memory
@@ -341,7 +341,7 @@ Extensions:
 * 2a. There are missing parameters or invalid syntax.
 
     * 2a1.  FoodTrail shows an error message, notifying the user about the syntax for add.
-  
+
       Use case resumes at step 1.
 
 
@@ -426,7 +426,7 @@ Extensions:
 * **API**: The public set of methods a component exposes, independent of its implementation
 * **Architecture Diagram**: High-level overview of components and their relationships
 * **CLI**: Refers to Command Line Interface, a text-based method for users to interact with the program
-* **FXML**: XML files describing JavaFX UI layouts 
+* **FXML**: XML files describing JavaFX UI layouts
 * **GUI**: Refers to Graphical User Interface, a user-friendly visual mechanism that allows users to interact with the system
 * **JAR**: Packaged executable of the app
 * **JavaFX**: GUI framework used to build the app’s interface

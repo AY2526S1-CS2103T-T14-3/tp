@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalRestaurants.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,12 +18,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.FoodTrail;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyFoodTrail;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.restaurant.Restaurant;
-import seedu.address.testutil.RestaurantBuilder;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
@@ -34,30 +34,29 @@ public class AddCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingRestaurantAdded modelStub = new ModelStubAcceptingRestaurantAdded();
-        Restaurant validRestaurant = new RestaurantBuilder().build();
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validRestaurant).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validRestaurant)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validRestaurant), modelStub.restaurantsAdded);
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Restaurant validPerson = new RestaurantBuilder().build();
+        Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand
-                .MESSAGE_DUPLICATE_RESTAURANT, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Restaurant alice = new RestaurantBuilder().withName("Alice").build();
-        Restaurant bob = new RestaurantBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").build();
+        Person bob = new PersonBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -74,7 +73,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different restaurant -> returns false
+        // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -110,95 +109,95 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getFoodTrailFilePath() {
+        public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setFoodTrailFilePath(Path addressBookFilePath) {
+        public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addRestaurant(Restaurant restaurant) {
+        public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setFoodTrail(ReadOnlyFoodTrail newData) {
+        public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyFoodTrail getFoodTrail() {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasRestaurant(Restaurant restaurant) {
+        public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteRestaurant(Restaurant target) {
+        public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setRestaurant(Restaurant target, Restaurant editedRestaurant) {
+        public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Restaurant> getFilteredRestaurantList() {
+        public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single restaurant.
+     * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Restaurant restaurant;
+        private final Person person;
 
-        ModelStubWithPerson(Restaurant restaurant) {
-            requireNonNull(restaurant);
-            this.restaurant = restaurant;
+        ModelStubWithPerson(Person person) {
+            requireNonNull(person);
+            this.person = person;
         }
 
         @Override
-        public boolean hasRestaurant(Restaurant restaurant) {
-            requireNonNull(restaurant);
-            return this.restaurant.isSameRestaurant(restaurant);
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return this.person.isSamePerson(person);
         }
     }
 
     /**
-     * A Model stub that always accept the restaurant being added.
+     * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingRestaurantAdded extends ModelStub {
-        final ArrayList<Restaurant> restaurantsAdded = new ArrayList<>();
+    private class ModelStubAcceptingPersonAdded extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasRestaurant(Restaurant restaurant) {
-            requireNonNull(restaurant);
-            return restaurantsAdded.stream().anyMatch(restaurant::isSameRestaurant);
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
         }
 
         @Override
-        public void addRestaurant(Restaurant restaurant) {
-            requireNonNull(restaurant);
-            restaurantsAdded.add(restaurant);
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
         }
 
         @Override
-        public ReadOnlyFoodTrail getFoodTrail() {
-            return new FoodTrail();
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
     }
 

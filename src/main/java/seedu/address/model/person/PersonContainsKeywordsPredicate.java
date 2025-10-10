@@ -22,7 +22,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getName().fullName, keyword)
                 || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
                 || StringUtil.containsSubstringIgnoreCase(person.getAddress().value, keyword)
-                || person.getTags().stream().anyMatch(tag -> StringUtil.containsSubstringIgnoreCase(tag.tagName, keyword)));
+                || person.getTags().stream().anyMatch(tag -> StringUtil
+                        .containsSubstringIgnoreCase(tag.tagName, keyword)));
     }
 
     @Override

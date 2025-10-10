@@ -3,13 +3,14 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KFC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_KFC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.MCDONALDS;
+import static seedu.address.testutil.TypicalPersons.KOI;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,69 +27,69 @@ public class PersonTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(MCDONALDS.isSamePerson(MCDONALDS));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(MCDONALDS.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        Person editedMcdonalds = new PersonBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
+                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
+        assertTrue(MCDONALDS.isSamePerson(editedMcdonalds));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        editedMcdonalds = new PersonBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
+        assertFalse(MCDONALDS.isSamePerson(editedMcdonalds));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        Person editedKoi = new PersonBuilder(KOI).withName(VALID_NAME_KFC.toLowerCase()).build();
+        assertFalse(KOI.isSamePerson(editedKoi));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        String nameWithTrailingSpaces = VALID_NAME_KFC + " ";
+        editedKoi = new PersonBuilder(KOI).withName(nameWithTrailingSpaces).build();
+        assertFalse(KOI.isSamePerson(editedKoi));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Person mcdonaldsCopy = new PersonBuilder(MCDONALDS).build();
+        assertTrue(MCDONALDS.equals(mcdonaldsCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(MCDONALDS.equals(MCDONALDS));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(MCDONALDS.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(MCDONALDS.equals(5));
 
         // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertFalse(MCDONALDS.equals(KOI));
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Person editedMcdonalds = new PersonBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
+        assertFalse(MCDONALDS.equals(editedMcdonalds));
 
         // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedMcdonalds = new PersonBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC).build();
+        assertFalse(MCDONALDS.equals(editedMcdonalds));
 
         // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedMcdonalds = new PersonBuilder(MCDONALDS).withAddress(VALID_ADDRESS_KFC).build();
+        assertFalse(MCDONALDS.equals(editedMcdonalds));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedMcdonalds = new PersonBuilder(MCDONALDS).withTags(VALID_TAG_HALAL).build();
+        assertFalse(MCDONALDS.equals(editedMcdonalds));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
-        assertEquals(expected, ALICE.toString());
+        String expected = Person.class.getCanonicalName() + "{name=" + MCDONALDS.getName() + ", phone=" + MCDONALDS.getPhone()
+                + ", address=" + MCDONALDS.getAddress() + ", tags=" + MCDONALDS.getTags() + "}";
+        assertEquals(expected, MCDONALDS.toString());
     }
 }

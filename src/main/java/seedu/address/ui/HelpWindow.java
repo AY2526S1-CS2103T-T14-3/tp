@@ -15,8 +15,26 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t14-3.github.io/tp/UserGuide.html";
+    public static final String USER_COMMANDS = """
+            Commands List:
+            Add a restaurant
+            add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]
+            eg : add n/McDonald's a/1 Jelebu Road, Bukit Panjang Plaza #02-01, 677743 hp/68928572\n
+            List all restaurants
+            list\n
+            Delete a restaurant
+            delete <index>
+            eg : delete 3\n
+            Find a restaurant
+            find <keyword>
+            eg : find Mcdonald\n
+            Tag a restaurant
+            tag <index> #<tag>
+            eg : tag 3 #fantastic\n
+            """;
+
+    public static final String HELP_MESSAGE = USER_COMMANDS + "\nRefer to the user guide:\n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -66,6 +84,18 @@ public class HelpWindow extends UiPart<Stage> {
         logger.fine("Showing help page about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
+
+        // Open the USERGUIDE_URL in a browser tab
+        /*
+        try {
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+            }
+        } catch (Exception e) {
+            logger.warning("Failed to open user guide in browser: " + e.getMessage());
+        }
+        */
+
     }
 
     /**

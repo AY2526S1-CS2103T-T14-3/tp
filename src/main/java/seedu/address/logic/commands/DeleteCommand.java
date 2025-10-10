@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.restaurant.Restaurant;
 
 /**
- * Deletes a restaurant identified using it's displayed index from the address book.
+ * Deletes a restaurant identified using its displayed index in FoodTrail.
  */
 public class DeleteCommand extends Command {
 

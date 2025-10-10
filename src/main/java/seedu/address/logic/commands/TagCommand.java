@@ -67,7 +67,7 @@ public class TagCommand extends Command {
         newTags.add(tag);
 
         Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getAddress(), newTags);
 
         model.setPerson(personToEdit, editedPerson);

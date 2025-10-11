@@ -3,19 +3,18 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String MESSAGE_CONSTRAINTS = "Address should not be empty, not exceed 100 characters, and must end with a comma followed by a space and a 6-digit postal code. "
+            + "Preferred format: [Block/Street No.] [Street Name], [Building Name] (Optional) [#Floor-Unit] (Optional), [Postal Code]. "
+            + "Spaces within the postal code will be ignored for validation.";
 
     public final String value;
 
@@ -34,7 +33,46 @@ public class Address {
      * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        // 1. Check if empty or blank
+        if (test.trim().isEmpty()) {
+            return false; // "Address cannot be empty"
+        }
+
+        // 2. Check if length > 100
+        if (test.length() > 100) {
+            return false; // "Address cannot exceed 100 characters"
+        }
+
+        // 3. Use regex to split address into main part and postal code
+        // The postal code must be preceded by a comma and mandatory whitespace.
+        Pattern addressPattern = Pattern.compile("^(.*?),\\s+((\\d\\s*){6})$");
+        Matcher addressMatcher = addressPattern.matcher(test);
+
+        if (!addressMatcher.matches()) {
+            return false;
+        }
+
+        // We have a match, let's validate the parts.
+        String addressPart = addressMatcher.group(1);
+        String rawPostalCode = addressMatcher.group(2);
+
+        // Validate address part
+        if (addressPart.trim().isEmpty()) {
+            return false; // Address part before comma is empty
+        }
+
+        if (!addressPart.matches("^[a-zA-Z0-9\\s,#'-]*$")) {
+            return false;
+        }
+
+        // Validate postal code part
+        String cleanedPostalCode = rawPostalCode.replaceAll("\\s", "");
+        if (!cleanedPostalCode.matches("\\d{6}")) {
+            // This is a safeguard, the main regex should have caught this.
+            return false;
+        }
+
+        return true;
     }
 
     @Override

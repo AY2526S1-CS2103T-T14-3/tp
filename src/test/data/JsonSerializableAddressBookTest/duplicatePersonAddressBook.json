@@ -1,12 +1,13 @@
 {
   "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "name" : "McDonald's",
+    "phone" : "67773777",
+    "address" : "200 Victoria St, #01-49 Bugis Junction, Singapore 188021",
+    "tags" : [ "fastfood" ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "address": "4th street"
+    "name" : "McDonald's",
+    "phone" : "67773777",
+    "address" : "Block 768 Woodlands Ave 6, #01-12 Woodlands Mart, Singapore 730768",
+    "tags" : [ "fastfood" ]
   } ]
 }

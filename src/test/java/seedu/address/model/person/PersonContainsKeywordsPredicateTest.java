@@ -46,24 +46,24 @@ public class PersonContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+                new PersonContainsKeywordsPredicate(Collections.singletonList("Burger"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
 
         // Multiple keywords
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Burger", "King"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
 
         // Only one matching keyword
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("King", "Chan"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Hawker Chan").build()));
 
         // Mixed-case keywords
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("bUrGeR", "kInG"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
 
         // Partial keyword match
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Ali"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Burg"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
     }
 
     @Test
@@ -82,41 +82,41 @@ public class PersonContainsKeywordsPredicateTest {
     public void test_addressContainsKeywords_returnsTrue() {
         // One keyword
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(Collections.singletonList("Street"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("Main Street").build()));
+                new PersonContainsKeywordsPredicate(Collections.singletonList("Junction"));
+        assertTrue(predicate.test(new PersonBuilder().withAddress("Bugis Junction").build()));
 
         // Partial keyword match
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Str"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("Main Street").build()));
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("Jun"));
+        assertTrue(predicate.test(new PersonBuilder().withAddress("Bugis Junction").build()));
 
         // Mixed-case keywords
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("sTrEeT"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("Main Street").build()));
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("jUnCtIoN"));
+        assertTrue(predicate.test(new PersonBuilder().withAddress("Bugis Junction").build()));
     }
 
     @Test
     public void test_tagsContainsKeywords_returnsTrue() {
         // One keyword
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(Collections.singletonList("friend"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friend", "colleague").build()));
+                new PersonContainsKeywordsPredicate(Collections.singletonList("western"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("western", "fastfood").build()));
 
         // Partial keyword match
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("fri"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friend").build()));
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("west"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("western").build()));
 
         // Mixed-case keywords
-        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("fRiEnD"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friend").build()));
+        predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("wEsTeRn"));
+        assertTrue(predicate.test(new PersonBuilder().withTags("western").build()));
     }
 
 
     @Test
     public void test_keywordMatchesMultipleAttributes_returnsTrue() {
-        // Keyword matches name and phone
+        // Keyword matches name and address
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(Collections.singletonList("Ali"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345").build()));
+                new PersonContainsKeywordsPredicate(Collections.singletonList("Burger"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").withAddress("Burger World").build()));
     }
 
 
@@ -125,12 +125,12 @@ public class PersonContainsKeywordsPredicateTest {
         // Zero keywords
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("McDonalds").build()));
 
         // Non-matching keyword for all attributes
-        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withPhone("12345")
-                .withAddress("Main Street").withTags("friend").build()));
+        predicate = new PersonContainsKeywordsPredicate(Arrays.asList("Pizza"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Burger King").withPhone("12345")
+                .withAddress("Bugis Junction").withTags("fastfood").build()));
     }
 
     @Test

@@ -20,16 +20,16 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_NAME = "McDonald's";
+    private static final String VALID_PHONE = "67773777";
+    private static final String VALID_ADDRESS = "200 Victoria St, #01-49 Bugis Junction, Singapore 188021";
+    private static final String VALID_TAG_1 = "halal";
+    private static final String VALID_TAG_2 = "fastfood";
 
     private static final String WHITESPACE = " \t\r\n";
 

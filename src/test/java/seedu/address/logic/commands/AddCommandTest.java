@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.POPEYES;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -55,32 +55,32 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Person jollibee = new PersonBuilder().withName("Jollibee").build();
+        Person kfc = new PersonBuilder().withName("KFC").build();
+        AddCommand addJollibeeCommand = new AddCommand(jollibee);
+        AddCommand addKfcCommand = new AddCommand(kfc);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addJollibeeCommand.equals(addJollibeeCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addJollibeeCommandCopy = new AddCommand(jollibee);
+        assertTrue(addJollibeeCommand.equals(addJollibeeCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addJollibeeCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addJollibeeCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addJollibeeCommand.equals(addKfcCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddCommand addCommand = new AddCommand(POPEYES);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + POPEYES + "}";
         assertEquals(expected, addCommand.toString());
     }
 

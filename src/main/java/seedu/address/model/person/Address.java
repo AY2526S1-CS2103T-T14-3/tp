@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Address should not be empty, not exceed 100 characters, and must end with a comma followed by a space and a 6-digit postal code. "
-            + "Preferred format: [Block/Street No.] [Street Name], [Building Name] (Optional) [#Floor-Unit] (Optional), [Postal Code]. "
+    public static final String MESSAGE_CONSTRAINTS = "Address should not be empty, not exceed 100 characters, and must end with ', Singapore' followed by a 6-digit postal code. "
+            + "Preferred format: [Street Address], [Building Name], Singapore [Postal Code]. "
             + "Spaces within the postal code will be ignored for validation.";
 
     public final String value;
@@ -44,8 +44,8 @@ public class Address {
         }
 
         // 3. Use regex to split address into main part and postal code
-        // The postal code must be preceded by a comma and mandatory whitespace.
-        Pattern addressPattern = Pattern.compile("^(.*?),\\s+((\\d\\s*){6})$");
+        // The postal code must be preceded by a comma, "Singapore", and mandatory whitespace.
+        Pattern addressPattern = Pattern.compile("^(.*?),\\s+Singapore\\s+((\\d\\s*){6})$", Pattern.CASE_INSENSITIVE);
         Matcher addressMatcher = addressPattern.matcher(test);
 
         if (!addressMatcher.matches()) {

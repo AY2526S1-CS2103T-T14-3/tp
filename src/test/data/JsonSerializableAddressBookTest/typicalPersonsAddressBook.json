@@ -1,46 +1,38 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "name" : "McDonald's",
+    "phone" : "67773777",
+    "address" : "200 Victoria St, #01-49 Bugis Junction, Singapore 188021",
+    "tags" : [ "fastfood" ]
   }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "name" : "KOI Thé",
+    "phone" : "64812345",
+    "address" : "53 Ang Mo Kio Ave 3, #B2-08 AMK Hub, Singapore 569933",
+    "tags" : [ "bubbletea", "drinks" ]
   }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
+    "name" : "Hawker Chan",
+    "phone" : "62190000",
+    "address" : "78 Smith St, Singapore 058972",
     "tags" : [ ]
   }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
+    "name" : "Astons Specialities",
+    "phone" : "62351234",
+    "address" : "201 Victoria St, #04-06 Bugis+, Singapore 188067",
+    "tags" : [ "western" ]
   }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
+    "name" : "Popeyes Louisiana Kitchen",
+    "phone" : "65153456",
+    "address" : "3 Simei Street 6, #01-01 Eastpoint Mall, Singapore 528833",
     "tags" : [ ]
   }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
+    "name" : "Subway",
+    "phone" : "67890123",
+    "address" : "10 Tampines Central 1, #01-18 Tampines 1, Singapore 529536",
     "tags" : [ ]
   }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
+    "name" : "Anna's Curry",
+    "phone" : "61234567",
+    "address" : "123 Serangoon Rd, Singapore 218227",
     "tags" : [ ]
   } ]
 }

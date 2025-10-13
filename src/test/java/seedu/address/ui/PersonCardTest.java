@@ -31,12 +31,14 @@ public class PersonCardTest {
 
     @BeforeAll
     public static void setupFxAndReflection() throws Exception {
-        // Initialize JavaFX toolkit once (headless-safe)
-        CountDownLatch latch = new CountDownLatch(1);
-        Platform.startup(latch::countDown);
-        latch.await(10, TimeUnit.SECONDS);
+        try {
+            CountDownLatch latch = new CountDownLatch(1);
+            Platform.startup(latch::countDown);
+            latch.await(10, TimeUnit.SECONDS);
+        } catch (IllegalStateException | UnsupportedOperationException e) {
+            // JavaFX already started — ignore
+        }
 
-        // Reflect private static helper
         getStarStringMethod = PersonCard.class.getDeclaredMethod("getStarString", int.class);
         getStarStringMethod.setAccessible(true);
     }

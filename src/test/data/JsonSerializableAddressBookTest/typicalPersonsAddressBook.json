@@ -3,22 +3,26 @@
     "name" : "McDonald's",
     "phone" : "67773777",
     "address" : "200 Victoria St, #01-49 Bugis Junction, Singapore 188021",
-    "tags" : [ "fastfood" ]
+    "tags" : [ "fastfood" ],
+    "rating" : 4
   }, {
     "name" : "KOI Thé",
     "phone" : "64812345",
     "address" : "53 Ang Mo Kio Ave 3, #B2-08 AMK Hub, Singapore 569933",
-    "tags" : [ "bubbletea", "drinks" ]
+    "tags" : [ "bubbletea", "drinks" ],
+    "rating" : 4  
   }, {
     "name" : "Hawker Chan",
     "phone" : "62190000",
     "address" : "78 Smith St, Singapore 058972",
-    "tags" : [ ]
+    "tags" : [ ],
+    "rating" : 2
   }, {
     "name" : "Astons Specialities",
     "phone" : "62351234",
     "address" : "201 Victoria St, #04-06 Bugis+, Singapore 188067",
-    "tags" : [ "western" ]
+    "tags" : [ "western" ],
+    "rating" : 0
   }, {
     "name" : "Popeyes Louisiana Kitchen",
     "phone" : "65153456",

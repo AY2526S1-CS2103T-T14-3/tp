@@ -29,7 +29,7 @@ public class RateCommand extends Command {
     private final int ratingValue;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index       of the person in the filtered person list to edit
      * @param ratingValue of the rating to be set
      */
     public RateCommand(Index index, int ratingValue) {
@@ -63,5 +63,11 @@ public class RateCommand extends Command {
         }
         RateCommand o = (RateCommand) other;
         return index.equals(o.index) && ratingValue == o.ratingValue;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s{index=%s, ratingValue=%d}",
+                getClass().getSimpleName(), index, ratingValue);
     }
 }

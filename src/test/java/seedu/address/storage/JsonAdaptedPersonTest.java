@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "";
@@ -28,6 +29,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = KOI.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
+    private static final Integer VALID_RATING = 4;
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -90,6 +92,35 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, invalidTags, /*rating*/ null);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_validRating_preserved() throws Exception {
+        // KOI in TypicalPersons has a rating (4) in your sample data; build from it
+        JsonAdaptedPerson person = new JsonAdaptedPerson(KOI);
+        assertEquals(KOI, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidRatingNegative_throwsIllegalArgumentException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, -1);
+        assertThrows(IllegalArgumentException.class, Rating.MESSAGE_CONSTRAINTS, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidRatingTooLarge_throwsIllegalArgumentException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, 10);
+        assertThrows(IllegalArgumentException.class, Rating.MESSAGE_CONSTRAINTS, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullRating_okayMeansEmptyOptional() throws Exception {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
+        // Should parse successfully with empty Optional<Rating>
+        person.toModelType();
     }
 
 }

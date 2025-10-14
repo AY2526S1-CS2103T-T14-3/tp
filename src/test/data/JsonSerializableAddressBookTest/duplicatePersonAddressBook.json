@@ -3,7 +3,8 @@
     "name" : "McDonald's",
     "phone" : "67773777",
     "address" : "200 Victoria St, #01-49 Bugis Junction, Singapore 188021",
-    "tags" : [ "fastfood" ]
+    "tags" : [ "fastfood" ],
+    "rating" : 4
   }, {
     "name" : "McDonald's",
     "phone" : "67773777",

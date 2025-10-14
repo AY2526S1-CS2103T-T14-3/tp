@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +28,7 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String address;
+    private final Integer rating;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -33,14 +36,16 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("address") String address,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("rating") Integer rating) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.rating = rating;
     }
 
     /**
@@ -53,12 +58,15 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        this.rating = source.getRating().map(r -> r.value).orElse(null);
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -91,7 +99,14 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelAddress, modelTags);
+
+        Optional<Rating> modelRating = (rating == null) ? java.util.Optional.empty()
+                : java.util.Optional.of(new Rating(rating));
+
+        if (rating != null) {
+            modelRating = Optional.of(new Rating(rating));
+        }
+        return new Person(modelName, modelPhone, modelAddress, modelTags, modelRating);
     }
 
 }

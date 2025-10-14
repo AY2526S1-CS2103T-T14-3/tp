@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,16 +39,16 @@ public class UntagCommandTest {
     public void execute_untagPerson_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Tag> newTags = new HashSet<>(firstPerson.getTags());
-        Tag tagToRemove = newTags.stream().findFirst().orElse(new Tag(TAG_STUB));
-        newTags.remove(tagToRemove);
+        Set<Tag> tagsToRemove = Collections.singleton(newTags.stream().findFirst().orElse(new Tag(TAG_STUB)));
+        newTags.removeAll(tagsToRemove);
 
         Person editedPerson = new PersonBuilder(firstPerson).withTags(newTags.stream()
                 .map(t -> t.tagName).toArray(String[]::new)).build();
 
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagToRemove);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
 
         String expectedMessage = String.format(UntagCommand.MESSAGE_UNTAG_SUCCESS,
-                Messages.format(editedPerson), tagToRemove);
+                Messages.format(editedPerson), tagsToRemove);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setAddressBook(model.getAddressBook());
@@ -58,8 +59,9 @@ public class UntagCommandTest {
 
     @Test
     public void execute_nonExistentTag_throwsCommandException() {
-        Tag nonExistentTag = new Tag("nonExistentTag");
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, nonExistentTag);
+        Set<Tag> nonExistentTags = new HashSet<>();
+        nonExistentTags.add(new Tag("nonExistentTag"));
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, nonExistentTags);
 
         assertCommandFailure(untagCommand, model, UntagCommand.MESSAGE_TAG_NOT_FOUND);
     }
@@ -67,7 +69,9 @@ public class UntagCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, new Tag(TAG_STUB));
+        Set<Tag> tagList = new HashSet<>();
+        tagList.add(new Tag(TAG_STUB));
+        UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, tagList);
 
         assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -83,16 +87,22 @@ public class UntagCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, new Tag(TAG_STUB));
+        Set<Tag> tagList = new HashSet<>();
+        tagList.add(new Tag(TAG_STUB));
+        UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, tagList);
         assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final UntagCommand standardCommand = new UntagCommand(INDEX_FIRST_PERSON, new Tag(TAG_STUB));
+        Set<Tag> tagList = new HashSet<>();
+        tagList.add(new Tag(TAG_STUB));
+        Set<Tag> anotherTagList = new HashSet<>();
+        anotherTagList.add(new Tag(ANOTHER_TAG_STUB));
+        final UntagCommand standardCommand = new UntagCommand(INDEX_FIRST_PERSON, tagList);
 
         // same values -> returns true
-        UntagCommand commandWithSameValues = new UntagCommand(INDEX_FIRST_PERSON, new Tag(TAG_STUB));
+        UntagCommand commandWithSameValues = new UntagCommand(INDEX_FIRST_PERSON, tagList);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -105,9 +115,9 @@ public class UntagCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new UntagCommand(INDEX_SECOND_PERSON, new Tag(TAG_STUB))));
+        assertFalse(standardCommand.equals(new UntagCommand(INDEX_SECOND_PERSON, tagList)));
 
         // different tag -> returns false
-        assertFalse(standardCommand.equals(new UntagCommand(INDEX_FIRST_PERSON, new Tag(ANOTHER_TAG_STUB))));
+        assertFalse(standardCommand.equals(new UntagCommand(INDEX_FIRST_PERSON, anotherTagList)));
     }
 }

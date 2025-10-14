@@ -58,9 +58,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_untag() throws Exception {
         final Tag tag = new Tag("friend");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(tag);
         UntagCommand command = (UntagCommand) parser.parseCommand(UntagCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + CliSyntax.PREFIX_TAG + tag.tagName);
-        assertEquals(new UntagCommand(INDEX_FIRST_PERSON, tag), command);
+        assertEquals(new UntagCommand(INDEX_FIRST_PERSON, tags), command);
     }
 
     @Test

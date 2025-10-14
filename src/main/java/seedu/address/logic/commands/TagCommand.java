@@ -33,13 +33,13 @@ public class TagCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists for the person.";
 
     private final Index index;
-    private final Tag tag;
+    private final Set<Tag> tag;
 
     /**
      * @param index of the person in the filtered person list to add the tag to
      * @param tag to be added to the person
      */
-    public TagCommand(Index index, Tag tag) {
+    public TagCommand(Index index, Set<Tag> tag) {
         requireNonNull(index);
         requireNonNull(tag);
 
@@ -59,12 +59,8 @@ public class TagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> existingTags = personToEdit.getTags();
 
-        if (existingTags.contains(tag)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TAG);
-        }
-
         Set<Tag> newTags = new HashSet<>(existingTags);
-        newTags.add(tag);
+        newTags.addAll(tag);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(),

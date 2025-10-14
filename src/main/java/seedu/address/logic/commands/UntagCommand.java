@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -30,21 +31,21 @@ public class UntagCommand extends Command {
             + PREFIX_TAG + "friend";
 
     public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag %2$s from Person: %1$s";
-    public static final String MESSAGE_TAG_NOT_FOUND = "This tag does not exist for this person.";
+    public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this person: ";
 
     private final Index index;
-    private final Set<Tag> tag;
+    private final Set<Tag> tags;
 
     /**
      * @param index of the person in the filtered person list to add the tag to
-     * @param tag to be added to the person
+     * @param tags to be added to the person
      */
-    public UntagCommand(Index index, Set<Tag> tag) {
+    public UntagCommand(Index index, Set<Tag> tags) {
         requireNonNull(index);
-        requireNonNull(tag);
+        requireNonNull(tags);
 
         this.index = index;
-        this.tag = tag;
+        this.tags = tags;
     }
 
     @Override
@@ -59,12 +60,16 @@ public class UntagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> existingTags = personToEdit.getTags();
 
-        if (!existingTags.containsAll(tag)) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND);
+        if (!existingTags.containsAll(tags)) {
+            Set<Tag> invalidTags = new HashSet<>(tags);
+            invalidTags.removeAll(existingTags);
+            String invalidTagsString = invalidTags.stream().map(Tag::toString)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(MESSAGE_TAG_NOT_FOUND + invalidTagsString);
         }
 
         Set<Tag> newTags = new HashSet<>(existingTags);
-        newTags.removeAll(tag);
+        newTags.removeAll(tags);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(),
@@ -73,7 +78,7 @@ public class UntagCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedPerson), tag));
+        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedPerson), tags));
     }
 
     @Override
@@ -89,6 +94,6 @@ public class UntagCommand extends Command {
 
         UntagCommand otherUntagCommand = (UntagCommand) other;
         return index.equals(otherUntagCommand.index)
-                && tag.equals(otherUntagCommand.tag);
+                && tags.equals(otherUntagCommand.tags);
     }
 }

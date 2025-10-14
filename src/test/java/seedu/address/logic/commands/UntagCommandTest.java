@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -61,9 +62,11 @@ public class UntagCommandTest {
     public void execute_nonExistentTag_throwsCommandException() {
         Set<Tag> nonExistentTags = new HashSet<>();
         nonExistentTags.add(new Tag("nonExistentTag"));
+        String nonExistentTagString = nonExistentTags.stream().map(Tag::toString)
+                .collect(Collectors.joining(", "));
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, nonExistentTags);
 
-        assertCommandFailure(untagCommand, model, UntagCommand.MESSAGE_TAG_NOT_FOUND);
+        assertCommandFailure(untagCommand, model, UntagCommand.MESSAGE_TAG_NOT_FOUND + nonExistentTagString);
     }
 
     @Test

@@ -79,7 +79,7 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: transparent;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
@@ -102,15 +102,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: rgba(60, 62, 63, 0.85);
+    -fx-background-color: #FAF3E0;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: rgba(81, 86, 88, 0.85);
+    -fx-background-color: #dbcbc4;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #EAE0C8;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -119,29 +119,29 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #5C4033;
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: white;
+    -fx-text-fill: #5C4033;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: white;
+    -fx-text-fill: #5C4033;
 }
 
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-radius: 8;
 }
 
 .pane-with-border {
      -fx-background-color: transparent;
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+     -fx-border-width: 0;
 }
 
 .status-bar {
@@ -152,11 +152,11 @@
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #5C4033;
 }
 
 .result-display .label {
-    -fx-text-fill: white !important;
+    -fx-text-fill: #5C4033 !important;
 }
 
 .status-bar .label {
@@ -320,14 +320,13 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #FAF3E0;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
-    -fx-border-insets: 0;
-    -fx-border-width: 1;
+    -fx-border-width: 0;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #5C4033;
+    -fx-background-radius: 8;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -335,8 +334,8 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
+    -fx-background-color: #FAF3E0;
+    -fx-background-radius: 8;
 }
 
 #tags {
@@ -345,8 +344,8 @@
 }
 
 #tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-text-fill: #5C4033;
+    -fx-background-color: #D2B48C;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

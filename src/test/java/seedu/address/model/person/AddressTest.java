@@ -27,19 +27,21 @@ public class AddressTest {
         // invalid addresses
         assertFalse(Address.isValidAddress("")); // empty string
         assertFalse(Address.isValidAddress(" ")); // spaces only
+        assertFalse(Address.isValidAddress("-")); // one character
+        assertFalse(Address.isValidAddress("21 Tampines Rd, #10-81")); // missing postal code
+        assertFalse(Address.isValidAddress("50 Sixth Avenue, Singapore 2764962")); // postal code not 6 digits
 
         // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Address.isValidAddress("50 Sixth Avenue, Singapore 276496"));
+        assertTrue(Address.isValidAddress(" 2 Orchard Turn, #4-01 ION Orchard, Singapore 238801")); // long address
     }
 
     @Test
     public void equals() {
-        Address address = new Address("Valid Address");
+        Address address = new Address("459 Clementi Ave 3, #10-401, Singapore 120459");
 
         // same values -> returns true
-        assertTrue(address.equals(new Address("Valid Address")));
+        assertTrue(address.equals(new Address("459 Clementi Ave 3, #10-401, Singapore 120459")));
 
         // same object -> returns true
         assertTrue(address.equals(address));
@@ -51,6 +53,6 @@ public class AddressTest {
         assertFalse(address.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(address.equals(new Address("Other Valid Address")));
+        assertFalse(address.equals(new Address("180 Kitchener Rd, Singapore 208539")));
     }
 }

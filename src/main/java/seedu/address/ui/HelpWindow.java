@@ -20,24 +20,38 @@ public class HelpWindow extends UiPart<Stage> {
             Commands List:
             Add a restaurant
             add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]
-            eg : add n/McDonald's a/1 Jelebu Road, Bukit Panjang Plaza #02-01, 677743 hp/68928572\n
+            Example: add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572
+            Example: add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken\n
             List all restaurants
             list\n
             Delete a restaurant
             delete <index>
-            eg : delete 3\n
+            Example: delete 3\n
+            Edit a restaurant
+            edit <index> n/NAME a/ADDRESS hp/PHONE_NUMBER
+            Example: edit 1 n/Subway hp/66591189
+            Example: edit 2 a/701A Yishun Ave 5, #01-02, Singapore 761701\n
+            Rate a restaurant from 0 to 5 stars
+            rate <index> <rating>
+            Example: rate 1 5\n
             Find a restaurant
             find <keyword>
-            eg : find Mcdonald\n
+            Example: find mcdonald
+            Example: find halal, fastfood\n
             Tag a restaurant
             tag <index> t/<tag>
-            eg : tag 3 t/fantastic\n
+            Example: tag 3 t/fantastic t/halal\n
             Untag a restaurant
-            Untag <index> t/<tag>
-            eg : Untag 3 t/fantastic\n
+            untag <index> t/<tag>
+            Example: untag 3 t/fantastic t/halal\n
+            Clear all restaurants
+            clear\n
+            Exit the program
+            exit
             """;
 
-    public static final String HELP_MESSAGE = USER_COMMANDS + "\nRefer to the user guide:\n" + USERGUIDE_URL;
+    public static final String HELP_MESSAGE =
+            USER_COMMANDS + "\nFor more information, refer to the user guide:\n" + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_KFC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KFC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_KFC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,10 +46,6 @@ public class EditPersonDescriptorTest {
         // different address -> returns false
         editedJollibee = new EditPersonDescriptorBuilder(DESC_JOLLIBEE).withAddress(VALID_ADDRESS_KFC).build();
         assertFalse(DESC_JOLLIBEE.equals(editedJollibee));
-
-        // different tags -> returns false
-        editedJollibee = new EditPersonDescriptorBuilder(DESC_JOLLIBEE).withTags(VALID_TAG_FASTFOOD).build();
-        assertFalse(DESC_JOLLIBEE.equals(editedJollibee));
     }
 
     @Test
@@ -59,8 +54,7 @@ public class EditPersonDescriptorTest {
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getAddress().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

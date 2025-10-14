@@ -7,6 +7,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -23,6 +24,7 @@ public class PersonBuilder {
     private Phone phone;
     private Address address;
     private Set<Tag> tags;
+    private Rating rating;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -32,6 +34,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        rating = null;
     }
 
     /**
@@ -42,6 +45,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        rating = personToCopy.getRating().orElse(null);
     }
 
     /**
@@ -73,6 +77,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rating} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRating(int value) {
+        this.rating = new Rating(value);
         return this;
     }
 

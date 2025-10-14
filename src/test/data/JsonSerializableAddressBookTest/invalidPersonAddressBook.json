@@ -2,6 +2,12 @@
   "persons": [ {
     "name": "",
     "phone": "948asdf2424",
-    "address": ""
-  } ]
+    "address": "",
+    "rating": 0
+  }, {
+      "name": "Invalid Rating Guy",
+      "phone": "99999999",
+      "address": "Somewhere",
+      "rating": -1
+    } ]
 }

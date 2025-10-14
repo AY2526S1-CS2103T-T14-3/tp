@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,16 +24,23 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Optional<Rating> rating;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Address address, Set<Tag> tags, Optional<Rating> rating) {
         requireAllNonNull(name, phone, address, tags);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.tags.addAll(tags);
+        this.rating = rating == null ? Optional.empty() : rating;
+    }
+
+    // Backward-compatible 4-arg constructor (no rating provided -> blank)
+    public Person(Name name, Phone phone, Address address, Set<Tag> tags) {
+        this(name, phone, address, tags, Optional.empty());
     }
 
     public Name getName() {
@@ -45,6 +53,17 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Optional<Rating> getRating() {
+        return rating;
+    }
+
+    /**
+     * Returns a new Person with the same details as this person, except with the given rating.
+     */
+    public Person withRating(Rating newRating) {
+        return new Person(this.name, this.phone, this.address, this.tags, Optional.ofNullable(newRating));
     }
 
     /**

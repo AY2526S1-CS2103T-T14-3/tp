@@ -33,13 +33,13 @@ public class UntagCommand extends Command {
     public static final String MESSAGE_TAG_NOT_FOUND = "This tag does not exist for this person.";
 
     private final Index index;
-    private final Tag tag;
+    private final Set<Tag> tag;
 
     /**
      * @param index of the person in the filtered person list to add the tag to
      * @param tag to be added to the person
      */
-    public UntagCommand(Index index, Tag tag) {
+    public UntagCommand(Index index, Set<Tag> tag) {
         requireNonNull(index);
         requireNonNull(tag);
 
@@ -59,12 +59,12 @@ public class UntagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> existingTags = personToEdit.getTags();
 
-        if (!existingTags.contains(tag)) {
+        if (!existingTags.containsAll(tag)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND);
         }
 
         Set<Tag> newTags = new HashSet<>(existingTags);
-        newTags.remove(tag);
+        newTags.removeAll(tag);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(),

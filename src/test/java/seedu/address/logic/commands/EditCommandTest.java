@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_JOLLIBEE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_KFC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_KFC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_KFC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -37,14 +36,19 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        Person finalExpectedPerson = new Person(editedPerson.getName(), editedPerson.getPhone(),
+                editedPerson.getAddress(), personToEdit.getTags());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(finalExpectedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(personToEdit, finalExpectedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -55,11 +59,10 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_KFC).withPhone(VALID_PHONE_KFC)
-                .withTags(VALID_TAG_FASTFOOD).build();
+        Person editedPerson = personInList.withName(VALID_NAME_KFC).withPhone(VALID_PHONE_KFC).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_KFC)
-                .withPhone(VALID_PHONE_KFC).withTags(VALID_TAG_FASTFOOD).build();
+                .withPhone(VALID_PHONE_KFC).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));

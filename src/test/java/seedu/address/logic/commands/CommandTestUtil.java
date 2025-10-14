@@ -43,9 +43,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HALAL = " " + PREFIX_TAG + VALID_TAG_HALAL;
     public static final String TAG_DESC_FASTFOOD = " " + PREFIX_TAG + VALID_TAG_FASTFOOD;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + ""; // '@' empty string not allowed in names
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + ""; // empty string not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "6512a345"; // 'a' not allowed in phones
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS + "Singapore"; // empty string not allowed
+    // for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "western*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -56,11 +57,9 @@ public class CommandTestUtil {
 
     static {
         DESC_JOLLIBEE = new EditPersonDescriptorBuilder().withName(VALID_NAME_JOLLIBEE)
-                .withPhone(VALID_PHONE_JOLLIBEE).withAddress(VALID_ADDRESS_JOLLIBEE)
-                .withTags(VALID_TAG_HALAL).build();
+                .withPhone(VALID_PHONE_JOLLIBEE).withAddress(VALID_ADDRESS_JOLLIBEE).build();
         DESC_KFC = new EditPersonDescriptorBuilder().withName(VALID_NAME_KFC)
-                .withPhone(VALID_PHONE_KFC).withAddress(VALID_ADDRESS_KFC)
-                .withTags(VALID_TAG_FASTFOOD, VALID_TAG_HALAL).build();
+                .withPhone(VALID_PHONE_KFC).withAddress(VALID_ADDRESS_KFC).build();
     }
 
     /**

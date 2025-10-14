@@ -30,8 +30,8 @@ public class HelpWindow extends UiPart<Stage> {
             find <keyword>
             eg : find Mcdonald\n
             Tag a restaurant
-            tag <index> #<tag>
-            eg : tag 3 #fantastic\n
+            tag <index> t/<tag>
+            eg : tag 3 t/fantastic\n
             """;
 
     public static final String HELP_MESSAGE = USER_COMMANDS + "\nRefer to the user guide:\n" + USERGUIDE_URL;

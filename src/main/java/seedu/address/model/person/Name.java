@@ -9,13 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Names should only contain alphanumeric characters, spaces, and certain special characters," + " and it should not be blank";
 
     /*
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * Allows for a wide range of characters, including those with accents.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = ".*\\S.*";
 
     public final String fullName;
 

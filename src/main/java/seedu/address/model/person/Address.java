@@ -45,7 +45,7 @@ public class Address {
 
         // 3. Use regex to split address into main part and postal code
         // The postal code must be preceded by a comma, "Singapore", and mandatory whitespace.
-        Pattern addressPattern = Pattern.compile("^(.*?),\\s+Singapore\\s+((\\d\\s*){6})$", Pattern.CASE_INSENSITIVE);
+        Pattern addressPattern = Pattern.compile("^(.*),\\s+Singapore\\s+((\\d\\s*){6})$", Pattern.CASE_INSENSITIVE);
         Matcher addressMatcher = addressPattern.matcher(test);
 
         if (!addressMatcher.matches()) {
@@ -61,7 +61,7 @@ public class Address {
             return false; // Address part before comma is empty
         }
 
-        if (!addressPart.matches("^[a-zA-Z0-9\\s,#'-]*$")) {
+        if (!addressPart.matches("^[a-zA-Z0-9\\s,#\\'-/.]*$")) {
             return false;
         }
 

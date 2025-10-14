@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Tag;
 
 /**
  * Parses input arguments and creates a new TagCommand object

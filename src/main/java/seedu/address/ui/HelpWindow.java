@@ -39,10 +39,10 @@ public class HelpWindow extends UiPart<Stage> {
             Example: find mcdonald
             Example: find halal, fastfood\n
             Tag a restaurant
-            tag <index> t/<tag>
+            tag <index> t/TAG
             Example: tag 3 t/fantastic t/halal\n
             Untag a restaurant
-            untag <index> t/<tag>
+            untag <index> t/TAG
             Example: untag 3 t/fantastic t/halal\n
             Clear all restaurants
             clear\n

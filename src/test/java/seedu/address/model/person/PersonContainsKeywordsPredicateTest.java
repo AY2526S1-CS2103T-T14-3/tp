@@ -83,15 +83,18 @@ public class PersonContainsKeywordsPredicateTest {
         // One keyword
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(Collections.singletonList("Orchard"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
+        assertTrue(predicate.test(new PersonBuilder()
+                .withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
 
         // Partial keyword match
         predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("ard"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
+        assertTrue(predicate.test(new PersonBuilder()
+                .withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
 
         // Mixed-case keywords
         predicate = new PersonContainsKeywordsPredicate(Collections.singletonList("OrCHard"));
-        assertTrue(predicate.test(new PersonBuilder().withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
+        assertTrue(predicate.test(new PersonBuilder()
+                .withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
     }
 
     @Test
@@ -116,7 +119,8 @@ public class PersonContainsKeywordsPredicateTest {
         // Keyword matches name and address
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(Collections.singletonList("Burger"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").withAddress("68 Orchard Rd, #B1-11 Plaza Singapura, Singapore 238839").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Burger King")
+                .withAddress("68 Orchard Rd, #B1-11 Plaza Singapura, Singapore 238839").build()));
     }
 
 

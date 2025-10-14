@@ -32,6 +32,9 @@ public class HelpWindow extends UiPart<Stage> {
             Tag a restaurant
             tag <index> t/<tag>
             eg : tag 3 t/fantastic\n
+            Untag a restaurant
+            Untag <index> t/<tag>
+            eg : Untag 3 t/fantastic\n
             """;
 
     public static final String HELP_MESSAGE = USER_COMMANDS + "\nRefer to the user guide:\n" + USERGUIDE_URL;

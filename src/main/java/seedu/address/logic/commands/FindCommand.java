@@ -15,7 +15,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose attributes contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all restaurants whose attributes contain any of "
             + "the specified, comma-separated keywords (case-insensitive). "
             + "The search is performed on name, phone, address, and tags.\n"
             + "Parameters: KEYWORD[, MORE_KEYWORDS]...\n"

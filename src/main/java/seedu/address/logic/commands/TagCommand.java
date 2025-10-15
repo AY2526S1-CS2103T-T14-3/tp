@@ -22,15 +22,15 @@ public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the restaurant identified "
+            + "by the index number used in the displayed restaurant list. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "friend";
+            + PREFIX_TAG + "halal";
 
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists for the person.";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to restaurant: %1$s";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists for the restaurant.";
 
     private final Index index;
     private final Set<Tag> tag;

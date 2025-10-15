@@ -14,10 +14,10 @@ public class Address {
 
     public static final String MESSAGE_CONSTRAINTS =
             """
-                Address should not be empty, not exceed 100 characters, and must end with ',
-                Singapore' followed by a 6-digit postal code.
-                Preferred format: [Street Address], [Building Name], Singapore [Postal Code].
-                Spaces within the postal code will be ignored for validation.
+            Address should not be empty, not exceed 100 characters,
+            and must end with ', Singapore' followed by a 6-digit postal code.
+            Preferred format: [Street Address], [Building Name], Singapore [Postal Code].
+            Spaces within the postal code will be ignored for validation.
             """;
 
     public final String value;

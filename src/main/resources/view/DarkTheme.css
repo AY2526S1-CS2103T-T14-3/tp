@@ -322,10 +322,13 @@
 #commandTextField {
     -fx-background-color: #FAF3E0;
     -fx-background-insets: 0;
-    -fx-border-width: 0;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: #5C4033;
+}
+
+#commandTextField .content {
+    -fx-background-color: #FAF3E0;
     -fx-background-radius: 8;
 }
 

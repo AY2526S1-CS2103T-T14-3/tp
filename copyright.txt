@@ -7,3 +7,6 @@ Copyright by Susumu Yoshida - http://www.mcdodesign.com/
 Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - calendar.png
 - edit.png
+
+Copyright by Phap Nguyen Huu - https://dribbble.com/shots/7057830-Food-Icon-Free-
+- curry_rice_icon.png

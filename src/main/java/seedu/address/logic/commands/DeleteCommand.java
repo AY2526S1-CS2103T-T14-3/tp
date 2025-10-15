@@ -12,18 +12,18 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from the restaurant list.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the Restaurant identified by the index number used in the displayed restaurant list.\n"
+            + ": Deletes the restaurant identified by the index number used in the displayed restaurant list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_RESTAURANT_SUCCESS = "Deleted Restaurant: %1$s";
+    public static final String MESSAGE_DELETE_RESTAURANT_SUCCESS = "Deleted restaurant: %1$s";
 
     private final Index targetIndex;
 

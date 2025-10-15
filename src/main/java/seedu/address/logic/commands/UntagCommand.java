@@ -23,15 +23,15 @@ public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove a tag of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove a tag of the restaurant identified "
+            + "by the index number used in the displayed restaurant list. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TAG + "friend";
+            + PREFIX_TAG + "halal";
 
-    public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag %2$s from Person: %1$s";
-    public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this person: ";
+    public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag %2$s from restaurant: %1$s";
+    public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this restaurant: ";
 
     private final Index index;
     private final Set<Tag> tags;

@@ -79,9 +79,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        //helpMessage.setText(HELP_MESSAGE);
-
-                
         Text commandList = new Text("Commands List:\n\n");
         commandList.getStyleClass().add("h1");
         Text addRest = new Text("Add a restaurant\n");

@@ -332,7 +332,7 @@
     -fx-background-radius: 8;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #restaurantListPanel, #restaurantWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

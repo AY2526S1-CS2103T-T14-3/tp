@@ -1,6 +1,6 @@
 package foodtrail.storage;
 
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

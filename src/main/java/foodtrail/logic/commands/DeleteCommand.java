@@ -9,10 +9,10 @@ import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
- * Deletes a person identified using it's displayed index from the restaurant list.
+ * Deletes a restaurant identified using it's displayed index from the restaurant list.
  */
 public class DeleteCommand extends Command {
 
@@ -34,15 +34,15 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Restaurant> lastShownList = model.getFilteredRestaurantList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, Messages.format(personToDelete)));
+        Restaurant restaurantToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteRestaurant(restaurantToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, Messages.format(restaurantToDelete)));
     }
 
     @Override

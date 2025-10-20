@@ -25,98 +25,99 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static foodtrail.testutil.TypicalPersons.JOLLIBEE;
-import static foodtrail.testutil.TypicalPersons.KFC;
+import static foodtrail.testutil.TypicalRestaurants.JOLLIBEE;
+import static foodtrail.testutil.TypicalRestaurants.KFC;
 
 import org.junit.jupiter.api.Test;
 
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.AddCommand;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Tag;
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Restaurant;
+import foodtrail.model.restaurant.Tag;
+import foodtrail.testutil.RestaurantBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(KFC).withTags(VALID_TAG_HALAL).build();
+        Restaurant expectedRestaurant = new RestaurantBuilder(KFC).withTags(VALID_TAG_HALAL).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_KFC + PHONE_DESC_KFC
-                + ADDRESS_DESC_KFC + TAG_DESC_HALAL, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_KFC + TAG_DESC_HALAL, new AddCommand(expectedRestaurant));
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(KFC).withTags(VALID_TAG_HALAL, VALID_TAG_FASTFOOD)
+        Restaurant expectedRestaurantMultipleTags = new RestaurantBuilder(KFC)
+                .withTags(VALID_TAG_HALAL, VALID_TAG_FASTFOOD)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_KFC + PHONE_DESC_KFC + ADDRESS_DESC_KFC + TAG_DESC_FASTFOOD + TAG_DESC_HALAL,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedRestaurantMultipleTags));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_KFC + PHONE_DESC_KFC
+        String validExpectedRestaurantString = NAME_DESC_KFC + PHONE_DESC_KFC
                 + ADDRESS_DESC_KFC + TAG_DESC_HALAL;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_JOLLIBEE + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_JOLLIBEE + validExpectedRestaurantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_JOLLIBEE + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC_JOLLIBEE + validExpectedRestaurantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_JOLLIBEE + validExpectedPersonString,
+        assertParseFailure(parser, ADDRESS_DESC_JOLLIBEE + validExpectedRestaurantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_JOLLIBEE + NAME_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE
-                        + validExpectedPersonString,
+                validExpectedRestaurantString + PHONE_DESC_JOLLIBEE + NAME_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE
+                        + validExpectedRestaurantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedRestaurantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedRestaurantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedRestaurantString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedRestaurantString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedRestaurantString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, validExpectedRestaurantString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(JOLLIBEE).withTags().build();
+        Restaurant expectedRestaurant = new RestaurantBuilder(JOLLIBEE).withTags().build();
         assertParseSuccess(parser, NAME_DESC_JOLLIBEE + PHONE_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedRestaurant));
     }
 
     @Test

@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 
 import foodtrail.logic.commands.AddCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Restaurant;
+import foodtrail.model.restaurant.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -42,9 +42,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, address, tagList);
+        Restaurant restaurant = new Restaurant(name, phone, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(restaurant);
     }
 
     /**

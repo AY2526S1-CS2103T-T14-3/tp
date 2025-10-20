@@ -1,10 +1,10 @@
 package foodtrail.storage;
 
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
-import static foodtrail.testutil.TypicalPersons.MIXUE;
-import static foodtrail.testutil.TypicalPersons.PIZZAHUT;
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.MIXUE;
+import static foodtrail.testutil.TypicalRestaurants.PIZZAHUT;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -51,13 +51,13 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readAddressBook_invalidRestaurantAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidRestaurantAddressBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
-        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readAddressBook_invalidAndValidRestaurantAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidRestaurantAddressBook.json"));
     }
 
     @Test
@@ -72,14 +72,14 @@ public class JsonAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(MIXUE);
-        original.removePerson(MCDONALDS);
+        original.addRestaurant(MIXUE);
+        original.removeRestaurant(MCDONALDS);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(PIZZAHUT);
+        original.addRestaurant(PIZZAHUT);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));

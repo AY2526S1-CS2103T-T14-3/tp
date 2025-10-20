@@ -3,8 +3,8 @@ package foodtrail.model;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,9 +16,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.model.person.Person;
-import foodtrail.model.person.exceptions.DuplicatePersonException;
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.model.restaurant.Restaurant;
+import foodtrail.model.restaurant.exceptions.DuplicateRestaurantException;
+import foodtrail.testutil.RestaurantBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -28,7 +28,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getRestaurantList());
     }
 
     @Test
@@ -44,64 +44,65 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedMcdonalds = new PersonBuilder(MCDONALDS)
+    public void resetData_withDuplicateRestaurants_throwsDuplicateRestaurantException() {
+        // Two restaurants with the same identity fields
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
-        List<Person> newPersons = Arrays.asList(MCDONALDS, editedMcdonalds);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Restaurant> newRestaurants = Arrays.asList(MCDONALDS, editedMcdonalds);
+        AddressBookStub newData = new AddressBookStub(newRestaurants);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateRestaurantException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasRestaurant_nullRestaurant_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasRestaurant(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(MCDONALDS));
+    public void hasRestaurant_restaurantNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasRestaurant(MCDONALDS));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(MCDONALDS);
-        assertTrue(addressBook.hasPerson(MCDONALDS));
+    public void hasRestaurant_restaurantInAddressBook_returnsTrue() {
+        addressBook.addRestaurant(MCDONALDS);
+        assertTrue(addressBook.hasRestaurant(MCDONALDS));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(MCDONALDS);
-        Person editedMcdonalds = new PersonBuilder(MCDONALDS)
+    public void hasRestaurant_restaurantWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addRestaurant(MCDONALDS);
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
-        assertTrue(addressBook.hasPerson(editedMcdonalds));
+        assertTrue(addressBook.hasRestaurant(editedMcdonalds));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getRestaurantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getRestaurantList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{restaurants="
+                + addressBook.getRestaurantList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose restaurants list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Restaurant> restaurants = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Restaurant> restaurants) {
+            this.restaurants.setAll(restaurants);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Restaurant> getRestaurantList() {
+            return restaurants;
         }
     }
 

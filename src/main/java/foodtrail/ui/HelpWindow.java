@@ -8,9 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.stage.Stage;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
+
 
 /**
  * Controller for a help page
@@ -85,9 +86,11 @@ public class HelpWindow extends UiPart<Stage> {
         addRest.getStyleClass().add("h2");
         Text addCommand = new Text("add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]\n");
         addCommand.getStyleClass().add("h3");
-        Text exampleAdd = new Text("Example: add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572\n");
+        Text exampleAdd = new Text("Example: add n/McDonald's a/1 Jelebu Road, #02-01,"
+                + " Bukit Panjang Plaza, Singapore 677743 hp/68928572\n");
         exampleAdd.getStyleClass().add("h3");
-        Text exampleAdd2 = new Text("Example: add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken\n\n");
+        Text exampleAdd2 = new Text("Example: add n/KFC a/701A Yishun Ave 5, #01-02,"
+                + " Singapore 761701 hp/62226111 t/fastfood t/chicken\n\n");
         exampleAdd2.getStyleClass().add("h3");
         Text listRest = new Text("List all restaurants\n");
         listRest.getStyleClass().add("h2");
@@ -142,11 +145,11 @@ public class HelpWindow extends UiPart<Stage> {
         Text exitCommand = new Text("exit\n");
         exitCommand.getStyleClass().add("h3");
         textFlow.getChildren().setAll(
-                commandList,addRest,addCommand,exampleAdd,exampleAdd2,listRest,listCommand,
-                deleteRest,deleteCommand,exampleDelete,editRest,editCommand,exampleEdit,
-                exampleEdit2,rateRest,rateCommand,exampleRate,findRest,findCommand,
-                exampleFind,exampleFind2,tagRest,tagCommand,exampleTag,untagRest,untagCommand,
-                exampleUntag,clearRest,clearCommand,exitRest,exitCommand
+                commandList, addRest, addCommand, exampleAdd, exampleAdd2, listRest, listCommand,
+                deleteRest, deleteCommand, exampleDelete, editRest, editCommand, exampleEdit,
+                exampleEdit2, rateRest, rateCommand, exampleRate, findRest, findCommand,
+                exampleFind, exampleFind2, tagRest, tagCommand, exampleTag, untagRest, untagCommand,
+                exampleUntag, clearRest, clearCommand, exitRest, exitCommand
         );
 
     }

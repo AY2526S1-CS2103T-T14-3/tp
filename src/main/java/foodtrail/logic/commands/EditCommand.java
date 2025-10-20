@@ -81,7 +81,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Restaurant} with the details of {@code pestaurantToEdit}
+     * Creates and returns a {@code Restaurant} with the details of {@code restaurantToEdit}
      * edited with {@code editRestaurantDescriptor}.
      */
     private static Restaurant createEditedRestaurant(Restaurant restaurantToEdit,

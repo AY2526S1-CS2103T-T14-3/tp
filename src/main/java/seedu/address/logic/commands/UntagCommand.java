@@ -30,7 +30,7 @@ public class UntagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "halal";
 
-    public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag %2$s from restaurant: %1$s";
+    public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag(s) %2$s from restaurant: %1$s";
     public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this restaurant: ";
 
     private final Index index;
@@ -78,7 +78,8 @@ public class UntagCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedPerson), tags));
+        String tagsString = tags.stream().map(Tag::toString).collect(Collectors.joining(", "));
+        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedPerson), tagsString));
     }
 
     @Override

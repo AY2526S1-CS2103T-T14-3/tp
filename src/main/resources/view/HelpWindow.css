@@ -1,3 +1,22 @@
+.h1 {
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+
+}
+.h2 {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-fill: #E87722;
+}
+
+.h3 {
+    -fx-font-size: 14px;
+    -fx-fill: #E9457A;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 4px;
+    -fx-padding: 2px 4px;
+}
+
 #copyButton, #helpMessage {
     -fx-text-fill: white;
 }
@@ -15,5 +34,5 @@
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    /*-fx-background-image: url("../images/Background.png"); */
 }

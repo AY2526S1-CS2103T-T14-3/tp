@@ -9,13 +9,18 @@ import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**
  * Controller for a help page
  */
+
+
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t14-3.github.io/tp/UserGuide.html";
+    //May not be needed later
     public static final String USER_COMMANDS = """
             Commands List:
             Add a restaurant
@@ -59,8 +64,13 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button copyButton;
 
+    //Comment later
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private TextFlow textFlow;
+
 
     /**
      * Creates a new HelpWindow.
@@ -69,7 +79,79 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        //helpMessage.setText(HELP_MESSAGE);
+
+                
+        Text commandList = new Text("Commands List:\n\n");
+        commandList.getStyleClass().add("h1");
+        Text addRest = new Text("Add a restaurant\n");
+        addRest.getStyleClass().add("h2");
+        Text addCommand = new Text("add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]\n");
+        addCommand.getStyleClass().add("h3");
+        Text exampleAdd = new Text("Example: add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572\n");
+        exampleAdd.getStyleClass().add("h3");
+        Text exampleAdd2 = new Text("Example: add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken\n\n");
+        exampleAdd2.getStyleClass().add("h3");
+        Text listRest = new Text("List all restaurants\n");
+        listRest.getStyleClass().add("h2");
+        Text listCommand = new Text("list\n\n");
+        listCommand.getStyleClass().add("h3");
+        Text deleteRest = new Text("Delete a restaurant\n");
+        deleteRest.getStyleClass().add("h2");
+        Text deleteCommand = new Text("delete <index>\n");
+        deleteCommand.getStyleClass().add("h3");
+        Text exampleDelete = new Text("Example: delete 3\n\n");
+        exampleDelete.getStyleClass().add("h3");
+        Text editRest = new Text("Edit a restaurant\n");
+        editRest.getStyleClass().add("h2");
+        Text editCommand = new Text("edit <index> n/NAME a/ADDRESS hp/PHONE_NUMBER\n");
+        editCommand.getStyleClass().add("h3");
+        Text exampleEdit = new Text("Example: edit 1 n/Subway hp/66591189\n");
+        exampleEdit.getStyleClass().add("h3");
+        Text exampleEdit2 = new Text("Example: edit 2 a/701A Yishun Ave 5, #01-02, Singapore 761701\n\n");
+        exampleEdit2.getStyleClass().add("h3");
+        Text rateRest = new Text("Rate a restaurant from 0 to 5 stars\n");
+        rateRest.getStyleClass().add("h2");
+        Text rateCommand = new Text("rate <index> <rating>\n");
+        rateCommand.getStyleClass().add("h3");
+        Text exampleRate = new Text("Example: rate 1 5\n\n");
+        exampleRate.getStyleClass().add("h3");
+        Text findRest = new Text("Find a restaurant\n");
+        findRest.getStyleClass().add("h2");
+        Text findCommand = new Text("find <keyword>\n");
+        findCommand.getStyleClass().add("h3");
+        Text exampleFind = new Text("Example: find mcdonald\n");
+        exampleFind.getStyleClass().add("h3");
+        Text exampleFind2 = new Text("Example: find halal, fastfood\n\n");
+        exampleFind2.getStyleClass().add("h3");
+        Text tagRest = new Text("Tag a restaurant\n");
+        tagRest.getStyleClass().add("h2");
+        Text tagCommand = new Text("tag <index> t/TAG\n");
+        tagCommand.getStyleClass().add("h3");
+        Text exampleTag = new Text("Example: tag 3 t/fantastic t/halal\n\n");
+        exampleTag.getStyleClass().add("h3");
+        Text untagRest = new Text("Untag a restaurant\n");
+        untagRest.getStyleClass().add("h2");
+        Text untagCommand = new Text("untag <index> t/TAG\n");
+        untagCommand.getStyleClass().add("h3");
+        Text exampleUntag = new Text("Example: untag 3 t/fantastic t/halal\n\n");
+        exampleUntag.getStyleClass().add("h3");
+        Text clearRest = new Text("Clear all restaurants\n");
+        clearRest.getStyleClass().add("h2");
+        Text clearCommand = new Text("clear\n\n");
+        clearCommand.getStyleClass().add("h3");
+        Text exitRest = new Text("Exit the program\n");
+        exitRest.getStyleClass().add("h2");
+        Text exitCommand = new Text("exit\n");
+        exitCommand.getStyleClass().add("h3");
+        textFlow.getChildren().setAll(
+                commandList,addRest,addCommand,exampleAdd,exampleAdd2,listRest,listCommand,
+                deleteRest,deleteCommand,exampleDelete,editRest,editCommand,exampleEdit,
+                exampleEdit2,rateRest,rateCommand,exampleRate,findRest,findCommand,
+                exampleFind,exampleFind2,tagRest,tagCommand,exampleTag,untagRest,untagCommand,
+                exampleUntag,clearRest,clearCommand,exitRest,exitCommand
+        );
+
     }
 
     /**

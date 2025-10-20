@@ -1,7 +1,7 @@
 package foodtrail.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 

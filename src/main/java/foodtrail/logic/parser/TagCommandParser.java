@@ -1,8 +1,8 @@
 package foodtrail.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Set;
 

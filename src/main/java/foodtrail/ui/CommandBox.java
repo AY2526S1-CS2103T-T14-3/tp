@@ -1,15 +1,15 @@
 package foodtrail.ui;
 
 import foodtrail.logic.Logic;
+import foodtrail.logic.commands.CommandResult;
+import foodtrail.logic.commands.exceptions.CommandException;
+import foodtrail.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
-import foodtrail.logic.commands.CommandResult;
-import foodtrail.logic.commands.exceptions.CommandException;
-import foodtrail.logic.parser.exceptions.ParseException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

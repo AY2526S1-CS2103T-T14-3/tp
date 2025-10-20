@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 import foodtrail.commons.core.Config;
 import foodtrail.commons.core.LogsCenter;
 import foodtrail.commons.core.Version;
@@ -30,6 +28,8 @@ import foodtrail.storage.StorageManager;
 import foodtrail.storage.UserPrefsStorage;
 import foodtrail.ui.Ui;
 import foodtrail.ui.UiManager;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Runs the application.

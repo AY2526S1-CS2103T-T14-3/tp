@@ -1,8 +1,8 @@
 package foodtrail.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 import static foodtrail.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.List;

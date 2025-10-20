@@ -5,7 +5,6 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.commons.core.LogsCenter;
 import foodtrail.logic.commands.Command;
@@ -17,6 +16,7 @@ import foodtrail.model.Model;
 import foodtrail.model.ReadOnlyAddressBook;
 import foodtrail.model.person.Person;
 import foodtrail.storage.Storage;
+import javafx.collections.ObservableList;
 
 /**
  * The main LogicManager of the app.

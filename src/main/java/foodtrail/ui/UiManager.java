@@ -2,15 +2,15 @@ package foodtrail.ui;
 
 import java.util.logging.Logger;
 
+import foodtrail.MainApp;
+import foodtrail.commons.core.LogsCenter;
+import foodtrail.commons.util.StringUtil;
+import foodtrail.logic.Logic;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import foodtrail.MainApp;
-import foodtrail.commons.core.LogsCenter;
-import foodtrail.commons.util.StringUtil;
-import foodtrail.logic.Logic;
 
 /**
  * The manager of the UI component.

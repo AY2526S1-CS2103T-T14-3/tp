@@ -1,11 +1,11 @@
 package foodtrail.logic.commands;
 
+import static foodtrail.testutil.Assert.assertThrows;
+import static foodtrail.testutil.TypicalPersons.POPEYES;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.POPEYES;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
@@ -24,6 +23,7 @@ import foodtrail.model.ReadOnlyAddressBook;
 import foodtrail.model.ReadOnlyUserPrefs;
 import foodtrail.model.person.Person;
 import foodtrail.testutil.PersonBuilder;
+import javafx.collections.ObservableList;
 
 public class AddCommandTest {
 

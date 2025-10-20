@@ -1,4 +1,4 @@
-// package seedu.address.ui;
+// package foodtrail.ui;
 
 // import static org.junit.jupiter.api.Assertions.assertEquals;
 // import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,11 +14,11 @@
 // import org.junit.jupiter.api.BeforeAll;
 // import org.junit.jupiter.api.Test;
 
+// import foodtrail.model.person.Person;
+// import foodtrail.testutil.PersonBuilder;
 // import javafx.application.Platform;
 // import javafx.scene.control.Label;
 // import javafx.scene.layout.FlowPane;
-// import seedu.address.model.person.Person;
-// import seedu.address.testutil.PersonBuilder;
 
 // /**
 //  * Unit tests for {@link PersonCard}.

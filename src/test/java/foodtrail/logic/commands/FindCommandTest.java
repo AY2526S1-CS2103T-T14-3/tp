@@ -1,14 +1,14 @@
 package foodtrail.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static foodtrail.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.testutil.TypicalPersons.HAWKERCHAN;
 import static foodtrail.testutil.TypicalPersons.KOI;
 import static foodtrail.testutil.TypicalPersons.MCDONALDS;
 import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;

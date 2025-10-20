@@ -1,7 +1,7 @@
 package foodtrail.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

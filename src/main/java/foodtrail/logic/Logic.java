@@ -2,14 +2,14 @@ package foodtrail.logic;
 
 import java.nio.file.Path;
 
-import foodtrail.model.Model;
-import javafx.collections.ObservableList;
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.logic.commands.CommandResult;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.logic.parser.exceptions.ParseException;
+import foodtrail.model.Model;
 import foodtrail.model.ReadOnlyAddressBook;
 import foodtrail.model.person.Person;
+import javafx.collections.ObservableList;
 
 /**
  * API of the Logic component

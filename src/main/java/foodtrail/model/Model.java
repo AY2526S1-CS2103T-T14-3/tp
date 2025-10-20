@@ -3,9 +3,9 @@ package foodtrail.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.model.person.Person;
+import javafx.collections.ObservableList;
 
 /**
  * The API of the Model component.

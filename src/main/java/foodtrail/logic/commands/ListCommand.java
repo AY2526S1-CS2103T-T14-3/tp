@@ -1,7 +1,7 @@
 package foodtrail.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static java.util.Objects.requireNonNull;
 
 import foodtrail.model.Model;
 

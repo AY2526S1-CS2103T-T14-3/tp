@@ -1,10 +1,10 @@
 package foodtrail.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
+import static java.util.Objects.requireNonNull;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.EditCommand;

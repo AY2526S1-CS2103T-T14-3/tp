@@ -1,7 +1,7 @@
 package foodtrail.model;
 
-import javafx.collections.ObservableList;
 import foodtrail.model.person.Person;
+import javafx.collections.ObservableList;
 
 /**
  * Unmodifiable view of an address book

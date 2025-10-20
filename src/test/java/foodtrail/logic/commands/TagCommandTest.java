@@ -1,13 +1,13 @@
 package foodtrail.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandFailure;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;

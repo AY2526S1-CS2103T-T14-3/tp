@@ -2,6 +2,12 @@ package foodtrail.ui;
 
 import java.util.logging.Logger;
 
+import foodtrail.commons.core.GuiSettings;
+import foodtrail.commons.core.LogsCenter;
+import foodtrail.logic.Logic;
+import foodtrail.logic.commands.CommandResult;
+import foodtrail.logic.commands.exceptions.CommandException;
+import foodtrail.logic.parser.exceptions.ParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -10,12 +16,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import foodtrail.commons.core.GuiSettings;
-import foodtrail.commons.core.LogsCenter;
-import foodtrail.logic.Logic;
-import foodtrail.logic.commands.CommandResult;
-import foodtrail.logic.commands.exceptions.CommandException;
-import foodtrail.logic.parser.exceptions.ParseException;
 
 /**
  * The Main Window. Provides the basic application layout containing

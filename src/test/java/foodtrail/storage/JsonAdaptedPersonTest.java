@@ -1,9 +1,9 @@
 package foodtrail.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static foodtrail.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static foodtrail.testutil.Assert.assertThrows;
 import static foodtrail.testutil.TypicalPersons.KOI;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;

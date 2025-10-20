@@ -1,13 +1,13 @@
 package foodtrail.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static foodtrail.logic.commands.CommandTestUtil.DESC_JOLLIBEE;
 import static foodtrail.logic.commands.CommandTestUtil.DESC_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_NAME_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_PHONE_KFC;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 

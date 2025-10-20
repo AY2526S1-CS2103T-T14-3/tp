@@ -1,7 +1,7 @@
 package foodtrail.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static java.util.Objects.requireNonNull;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.RateCommand;

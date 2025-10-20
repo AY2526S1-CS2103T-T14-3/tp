@@ -1,12 +1,12 @@
 package foodtrail.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static foodtrail.testutil.Assert.assertThrows;
 import static foodtrail.testutil.TypicalPersons.MCDONALDS;
 import static foodtrail.testutil.TypicalPersons.MIXUE;
 import static foodtrail.testutil.TypicalPersons.PIZZAHUT;
 import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Path;

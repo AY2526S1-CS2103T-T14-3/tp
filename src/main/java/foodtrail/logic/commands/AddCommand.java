@@ -1,10 +1,10 @@
 package foodtrail.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;

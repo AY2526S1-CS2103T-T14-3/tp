@@ -2,10 +2,10 @@ package foodtrail.logic.commands;
 
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandFailure;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static foodtrail.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.logic.commands.CommandTestUtil.showRestaurantAtIndex;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
+import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,13 +34,13 @@ public class TagCommandTest {
 
     @Test
     public void execute_addTagUnfilteredList_success() {
-        Restaurant firstRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Restaurant firstRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
         Set<Tag> newTags = new HashSet<>(firstRestaurant.getTags());
         newTags.add(new Tag(TAG_STUB));
         Restaurant editedRestaurant = new Restaurant(firstRestaurant.getName(), firstRestaurant.getPhone(),
                 firstRestaurant.getAddress(), newTags);
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, newTags);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, newTags);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
 
@@ -52,16 +52,17 @@ public class TagCommandTest {
 
     @Test
     public void execute_addTagFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
 
-        Restaurant restaurantInFilteredList = model.getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Restaurant restaurantInFilteredList = model.getFilteredRestaurantList()
+                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
         Set<Tag> newTags = new HashSet<>(restaurantInFilteredList.getTags());
         newTags.add(new Tag(TAG_STUB));
         Restaurant editedRestaurant = new Restaurant(restaurantInFilteredList.getName(),
                 restaurantInFilteredList.getPhone(),
                 restaurantInFilteredList.getAddress(), newTags);
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, newTags);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, newTags);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
 
@@ -72,13 +73,13 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidRestaurantIndexUnfilteredList_failure() {
         Set<Tag> newTags = new HashSet<>();
         newTags.add(new Tag(TAG_STUB));
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRestaurantList().size() + 1);
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, newTags);
 
-        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
     }
 
     /**
@@ -86,9 +87,9 @@ public class TagCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+    public void execute_invalidRestaurantIndexFilteredList_failure() {
+        showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
+        Index outOfBoundIndex = INDEX_SECOND_RESTAURANT;
         Set<Tag> newTags = new HashSet<>();
         newTags.add(new Tag(TAG_STUB));
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -96,17 +97,17 @@ public class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, newTags);
 
-        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
         Set<Tag> newTags = new HashSet<>();
         newTags.add(new Tag(TAG_STUB));
-        final TagCommand standardCommand = new TagCommand(INDEX_FIRST_PERSON, newTags);
+        final TagCommand standardCommand = new TagCommand(INDEX_FIRST_RESTAURANT, newTags);
 
         // same values -> returns true
-        TagCommand commandWithSameValues = new TagCommand(INDEX_FIRST_PERSON, newTags);
+        TagCommand commandWithSameValues = new TagCommand(INDEX_FIRST_RESTAURANT, newTags);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -119,11 +120,11 @@ public class TagCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new TagCommand(INDEX_SECOND_PERSON, newTags)));
+        assertFalse(standardCommand.equals(new TagCommand(INDEX_SECOND_RESTAURANT, newTags)));
 
         // different tag -> returns false
         Set<Tag> diffTags = new HashSet<>();
         diffTags.add(new Tag("OtherTag"));
-        assertFalse(standardCommand.equals(new TagCommand(INDEX_FIRST_PERSON, diffTags)));
+        assertFalse(standardCommand.equals(new TagCommand(INDEX_FIRST_RESTAURANT, diffTags)));
     }
 }

@@ -2,8 +2,8 @@ package foodtrail.model;
 
 import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.KOI;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.KOI;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(MCDONALDS).withPerson(KOI).build();
+        AddressBook addressBook = new AddressBookBuilder().withRestaurant(MCDONALDS).withRestaurant(KOI).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

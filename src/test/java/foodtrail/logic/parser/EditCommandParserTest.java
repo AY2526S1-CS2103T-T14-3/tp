@@ -17,9 +17,9 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static foodtrail.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
+import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
+import static foodtrail.testutil.TypicalIndexes.INDEX_THIRD_RESTAURANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -88,7 +88,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_RESTAURANT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_KFC + ADDRESS_DESC_JOLLIBEE + NAME_DESC_JOLLIBEE;
 
         EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder().withName(VALID_NAME_JOLLIBEE)
@@ -100,7 +100,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_RESTAURANT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_KFC;
 
         EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder().withPhone(VALID_PHONE_KFC).build();
@@ -112,7 +112,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_RESTAURANT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_JOLLIBEE;
         EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder()
                 .withName(VALID_NAME_JOLLIBEE).build();
@@ -138,7 +138,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_RESTAURANT;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_KFC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));

@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.testutil.RestaurantBuilder;
 
 public class RestaurantContainsKeywordsPredicateTest {
 
@@ -38,7 +38,7 @@ public class RestaurantContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different restaurant -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -47,23 +47,23 @@ public class RestaurantContainsKeywordsPredicateTest {
         // One keyword
         RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.singletonList("Burger"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withName("Burger King").build()));
 
         // Multiple keywords
         predicate = new RestaurantContainsKeywordsPredicate(Arrays.asList("Burger", "King"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withName("Burger King").build()));
 
         // Only one matching keyword
         predicate = new RestaurantContainsKeywordsPredicate(Arrays.asList("King", "Chan"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Hawker Chan").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withName("Hawker Chan").build()));
 
         // Mixed-case keywords
         predicate = new RestaurantContainsKeywordsPredicate(Arrays.asList("bUrGeR", "kInG"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withName("Burger King").build()));
 
         // Partial keyword match
         predicate = new RestaurantContainsKeywordsPredicate(Collections.singletonList("Burg"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Burger King").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withName("Burger King").build()));
     }
 
     @Test
@@ -71,11 +71,11 @@ public class RestaurantContainsKeywordsPredicateTest {
         // One keyword
         RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.singletonList("96437852"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("96437852").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withPhone("96437852").build()));
 
         // Partial keyword match
         predicate = new RestaurantContainsKeywordsPredicate(Collections.singletonList("7852"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("96437852").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withPhone("96437852").build()));
     }
 
     @Test
@@ -83,17 +83,17 @@ public class RestaurantContainsKeywordsPredicateTest {
         // One keyword
         RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.singletonList("Orchard"));
-        assertTrue(predicate.test(new PersonBuilder()
+        assertTrue(predicate.test(new RestaurantBuilder()
                 .withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
 
         // Partial keyword match
         predicate = new RestaurantContainsKeywordsPredicate(Collections.singletonList("ard"));
-        assertTrue(predicate.test(new PersonBuilder()
+        assertTrue(predicate.test(new RestaurantBuilder()
                 .withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
 
         // Mixed-case keywords
         predicate = new RestaurantContainsKeywordsPredicate(Collections.singletonList("OrCHard"));
-        assertTrue(predicate.test(new PersonBuilder()
+        assertTrue(predicate.test(new RestaurantBuilder()
                 .withAddress("68 Orchard Rd, #04-01 20 Plaza, Singapore 238839").build()));
     }
 
@@ -102,15 +102,15 @@ public class RestaurantContainsKeywordsPredicateTest {
         // One keyword
         RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.singletonList("western"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("western", "fastfood").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withTags("western", "fastfood").build()));
 
         // Partial keyword match
         predicate = new RestaurantContainsKeywordsPredicate(Collections.singletonList("west"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("western").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withTags("western").build()));
 
         // Mixed-case keywords
         predicate = new RestaurantContainsKeywordsPredicate(Collections.singletonList("wEsTeRn"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("western").build()));
+        assertTrue(predicate.test(new RestaurantBuilder().withTags("western").build()));
     }
 
 
@@ -119,7 +119,7 @@ public class RestaurantContainsKeywordsPredicateTest {
         // Keyword matches name and address
         RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.singletonList("Burger"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Burger King")
+        assertTrue(predicate.test(new RestaurantBuilder().withName("Burger King")
                 .withAddress("68 Orchard Rd, #B1-11 Plaza Singapura, Singapore 238839").build()));
     }
 
@@ -129,11 +129,11 @@ public class RestaurantContainsKeywordsPredicateTest {
         // Zero keywords
         RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("McDonalds").build()));
+        assertFalse(predicate.test(new RestaurantBuilder().withName("McDonalds").build()));
 
         // Non-matching keyword for all attributes
         predicate = new RestaurantContainsKeywordsPredicate(Arrays.asList("Pizza"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Burger King").withPhone("85633335")
+        assertFalse(predicate.test(new RestaurantBuilder().withName("Burger King").withPhone("85633335")
                 .withAddress("200 Victoria St, Singapore 188021").withTags("fastfood").build()));
     }
 

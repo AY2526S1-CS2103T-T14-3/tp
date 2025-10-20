@@ -1,10 +1,8 @@
-package foodtrail.model.tag;
+package foodtrail.model.restaurant;
 
 import static foodtrail.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-
-import foodtrail.model.restaurant.Tag;
 
 public class TagTest {
 

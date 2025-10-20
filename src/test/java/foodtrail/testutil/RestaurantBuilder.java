@@ -12,9 +12,9 @@ import foodtrail.model.restaurant.Tag;
 import foodtrail.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Restaurant objects.
  */
-public class PersonBuilder {
+public class RestaurantBuilder {
 
     public static final String DEFAULT_NAME = "Pizza Hut";
     public static final String DEFAULT_PHONE = "62353535";
@@ -27,9 +27,9 @@ public class PersonBuilder {
     private Rating rating;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code RestaurantBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public RestaurantBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
@@ -38,9 +38,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the RestaurantBuilder with the data of {@code restaurantToCopy}.
      */
-    public PersonBuilder(Restaurant restaurantToCopy) {
+    public RestaurantBuilder(Restaurant restaurantToCopy) {
         name = restaurantToCopy.getName();
         phone = restaurantToCopy.getPhone();
         address = restaurantToCopy.getAddress();
@@ -49,41 +49,41 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Restaurant} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public RestaurantBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Restaurant} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public RestaurantBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Restaurant} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public RestaurantBuilder withAddress(String address) {
         this.address = new Address(address);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Restaurant} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
+    public RestaurantBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
         return this;
     }
 
     /**
-     * Sets the {@code Rating} of the {@code Person} that we are building.
+     * Sets the {@code Rating} of the {@code Restaurant} that we are building.
      */
-    public PersonBuilder withRating(int value) {
+    public RestaurantBuilder withRating(int value) {
         this.rating = new Rating(value);
         return this;
     }

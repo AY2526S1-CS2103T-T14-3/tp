@@ -6,21 +6,21 @@ import static foodtrail.logic.commands.CommandTestUtil.VALID_PHONE_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.KOI;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.KOI;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.testutil.RestaurantBuilder;
 
 public class RestaurantTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Restaurant restaurant = new PersonBuilder().build();
+        Restaurant restaurant = new RestaurantBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> restaurant.getTags().remove(0));
     }
 
@@ -33,28 +33,28 @@ public class RestaurantTest {
         assertFalse(MCDONALDS.isSameRestaurant(null));
 
         // same name, all other attributes different -> returns true
-        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // different name, all other attributes same -> returns false
-        editedMcdonalds = new PersonBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
+        editedMcdonalds = new RestaurantBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
         assertFalse(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // name differs in case, all other attributes same -> returns false
-        Restaurant editedKoi = new PersonBuilder(KOI).withName(VALID_NAME_KFC.toLowerCase()).build();
+        Restaurant editedKoi = new RestaurantBuilder(KOI).withName(VALID_NAME_KFC.toLowerCase()).build();
         assertFalse(KOI.isSameRestaurant(editedKoi));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_KFC + " ";
-        editedKoi = new PersonBuilder(KOI).withName(nameWithTrailingSpaces).build();
+        editedKoi = new RestaurantBuilder(KOI).withName(nameWithTrailingSpaces).build();
         assertFalse(KOI.isSameRestaurant(editedKoi));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Restaurant mcdonaldsCopy = new PersonBuilder(MCDONALDS).build();
+        Restaurant mcdonaldsCopy = new RestaurantBuilder(MCDONALDS).build();
         assertTrue(MCDONALDS.equals(mcdonaldsCopy));
 
         // same object -> returns true
@@ -66,23 +66,23 @@ public class RestaurantTest {
         // different type -> returns false
         assertFalse(MCDONALDS.equals(5));
 
-        // different person -> returns false
+        // different restaurant -> returns false
         assertFalse(MCDONALDS.equals(KOI));
 
         // different name -> returns false
-        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
         assertFalse(MCDONALDS.equals(editedMcdonalds));
 
         // different phone -> returns false
-        editedMcdonalds = new PersonBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC).build();
+        editedMcdonalds = new RestaurantBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC).build();
         assertFalse(MCDONALDS.equals(editedMcdonalds));
 
         // different address -> returns false
-        editedMcdonalds = new PersonBuilder(MCDONALDS).withAddress(VALID_ADDRESS_KFC).build();
+        editedMcdonalds = new RestaurantBuilder(MCDONALDS).withAddress(VALID_ADDRESS_KFC).build();
         assertFalse(MCDONALDS.equals(editedMcdonalds));
 
         // different tags -> returns false
-        editedMcdonalds = new PersonBuilder(MCDONALDS).withTags(VALID_TAG_HALAL).build();
+        editedMcdonalds = new RestaurantBuilder(MCDONALDS).withTags(VALID_TAG_HALAL).build();
         assertFalse(MCDONALDS.equals(editedMcdonalds));
     }
 

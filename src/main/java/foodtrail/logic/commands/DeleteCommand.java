@@ -12,7 +12,7 @@ import foodtrail.model.Model;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
- * Deletes a person identified using it's displayed index from the restaurant list.
+ * Deletes a restaurant identified using it's displayed index from the restaurant list.
  */
 public class DeleteCommand extends Command {
 
@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         List<Restaurant> lastShownList = model.getFilteredRestaurantList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
         Restaurant restaurantToDelete = lastShownList.get(targetIndex.getZeroBased());

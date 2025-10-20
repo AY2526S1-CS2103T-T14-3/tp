@@ -3,8 +3,8 @@ package foodtrail.model.restaurant;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.KOI;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.KOI;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,43 +17,43 @@ import org.junit.jupiter.api.Test;
 
 import foodtrail.model.restaurant.exceptions.DuplicateRestaurantException;
 import foodtrail.model.restaurant.exceptions.RestaurantNotFoundException;
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.testutil.RestaurantBuilder;
 
 public class UniqueRestaurantListTest {
 
     private final UniqueRestaurantList uniqueRestaurantList = new UniqueRestaurantList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullRestaurant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueRestaurantList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_restaurantNotInList_returnsFalse() {
         assertFalse(uniqueRestaurantList.contains(MCDONALDS));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_restaurantInList_returnsTrue() {
         uniqueRestaurantList.add(MCDONALDS);
         assertTrue(uniqueRestaurantList.contains(MCDONALDS));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_restaurantWithSameIdentityFieldsInList_returnsTrue() {
         uniqueRestaurantList.add(MCDONALDS);
-        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS)
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(uniqueRestaurantList.contains(editedMcdonalds));
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullRestaurant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueRestaurantList.add(null));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateRestaurant_throwsDuplicateRestaurantException() {
         uniqueRestaurantList.add(MCDONALDS);
         assertThrows(DuplicateRestaurantException.class, () -> uniqueRestaurantList.add(MCDONALDS));
     }
@@ -88,7 +88,7 @@ public class UniqueRestaurantListTest {
     @Test
     public void setRestaurant_editedRestaurantHasSameIdentity_success() {
         uniqueRestaurantList.add(MCDONALDS);
-        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS)
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
         uniqueRestaurantList.setRestaurant(MCDONALDS, editedMcdonalds);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
@@ -113,17 +113,17 @@ public class UniqueRestaurantListTest {
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullRestaurant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueRestaurantList.remove(null));
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_restaurantDoesNotExist_throwsRestaurantNotFoundException() {
         assertThrows(RestaurantNotFoundException.class, () -> uniqueRestaurantList.remove(MCDONALDS));
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
+    public void remove_existingRestaurant_removesRestaurant() {
         uniqueRestaurantList.add(MCDONALDS);
         uniqueRestaurantList.remove(MCDONALDS);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
@@ -131,13 +131,13 @@ public class UniqueRestaurantListTest {
     }
 
     @Test
-    public void setRestaurants_nullUniquePersonList_throwsNullPointerException() {
+    public void setRestaurants_nullUniqueRestaurantList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
                 uniqueRestaurantList.setRestaurants((UniqueRestaurantList) null));
     }
 
     @Test
-    public void setRestaurants_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
+    public void setRestaurants_uniqueRestaurantList_replacesOwnListWithProvidedUniqueRestaurantList() {
         uniqueRestaurantList.add(MCDONALDS);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
         expectedUniqueRestaurantList.add(KOI);
@@ -162,7 +162,7 @@ public class UniqueRestaurantListTest {
     }
 
     @Test
-    public void setRestaurants_listWithDuplicateRestaurants_throwsDuplicatePersonException() {
+    public void setRestaurants_listWithDuplicateRestaurants_throwsDuplicateRestaurantException() {
         List<Restaurant> listWithDuplicateRestaurants = Arrays.asList(MCDONALDS, MCDONALDS);
         assertThrows(DuplicateRestaurantException.class, () ->
                 uniqueRestaurantList.setRestaurants(listWithDuplicateRestaurants));

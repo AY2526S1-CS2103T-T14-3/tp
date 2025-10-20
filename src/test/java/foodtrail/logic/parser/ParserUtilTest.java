@@ -2,7 +2,7 @@ package foodtrail.logic.parser;
 
 import static foodtrail.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -47,10 +47,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_RESTAURANT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_RESTAURANT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test

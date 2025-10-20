@@ -1,12 +1,12 @@
 package foodtrail.logic;
 
-import static foodtrail.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static foodtrail.logic.Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX;
 import static foodtrail.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static foodtrail.logic.commands.CommandTestUtil.ADDRESS_DESC_JOLLIBEE;
 import static foodtrail.logic.commands.CommandTestUtil.NAME_DESC_JOLLIBEE;
 import static foodtrail.logic.commands.CommandTestUtil.PHONE_DESC_JOLLIBEE;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.JOLLIBEE;
+import static foodtrail.testutil.TypicalRestaurants.JOLLIBEE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
@@ -30,7 +30,7 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.storage.JsonAddressBookStorage;
 import foodtrail.storage.JsonUserPrefsStorage;
 import foodtrail.storage.StorageManager;
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.testutil.RestaurantBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -60,7 +60,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -165,7 +165,7 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_JOLLIBEE + PHONE_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE;
-        Restaurant expectedRestaurant = new PersonBuilder(JOLLIBEE).withTags().build();
+        Restaurant expectedRestaurant = new RestaurantBuilder(JOLLIBEE).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addRestaurant(expectedRestaurant);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

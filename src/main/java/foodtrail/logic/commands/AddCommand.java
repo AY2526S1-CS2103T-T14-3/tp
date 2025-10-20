@@ -13,7 +13,7 @@ import foodtrail.model.Model;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
- * Adds a person to the address book.
+ * Adds a restaurant to the address book.
  */
 public class AddCommand extends Command {
 
@@ -33,12 +33,12 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "fastfood";
 
     public static final String MESSAGE_SUCCESS = "New restaurant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This restaurant already exists in the restaurant list";
+    public static final String MESSAGE_DUPLICATE_RESTAURANT = "This restaurant already exists in the restaurant list";
 
     private final Restaurant toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Restaurant}
      */
     public AddCommand(Restaurant restaurant) {
         requireNonNull(restaurant);
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasRestaurant(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_RESTAURANT);
         }
 
         model.addRestaurant(toAdd);

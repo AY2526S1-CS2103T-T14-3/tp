@@ -3,7 +3,7 @@ package foodtrail.logic.parser;
 import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static foodtrail.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,8 +31,8 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 import foodtrail.model.restaurant.Tag;
 import foodtrail.testutil.EditRestaurantDescriptorBuilder;
-import foodtrail.testutil.PersonBuilder;
-import foodtrail.testutil.PersonUtil;
+import foodtrail.testutil.RestaurantBuilder;
+import foodtrail.testutil.RestaurantUtil;
 
 public class AddressBookParserTest {
 
@@ -40,8 +40,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Restaurant restaurant = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(restaurant));
+        Restaurant restaurant = new RestaurantBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(RestaurantUtil.getAddCommand(restaurant));
         assertEquals(new AddCommand(restaurant), command);
     }
 
@@ -51,8 +51,8 @@ public class AddressBookParserTest {
         Set<Tag> tags = new HashSet<>();
         tags.add(tag);
         TagCommand command = (TagCommand) parser.parseCommand(TagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + CliSyntax.PREFIX_TAG + tag.tagName);
-        assertEquals(new TagCommand(INDEX_FIRST_PERSON, tags), command);
+                + INDEX_FIRST_RESTAURANT.getOneBased() + " " + CliSyntax.PREFIX_TAG + tag.tagName);
+        assertEquals(new TagCommand(INDEX_FIRST_RESTAURANT, tags), command);
     }
 
     @Test
@@ -61,8 +61,8 @@ public class AddressBookParserTest {
         Set<Tag> tags = new HashSet<>();
         tags.add(tag);
         UntagCommand command = (UntagCommand) parser.parseCommand(UntagCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + CliSyntax.PREFIX_TAG + tag.tagName);
-        assertEquals(new UntagCommand(INDEX_FIRST_PERSON, tags), command);
+                + INDEX_FIRST_RESTAURANT.getOneBased() + " " + CliSyntax.PREFIX_TAG + tag.tagName);
+        assertEquals(new UntagCommand(INDEX_FIRST_RESTAURANT, tags), command);
     }
 
     @Test
@@ -74,17 +74,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_RESTAURANT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Restaurant restaurant = new PersonBuilder().build();
+        Restaurant restaurant = new RestaurantBuilder().build();
         EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder(restaurant).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_RESTAURANT.getOneBased() + " "
+                + RestaurantUtil.getEditRestaurantDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_RESTAURANT, descriptor), command);
     }
 
     @Test
@@ -121,6 +122,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
 }

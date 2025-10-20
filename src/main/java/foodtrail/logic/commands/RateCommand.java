@@ -1,6 +1,6 @@
 package foodtrail.logic.commands;
 
-import static foodtrail.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static foodtrail.logic.Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class RateCommand extends Command {
     private final int ratingValue;
 
     /**
-     * @param index       of the person in the filtered person list to edit
+     * @param index       of the restaurant in the filtered restaurant list to edit
      * @param ratingValue of the rating to be set
      */
     public RateCommand(Index index, int ratingValue) {
@@ -42,7 +42,7 @@ public class RateCommand extends Command {
         requireNonNull(model);
         List<Restaurant> lastShownList = model.getFilteredRestaurantList();
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());

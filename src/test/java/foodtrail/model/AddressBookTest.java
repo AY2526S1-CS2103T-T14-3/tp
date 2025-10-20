@@ -3,8 +3,8 @@ package foodtrail.model;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.exceptions.DuplicateRestaurantException;
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.testutil.RestaurantBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -44,9 +44,9 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS)
+    public void resetData_withDuplicateRestaurants_throwsDuplicateRestaurantException() {
+        // Two restaurants with the same identity fields
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
         List<Restaurant> newRestaurants = Arrays.asList(MCDONALDS, editedMcdonalds);
         AddressBookStub newData = new AddressBookStub(newRestaurants);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasRestaurant_restaurantWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addRestaurant(MCDONALDS);
-        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS)
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(addressBook.hasRestaurant(editedMcdonalds));
     }
@@ -91,7 +91,7 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose restaurants list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Restaurant> restaurants = FXCollections.observableArrayList();

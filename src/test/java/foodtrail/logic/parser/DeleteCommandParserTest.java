@@ -3,7 +3,7 @@ package foodtrail.logic.parser;
 import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_RESTAURANT));
     }
 
     @Test

@@ -17,7 +17,7 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Remove a tag of an existing person in the address book.
+ * Remove a tag of an existing restaurant in the address book.
  */
 public class UntagCommand extends Command {
 
@@ -37,8 +37,8 @@ public class UntagCommand extends Command {
     private final Set<Tag> tags;
 
     /**
-     * @param index of the person in the filtered person list to add the tag to
-     * @param tags to be added to the person
+     * @param index of the restaurant in the filtered restaurant list to add the tag to
+     * @param tags to be added to the restaurant
      */
     public UntagCommand(Index index, Set<Tag> tags) {
         requireNonNull(index);
@@ -54,7 +54,7 @@ public class UntagCommand extends Command {
         List<Restaurant> lastShownList = model.getFilteredRestaurantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());

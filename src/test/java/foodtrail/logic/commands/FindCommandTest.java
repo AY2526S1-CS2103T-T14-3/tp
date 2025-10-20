@@ -1,11 +1,11 @@
 package foodtrail.logic.commands;
 
-import static foodtrail.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static foodtrail.logic.Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static foodtrail.testutil.TypicalPersons.HAWKERCHAN;
-import static foodtrail.testutil.TypicalPersons.KOI;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.HAWKERCHAN;
+import static foodtrail.testutil.TypicalRestaurants.KOI;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,13 +52,13 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different restaurant -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noRestaurantFound() {
+        String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 0);
         RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.emptyList());
         FindCommand command = new FindCommand(predicate);
@@ -68,8 +68,8 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multipleRestaurantsFound() {
+        String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 3);
         RestaurantContainsKeywordsPredicate predicate = preparePredicate("McDonald's, KOI, Hawker");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRestaurantList(predicate);
@@ -87,7 +87,7 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code PersonContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code RestaurantContainsKeywordsPredicate}.
      */
     private RestaurantContainsKeywordsPredicate preparePredicate(String userInput) {
         List<String> keywords = Arrays.stream(userInput.split(","))

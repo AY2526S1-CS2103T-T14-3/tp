@@ -24,7 +24,7 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing restaurant in the address book.
  */
 public class EditCommand extends Command {
 
@@ -40,16 +40,16 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited restaurant: %1$s";
+    public static final String MESSAGE_EDIT_RESTAURANT_SUCCESS = "Edited restaurant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This restaurant already exists in the restaurant list.";
+    public static final String MESSAGE_DUPLICATE_RESTAURANT = "This restaurant already exists in the restaurant list.";
 
     private final Index index;
     private final EditRestaurantDescriptor editRestaurantDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editRestaurantDescriptor details to edit the person with
+     * @param index of the restaurant in the filtered restaurant list to edit
+     * @param editRestaurantDescriptor details to edit the restaurant with
      */
     public EditCommand(Index index, EditRestaurantDescriptor editRestaurantDescriptor) {
         requireNonNull(index);
@@ -65,26 +65,26 @@ public class EditCommand extends Command {
         List<Restaurant> lastShownList = model.getFilteredRestaurantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
-        Restaurant editedRestaurant = createEditedPerson(restaurantToEdit, editRestaurantDescriptor);
+        Restaurant editedRestaurant = createEditedRestaurant(restaurantToEdit, editRestaurantDescriptor);
 
         if (!restaurantToEdit.isSameRestaurant(editedRestaurant) && model.hasRestaurant(editedRestaurant)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_RESTAURANT);
         }
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedRestaurant)));
+        return new CommandResult(String.format(MESSAGE_EDIT_RESTAURANT_SUCCESS, Messages.format(editedRestaurant)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Restaurant} with the details of {@code pestaurantToEdit}
+     * edited with {@code editRestaurantDescriptor}.
      */
-    private static Restaurant createEditedPerson(Restaurant restaurantToEdit,
+    private static Restaurant createEditedRestaurant(Restaurant restaurantToEdit,
                                                  EditRestaurantDescriptor editRestaurantDescriptor) {
         assert restaurantToEdit != null;
 
@@ -116,13 +116,13 @@ public class EditCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editRestaurantDescriptor)
+                .add("editRestaurantDescriptor", editRestaurantDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the restaurant with. Each non-empty field value will replace the
+     * corresponding field value of the restaurant.
      */
     public static class EditRestaurantDescriptor {
         private Name name;

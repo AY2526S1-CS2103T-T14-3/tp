@@ -14,18 +14,18 @@
 // import org.junit.jupiter.api.BeforeAll;
 // import org.junit.jupiter.api.Test;
 
-// import foodtrail.model.person.Person;
-// import foodtrail.testutil.PersonBuilder;
+// import foodtrail.model.restaurant.Restaurant;
+// import foodtrail.testutil.RestaurantBuilder;
 // import javafx.application.Platform;
 // import javafx.scene.control.Label;
 // import javafx.scene.layout.FlowPane;
 
 // /**
-//  * Unit tests for {@link PersonCard}.
+//  * Unit tests for {@link RestaurantCard}.
 //  * - Ensures constructor renders tags sorted and rating visibility correctly.
 //  * - Covers private getStarString(int) via reflection.
 //  */
-// public class PersonCardTest {
+// public class RestaurantCardTest {
 
 //     private static Method getStarStringMethod;
 
@@ -39,20 +39,20 @@
 //             // JavaFX already started — ignore
 //         }
 
-//         getStarStringMethod = PersonCard.class.getDeclaredMethod("getStarString", int.class);
+//         getStarStringMethod = RestaurantCard.class.getDeclaredMethod("getStarString", int.class);
 //         getStarStringMethod.setAccessible(true);
 //     }
 
 //     @Test
-//     public void unratedPersonHidesRatingAndSortsTags() throws Exception {
-//         Person unrated = new PersonBuilder()
+//     public void unratedRestaurantHidesRatingAndSortsTags() throws Exception {
+//         Restaurant unrated = new RestaurantBuilder()
 //                 .withName("Amy")
 //                 .withPhone("22222222")
 //                 .withAddress("There")
 //                 .withTags("zzz", "aaa")
 //                 .build();
 
-//         PersonCard card = runOnFxThread(() -> new PersonCard(unrated, 2));
+//         RestaurantCard card = runOnFxThread(() -> new RestaurantCard(unrated, 2));
 
 //         Label ratingLabel = (Label) getPrivateField(card, "rating");
 //         FlowPane tagsPane = (FlowPane) getPrivateField(card, "tags");
@@ -85,7 +85,7 @@
 //     // ------------------------------------------------------------
 
 //     private static Object getPrivateField(Object target, String name) throws Exception {
-//         Field f = PersonCard.class.getDeclaredField(name);
+//         Field f = RestaurantCard.class.getDeclaredField(name);
 //         f.setAccessible(true);
 //         return f.get(target);
 //     }

@@ -1,7 +1,7 @@
 package foodtrail.logic.commands;
 
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 

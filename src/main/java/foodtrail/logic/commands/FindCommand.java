@@ -8,7 +8,7 @@ import foodtrail.model.Model;
 import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose attributes contain any of the argument keywords.
+ * Finds and lists all restaurants in address book whose attributes contain any of the argument keywords.
  * Keywords are comma-separated. Keyword matching is case-insensitive and based on substrings.
  */
 public class FindCommand extends Command {
@@ -32,7 +32,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredRestaurantList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredRestaurantList().size()));
+                String.format(Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW, model.getFilteredRestaurantList().size()));
     }
 
     @Override

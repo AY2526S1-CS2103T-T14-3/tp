@@ -1,7 +1,7 @@
 package foodtrail.logic.commands;
 
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.POPEYES;
+import static foodtrail.testutil.TypicalRestaurants.POPEYES;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,41 +22,42 @@ import foodtrail.model.Model;
 import foodtrail.model.ReadOnlyAddressBook;
 import foodtrail.model.ReadOnlyUserPrefs;
 import foodtrail.model.restaurant.Restaurant;
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.testutil.RestaurantBuilder;
 import javafx.collections.ObservableList;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullRestaurant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Restaurant validRestaurant = new PersonBuilder().build();
+    public void execute_restaurantAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingRestaurantAdded modelStub = new ModelStubAcceptingRestaurantAdded();
+        Restaurant validRestaurant = new RestaurantBuilder().build();
 
         CommandResult commandResult = new AddCommand(validRestaurant).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validRestaurant)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validRestaurant), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validRestaurant), modelStub.restaurantsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Restaurant validRestaurant = new PersonBuilder().build();
+    public void execute_duplicateRestaurant_throwsCommandException() {
+        Restaurant validRestaurant = new RestaurantBuilder().build();
         AddCommand addCommand = new AddCommand(validRestaurant);
-        ModelStub modelStub = new ModelStubWithPerson(validRestaurant);
+        ModelStub modelStub = new ModelStubWithRestaurant(validRestaurant);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_RESTAURANT, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Restaurant jollibee = new PersonBuilder().withName("Jollibee").build();
-        Restaurant kfc = new PersonBuilder().withName("KFC").build();
+        Restaurant jollibee = new RestaurantBuilder().withName("Jollibee").build();
+        Restaurant kfc = new RestaurantBuilder().withName("KFC").build();
         AddCommand addJollibeeCommand = new AddCommand(jollibee);
         AddCommand addKfcCommand = new AddCommand(kfc);
 
@@ -73,7 +74,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addJollibeeCommand.equals(null));
 
-        // different person -> returns false
+        // different restaurant -> returns false
         assertFalse(addJollibeeCommand.equals(addKfcCommand));
     }
 
@@ -160,12 +161,12 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single restaurant.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithRestaurant extends ModelStub {
         private final Restaurant restaurant;
 
-        ModelStubWithPerson(Restaurant restaurant) {
+        ModelStubWithRestaurant(Restaurant restaurant) {
             requireNonNull(restaurant);
             this.restaurant = restaurant;
         }
@@ -178,21 +179,21 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the restaurant being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Restaurant> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingRestaurantAdded extends ModelStub {
+        final ArrayList<Restaurant> restaurantsAdded = new ArrayList<>();
 
         @Override
         public boolean hasRestaurant(Restaurant restaurant) {
             requireNonNull(restaurant);
-            return personsAdded.stream().anyMatch(restaurant::isSameRestaurant);
+            return restaurantsAdded.stream().anyMatch(restaurant::isSameRestaurant);
         }
 
         @Override
         public void addRestaurant(Restaurant restaurant) {
             requireNonNull(restaurant);
-            personsAdded.add(restaurant);
+            restaurantsAdded.add(restaurant);
         }
 
         @Override

@@ -16,7 +16,7 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Adds a tag to an existing person in the address book.
+ * Adds a tag to an existing restaurant in the address book.
  */
 public class TagCommand extends Command {
 
@@ -36,8 +36,8 @@ public class TagCommand extends Command {
     private final Set<Tag> tag;
 
     /**
-     * @param index of the person in the filtered person list to add the tag to
-     * @param tag to be added to the person
+     * @param index of the restaurant in the filtered restaurant list to add the tag to
+     * @param tag to be added to the restaurant
      */
     public TagCommand(Index index, Set<Tag> tag) {
         requireNonNull(index);
@@ -53,7 +53,7 @@ public class TagCommand extends Command {
         List<Restaurant> lastShownList = model.getFilteredRestaurantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());

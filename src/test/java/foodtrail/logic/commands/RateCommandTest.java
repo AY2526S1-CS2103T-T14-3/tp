@@ -20,8 +20,8 @@ import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.Person;
 import foodtrail.model.restaurant.Rating;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
  * Integration + unit tests for {@link RateCommand}.
@@ -32,27 +32,27 @@ public class RateCommandTest {
 
     @Test
     public void executeUnfilteredListValidIndexSuccess() {
-        Person target = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Restaurant target = model.getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased());
         int newRatingValue = 4;
-        Person edited = target.withRating(new Rating(newRatingValue));
+        Restaurant edited = target.withRating(new Rating(newRatingValue));
 
         RateCommand cmd = new RateCommand(INDEX_FIRST_PERSON, newRatingValue);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(target, edited);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.setRestaurant(target, edited);
+        expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String expectedMsg = String.format(RateCommand.MESSAGE_RATE_SUCCESS, edited.getName(), newRatingValue);
         assertCommandSuccess(cmd, model, expectedMsg, expectedModel);
 
         // sanity check: rating actually set
-        Person after = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Restaurant after = model.getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased());
         assertEquals(Optional.of(new Rating(newRatingValue)), after.getRating());
     }
 
     @Test
     public void executeUnfilteredListInvalidIndexThrowsCommandException() {
-        Index outOfBounds = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBounds = Index.fromOneBased(model.getFilteredRestaurantList().size() + 1);
         RateCommand cmd = new RateCommand(outOfBounds, 3);
         assertCommandFailure(cmd, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -61,16 +61,16 @@ public class RateCommandTest {
     public void executeFilteredListValidIndexSuccess() throws CommandException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON); // filter down to 1 person
 
-        Person target = model.getFilteredPersonList().get(0);
+        Restaurant target = model.getFilteredRestaurantList().get(0);
         int newRatingValue = 5;
-        Person edited = target.withRating(new Rating(newRatingValue));
+        Restaurant edited = target.withRating(new Rating(newRatingValue));
 
         RateCommand cmd = new RateCommand(INDEX_FIRST_PERSON, newRatingValue);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        expectedModel.setPerson(target, edited);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.setRestaurant(target, edited);
+        expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String expectedMsg = String.format(RateCommand.MESSAGE_RATE_SUCCESS, edited.getName(), newRatingValue);
         assertCommandSuccess(cmd, model, expectedMsg, expectedModel);

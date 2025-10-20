@@ -14,7 +14,7 @@ import foodtrail.logic.parser.AddressBookParser;
 import foodtrail.logic.parser.exceptions.ParseException;
 import foodtrail.model.Model;
 import foodtrail.model.ReadOnlyAddressBook;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.storage.Storage;
 import javafx.collections.ObservableList;
 
@@ -67,8 +67,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Restaurant> getFilteredRestaurantList() {
+        return model.getFilteredRestaurantList();
     }
 
     @Override

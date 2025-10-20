@@ -76,47 +76,47 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a restaurant: `add`
 
-Adds a person to the address book.
+Adds a restaurant to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A restaurant can have any number of tags (including 0)
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all restaurants : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all restaurants in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a restaurant : `edit`
 
-Edits an existing person in the address book.
+Edits an existing restaurant in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the restaurant will be removed i.e adding of tags is not cumulative.
+* You can remove all the restaurant’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567` Edits the phone number of the 1st person to be `91234567`.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd restaurant to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating restaurants by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds restaurants whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -132,19 +132,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a restaurant : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified restaurant from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd restaurant in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 

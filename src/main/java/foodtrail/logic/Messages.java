@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import foodtrail.logic.parser.Prefix;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
  * Container for user visible messages.
@@ -34,15 +34,15 @@ public class Messages {
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Restaurant restaurant) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(restaurant.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(restaurant.getPhone())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(restaurant.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        restaurant.getTags().forEach(builder::append);
         return builder.toString();
     }
 

@@ -10,7 +10,7 @@ import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
  * Adds a person to the address book.
@@ -35,25 +35,25 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New restaurant added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This restaurant already exists in the restaurant list";
 
-    private final Person toAdd;
+    private final Restaurant toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Restaurant restaurant) {
+        requireNonNull(restaurant);
+        toAdd = restaurant;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasRestaurant(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addRestaurant(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

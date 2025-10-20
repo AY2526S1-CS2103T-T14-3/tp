@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -31,10 +31,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        PersonContainsKeywordsPredicate firstPredicate =
-                new PersonContainsKeywordsPredicate(Collections.singletonList("first"));
-        PersonContainsKeywordsPredicate secondPredicate =
-                new PersonContainsKeywordsPredicate(Collections.singletonList("second"));
+        RestaurantContainsKeywordsPredicate firstPredicate =
+                new RestaurantContainsKeywordsPredicate(Collections.singletonList("first"));
+        RestaurantContainsKeywordsPredicate secondPredicate =
+                new RestaurantContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -59,26 +59,28 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Collections.emptyList());
+        RestaurantContainsKeywordsPredicate predicate =
+                new RestaurantContainsKeywordsPredicate(Collections.emptyList());
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredRestaurantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredRestaurantList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("McDonald's, KOI, Hawker");
+        RestaurantContainsKeywordsPredicate predicate = preparePredicate("McDonald's, KOI, Hawker");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredRestaurantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MCDONALDS, KOI, HAWKERCHAN), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(MCDONALDS, KOI, HAWKERCHAN), model.getFilteredRestaurantList());
     }
 
     @Test
     public void toStringMethod() {
-        PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(Arrays.asList("keyword"));
+        RestaurantContainsKeywordsPredicate predicate =
+                new RestaurantContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
@@ -87,11 +89,11 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code PersonContainsKeywordsPredicate}.
      */
-    private PersonContainsKeywordsPredicate preparePredicate(String userInput) {
+    private RestaurantContainsKeywordsPredicate preparePredicate(String userInput) {
         List<String> keywords = Arrays.stream(userInput.split(","))
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .collect(Collectors.toList());
-        return new PersonContainsKeywordsPredicate(keywords);
+        return new RestaurantContainsKeywordsPredicate(keywords);
     }
 }

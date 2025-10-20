@@ -1,7 +1,7 @@
 package foodtrail.testutil;
 
 import foodtrail.model.AddressBook;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -23,8 +23,8 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+    public AddressBookBuilder withPerson(Restaurant restaurant) {
+        addressBook.addRestaurant(restaurant);
         return this;
     }
 

@@ -1,6 +1,6 @@
 package foodtrail.logic.commands;
 
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import foodtrail.model.Model;
@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

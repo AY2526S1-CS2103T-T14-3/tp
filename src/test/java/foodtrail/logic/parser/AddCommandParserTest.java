@@ -34,8 +34,8 @@ import foodtrail.logic.Messages;
 import foodtrail.logic.commands.AddCommand;
 import foodtrail.model.restaurant.Address;
 import foodtrail.model.restaurant.Name;
-import foodtrail.model.restaurant.Person;
 import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 import foodtrail.testutil.PersonBuilder;
 
@@ -44,19 +44,19 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(KFC).withTags(VALID_TAG_HALAL).build();
+        Restaurant expectedRestaurant = new PersonBuilder(KFC).withTags(VALID_TAG_HALAL).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_KFC + PHONE_DESC_KFC
-                + ADDRESS_DESC_KFC + TAG_DESC_HALAL, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_KFC + TAG_DESC_HALAL, new AddCommand(expectedRestaurant));
 
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(KFC).withTags(VALID_TAG_HALAL, VALID_TAG_FASTFOOD)
+        Restaurant expectedRestaurantMultipleTags = new PersonBuilder(KFC).withTags(VALID_TAG_HALAL, VALID_TAG_FASTFOOD)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_KFC + PHONE_DESC_KFC + ADDRESS_DESC_KFC + TAG_DESC_FASTFOOD + TAG_DESC_HALAL,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedRestaurantMultipleTags));
     }
 
     @Test
@@ -114,9 +114,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(JOLLIBEE).withTags().build();
+        Restaurant expectedRestaurant = new PersonBuilder(JOLLIBEE).withTags().build();
         assertParseSuccess(parser, NAME_DESC_JOLLIBEE + PHONE_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedRestaurant));
     }
 
     @Test

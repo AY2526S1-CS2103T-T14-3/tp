@@ -22,7 +22,7 @@ import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 import foodtrail.testutil.PersonBuilder;
 
@@ -38,22 +38,22 @@ public class UntagCommandTest {
 
     @Test
     public void execute_untagPerson_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(firstPerson.getTags());
+        Restaurant firstRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Set<Tag> newTags = new HashSet<>(firstRestaurant.getTags());
         Set<Tag> tagsToRemove = Collections.singleton(newTags.stream().findFirst().orElse(new Tag(TAG_STUB)));
         newTags.removeAll(tagsToRemove);
 
-        Person editedPerson = new PersonBuilder(firstPerson).withTags(newTags.stream()
+        Restaurant editedRestaurant = new PersonBuilder(firstRestaurant).withTags(newTags.stream()
                 .map(t -> t.tagName).toArray(String[]::new)).build();
 
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
 
         String expectedMessage = String.format(UntagCommand.MESSAGE_UNTAG_SUCCESS,
-                Messages.format(editedPerson), tagsToRemove);
+                Messages.format(editedRestaurant), tagsToRemove);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setAddressBook(model.getAddressBook());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setRestaurant(firstRestaurant, editedRestaurant);
 
         assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
     }
@@ -71,7 +71,7 @@ public class UntagCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRestaurantList().size() + 1);
         Set<Tag> tagList = new HashSet<>();
         tagList.add(new Tag(TAG_STUB));
         UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, tagList);
@@ -88,7 +88,7 @@ public class UntagCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRestaurantList().size());
 
         Set<Tag> tagList = new HashSet<>();
         tagList.add(new Tag(TAG_STUB));

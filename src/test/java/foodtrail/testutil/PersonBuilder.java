@@ -5,9 +5,9 @@ import java.util.Set;
 
 import foodtrail.model.restaurant.Address;
 import foodtrail.model.restaurant.Name;
-import foodtrail.model.restaurant.Person;
 import foodtrail.model.restaurant.Phone;
 import foodtrail.model.restaurant.Rating;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 import foodtrail.model.util.SampleDataUtil;
 
@@ -40,12 +40,12 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
-        rating = personToCopy.getRating().orElse(null);
+    public PersonBuilder(Restaurant restaurantToCopy) {
+        name = restaurantToCopy.getName();
+        phone = restaurantToCopy.getPhone();
+        address = restaurantToCopy.getAddress();
+        tags = new HashSet<>(restaurantToCopy.getTags());
+        rating = restaurantToCopy.getRating().orElse(null);
     }
 
     /**
@@ -88,8 +88,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, address, tags);
+    public Restaurant build() {
+        return new Restaurant(name, phone, address, tags);
     }
 
 }

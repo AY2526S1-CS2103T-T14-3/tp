@@ -2,7 +2,7 @@ package foodtrail.ui;
 
 import java.util.Comparator;
 
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -10,11 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Restaurant}.
  */
-public class PersonCard extends UiPart<Region> {
+public class RestaurantCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "RestaurantListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved
@@ -26,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
      *      issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Restaurant restaurant;
 
     @FXML
     private HBox cardPane;
@@ -44,21 +44,21 @@ public class PersonCard extends UiPart<Region> {
     private Label rating;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to
+     * Creates a {@code RestaurantCode} with the given {@code Restaurant} and index to
      * display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public RestaurantCard(Restaurant restaurant, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.restaurant = restaurant;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        person.getTags().stream()
+        name.setText(restaurant.getName().fullName);
+        phone.setText(restaurant.getPhone().value);
+        address.setText(restaurant.getAddress().value);
+        restaurant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        person.getRating().ifPresentOrElse(r -> {
+        restaurant.getRating().ifPresentOrElse(r -> {
             rating.setText(getStarString(r.value));
             rating.setVisible(true);
             rating.setManaged(true);

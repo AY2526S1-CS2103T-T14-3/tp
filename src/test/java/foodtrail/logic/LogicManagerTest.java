@@ -26,7 +26,7 @@ import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.ReadOnlyAddressBook;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.storage.JsonAddressBookStorage;
 import foodtrail.storage.JsonUserPrefsStorage;
 import foodtrail.storage.StorageManager;
@@ -82,8 +82,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredRestaurantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredRestaurantList().remove(0));
     }
 
     /**
@@ -165,9 +165,9 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_JOLLIBEE + PHONE_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE;
-        Person expectedPerson = new PersonBuilder(JOLLIBEE).withTags().build();
+        Restaurant expectedRestaurant = new PersonBuilder(JOLLIBEE).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addRestaurant(expectedRestaurant);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

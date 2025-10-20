@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import foodtrail.logic.commands.FindCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
-import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        return new FindCommand(new PersonContainsKeywordsPredicate(keywordList));
+        return new FindCommand(new RestaurantContainsKeywordsPredicate(keywordList));
     }
 
 }

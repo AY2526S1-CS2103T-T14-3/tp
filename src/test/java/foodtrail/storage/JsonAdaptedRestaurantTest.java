@@ -1,6 +1,6 @@
 package foodtrail.storage;
 
-import static foodtrail.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static foodtrail.storage.JsonAdaptedRestaurant.MISSING_FIELD_MESSAGE_FORMAT;
 import static foodtrail.testutil.Assert.assertThrows;
 import static foodtrail.testutil.TypicalPersons.KOI;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +17,7 @@ import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
 import foodtrail.model.restaurant.Rating;
 
-public class JsonAdaptedPersonTest {
+public class JsonAdaptedRestaurantTest {
     private static final String INVALID_NAME = "";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -33,54 +33,54 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(KOI);
+        JsonAdaptedRestaurant person = new JsonAdaptedRestaurant(KOI);
         assertEquals(KOI, person.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(INVALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, null, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, null, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_ADDRESS, VALID_TAGS, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, INVALID_ADDRESS, VALID_TAGS, /*rating*/ null);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, null, VALID_TAGS, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, null, VALID_TAGS, /*rating*/ null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -89,36 +89,36 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, invalidTags, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, VALID_ADDRESS, invalidTags, /*rating*/ null);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
     @Test
     public void toModelType_validRating_preserved() throws Exception {
         // KOI in TypicalPersons has a rating (4) in your sample data; build from it
-        JsonAdaptedPerson person = new JsonAdaptedPerson(KOI);
+        JsonAdaptedRestaurant person = new JsonAdaptedRestaurant(KOI);
         assertEquals(KOI, person.toModelType());
     }
 
     @Test
     public void toModelType_invalidRatingNegative_throwsIllegalArgumentException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, -1);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, -1);
         assertThrows(IllegalArgumentException.class, Rating.MESSAGE_CONSTRAINTS, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidRatingTooLarge_throwsIllegalArgumentException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, 10);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, 10);
         assertThrows(IllegalArgumentException.class, Rating.MESSAGE_CONSTRAINTS, person::toModelType);
     }
 
     @Test
     public void toModelType_nullRating_okayMeansEmptyOptional() throws Exception {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
+        JsonAdaptedRestaurant person =
+                new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, /*rating*/ null);
         // Should parse successfully with empty Optional<Rating>
         person.toModelType();
     }

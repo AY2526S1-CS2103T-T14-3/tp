@@ -11,10 +11,10 @@ import java.util.Set;
 import foodtrail.commons.util.ToStringBuilder;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Restaurant in the restaurant list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Restaurant {
 
     // Identity fields
     private final Name name;
@@ -28,7 +28,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Address address, Set<Tag> tags, Optional<Rating> rating) {
+    public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags, Optional<Rating> rating) {
         requireAllNonNull(name, phone, address, tags);
         this.name = name;
         this.phone = phone;
@@ -38,7 +38,7 @@ public class Person {
     }
 
     // Backward-compatible 4-arg constructor (no rating provided -> blank)
-    public Person(Name name, Phone phone, Address address, Set<Tag> tags) {
+    public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags) {
         this(name, phone, address, tags, Optional.empty());
     }
 
@@ -59,10 +59,10 @@ public class Person {
     }
 
     /**
-     * Returns a new Person with the same details as this person, except with the given rating.
+     * Returns a new Restaurant with the same details as this restaurant, except with the given rating.
      */
-    public Person withRating(Rating newRating) {
-        return new Person(this.name, this.phone, this.address, this.tags, Optional.ofNullable(newRating));
+    public Restaurant withRating(Rating newRating) {
+        return new Restaurant(this.name, this.phone, this.address, this.tags, Optional.ofNullable(newRating));
     }
 
     /**
@@ -74,21 +74,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both restaurants have the same name.
+     * This defines a weaker notion of equality between two restaurants.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameRestaurant(Restaurant otherRestaurant) {
+        if (otherRestaurant == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherRestaurant != null
+                && otherRestaurant.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both restaurants have the same identity and data fields.
+     * This defines a stronger notion of equality between two restaurants.
      */
     @Override
     public boolean equals(Object other) {
@@ -97,15 +97,15 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Restaurant)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Restaurant otherRestaurant = (Restaurant) other;
+        return name.equals(otherRestaurant.name)
+                && phone.equals(otherRestaurant.phone)
+                && address.equals(otherRestaurant.address)
+                && tags.equals(otherRestaurant.tags);
     }
 
     @Override

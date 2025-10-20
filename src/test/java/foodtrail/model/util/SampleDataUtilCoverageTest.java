@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.model.ReadOnlyAddressBook;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
  * Ensures that every Person created in SampleDataUtil#getSamplePersons() is valid and covered.
@@ -17,15 +17,15 @@ import foodtrail.model.restaurant.Person;
 public class SampleDataUtilCoverageTest {
 
     @Test
-    public void getSamplePersons_allEntriesPresentAndValid() {
-        Person[] sample = SampleDataUtil.getSamplePersons();
+    public void getSampleRestaurants_allEntriesPresentAndValid() {
+        Restaurant[] sample = SampleDataUtil.getSampleRestaurants();
         assertNotNull(sample);
         assertTrue(sample.length >= 6, "Expected at least 6 sample persons");
 
         boolean hasRating = false;
         boolean hasNoRating = false;
 
-        for (Person p : sample) {
+        for (Restaurant p : sample) {
             assertNotNull(p.getName(), "Person name should not be null");
             assertNotNull(p.getPhone(), "Person phone should not be null");
             assertNotNull(p.getAddress(), "Person address should not be null");
@@ -50,14 +50,14 @@ public class SampleDataUtilCoverageTest {
     @Test
     public void getSampleAddressBook_containsAllSamplePersons() {
         ReadOnlyAddressBook ab = SampleDataUtil.getSampleAddressBook(); // ✅ fix type
-        List<Person> list = ab.getPersonList();
-        Person[] sample = SampleDataUtil.getSamplePersons();
+        List<Restaurant> list = ab.getRestaurantList();
+        Restaurant[] sample = SampleDataUtil.getSampleRestaurants();
 
         assertEquals(sample.length, list.size(),
                 "AddressBook should contain all sample persons");
 
-        for (Person p : sample) {
-            assertTrue(list.stream().anyMatch(x -> x.isSamePerson(p)),
+        for (Restaurant p : sample) {
+            assertTrue(list.stream().anyMatch(x -> x.isSameRestaurant(p)),
                     "Sample person missing: " + p.getName());
         }
     }

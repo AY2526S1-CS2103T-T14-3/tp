@@ -3,7 +3,7 @@ package foodtrail.model.restaurant;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person's rating in the address book.
+ * Represents a Restaurant's rating in the restaurant list.
  * Guarantees: immutable; is valid as declared in {@link #isValidRating(int)}
  */
 public class Rating {

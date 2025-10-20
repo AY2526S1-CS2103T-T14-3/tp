@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.model.Model;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
  * A utility class for test cases.
@@ -36,20 +36,20 @@ public class TestUtil {
      * Returns the middle index of the person in the {@code model}'s person list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+        return Index.fromOneBased(model.getFilteredRestaurantList().size() / 2);
     }
 
     /**
      * Returns the last index of the person in the {@code model}'s person list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+        return Index.fromOneBased(model.getFilteredRestaurantList().size());
     }
 
     /**
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static Restaurant getPerson(Model model, Index index) {
+        return model.getFilteredRestaurantList().get(index.getZeroBased());
     }
 }

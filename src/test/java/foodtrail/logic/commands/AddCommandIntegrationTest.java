@@ -11,7 +11,7 @@ import foodtrail.logic.Messages;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.testutil.PersonBuilder;
 
 /**
@@ -28,20 +28,20 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Restaurant validRestaurant = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addRestaurant(validRestaurant);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertCommandSuccess(new AddCommand(validRestaurant), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validRestaurant)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
+        Restaurant restaurantInList = model.getAddressBook().getRestaurantList().get(0);
+        assertCommandFailure(new AddCommand(restaurantInList), model,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 

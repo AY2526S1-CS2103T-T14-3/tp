@@ -16,45 +16,45 @@ import org.junit.jupiter.api.Test;
 
 import foodtrail.testutil.PersonBuilder;
 
-public class PersonTest {
+public class RestaurantTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        Restaurant restaurant = new PersonBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> restaurant.getTags().remove(0));
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameRestaurant() {
         // same object -> returns true
-        assertTrue(MCDONALDS.isSamePerson(MCDONALDS));
+        assertTrue(MCDONALDS.isSameRestaurant(MCDONALDS));
 
         // null -> returns false
-        assertFalse(MCDONALDS.isSamePerson(null));
+        assertFalse(MCDONALDS.isSameRestaurant(null));
 
         // same name, all other attributes different -> returns true
-        Person editedMcdonalds = new PersonBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
+        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
                 .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
-        assertTrue(MCDONALDS.isSamePerson(editedMcdonalds));
+        assertTrue(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // different name, all other attributes same -> returns false
         editedMcdonalds = new PersonBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
-        assertFalse(MCDONALDS.isSamePerson(editedMcdonalds));
+        assertFalse(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedKoi = new PersonBuilder(KOI).withName(VALID_NAME_KFC.toLowerCase()).build();
-        assertFalse(KOI.isSamePerson(editedKoi));
+        Restaurant editedKoi = new PersonBuilder(KOI).withName(VALID_NAME_KFC.toLowerCase()).build();
+        assertFalse(KOI.isSameRestaurant(editedKoi));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_KFC + " ";
         editedKoi = new PersonBuilder(KOI).withName(nameWithTrailingSpaces).build();
-        assertFalse(KOI.isSamePerson(editedKoi));
+        assertFalse(KOI.isSameRestaurant(editedKoi));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person mcdonaldsCopy = new PersonBuilder(MCDONALDS).build();
+        Restaurant mcdonaldsCopy = new PersonBuilder(MCDONALDS).build();
         assertTrue(MCDONALDS.equals(mcdonaldsCopy));
 
         // same object -> returns true
@@ -70,7 +70,7 @@ public class PersonTest {
         assertFalse(MCDONALDS.equals(KOI));
 
         // different name -> returns false
-        Person editedMcdonalds = new PersonBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
+        Restaurant editedMcdonalds = new PersonBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
         assertFalse(MCDONALDS.equals(editedMcdonalds));
 
         // different phone -> returns false
@@ -88,7 +88,7 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + MCDONALDS.getName()
+        String expected = Restaurant.class.getCanonicalName() + "{name=" + MCDONALDS.getName()
                 + ", phone=" + MCDONALDS.getPhone()
                 + ", address=" + MCDONALDS.getAddress() + ", tags=" + MCDONALDS.getTags() + "}";
         assertEquals(expected, MCDONALDS.toString());

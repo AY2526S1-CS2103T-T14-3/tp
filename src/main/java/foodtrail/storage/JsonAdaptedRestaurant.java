@@ -13,17 +13,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import foodtrail.commons.exceptions.IllegalValueException;
 import foodtrail.model.restaurant.Address;
 import foodtrail.model.restaurant.Name;
-import foodtrail.model.restaurant.Person;
 import foodtrail.model.restaurant.Phone;
 import foodtrail.model.restaurant.Rating;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Restaurant}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedRestaurant {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Restaurant's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -32,13 +32,13 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedRestaurant} with the given restaurant details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("rating") Integer rating) {
+    public JsonAdaptedRestaurant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                                 @JsonProperty("address") String address,
+                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                                 @JsonProperty("rating") Integer rating) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -49,9 +49,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Restaurant} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedRestaurant(Restaurant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         address = source.getAddress().value;
@@ -62,16 +62,16 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's
-     * {@code Person} object.
+     * Converts this Jackson-friendly adapted restaurant object into the model's
+     * {@code Restaurant} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in
-     *                               the adapted person.
+     *                               the adapted restaurant.
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+    public Restaurant toModelType() throws IllegalValueException {
+        final List<Tag> restaurantTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            restaurantTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -98,7 +98,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(restaurantTags);
 
         Optional<Rating> modelRating = (rating == null) ? java.util.Optional.empty()
                 : java.util.Optional.of(new Rating(rating));
@@ -106,7 +106,7 @@ class JsonAdaptedPerson {
         if (rating != null) {
             modelRating = Optional.of(new Rating(rating));
         }
-        return new Person(modelName, modelPhone, modelAddress, modelTags, modelRating);
+        return new Restaurant(modelName, modelPhone, modelAddress, modelTags, modelRating);
     }
 
 }

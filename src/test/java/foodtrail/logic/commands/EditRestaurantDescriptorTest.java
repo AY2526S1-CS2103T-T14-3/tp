@@ -11,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.logic.commands.EditCommand.EditPersonDescriptor;
-import foodtrail.testutil.EditPersonDescriptorBuilder;
+import foodtrail.logic.commands.EditCommand.EditRestaurantDescriptor;
+import foodtrail.testutil.EditRestaurantDescriptorBuilder;
 
-public class EditPersonDescriptorTest {
+public class EditRestaurantDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        EditPersonDescriptor descriptorWithSameValues = new EditPersonDescriptor(DESC_JOLLIBEE);
+        EditRestaurantDescriptor descriptorWithSameValues = new EditRestaurantDescriptor(DESC_JOLLIBEE);
         assertTrue(DESC_JOLLIBEE.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -35,26 +35,26 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_JOLLIBEE.equals(DESC_KFC));
 
         // different name -> returns false
-        EditPersonDescriptor editedJollibee = new EditPersonDescriptorBuilder(DESC_JOLLIBEE)
+        EditRestaurantDescriptor editedJollibee = new EditRestaurantDescriptorBuilder(DESC_JOLLIBEE)
                 .withName(VALID_NAME_KFC).build();
         assertFalse(DESC_JOLLIBEE.equals(editedJollibee));
 
         // different phone -> returns false
-        editedJollibee = new EditPersonDescriptorBuilder(DESC_JOLLIBEE).withPhone(VALID_PHONE_KFC).build();
+        editedJollibee = new EditRestaurantDescriptorBuilder(DESC_JOLLIBEE).withPhone(VALID_PHONE_KFC).build();
         assertFalse(DESC_JOLLIBEE.equals(editedJollibee));
 
         // different address -> returns false
-        editedJollibee = new EditPersonDescriptorBuilder(DESC_JOLLIBEE).withAddress(VALID_ADDRESS_KFC).build();
+        editedJollibee = new EditRestaurantDescriptorBuilder(DESC_JOLLIBEE).withAddress(VALID_ADDRESS_KFC).build();
         assertFalse(DESC_JOLLIBEE.equals(editedJollibee));
     }
 
     @Test
     public void toStringMethod() {
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + "}";
-        assertEquals(expected, editPersonDescriptor.toString());
+        EditRestaurantDescriptor editRestaurantDescriptor = new EditRestaurantDescriptor();
+        String expected = EditRestaurantDescriptor.class.getCanonicalName() + "{name="
+                + editRestaurantDescriptor.getName().orElse(null) + ", phone="
+                + editRestaurantDescriptor.getPhone().orElse(null) + ", address="
+                + editRestaurantDescriptor.getAddress().orElse(null) + "}";
+        assertEquals(expected, editRestaurantDescriptor.toString());
     }
 }

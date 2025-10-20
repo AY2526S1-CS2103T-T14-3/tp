@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.model.Model;
-import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose attributes contain any of the argument keywords.
@@ -21,18 +21,18 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD[, MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " ang mo kio, serangoon";
 
-    private final PersonContainsKeywordsPredicate predicate;
+    private final RestaurantContainsKeywordsPredicate predicate;
 
-    public FindCommand(PersonContainsKeywordsPredicate predicate) {
+    public FindCommand(RestaurantContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredRestaurantList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredRestaurantList().size()));
     }
 
     @Override

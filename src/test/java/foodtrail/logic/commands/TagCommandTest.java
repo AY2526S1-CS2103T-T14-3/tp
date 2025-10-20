@@ -20,7 +20,7 @@ import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
@@ -34,18 +34,18 @@ public class TagCommandTest {
 
     @Test
     public void execute_addTagUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(firstPerson.getTags());
+        Restaurant firstRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Set<Tag> newTags = new HashSet<>(firstRestaurant.getTags());
         newTags.add(new Tag(TAG_STUB));
-        Person editedPerson = new Person(firstPerson.getName(), firstPerson.getPhone(),
-                firstPerson.getAddress(), newTags);
+        Restaurant editedRestaurant = new Restaurant(firstRestaurant.getName(), firstRestaurant.getPhone(),
+                firstRestaurant.getAddress(), newTags);
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, newTags);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setRestaurant(firstRestaurant, editedRestaurant);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
@@ -54,18 +54,19 @@ public class TagCommandTest {
     public void execute_addTagFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(personInFilteredList.getTags());
+        Restaurant restaurantInFilteredList = model.getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Set<Tag> newTags = new HashSet<>(restaurantInFilteredList.getTags());
         newTags.add(new Tag(TAG_STUB));
-        Person editedPerson = new Person(personInFilteredList.getName(), personInFilteredList.getPhone(),
-                personInFilteredList.getAddress(), newTags);
+        Restaurant editedRestaurant = new Restaurant(restaurantInFilteredList.getName(),
+                restaurantInFilteredList.getPhone(),
+                restaurantInFilteredList.getAddress(), newTags);
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, newTags);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setRestaurant(model.getFilteredRestaurantList().get(0), editedRestaurant);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
@@ -74,7 +75,7 @@ public class TagCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Set<Tag> newTags = new HashSet<>();
         newTags.add(new Tag(TAG_STUB));
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRestaurantList().size() + 1);
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, newTags);
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -91,7 +92,7 @@ public class TagCommandTest {
         Set<Tag> newTags = new HashSet<>();
         newTags.add(new Tag(TAG_STUB));
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRestaurantList().size());
 
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, newTags);
 

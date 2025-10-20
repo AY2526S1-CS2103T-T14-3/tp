@@ -8,7 +8,7 @@ import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.logic.parser.exceptions.ParseException;
 import foodtrail.model.Model;
 import foodtrail.model.ReadOnlyAddressBook;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Restaurant;
 import javafx.collections.ObservableList;
 
 /**
@@ -31,8 +31,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of restaurants */
+    ObservableList<Restaurant> getFilteredRestaurantList();
 
     /**
      * Returns the user prefs' address book file path.

@@ -9,27 +9,27 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.model.ReadOnlyAddressBook;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
- * Ensures that every Person created in SampleDataUtil#getSamplePersons() is valid and covered.
+ * Ensures that every Restaurant created in SampleDataUtil#getSampleRestaurants() is valid and covered.
  */
 public class SampleDataUtilCoverageTest {
 
     @Test
-    public void getSamplePersons_allEntriesPresentAndValid() {
-        Person[] sample = SampleDataUtil.getSamplePersons();
+    public void getSampleRestaurants_allEntriesPresentAndValid() {
+        Restaurant[] sample = SampleDataUtil.getSampleRestaurants();
         assertNotNull(sample);
-        assertTrue(sample.length >= 6, "Expected at least 6 sample persons");
+        assertTrue(sample.length >= 6, "Expected at least 6 sample restaurants");
 
         boolean hasRating = false;
         boolean hasNoRating = false;
 
-        for (Person p : sample) {
-            assertNotNull(p.getName(), "Person name should not be null");
-            assertNotNull(p.getPhone(), "Person phone should not be null");
-            assertNotNull(p.getAddress(), "Person address should not be null");
-            assertNotNull(p.getTags(), "Person tags should not be null");
+        for (Restaurant p : sample) {
+            assertNotNull(p.getName(), "Restaurant name should not be null");
+            assertNotNull(p.getPhone(), "Restaurant phone should not be null");
+            assertNotNull(p.getAddress(), "Restaurant address should not be null");
+            assertNotNull(p.getTags(), "Restaurant tags should not be null");
 
             if (p.getRating().isPresent()) {
                 hasRating = true;
@@ -42,23 +42,23 @@ public class SampleDataUtilCoverageTest {
             }
         }
 
-        // ensure both rated and unrated persons exist
-        assertTrue(hasRating, "At least one sample person should have a rating");
-        assertTrue(hasNoRating, "At least one sample person should have no rating");
+        // ensure both rated and unrated restaurants exist
+        assertTrue(hasRating, "At least one sample restaurant should have a rating");
+        assertTrue(hasNoRating, "At least one sample restaurant should have no rating");
     }
 
     @Test
-    public void getSampleAddressBook_containsAllSamplePersons() {
+    public void getSampleAddressBook_containsAllSampleRestaurants() {
         ReadOnlyAddressBook ab = SampleDataUtil.getSampleAddressBook(); // ✅ fix type
-        List<Person> list = ab.getPersonList();
-        Person[] sample = SampleDataUtil.getSamplePersons();
+        List<Restaurant> list = ab.getRestaurantList();
+        Restaurant[] sample = SampleDataUtil.getSampleRestaurants();
 
         assertEquals(sample.length, list.size(),
-                "AddressBook should contain all sample persons");
+                "AddressBook should contain all sample restaurants");
 
-        for (Person p : sample) {
-            assertTrue(list.stream().anyMatch(x -> x.isSamePerson(p)),
-                    "Sample person missing: " + p.getName());
+        for (Restaurant p : sample) {
+            assertTrue(list.stream().anyMatch(x -> x.isSameRestaurant(p)),
+                    "Sample restaurant missing: " + p.getName());
         }
     }
 }

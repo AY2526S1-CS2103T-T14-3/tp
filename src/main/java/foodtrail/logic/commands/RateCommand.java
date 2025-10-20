@@ -1,6 +1,6 @@
 package foodtrail.logic.commands;
 
-import static foodtrail.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static foodtrail.logic.Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -8,8 +8,8 @@ import java.util.List;
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Rating;
+import foodtrail.model.restaurant.Rating;
+import foodtrail.model.restaurant.Restaurant;
 
 /**
  * Rates a restaurant from 0 to 5 (inclusive).
@@ -29,7 +29,7 @@ public class RateCommand extends Command {
     private final int ratingValue;
 
     /**
-     * @param index       of the person in the filtered person list to edit
+     * @param index       of the restaurant in the filtered restaurant list to edit
      * @param ratingValue of the rating to be set
      */
     public RateCommand(Index index, int ratingValue) {
@@ -40,16 +40,16 @@ public class RateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Restaurant> lastShownList = model.getFilteredRestaurantList();
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person edited = personToEdit.withRating(new Rating(ratingValue));
+        Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
+        Restaurant edited = restaurantToEdit.withRating(new Rating(ratingValue));
 
-        model.setPerson(personToEdit, edited);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.setRestaurant(restaurantToEdit, edited);
+        model.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
         return new CommandResult(String.format(MESSAGE_RATE_SUCCESS, edited.getName(), ratingValue));
     }
 

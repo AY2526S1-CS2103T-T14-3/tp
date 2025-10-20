@@ -16,9 +16,9 @@ import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
-import foodtrail.testutil.EditPersonDescriptorBuilder;
+import foodtrail.model.restaurant.Restaurant;
+import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
+import foodtrail.testutil.EditRestaurantDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -52,13 +52,13 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_JOLLIBEE;
-    public static final EditCommand.EditPersonDescriptor DESC_KFC;
+    public static final EditCommand.EditRestaurantDescriptor DESC_JOLLIBEE;
+    public static final EditCommand.EditRestaurantDescriptor DESC_KFC;
 
     static {
-        DESC_JOLLIBEE = new EditPersonDescriptorBuilder().withName(VALID_NAME_JOLLIBEE)
+        DESC_JOLLIBEE = new EditRestaurantDescriptorBuilder().withName(VALID_NAME_JOLLIBEE)
                 .withPhone(VALID_PHONE_JOLLIBEE).withAddress(VALID_ADDRESS_JOLLIBEE).build();
-        DESC_KFC = new EditPersonDescriptorBuilder().withName(VALID_NAME_KFC)
+        DESC_KFC = new EditRestaurantDescriptorBuilder().withName(VALID_NAME_KFC)
                 .withPhone(VALID_PHONE_KFC).withAddress(VALID_ADDRESS_KFC).build();
     }
 
@@ -92,30 +92,30 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered restaurant list and selected restaurant in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Restaurant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredRestaurantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredRestaurantList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the restaurant at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showRestaurantAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredRestaurantList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Restaurant restaurant = model.getFilteredRestaurantList().get(targetIndex.getZeroBased());
+        final String[] splitName = restaurant.getName().fullName.split("\\s+");
+        model.updateFilteredRestaurantList(new RestaurantContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredRestaurantList().size());
     }
 
 }

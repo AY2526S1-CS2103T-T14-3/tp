@@ -3,7 +3,7 @@ package foodtrail.logic.commands;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -17,14 +17,14 @@ import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Restaurant;
+import foodtrail.model.restaurant.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing restaurant in the address book.
  */
 public class EditCommand extends Command {
 
@@ -40,59 +40,60 @@ public class EditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited restaurant: %1$s";
+    public static final String MESSAGE_EDIT_RESTAURANT_SUCCESS = "Edited restaurant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This restaurant already exists in the restaurant list.";
+    public static final String MESSAGE_DUPLICATE_RESTAURANT = "This restaurant already exists in the restaurant list.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditRestaurantDescriptor editRestaurantDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the restaurant in the filtered restaurant list to edit
+     * @param editRestaurantDescriptor details to edit the restaurant with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditRestaurantDescriptor editRestaurantDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editRestaurantDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editRestaurantDescriptor = new EditRestaurantDescriptor(editRestaurantDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Restaurant> lastShownList = model.getFilteredRestaurantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
+        Restaurant editedRestaurant = createEditedRestaurant(restaurantToEdit, editRestaurantDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!restaurantToEdit.isSameRestaurant(editedRestaurant) && model.hasRestaurant(editedRestaurant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_RESTAURANT);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        model.setRestaurant(restaurantToEdit, editedRestaurant);
+        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_RESTAURANT_SUCCESS, Messages.format(editedRestaurant)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Restaurant} with the details of {@code restaurantToEdit}
+     * edited with {@code editRestaurantDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Restaurant createEditedRestaurant(Restaurant restaurantToEdit,
+                                                 EditRestaurantDescriptor editRestaurantDescriptor) {
+        assert restaurantToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> currentTags = personToEdit.getTags();
+        Name updatedName = editRestaurantDescriptor.getName().orElse(restaurantToEdit.getName());
+        Phone updatedPhone = editRestaurantDescriptor.getPhone().orElse(restaurantToEdit.getPhone());
+        Address updatedAddress = editRestaurantDescriptor.getAddress().orElse(restaurantToEdit.getAddress());
+        Set<Tag> currentTags = restaurantToEdit.getTags();
 
-        return new Person(updatedName, updatedPhone, updatedAddress, currentTags);
+        return new Restaurant(updatedName, updatedPhone, updatedAddress, currentTags);
     }
 
     @Override
@@ -108,32 +109,32 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editRestaurantDescriptor.equals(otherEditCommand.editRestaurantDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editRestaurantDescriptor", editRestaurantDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the restaurant with. Each non-empty field value will replace the
+     * corresponding field value of the restaurant.
      */
-    public static class EditPersonDescriptor {
+    public static class EditRestaurantDescriptor {
         private Name name;
         private Phone phone;
         private Address address;
 
-        public EditPersonDescriptor() {}
+        public EditRestaurantDescriptor() {}
 
         /**
          * Copy constructor.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditRestaurantDescriptor(EditRestaurantDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
@@ -177,14 +178,14 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditRestaurantDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(address, otherEditPersonDescriptor.address);
+            EditRestaurantDescriptor otherEditRestaurantDescriptor = (EditRestaurantDescriptor) other;
+            return Objects.equals(name, otherEditRestaurantDescriptor.name)
+                    && Objects.equals(phone, otherEditRestaurantDescriptor.phone)
+                    && Objects.equals(address, otherEditRestaurantDescriptor.address);
         }
 
         @Override

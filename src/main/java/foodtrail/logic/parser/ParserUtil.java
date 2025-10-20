@@ -9,10 +9,10 @@ import java.util.Set;
 import foodtrail.commons.core.index.Index;
 import foodtrail.commons.util.StringUtil;
 import foodtrail.logic.parser.exceptions.ParseException;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

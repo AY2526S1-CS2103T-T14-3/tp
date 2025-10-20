@@ -17,20 +17,20 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static foodtrail.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
+import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
+import static foodtrail.testutil.TypicalIndexes.INDEX_THIRD_RESTAURANT;
 
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.EditCommand;
-import foodtrail.logic.commands.EditCommand.EditPersonDescriptor;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Phone;
-import foodtrail.testutil.EditPersonDescriptorBuilder;
+import foodtrail.logic.commands.EditCommand.EditRestaurantDescriptor;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.testutil.EditRestaurantDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -88,10 +88,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_RESTAURANT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_KFC + ADDRESS_DESC_JOLLIBEE + NAME_DESC_JOLLIBEE;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_JOLLIBEE)
+        EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder().withName(VALID_NAME_JOLLIBEE)
                 .withPhone(VALID_PHONE_KFC).withAddress(VALID_ADDRESS_JOLLIBEE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -100,10 +100,10 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_RESTAURANT;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_KFC;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_KFC).build();
+        EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder().withPhone(VALID_PHONE_KFC).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -112,21 +112,22 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_RESTAURANT;
         String userInput = targetIndex.getOneBased() + NAME_DESC_JOLLIBEE;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_JOLLIBEE).build();
+        EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder()
+                .withName(VALID_NAME_JOLLIBEE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + PHONE_DESC_JOLLIBEE;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_JOLLIBEE).build();
+        descriptor = new EditRestaurantDescriptorBuilder().withPhone(VALID_PHONE_JOLLIBEE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_JOLLIBEE;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_JOLLIBEE).build();
+        descriptor = new EditRestaurantDescriptorBuilder().withAddress(VALID_ADDRESS_JOLLIBEE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -137,7 +138,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_RESTAURANT;
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_KFC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));

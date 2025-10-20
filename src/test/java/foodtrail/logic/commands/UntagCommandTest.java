@@ -2,10 +2,10 @@ package foodtrail.logic.commands;
 
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandFailure;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static foodtrail.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static foodtrail.testutil.TypicalPersons.getTypicalAddressBook;
+import static foodtrail.logic.commands.CommandTestUtil.showRestaurantAtIndex;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
+import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,9 +22,9 @@ import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Tag;
-import foodtrail.testutil.PersonBuilder;
+import foodtrail.model.restaurant.Restaurant;
+import foodtrail.model.restaurant.Tag;
+import foodtrail.testutil.RestaurantBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for UntagCommand.
@@ -37,23 +37,23 @@ public class UntagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_untagPerson_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(firstPerson.getTags());
+    public void execute_untagRestaurant_success() {
+        Restaurant firstRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
+        Set<Tag> newTags = new HashSet<>(firstRestaurant.getTags());
         Set<Tag> tagsToRemove = Collections.singleton(newTags.stream().findFirst().orElse(new Tag(TAG_STUB)));
         newTags.removeAll(tagsToRemove);
 
-        Person editedPerson = new PersonBuilder(firstPerson).withTags(newTags.stream()
+        Restaurant editedRestaurant = new RestaurantBuilder(firstRestaurant).withTags(newTags.stream()
                 .map(t -> t.tagName).toArray(String[]::new)).build();
 
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_RESTAURANT, tagsToRemove);
 
         String expectedMessage = String.format(UntagCommand.MESSAGE_UNTAG_SUCCESS,
-                Messages.format(editedPerson), tagsToRemove);
+                Messages.format(editedRestaurant), tagsToRemove);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setAddressBook(model.getAddressBook());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setRestaurant(firstRestaurant, editedRestaurant);
 
         assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
     }
@@ -64,19 +64,19 @@ public class UntagCommandTest {
         nonExistentTags.add(new Tag("nonExistentTag"));
         String nonExistentTagString = nonExistentTags.stream().map(Tag::toString)
                 .collect(Collectors.joining(", "));
-        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, nonExistentTags);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_RESTAURANT, nonExistentTags);
 
         assertCommandFailure(untagCommand, model, UntagCommand.MESSAGE_TAG_NOT_FOUND + nonExistentTagString);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void execute_invalidRestaurantIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRestaurantList().size() + 1);
         Set<Tag> tagList = new HashSet<>();
         tagList.add(new Tag(TAG_STUB));
         UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, tagList);
 
-        assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
     }
 
     /**
@@ -84,16 +84,16 @@ public class UntagCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+    public void execute_invalidRestaurantIndexFilteredList_failure() {
+        showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
+        Index outOfBoundIndex = INDEX_SECOND_RESTAURANT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRestaurantList().size());
 
         Set<Tag> tagList = new HashSet<>();
         tagList.add(new Tag(TAG_STUB));
         UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, tagList);
-        assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(untagCommand, model, Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -102,10 +102,10 @@ public class UntagCommandTest {
         tagList.add(new Tag(TAG_STUB));
         Set<Tag> anotherTagList = new HashSet<>();
         anotherTagList.add(new Tag(ANOTHER_TAG_STUB));
-        final UntagCommand standardCommand = new UntagCommand(INDEX_FIRST_PERSON, tagList);
+        final UntagCommand standardCommand = new UntagCommand(INDEX_FIRST_RESTAURANT, tagList);
 
         // same values -> returns true
-        UntagCommand commandWithSameValues = new UntagCommand(INDEX_FIRST_PERSON, tagList);
+        UntagCommand commandWithSameValues = new UntagCommand(INDEX_FIRST_RESTAURANT, tagList);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -118,9 +118,9 @@ public class UntagCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new UntagCommand(INDEX_SECOND_PERSON, tagList)));
+        assertFalse(standardCommand.equals(new UntagCommand(INDEX_SECOND_RESTAURANT, tagList)));
 
         // different tag -> returns false
-        assertFalse(standardCommand.equals(new UntagCommand(INDEX_FIRST_PERSON, anotherTagList)));
+        assertFalse(standardCommand.equals(new UntagCommand(INDEX_FIRST_RESTAURANT, anotherTagList)));
     }
 }

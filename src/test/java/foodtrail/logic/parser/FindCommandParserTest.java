@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.logic.commands.FindCommand;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -24,7 +24,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new PersonContainsKeywordsPredicate(Arrays.asList("ang mo kio", "serangoon")));
+                new FindCommand(new RestaurantContainsKeywordsPredicate(Arrays.asList("ang mo kio", "serangoon")));
         assertParseSuccess(parser, "ang mo kio, serangoon", expectedFindCommand);
 
         // multiple whitespaces around keywords

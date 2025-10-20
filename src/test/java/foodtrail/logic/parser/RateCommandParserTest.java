@@ -4,7 +4,7 @@ import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static foodtrail.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static foodtrail.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,18 +16,18 @@ public class RateCommandParserTest {
 
     @Test
     public void parseValidArgsPlainReturnsRateCommand() {
-        assertParseSuccess(parser, "1 4", new RateCommand(INDEX_FIRST_PERSON, 4));
+        assertParseSuccess(parser, "1 4", new RateCommand(INDEX_FIRST_RESTAURANT, 4));
     }
 
     @Test
     public void parseValidArgsWithPrefixReturnsRateCommand() {
         // supports "rate 1 r/5"
-        assertParseSuccess(parser, "1 r/5", new RateCommand(INDEX_FIRST_PERSON, 5));
+        assertParseSuccess(parser, "1 r/5", new RateCommand(INDEX_FIRST_RESTAURANT, 5));
     }
 
     @Test
     public void parseValidArgsExtraSpacesReturnsRateCommand() {
-        assertParseSuccess(parser, "   1    0   ", new RateCommand(INDEX_FIRST_PERSON, 0));
+        assertParseSuccess(parser, "   1    0   ", new RateCommand(INDEX_FIRST_RESTAURANT, 0));
     }
 
     @Test

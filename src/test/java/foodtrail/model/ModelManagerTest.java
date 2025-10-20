@@ -1,9 +1,9 @@
 package foodtrail.model;
 
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalPersons.KOI;
-import static foodtrail.testutil.TypicalPersons.MCDONALDS;
+import static foodtrail.testutil.TypicalRestaurants.KOI;
+import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.GuiSettings;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 import foodtrail.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -73,29 +73,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasRestaurant_nullRestaurant_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasRestaurant(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(MCDONALDS));
+    public void hasRestaurant_restaurantNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasRestaurant(MCDONALDS));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(MCDONALDS);
-        assertTrue(modelManager.hasPerson(MCDONALDS));
+    public void hasRestaurant_restaurantInAddressBook_returnsTrue() {
+        modelManager.addRestaurant(MCDONALDS);
+        assertTrue(modelManager.hasRestaurant(MCDONALDS));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredRestaurantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredRestaurantList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(MCDONALDS).withPerson(KOI).build();
+        AddressBook addressBook = new AddressBookBuilder().withRestaurant(MCDONALDS).withRestaurant(KOI).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,11 +118,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = MCDONALDS.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new PersonContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredRestaurantList(new RestaurantContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

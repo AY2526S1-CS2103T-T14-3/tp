@@ -1,7 +1,7 @@
 package foodtrail.logic.commands;
 
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
@@ -13,11 +13,11 @@ import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Restaurant;
+import foodtrail.model.restaurant.Tag;
 
 /**
- * Remove a tag of an existing person in the address book.
+ * Remove a tag of an existing restaurant in the address book.
  */
 public class UntagCommand extends Command {
 
@@ -37,8 +37,8 @@ public class UntagCommand extends Command {
     private final Set<Tag> tags;
 
     /**
-     * @param index of the person in the filtered person list to add the tag to
-     * @param tags to be added to the person
+     * @param index of the restaurant in the filtered restaurant list to add the tag to
+     * @param tags to be added to the restaurant
      */
     public UntagCommand(Index index, Set<Tag> tags) {
         requireNonNull(index);
@@ -51,14 +51,14 @@ public class UntagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Restaurant> lastShownList = model.getFilteredRestaurantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> existingTags = personToEdit.getTags();
+        Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
+        Set<Tag> existingTags = restaurantToEdit.getTags();
 
         if (!existingTags.containsAll(tags)) {
             Set<Tag> invalidTags = new HashSet<>(tags);
@@ -71,14 +71,14 @@ public class UntagCommand extends Command {
         Set<Tag> newTags = new HashSet<>(existingTags);
         newTags.removeAll(tags);
 
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getAddress(), newTags);
+        Restaurant editedRestaurant = new Restaurant(
+                restaurantToEdit.getName(), restaurantToEdit.getPhone(),
+                restaurantToEdit.getAddress(), newTags);
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setRestaurant(restaurantToEdit, editedRestaurant);
+        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
-        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedPerson), tags));
+        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedRestaurant), tags));
     }
 
     @Override

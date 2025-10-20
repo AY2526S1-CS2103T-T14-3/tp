@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.commons.core.LogsCenter;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Restaurant;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Restaurant> filteredRestaurants;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredRestaurants = new FilteredList<>(this.addressBook.getRestaurantList());
     }
 
     public ModelManager() {
@@ -88,44 +88,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasRestaurant(Restaurant restaurant) {
+        requireNonNull(restaurant);
+        return addressBook.hasRestaurant(restaurant);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteRestaurant(Restaurant target) {
+        addressBook.removeRestaurant(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addRestaurant(Restaurant restaurant) {
+        addressBook.addRestaurant(restaurant);
+        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setRestaurant(Restaurant target, Restaurant editedRestaurant) {
+        requireAllNonNull(target, editedRestaurant);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setRestaurant(target, editedRestaurant);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Restaurant} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Restaurant> getFilteredRestaurantList() {
+        return filteredRestaurants;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredRestaurants.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredRestaurants.equals(otherModelManager.filteredRestaurants);
     }
 
 }

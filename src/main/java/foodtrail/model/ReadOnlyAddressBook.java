@@ -1,6 +1,6 @@
 package foodtrail.model;
 
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Restaurant;
 import javafx.collections.ObservableList;
 
 /**
@@ -9,9 +9,9 @@ import javafx.collections.ObservableList;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the restaurants list.
+     * This list will not contain any duplicate restaurants.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Restaurant> getRestaurantList();
 
 }

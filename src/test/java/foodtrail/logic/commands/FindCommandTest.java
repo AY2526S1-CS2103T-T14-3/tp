@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

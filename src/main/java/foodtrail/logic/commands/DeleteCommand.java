@@ -9,7 +9,7 @@ import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * Deletes a person identified using it's displayed index from the restaurant list.

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.logic.commands.FindCommand;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

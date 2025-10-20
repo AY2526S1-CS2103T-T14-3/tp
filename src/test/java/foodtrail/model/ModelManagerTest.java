@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.GuiSettings;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
 import foodtrail.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

@@ -1,7 +1,7 @@
 package foodtrail.testutil;
 
 import foodtrail.model.AddressBook;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * A utility class to help with building Addressbook objects.

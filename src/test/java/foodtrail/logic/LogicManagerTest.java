@@ -26,7 +26,7 @@ import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.ReadOnlyAddressBook;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import foodtrail.storage.JsonAddressBookStorage;
 import foodtrail.storage.JsonUserPrefsStorage;
 import foodtrail.storage.StorageManager;

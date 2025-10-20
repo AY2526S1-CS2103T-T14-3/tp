@@ -1,4 +1,4 @@
-package foodtrail.model.person;
+package foodtrail.model.restaurant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

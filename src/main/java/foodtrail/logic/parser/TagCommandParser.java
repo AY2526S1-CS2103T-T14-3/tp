@@ -9,7 +9,7 @@ import java.util.Set;
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.TagCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Tag;
 
 /**
  * Parses input arguments and creates a new TagCommand object

@@ -3,7 +3,7 @@ package foodtrail.ui;
 import java.util.logging.Logger;
 
 import foodtrail.commons.core.LogsCenter;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;

@@ -16,8 +16,8 @@ import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
 import foodtrail.testutil.EditPersonDescriptorBuilder;
 
 /**

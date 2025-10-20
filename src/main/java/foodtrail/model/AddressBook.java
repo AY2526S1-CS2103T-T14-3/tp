@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import foodtrail.commons.util.ToStringBuilder;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.UniquePersonList;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.UniquePersonList;
 import javafx.collections.ObservableList;
 
 /**

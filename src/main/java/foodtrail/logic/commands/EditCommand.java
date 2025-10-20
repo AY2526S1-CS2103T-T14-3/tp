@@ -17,11 +17,11 @@ import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Tag;
 
 /**
  * Edits the details of an existing person in the address book.

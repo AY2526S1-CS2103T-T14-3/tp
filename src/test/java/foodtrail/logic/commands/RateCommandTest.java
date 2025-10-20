@@ -20,8 +20,8 @@ import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Rating;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Rating;
 
 /**
  * Integration + unit tests for {@link RateCommand}.

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import foodtrail.model.AddressBook;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

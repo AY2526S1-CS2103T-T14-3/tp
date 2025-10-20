@@ -17,7 +17,7 @@ import foodtrail.logic.Messages;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

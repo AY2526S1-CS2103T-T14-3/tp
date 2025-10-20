@@ -1,4 +1,4 @@
-package foodtrail.model.person;
+package foodtrail.model.restaurant;
 
 import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.model.person.exceptions.DuplicatePersonException;
-import foodtrail.model.person.exceptions.PersonNotFoundException;
+import foodtrail.model.restaurant.exceptions.DuplicatePersonException;
+import foodtrail.model.restaurant.exceptions.PersonNotFoundException;
 import foodtrail.testutil.PersonBuilder;
 
 public class UniquePersonListTest {

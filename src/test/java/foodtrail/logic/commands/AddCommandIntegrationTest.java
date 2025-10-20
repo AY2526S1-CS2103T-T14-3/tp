@@ -11,7 +11,7 @@ import foodtrail.logic.Messages;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import foodtrail.testutil.PersonBuilder;
 
 /**

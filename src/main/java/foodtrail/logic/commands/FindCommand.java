@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.model.Model;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose attributes contain any of the argument keywords.

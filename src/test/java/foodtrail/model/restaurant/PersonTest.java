@@ -1,4 +1,4 @@
-package foodtrail.model.person;
+package foodtrail.model.restaurant;
 
 import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_NAME_KFC;

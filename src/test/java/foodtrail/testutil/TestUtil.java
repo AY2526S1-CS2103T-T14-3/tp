@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * A utility class for test cases.

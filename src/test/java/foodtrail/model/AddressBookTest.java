@@ -16,8 +16,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.model.person.Person;
-import foodtrail.model.person.exceptions.DuplicatePersonException;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.exceptions.DuplicatePersonException;
 import foodtrail.testutil.PersonBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.exceptions.IllegalValueException;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Rating;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Rating;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "";

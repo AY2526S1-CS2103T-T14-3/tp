@@ -13,8 +13,8 @@ import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Tag;
 
 /**
  * Remove a tag of an existing person in the address book.

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import foodtrail.logic.commands.FindCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
-import foodtrail.model.person.PersonContainsKeywordsPredicate;
+import foodtrail.model.restaurant.PersonContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

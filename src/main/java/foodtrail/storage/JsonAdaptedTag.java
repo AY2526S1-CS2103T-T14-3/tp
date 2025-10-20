@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import foodtrail.commons.exceptions.IllegalValueException;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Tag;
 
 /**
  * Jackson-friendly version of {@link Tag}.

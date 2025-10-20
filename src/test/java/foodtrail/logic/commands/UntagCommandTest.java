@@ -22,8 +22,8 @@ import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Tag;
 import foodtrail.testutil.PersonBuilder;
 
 /**

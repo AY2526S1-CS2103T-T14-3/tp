@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.model.ReadOnlyAddressBook;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * Ensures that every Person created in SampleDataUtil#getSamplePersons() is valid and covered.

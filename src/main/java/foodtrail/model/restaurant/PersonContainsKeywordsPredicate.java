@@ -1,4 +1,4 @@
-package foodtrail.model.person;
+package foodtrail.model.restaurant;
 
 import java.util.List;
 import java.util.function.Predicate;

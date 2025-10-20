@@ -7,7 +7,7 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 
 import foodtrail.logic.commands.AddCommand;
 import foodtrail.logic.commands.EditCommand.EditPersonDescriptor;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * A utility class for Person.

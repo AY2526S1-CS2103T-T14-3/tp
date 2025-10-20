@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import foodtrail.commons.exceptions.IllegalValueException;
 import foodtrail.model.AddressBook;
 import foodtrail.model.ReadOnlyAddressBook;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.

@@ -10,7 +10,7 @@ import foodtrail.commons.util.ToStringBuilder;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 
 /**
  * Adds a person to the address book.

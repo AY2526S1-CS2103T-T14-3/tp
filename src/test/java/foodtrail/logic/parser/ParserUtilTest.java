@@ -14,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import foodtrail.logic.parser.exceptions.ParseException;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "";

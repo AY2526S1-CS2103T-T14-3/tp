@@ -8,8 +8,8 @@ import java.util.List;
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Rating;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Rating;
 
 /**
  * Rates a restaurant from 0 to 5 (inclusive).

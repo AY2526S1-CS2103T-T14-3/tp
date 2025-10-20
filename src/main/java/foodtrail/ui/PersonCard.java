@@ -2,7 +2,7 @@ package foodtrail.ui;
 
 import java.util.Comparator;
 
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;

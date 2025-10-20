@@ -11,11 +11,11 @@ import java.util.stream.Stream;
 
 import foodtrail.logic.commands.AddCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Person;
-import foodtrail.model.person.Phone;
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Person;
+import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object

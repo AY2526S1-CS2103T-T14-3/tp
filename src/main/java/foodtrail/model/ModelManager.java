@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.commons.core.LogsCenter;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 

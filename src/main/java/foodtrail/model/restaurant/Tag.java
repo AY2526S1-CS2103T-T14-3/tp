@@ -1,4 +1,4 @@
-package foodtrail.model.person;
+package foodtrail.model.restaurant;
 
 import static foodtrail.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;

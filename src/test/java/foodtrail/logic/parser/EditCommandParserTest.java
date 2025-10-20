@@ -27,9 +27,9 @@ import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.EditCommand;
 import foodtrail.logic.commands.EditCommand.EditPersonDescriptor;
-import foodtrail.model.person.Address;
-import foodtrail.model.person.Name;
-import foodtrail.model.person.Phone;
+import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.Name;
+import foodtrail.model.restaurant.Phone;
 import foodtrail.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {

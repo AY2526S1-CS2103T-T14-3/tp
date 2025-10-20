@@ -1,6 +1,6 @@
 package foodtrail.model;
 
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import javafx.collections.ObservableList;
 
 /**

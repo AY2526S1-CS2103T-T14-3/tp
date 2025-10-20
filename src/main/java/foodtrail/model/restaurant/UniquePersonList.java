@@ -1,4 +1,4 @@
-package foodtrail.model.person;
+package foodtrail.model.restaurant;
 
 import static foodtrail.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
@@ -6,8 +6,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Iterator;
 import java.util.List;
 
-import foodtrail.model.person.exceptions.DuplicatePersonException;
-import foodtrail.model.person.exceptions.PersonNotFoundException;
+import foodtrail.model.restaurant.exceptions.DuplicatePersonException;
+import foodtrail.model.restaurant.exceptions.PersonNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

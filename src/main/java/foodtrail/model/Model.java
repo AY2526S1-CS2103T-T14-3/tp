@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import foodtrail.commons.core.GuiSettings;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import javafx.collections.ObservableList;
 
 /**

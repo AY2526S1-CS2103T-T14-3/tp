@@ -21,7 +21,7 @@ import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ReadOnlyAddressBook;
 import foodtrail.model.ReadOnlyUserPrefs;
-import foodtrail.model.person.Person;
+import foodtrail.model.restaurant.Person;
 import foodtrail.testutil.PersonBuilder;
 import javafx.collections.ObservableList;
 

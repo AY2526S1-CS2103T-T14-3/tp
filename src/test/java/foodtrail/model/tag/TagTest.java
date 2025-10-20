@@ -4,7 +4,7 @@ import static foodtrail.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.model.person.Tag;
+import foodtrail.model.restaurant.Tag;
 
 public class TagTest {
 

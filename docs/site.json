@@ -1,8 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "FoodTrail",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/curry_rice_icon.png",
   "style": {
     "codeTheme": "light"
   },

@@ -48,8 +48,9 @@ public class UntagCommandTest {
 
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_RESTAURANT, tagsToRemove);
 
+        String tagstoRemoveString = tagsToRemove.stream().map(Tag::toString).collect(Collectors.joining(", "));
         String expectedMessage = String.format(UntagCommand.MESSAGE_UNTAG_SUCCESS,
-                Messages.format(editedRestaurant), tagsToRemove);
+                Messages.format(editedRestaurant), tagstoRemoveString);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setAddressBook(model.getAddressBook());

@@ -11,7 +11,7 @@ start
 if () then ([command commits RestaurantDirectory])
     :Purge redundant states;
     :Save RestaurantDirectory to
-    addressBookStateList;
+    restaurantDirectoryStateList;
 else ([else])
 endif
 stop

@@ -7,5 +7,5 @@
       "y" : 21
     }
   },
-  "restaurantDirectoryFilePath" : "data\\foodtrail.json"
+  "restaurantDirectoryFilePath" : "data/foodtrail.json"
 }

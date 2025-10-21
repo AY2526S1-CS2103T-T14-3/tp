@@ -3,6 +3,7 @@ package foodtrail.model.restaurant;
 import static foodtrail.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,11 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * A list of restaurants that enforces uniqueness between its elements and does not allow nulls.
- * A restaurant is considered unique by comparing using {@code Restaurant#isSameRestaurant(Restaurant)}.
- * As such, adding and updating of restaurants uses Restaurant#isSameRestaurant(Restaurant) for equality
- * so as to ensure that the restaurant being added or updated is unique in terms of identity in the
- * UniqueRestaurantList. However, the removal of a restaurant uses Restaurant#equals(Object) so as to
+ * A list of restaurants that enforces uniqueness between its elements and does
+ * not allow nulls.
+ * A restaurant is considered unique by comparing using
+ * {@code Restaurant#isSameRestaurant(Restaurant)}.
+ * As such, adding and updating of restaurants uses
+ * Restaurant#isSameRestaurant(Restaurant) for equality
+ * so as to ensure that the restaurant being added or updated is unique in terms
+ * of identity in the
+ * UniqueRestaurantList. However, the removal of a restaurant uses
+ * Restaurant#equals(Object) so as to
  * ensure that the restaurant with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -26,11 +32,12 @@ import javafx.collections.ObservableList;
 public class UniqueRestaurantList implements Iterable<Restaurant> {
 
     private final ObservableList<Restaurant> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Restaurant> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Restaurant> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent restaurant as the given argument.
+     * Returns true if the list contains an equivalent restaurant as the given
+     * argument.
      */
     public boolean contains(Restaurant toCheck) {
         requireNonNull(toCheck);
@@ -50,7 +57,8 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
     }
 
     /**
-     * Replaces the restaurant {@code target} in the list with {@code editedRestaurant}.
+     * Replaces the restaurant {@code target} in the list with
+     * {@code editedRestaurant}.
      * {@code target} must exist in the list.
      * The restaurant identity of {@code editedRestaurant} must not be the
      * same as another existing restaurant in the list.
@@ -97,6 +105,12 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
         }
 
         internalList.setAll(restaurants);
+    }
+
+    /** Sorts the internal list with the given comparator. */
+    public void sort(Comparator<Restaurant> comparator) {
+        requireNonNull(comparator);
+        FXCollections.sort(internalList, comparator);
     }
 
     /**

@@ -45,7 +45,8 @@ public interface Model {
     void setRestaurantDirectoryFilePath(Path restaurantDirectoryFilePath);
 
     /**
-     * Replaces restaurant directory data with the data in {@code restaurantDirectory}.
+     * Replaces restaurant directory data with the data in
+     * {@code restaurantDirectory}.
      */
     void setRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory);
 
@@ -53,7 +54,8 @@ public interface Model {
     ReadOnlyRestaurantDirectory getRestaurantDirectory();
 
     /**
-     * Returns true if a restaurant with the same identity as {@code restaurant} exists in the restaurant directory.
+     * Returns true if a restaurant with the same identity as {@code restaurant}
+     * exists in the restaurant directory.
      */
     boolean hasRestaurant(Restaurant restaurant);
 
@@ -77,11 +79,16 @@ public interface Model {
      */
     void setRestaurant(Restaurant target, Restaurant editedRestaurant);
 
+    /** Sorts the restaurant list by name in ascending order. */
+    void sortRestaurantListByName();
+
     /** Returns an unmodifiable view of the filtered restaurant list */
     ObservableList<Restaurant> getFilteredRestaurantList();
 
     /**
-     * Updates the filter of the filtered restaurant list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered restaurant list to filter by the given
+     * {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);

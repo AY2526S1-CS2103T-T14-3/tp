@@ -9,10 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -84,6 +87,47 @@ public class RestaurantDirectoryTest {
     }
 
     @Test
+    public void sortByNameAscendingCaseInsensitiveWithTypicalData() {
+        RestaurantDirectory directory = getTypicalRestaurantDirectory();
+
+        // Build expected order by sorting a copy (case-insensitive by name)
+        Comparator<Restaurant> byNameIgnoreCase = Comparator.comparing(r -> r.getName().fullName.toLowerCase());
+
+        List<Restaurant> before = new ArrayList<>(directory.getRestaurantList());
+        List<Restaurant> expected = before.stream()
+                .sorted(byNameIgnoreCase)
+                .collect(Collectors.toList());
+
+        // When: sort is applied on the directory
+        directory.sortRestaurant(byNameIgnoreCase);
+
+        // Then: order matches expected
+        assertEquals(expected, directory.getRestaurantList());
+    }
+
+    @Test
+    public void sort_nullComparator_throwsNullPointerException() {
+        RestaurantDirectory directory = getTypicalRestaurantDirectory();
+        assertThrows(NullPointerException.class, () -> directory.sortRestaurant(null));
+    }
+
+    @Test
+    public void sort_preservesAllElements_noLossNoDuplicate() {
+        RestaurantDirectory directory = getTypicalRestaurantDirectory();
+
+        List<Restaurant> snapshotBefore = new ArrayList<>(directory.getRestaurantList());
+        Comparator<Restaurant> byNameIgnoreCase = Comparator.comparing(r -> r.getName().fullName.toLowerCase());
+
+        directory.sortRestaurant(byNameIgnoreCase);
+
+        List<Restaurant> after = new ArrayList<>(directory.getRestaurantList());
+        // same size
+        assertEquals(snapshotBefore.size(), after.size());
+        // same multiset of elements (order can change, elements must be identical)
+        assertTrue(after.containsAll(snapshotBefore) && snapshotBefore.containsAll(after));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = RestaurantDirectory.class.getCanonicalName() + "{restaurants="
                 + restaurantDirectory.getRestaurantList() + "}";
@@ -91,7 +135,8 @@ public class RestaurantDirectoryTest {
     }
 
     /**
-     * A stub ReadOnlyRestaurantDirectory whose restaurants list can violate interface constraints.
+     * A stub ReadOnlyRestaurantDirectory whose restaurants list can violate
+     * interface constraints.
      */
     private static class RestaurantDirectoryStub implements ReadOnlyRestaurantDirectory {
         private final ObservableList<Restaurant> restaurants = FXCollections.observableArrayList();

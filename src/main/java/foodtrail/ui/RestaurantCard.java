@@ -42,6 +42,8 @@ public class RestaurantCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label rating;
+    @FXML
+    private Label isMarkedStatus; // New FXML Label for IsMarked status
 
     /**
      * Creates a {@code RestaurantCode} with the given {@code Restaurant} and index to
@@ -67,6 +69,9 @@ public class RestaurantCard extends UiPart<Region> {
             rating.setVisible(false);
             rating.setManaged(false);
         });
+
+        // Set the text for the new IsMarked status label
+        isMarkedStatus.setText(restaurant.getIsMarked().toString());
     }
 
     /**

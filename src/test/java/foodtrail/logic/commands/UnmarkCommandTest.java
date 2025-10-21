@@ -17,7 +17,6 @@ import foodtrail.logic.Messages;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.testutil.RestaurantBuilder;
 
@@ -85,11 +84,14 @@ public class UnmarkCommandTest {
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
-        Restaurant expectedRestaurantToUnmark = expectedModel.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
-        Restaurant expectedMarkedRestaurant = new RestaurantBuilder(expectedRestaurantToUnmark).withIsMarked(true).build();
+        Restaurant expectedRestaurantToUnmark = expectedModel.getFilteredRestaurantList()
+                .get(INDEX_FIRST_RESTAURANT.getZeroBased());
+        Restaurant expectedMarkedRestaurant = new RestaurantBuilder(expectedRestaurantToUnmark)
+                .withIsMarked(true).build();
         expectedModel.setRestaurant(expectedRestaurantToUnmark, expectedMarkedRestaurant);
 
-        Restaurant expectedUnmarkedRestaurant = new RestaurantBuilder(expectedMarkedRestaurant).withIsMarked(false).build();
+        Restaurant expectedUnmarkedRestaurant = new RestaurantBuilder(expectedMarkedRestaurant)
+                .withIsMarked(false).build();
         expectedModel.setRestaurant(expectedMarkedRestaurant, expectedUnmarkedRestaurant);
 
         assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
@@ -99,9 +101,11 @@ public class UnmarkCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
 
-        Index outOfBoundIndex = INDEX_SECOND_RESTAURANT; // INDEX_SECOND_RESTAURANT is out of bounds for a filtered list with one restaurant
+        Index outOfBoundIndex = INDEX_SECOND_RESTAURANT; // INDEX_SECOND_RESTAURANT is out of bounds for
+        // a filtered list with one restaurant
         // ensures that outOfBoundIndex is still in bounds of restaurant directory list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantDirectory().getRestaurantList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantDirectory()
+                .getRestaurantList().size());
 
         UnmarkCommand unmarkCommand = new UnmarkCommand(outOfBoundIndex);
 

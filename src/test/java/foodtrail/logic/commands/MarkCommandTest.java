@@ -17,7 +17,6 @@ import foodtrail.logic.Messages;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
-import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.testutil.RestaurantBuilder;
 
@@ -87,7 +86,8 @@ public class MarkCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
 
-        Index outOfBoundIndex = INDEX_SECOND_RESTAURANT; // INDEX_SECOND_RESTAURANT is out of bounds for a filtered list with one restaurant
+        Index outOfBoundIndex = INDEX_SECOND_RESTAURANT; // INDEX_SECOND_RESTAURANT is out of bounds
+        // for a filtered list with one restaurant
         // ensures that outOfBoundIndex is still in bounds of restaurant directory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantDirectory().getRestaurantList().size());
 

@@ -9,7 +9,7 @@ import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.logic.commands.CommandTestUtil.showRestaurantAtIndex;
 import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
-import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.EditCommand.EditRestaurantDescriptor;
-import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.UserPrefs;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.testutil.EditRestaurantDescriptorBuilder;
@@ -32,7 +32,7 @@ import foodtrail.testutil.RestaurantBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -47,7 +47,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
                 Messages.format(finalExpectedRestaurant));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
+                new UserPrefs());
         expectedModel.setRestaurant(restaurantToEdit, finalExpectedRestaurant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -68,7 +69,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
                 Messages.format(editedRestaurant));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
+                new UserPrefs());
         expectedModel.setRestaurant(lastRestaurant, editedRestaurant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -82,7 +84,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
                 Messages.format(editedRestaurant));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
+                new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -101,7 +104,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
                 Messages.format(editedRestaurant));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
+                new UserPrefs());
         expectedModel.setRestaurant(model.getFilteredRestaurantList().get(0), editedRestaurant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -120,8 +124,8 @@ public class EditCommandTest {
     public void execute_duplicateRestaurantFilteredList_failure() {
         showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
 
-        // edit restaurant in filtered list into a duplicate in address book
-        Restaurant restaurantInList = model.getAddressBook().getRestaurantList()
+        // edit restaurant in filtered list into a duplicate in restaurant directory
+        Restaurant restaurantInList = model.getRestaurantDirectory().getRestaurantList()
                 .get(INDEX_SECOND_RESTAURANT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESTAURANT,
                 new EditRestaurantDescriptorBuilder(restaurantInList).build());
@@ -140,14 +144,14 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of restaurant directory
      */
     @Test
     public void execute_invalidRestaurantIndexFilteredList_failure() {
         showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
         Index outOfBoundIndex = INDEX_SECOND_RESTAURANT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRestaurantList().size());
+        // ensures that outOfBoundIndex is still in bounds of restaurant directory list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantDirectory().getRestaurantList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditRestaurantDescriptorBuilder().withName(VALID_NAME_KFC).build());

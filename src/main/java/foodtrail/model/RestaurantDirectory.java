@@ -10,10 +10,10 @@ import foodtrail.model.restaurant.UniqueRestaurantList;
 import javafx.collections.ObservableList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the restaurant-directory level
  * Duplicates are not allowed (by .isSameRestaurant comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class RestaurantDirectory implements ReadOnlyRestaurantDirectory {
 
     private final UniqueRestaurantList restaurants;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         restaurants = new UniqueRestaurantList();
     }
 
-    public AddressBook() {}
+    public RestaurantDirectory() {}
 
     /**
-     * Creates an AddressBook using the Restaurants in the {@code toBeCopied}
+     * Creates an RestaurantDirectory using the Restaurants in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public RestaurantDirectory(ReadOnlyRestaurantDirectory toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -41,7 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the restaurant list with {@code restaurants}.
+     * Replaces the contents of the restaurant directory with {@code restaurants}.
      * {@code restaurants} must not contain duplicate restaurants.
      */
     public void setRestaurants(List<Restaurant> restaurants) {
@@ -49,9 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code RestaurantDirectory} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyRestaurantDirectory newData) {
         requireNonNull(newData);
 
         setRestaurants(newData.getRestaurantList());
@@ -60,7 +60,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// restaurant-level operations
 
     /**
-     * Returns true if a restaurant with the same identity as {@code restaurant} exists in the address book.
+     * Returns true if a restaurant with the same identity as {@code restaurant} exists in the restaurant directory.
      */
     public boolean hasRestaurant(Restaurant restaurant) {
         requireNonNull(restaurant);
@@ -68,8 +68,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a restaurant to the address book.
-     * The restaurant must not already exist in the address book.
+     * Adds a restaurant to the restaurant directory.
+     * The restaurant must not already exist in the restaurant directory.
      */
     public void addRestaurant(Restaurant p) {
         restaurants.add(p);
@@ -77,9 +77,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given restaurant {@code target} in the list with {@code editedRestaurant}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the restaurant directory.
      * The restaurant identity of {@code editedRestaurant} must not be
-     * the same as another existing restaurant in the address book.
+     * the same as another existing restaurant in the restaurant directory.
      */
     public void setRestaurant(Restaurant target, Restaurant editedRestaurant) {
         requireNonNull(editedRestaurant);
@@ -88,8 +88,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code RestaurantDirectory}.
+     * {@code key} must exist in the restaurant directory.
      */
     public void removeRestaurant(Restaurant key) {
         restaurants.remove(key);
@@ -116,12 +116,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof RestaurantDirectory)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return restaurants.equals(otherAddressBook.restaurants);
+        RestaurantDirectory otherRestaurantDirectory = (RestaurantDirectory) other;
+        return restaurants.equals(otherRestaurantDirectory.restaurants);
     }
 
     @Override

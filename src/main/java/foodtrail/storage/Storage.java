@@ -5,14 +5,14 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import foodtrail.commons.exceptions.DataLoadingException;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.ReadOnlyUserPrefs;
 import foodtrail.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends RestaurantDirectoryStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -21,12 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getRestaurantDirectoryFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyRestaurantDirectory> readRestaurantDirectory() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory) throws IOException;
 
 }

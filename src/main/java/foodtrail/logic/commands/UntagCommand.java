@@ -17,14 +17,14 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Remove a tag of an existing restaurant in the address book.
+ * Remove a tag of an existing restaurant in the restaurant directory.
  */
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove a tag of the restaurant identified "
-            + "by the index number used in the displayed restaurant list. "
+            + "by the index number used in the displayed restaurant directory. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "

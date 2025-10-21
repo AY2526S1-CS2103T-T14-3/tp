@@ -35,45 +35,45 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' restaurant directory file path.
      */
-    Path getAddressBookFilePath();
+    Path getRestaurantDirectoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' restaurant directory file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setRestaurantDirectoryFilePath(Path restaurantDirectoryFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces restaurant directory data with the data in {@code restaurantDirectory}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the RestaurantDirectory */
+    ReadOnlyRestaurantDirectory getRestaurantDirectory();
 
     /**
-     * Returns true if a restaurant with the same identity as {@code restaurant} exists in the address book.
+     * Returns true if a restaurant with the same identity as {@code restaurant} exists in the restaurant directory.
      */
     boolean hasRestaurant(Restaurant restaurant);
 
     /**
      * Deletes the given restaurant.
-     * The restaurant must exist in the address book.
+     * The restaurant must exist in the restaurant directory.
      */
     void deleteRestaurant(Restaurant target);
 
     /**
      * Adds the given restaurant.
-     * {@code restaurant} must not already exist in the address book.
+     * {@code restaurant} must not already exist in the restaurant directory.
      */
     void addRestaurant(Restaurant restaurant);
 
     /**
      * Replaces the given restaurant {@code target} with {@code editedRestaurant}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the restaurant directory.
      * The restaurant identity of {@code editedRestaurant} must not be the same
-     * as another existing restaurant in the address book.
+     * as another existing restaurant in the restaurant directory.
      */
     void setRestaurant(Restaurant target, Restaurant editedRestaurant);
 

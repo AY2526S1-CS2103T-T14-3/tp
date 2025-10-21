@@ -17,10 +17,10 @@ import org.junit.jupiter.api.Test;
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
-import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.ReadOnlyUserPrefs;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.testutil.RestaurantBuilder;
 import javafx.collections.ObservableList;
@@ -110,12 +110,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getRestaurantDirectoryFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setRestaurantDirectoryFilePath(Path restaurantDirectoryFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -125,12 +125,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setRestaurantDirectory(ReadOnlyRestaurantDirectory newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyRestaurantDirectory getRestaurantDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -197,8 +197,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyRestaurantDirectory getRestaurantDirectory() {
+            return new RestaurantDirectory();
         }
     }
 

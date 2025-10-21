@@ -1,0 +1,59 @@
+package foodtrail.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+
+import foodtrail.commons.util.ToStringBuilder;
+import foodtrail.logic.Messages;
+import foodtrail.model.Model;
+import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
+
+/**
+ * Finds and lists all restaurants in restaurant directory whose attributes contain any of the argument keywords.
+ * Keywords are comma-separated. Keyword matching is case-insensitive and based on substrings.
+ */
+public class FindCommand extends Command {
+
+    public static final String COMMAND_WORD = "find";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all restaurants whose attributes contain any of "
+            + "the specified, comma-separated keywords (case-insensitive). "
+            + "The search is performed on name, phone, address, and tags.\n"
+            + "Parameters: KEYWORD[, MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " ang mo kio, serangoon";
+
+    private final RestaurantContainsKeywordsPredicate predicate;
+
+    public FindCommand(RestaurantContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public CommandResult execute(Model model) {
+        requireNonNull(model);
+        model.updateFilteredRestaurantList(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW, model.getFilteredRestaurantList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FindCommand)) {
+            return false;
+        }
+
+        FindCommand otherFindCommand = (FindCommand) other;
+        return predicate.equals(otherFindCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
+    }
+}

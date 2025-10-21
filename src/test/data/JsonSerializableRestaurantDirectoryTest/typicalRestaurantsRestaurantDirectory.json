@@ -1,0 +1,42 @@
+{
+  "restaurants" : [ {
+    "name" : "McDonald's",
+    "phone" : "67773777",
+    "address" : "200 Victoria St, #01-49 Bugis Junction, Singapore 188021",
+    "tags" : [ "fastfood" ],
+    "rating" : 4
+  }, {
+    "name" : "KOI Thé",
+    "phone" : "64812345",
+    "address" : "53 Ang Mo Kio Ave 3, #B2-08 AMK Hub, Singapore 569933",
+    "tags" : [ "bubbletea", "drinks" ],
+    "rating" : 4
+  }, {
+    "name" : "Hawker Chan",
+    "phone" : "62190000",
+    "address" : "78 Smith St, Singapore 058972",
+    "tags" : [ ],
+    "rating" : 2
+  }, {
+    "name" : "Astons Specialities",
+    "phone" : "62351234",
+    "address" : "201 Victoria St, #04-06 Bugis+, Singapore 188067",
+    "tags" : [ "western" ],
+    "rating" : 0
+  }, {
+    "name" : "Popeyes Louisiana Kitchen",
+    "phone" : "65153456",
+    "address" : "3 Simei Street 6, #01-01 Eastpoint Mall, Singapore 528833",
+    "tags" : [ ]
+  }, {
+    "name" : "Subway",
+    "phone" : "67890123",
+    "address" : "10 Tampines Central 1, #01-18 Tampines 1, Singapore 529536",
+    "tags" : [ ]
+  }, {
+    "name" : "Anna's Curry",
+    "phone" : "61234567",
+    "address" : "123 Serangoon Rd, Singapore 218227",
+    "tags" : [ ]
+  } ]
+}

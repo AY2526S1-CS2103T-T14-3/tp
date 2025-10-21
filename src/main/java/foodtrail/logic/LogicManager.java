@@ -72,7 +72,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getgetRestaurantDirectoryFilePath() {
+    public Path getRestaurantDirectoryFilePath() {
         return model.getRestaurantDirectoryFilePath();
     }
 

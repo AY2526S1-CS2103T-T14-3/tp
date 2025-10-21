@@ -37,7 +37,7 @@ public interface Logic {
     /**
      * Returns the user prefs' restaurant directory file path.
      */
-    Path getgetRestaurantDirectoryFilePath();
+    Path getRestaurantDirectoryFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

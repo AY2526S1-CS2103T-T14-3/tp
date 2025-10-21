@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setRestaurantDirectoryFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setRestaurantDirectoryFilePath(Paths.get("restaurant/directory/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setRestaurantDirectoryFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setRestaurantDirectoryFilePath(Paths.get("new/restaurant/directory/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -67,7 +67,7 @@ public class ModelManagerTest {
 
     @Test
     public void setRestaurantDirectoryFilePath_validPath_setsRestaurantDirectoryFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("restaurant/directory/file/path");
         modelManager.setRestaurantDirectoryFilePath(path);
         assertEquals(path, modelManager.getRestaurantDirectoryFilePath());
     }

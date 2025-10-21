@@ -5,7 +5,7 @@ import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.logic.commands.CommandTestUtil.showRestaurantAtIndex;
 import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
-import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
-import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.UserPrefs;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
@@ -30,7 +30,7 @@ public class TagCommandTest {
 
     private static final String TAG_STUB = "SomeTag";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
 
     @Test
     public void execute_addTagUnfilteredList_success() {
@@ -44,7 +44,8 @@ public class TagCommandTest {
 
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
+                new UserPrefs());
         expectedModel.setRestaurant(firstRestaurant, editedRestaurant);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
@@ -66,7 +67,8 @@ public class TagCommandTest {
 
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
+                new UserPrefs());
         expectedModel.setRestaurant(model.getFilteredRestaurantList().get(0), editedRestaurant);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
@@ -84,7 +86,7 @@ public class TagCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of restaurant directory
      */
     @Test
     public void execute_invalidRestaurantIndexFilteredList_failure() {
@@ -92,8 +94,8 @@ public class TagCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_RESTAURANT;
         Set<Tag> newTags = new HashSet<>();
         newTags.add(new Tag(TAG_STUB));
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRestaurantList().size());
+        // ensures that outOfBoundIndex is still in bounds of restaurant directory list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantDirectory().getRestaurantList().size());
 
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, newTags);
 

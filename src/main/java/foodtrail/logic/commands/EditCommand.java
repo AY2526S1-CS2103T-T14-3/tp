@@ -24,14 +24,14 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Edits the details of an existing restaurant in the address book.
+ * Edits the details of an existing restaurant in the restaurant directory.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the restaurant identified "
-            + "by the index number used in the displayed restaurant list. "
+            + "by the index number used in the displayed restaurant directory. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -42,7 +42,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_RESTAURANT_SUCCESS = "Edited restaurant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RESTAURANT = "This restaurant already exists in the restaurant list.";
+    public static final String MESSAGE_DUPLICATE_RESTAURANT = "This restaurant already exists "
+            + "in the restaurant directory.";
 
     private final Index index;
     private final EditRestaurantDescriptor editRestaurantDescriptor;

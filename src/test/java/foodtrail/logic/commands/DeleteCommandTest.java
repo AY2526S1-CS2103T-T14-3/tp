@@ -5,7 +5,7 @@ import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.logic.commands.CommandTestUtil.showRestaurantAtIndex;
 import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
-import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,7 +25,7 @@ import foodtrail.model.restaurant.Restaurant;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -35,7 +35,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESTAURANT_SUCCESS,
                 Messages.format(restaurantToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.deleteRestaurant(restaurantToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -59,7 +59,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESTAURANT_SUCCESS,
                 Messages.format(restaurantToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.deleteRestaurant(restaurantToDelete);
         showNoRestaurant(expectedModel);
 
@@ -71,8 +71,8 @@ public class DeleteCommandTest {
         showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
 
         Index outOfBoundIndex = INDEX_SECOND_RESTAURANT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRestaurantList().size());
+        // ensures that outOfBoundIndex is still in bounds of restaurant directory list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantDirectory().getRestaurantList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 

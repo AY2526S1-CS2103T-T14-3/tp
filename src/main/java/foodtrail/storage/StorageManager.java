@@ -7,24 +7,24 @@ import java.util.logging.Logger;
 
 import foodtrail.commons.core.LogsCenter;
 import foodtrail.commons.exceptions.DataLoadingException;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.ReadOnlyUserPrefs;
 import foodtrail.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of RestaurantDirectory data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private RestaurantDirectoryStorage restaurantDirectoryStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code RestaurantDirectoryStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(RestaurantDirectoryStorage restaurantDirectoryStorage, UserPrefsStorage userPrefsStorage) {
+        this.restaurantDirectoryStorage = restaurantDirectoryStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -46,33 +46,34 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ RestaurantDirectory methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getRestaurantDirectoryFilePath() {
+        return restaurantDirectoryStorage.getRestaurantDirectoryFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyRestaurantDirectory> readRestaurantDirectory() throws DataLoadingException {
+        return readRestaurantDirectory(restaurantDirectoryStorage.getRestaurantDirectoryFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyRestaurantDirectory> readRestaurantDirectory(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return restaurantDirectoryStorage.readRestaurantDirectory(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory) throws IOException {
+        saveRestaurantDirectory(restaurantDirectory, restaurantDirectoryStorage.getRestaurantDirectoryFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory, Path filePath)
+            throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        restaurantDirectoryStorage.saveRestaurantDirectory(restaurantDirectory, filePath);
     }
 
 }

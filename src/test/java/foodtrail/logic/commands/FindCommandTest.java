@@ -5,7 +5,7 @@ import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.testutil.TypicalRestaurants.HAWKERCHAN;
 import static foodtrail.testutil.TypicalRestaurants.KOI;
 import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
-import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,8 +26,8 @@ import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
 
     @Test
     public void equals() {

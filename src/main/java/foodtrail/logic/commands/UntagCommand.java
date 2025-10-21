@@ -17,20 +17,20 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Remove a tag of an existing restaurant in the address book.
+ * Remove a tag of an existing restaurant in the restaurant directory.
  */
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove a tag of the restaurant identified "
-            + "by the index number used in the displayed restaurant list. "
+            + "by the index number used in the displayed restaurant directory. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "halal";
 
-    public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag %2$s from restaurant: %1$s";
+    public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag(s) %2$s from restaurant: %1$s";
     public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this restaurant: ";
 
     private final Index index;
@@ -78,7 +78,8 @@ public class UntagCommand extends Command {
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
-        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedRestaurant), tags));
+        String tagsString = tags.stream().map(Tag::toString).collect(Collectors.joining(", "));
+        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedRestaurant), tagsString));
     }
 
     @Override

@@ -13,13 +13,13 @@ import foodtrail.model.Model;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
- * Adds a restaurant to the address book.
+ * Adds a restaurant to the restaurant directory.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a restaurant to the restaurant list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a restaurant to the restaurant directory. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -33,7 +33,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "fastfood";
 
     public static final String MESSAGE_SUCCESS = "New restaurant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_RESTAURANT = "This restaurant already exists in the restaurant list";
+    public static final String MESSAGE_DUPLICATE_RESTAURANT = "This restaurant already exists "
+            + "in the restaurant directory";
 
     private final Restaurant toAdd;
 

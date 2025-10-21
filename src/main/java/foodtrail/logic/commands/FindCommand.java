@@ -8,7 +8,7 @@ import foodtrail.model.Model;
 import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 
 /**
- * Finds and lists all restaurants in address book whose attributes contain any of the argument keywords.
+ * Finds and lists all restaurants in restaurant directory whose attributes contain any of the argument keywords.
  * Keywords are comma-separated. Keyword matching is case-insensitive and based on substrings.
  */
 public class FindCommand extends Command {

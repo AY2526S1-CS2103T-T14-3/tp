@@ -4,7 +4,7 @@ import static foodtrail.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Restaurant's name in the restaurant list.
+ * Represents a Restaurant's name in the restaurant directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

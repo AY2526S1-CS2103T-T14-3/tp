@@ -34,9 +34,9 @@ import foodtrail.testutil.EditRestaurantDescriptorBuilder;
 import foodtrail.testutil.RestaurantBuilder;
 import foodtrail.testutil.RestaurantUtil;
 
-public class AddressBookParserTest {
+public class RestaurantDirectoryParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final RestaurantDirectoryParser parser = new RestaurantDirectoryParser();
 
     @Test
     public void parseCommand_add() throws Exception {

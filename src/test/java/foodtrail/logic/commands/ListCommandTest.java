@@ -3,7 +3,7 @@ package foodtrail.logic.commands;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.logic.commands.CommandTestUtil.showRestaurantAtIndex;
 import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
-import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
+        expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
     }
 
     @Test

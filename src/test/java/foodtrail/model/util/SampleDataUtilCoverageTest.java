@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
@@ -48,13 +48,13 @@ public class SampleDataUtilCoverageTest {
     }
 
     @Test
-    public void getSampleAddressBook_containsAllSampleRestaurants() {
-        ReadOnlyAddressBook ab = SampleDataUtil.getSampleAddressBook(); // ✅ fix type
+    public void getSampleRestaurantDirectory_containsAllSampleRestaurants() {
+        ReadOnlyRestaurantDirectory ab = SampleDataUtil.getSampleRestaurantDirectory(); // ✅ fix type
         List<Restaurant> list = ab.getRestaurantList();
         Restaurant[] sample = SampleDataUtil.getSampleRestaurants();
 
         assertEquals(sample.length, list.size(),
-                "AddressBook should contain all sample restaurants");
+                "RestaurantDirectory should contain all sample restaurants");
 
         for (Restaurant p : sample) {
             assertTrue(list.stream().anyMatch(x -> x.isSameRestaurant(p)),

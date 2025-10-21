@@ -33,21 +33,21 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the restaurant in the {@code model}'s restaurant list.
+     * Returns the middle index of the restaurant in the {@code model}'s restaurant directory.
      */
     public static Index getMidIndex(Model model) {
         return Index.fromOneBased(model.getFilteredRestaurantList().size() / 2);
     }
 
     /**
-     * Returns the last index of the restaurant in the {@code model}'s restaurant list.
+     * Returns the last index of the restaurant in the {@code model}'s restaurant directory.
      */
     public static Index getLastIndex(Model model) {
         return Index.fromOneBased(model.getFilteredRestaurantList().size());
     }
 
     /**
-     * Returns the restaurant in the {@code model}'s restaurant list at {@code index}.
+     * Returns the restaurant in the {@code model}'s restaurant directory at {@code index}.
      */
     public static Restaurant getRestaurant(Model model, Index index) {
         return model.getFilteredRestaurantList().get(index.getZeroBased());

@@ -12,14 +12,14 @@ import foodtrail.model.Model;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
- * Deletes a restaurant identified using it's displayed index from the restaurant list.
+ * Deletes a restaurant identified using it's displayed index from the restaurant directory.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the restaurant identified by the index number used in the displayed restaurant list.\n"
+            + ": Deletes the restaurant identified by the index number used in the displayed restaurant directory.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

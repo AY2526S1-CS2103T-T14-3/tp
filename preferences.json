@@ -1,0 +1,11 @@
+{
+  "guiSettings" : {
+    "windowWidth" : 1240.0,
+    "windowHeight" : 891.2000122070312,
+    "windowCoordinates" : {
+      "x" : 728,
+      "y" : 150
+    }
+  },
+  "restaurantDirectoryFilePath" : "data\\foodtrail.json"
+}

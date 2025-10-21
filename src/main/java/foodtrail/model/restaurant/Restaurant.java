@@ -29,7 +29,8 @@ public class Restaurant {
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags, Optional<Rating> rating, IsMarked isMarked) {
+    public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags,
+                      Optional<Rating> rating, IsMarked isMarked) {
         requireAllNonNull(name, phone, address, tags, isMarked);
         this.name = name;
         this.phone = phone;
@@ -68,7 +69,8 @@ public class Restaurant {
      * Returns a new Restaurant with the same details as this restaurant, except with the given rating.
      */
     public Restaurant withRating(Rating newRating) {
-        return new Restaurant(this.name, this.phone, this.address, this.tags, Optional.ofNullable(newRating), this.isMarked);
+        return new Restaurant(this.name, this.phone, this.address, this.tags,
+                Optional.ofNullable(newRating), this.isMarked);
     }
 
     /**

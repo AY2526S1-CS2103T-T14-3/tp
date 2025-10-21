@@ -99,7 +99,8 @@ public class EditCommand extends Command {
         Optional<Rating> originalRating = restaurantToEdit.getRating();
         IsMarked originalIsMarked = restaurantToEdit.getIsMarked();
 
-        return new Restaurant(updatedName, updatedPhone, updatedAddress, originalTags, originalRating, originalIsMarked);
+        return new Restaurant(updatedName, updatedPhone, updatedAddress, originalTags,
+                originalRating, originalIsMarked);
     }
 
     @Override

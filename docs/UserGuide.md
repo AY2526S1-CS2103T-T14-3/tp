@@ -92,8 +92,8 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend a/Newgate Prison p/1234567 t/criminal`
+* `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572`
+* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`
 
 ### Listing all restaurants : `list`
 
@@ -105,7 +105,7 @@ Format: `list`
 
 Edits an existing restaurant in the restaurant directory.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS]​`
+Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
 
 * Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed 
   restaurant directory. The index **must be a positive integer** 1, 2, 3, …​
@@ -116,25 +116,22 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS]​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd restaurant to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 hp/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
+*  `edit 2 n/KFC` Edits the name of the 2nd restaurant to be `KFC`.
 
 ### Locating restaurants by name: `find`
 
-Finds restaurants whose names contain any of the given keywords.
+Finds restaurants whose name/address/phone number/tag contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Restaurants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords matters. e.g. `Hans Bo` will not match `Bo Hans`
+* Multiple keywords can be searched using the same command by seperating it with a `,`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find koi` returns `KOI Thé` and `KOI Thé Specialty`
+* `find subway, kfc` returns `Subway`, `KFC`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a restaurant : `delete`
@@ -149,7 +146,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd restaurant in the restaurant directory.
-* `find Betsy` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
+* `find KFC` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -205,10 +202,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/KFC hp/68849301`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find KOI`
 **List**   | `list`
 **Help**   | `help`

@@ -13,16 +13,16 @@ import foodtrail.commons.util.ConfigUtil;
 import foodtrail.commons.util.StringUtil;
 import foodtrail.logic.Logic;
 import foodtrail.logic.LogicManager;
-import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.ReadOnlyUserPrefs;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.UserPrefs;
 import foodtrail.model.util.SampleDataUtil;
-import foodtrail.storage.AddressBookStorage;
-import foodtrail.storage.JsonAddressBookStorage;
+import foodtrail.storage.JsonRestaurantDirectoryStorage;
 import foodtrail.storage.JsonUserPrefsStorage;
+import foodtrail.storage.RestaurantDirectoryStorage;
 import foodtrail.storage.Storage;
 import foodtrail.storage.StorageManager;
 import foodtrail.storage.UserPrefsStorage;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing RestaurantDirectory ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +57,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        RestaurantDirectoryStorage restaurantDirectoryStorage =
+                new JsonRestaurantDirectoryStorage(userPrefs.getRestaurantDirectoryFilePath());
+        storage = new StorageManager(restaurantDirectoryStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,26 +69,28 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s restaurant directory and {@code userPrefs}.
+     * <br>
+     * The data from the sample restaurant directory will be used instead if {@code storage}'s restaurant directory
+     * is not found, or an empty restaurant directory will be used instead if errors occur when reading
+     * {@code storage}'s restaurant directory.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getRestaurantDirectoryFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyRestaurantDirectory> restaurantDirectoryOptional;
+        ReadOnlyRestaurantDirectory initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            restaurantDirectoryOptional = storage.readRestaurantDirectory();
+            if (!restaurantDirectoryOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getRestaurantDirectoryFilePath()
+                        + " populated with a sample RestaurantDirectory.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = restaurantDirectoryOptional.orElseGet(SampleDataUtil::getSampleRestaurantDirectory);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getRestaurantDirectoryFilePath() + " could not be loaded."
+                    + " Will be starting with an empty RestaurantDirectory.");
+            initialData = new RestaurantDirectory();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -170,13 +173,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting RestaurantDirectory " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping RestaurantDirectory ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

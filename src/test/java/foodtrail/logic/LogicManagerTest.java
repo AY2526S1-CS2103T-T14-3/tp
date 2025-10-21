@@ -24,10 +24,10 @@ import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.logic.parser.exceptions.ParseException;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.UserPrefs;
 import foodtrail.model.restaurant.Restaurant;
-import foodtrail.storage.JsonAddressBookStorage;
+import foodtrail.storage.JsonRestaurantDirectoryStorage;
 import foodtrail.storage.JsonUserPrefsStorage;
 import foodtrail.storage.StorageManager;
 import foodtrail.testutil.RestaurantBuilder;
@@ -44,10 +44,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("foodtrail.json"));
+        JsonRestaurantDirectoryStorage restaurantDirectoryStorage =
+                new JsonRestaurantDirectoryStorage(temporaryFolder.resolve("foodtrail.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(restaurantDirectoryStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -122,7 +122,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -148,10 +148,10 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        // Inject LogicManager with an RestaurantDirectoryStorage that throws the IOException e when saving
+        JsonRestaurantDirectoryStorage restaurantDirectoryStorage = new JsonRestaurantDirectoryStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void saveRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -159,11 +159,11 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(restaurantDirectoryStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveRestaurantDirectory method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_JOLLIBEE + PHONE_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE;
         Restaurant expectedRestaurant = new RestaurantBuilder(JOLLIBEE).withTags().build();
         ModelManager expectedModel = new ModelManager();

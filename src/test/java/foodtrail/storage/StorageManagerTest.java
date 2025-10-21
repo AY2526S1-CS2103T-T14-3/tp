@@ -1,6 +1,6 @@
 package foodtrail.storage;
 
-import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import foodtrail.commons.core.GuiSettings;
-import foodtrail.model.AddressBook;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,10 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonRestaurantDirectoryStorage restaurantDirectoryStorage =
+                new JsonRestaurantDirectoryStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(restaurantDirectoryStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +49,22 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void restaurantDirectoryReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonRestaurantDirectoryStorage} class.
+         * More extensive testing of UserPref saving/reading is done
+         * in {@link JsonRestaurantDirectoryStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        RestaurantDirectory original = getTypicalRestaurantDirectory();
+        storageManager.saveRestaurantDirectory(original);
+        ReadOnlyRestaurantDirectory retrieved = storageManager.readRestaurantDirectory().get();
+        assertEquals(original, new RestaurantDirectory(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getRestaurantDirectoryFilePath() {
+        assertNotNull(storageManager.getRestaurantDirectoryFilePath());
     }
 
 }

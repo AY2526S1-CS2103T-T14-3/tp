@@ -14,8 +14,8 @@ import java.util.List;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.exceptions.CommandException;
-import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 import foodtrail.testutil.EditRestaurantDescriptorBuilder;
@@ -92,21 +92,22 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered restaurant list and selected restaurant in {@code actualModel} remain unchanged
+     * - the restaurant directory, filtered restaurant list and selected restaurant in {@code actualModel}
+     *   remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        RestaurantDirectory expectedRestaurantDirectory = new RestaurantDirectory(actualModel.getRestaurantDirectory());
         List<Restaurant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredRestaurantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedRestaurantDirectory, actualModel.getRestaurantDirectory());
         assertEquals(expectedFilteredList, actualModel.getFilteredRestaurantList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the restaurant at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s restaurant directory.
      */
     public static void showRestaurantAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredRestaurantList().size());

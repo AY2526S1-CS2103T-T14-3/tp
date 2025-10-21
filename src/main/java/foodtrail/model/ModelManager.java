@@ -14,30 +14,31 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the restaurant directory data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final RestaurantDirectory restaurantDirectory;
     private final UserPrefs userPrefs;
     private final FilteredList<Restaurant> filteredRestaurants;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given restaurantDirectory and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyRestaurantDirectory restaurantDirectory, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(restaurantDirectory, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with restaurant directory: " + restaurantDirectory
+                + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.restaurantDirectory = new RestaurantDirectory(restaurantDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredRestaurants = new FilteredList<>(this.addressBook.getRestaurantList());
+        filteredRestaurants = new FilteredList<>(this.restaurantDirectory.getRestaurantList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new RestaurantDirectory(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,42 +66,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getRestaurantDirectoryFilePath() {
+        return userPrefs.getRestaurantDirectoryFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setRestaurantDirectoryFilePath(Path restaurantDirectoryFilePath) {
+        requireNonNull(restaurantDirectoryFilePath);
+        userPrefs.setRestaurantDirectoryFilePath(restaurantDirectoryFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== RestaurantDirectory ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory) {
+        this.restaurantDirectory.resetData(restaurantDirectory);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyRestaurantDirectory getRestaurantDirectory() {
+        return restaurantDirectory;
     }
 
     @Override
     public boolean hasRestaurant(Restaurant restaurant) {
         requireNonNull(restaurant);
-        return addressBook.hasRestaurant(restaurant);
+        return restaurantDirectory.hasRestaurant(restaurant);
     }
 
     @Override
     public void deleteRestaurant(Restaurant target) {
-        addressBook.removeRestaurant(target);
+        restaurantDirectory.removeRestaurant(target);
     }
 
     @Override
     public void addRestaurant(Restaurant restaurant) {
-        addressBook.addRestaurant(restaurant);
+        restaurantDirectory.addRestaurant(restaurant);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
     }
 
@@ -108,14 +109,14 @@ public class ModelManager implements Model {
     public void setRestaurant(Restaurant target, Restaurant editedRestaurant) {
         requireAllNonNull(target, editedRestaurant);
 
-        addressBook.setRestaurant(target, editedRestaurant);
+        restaurantDirectory.setRestaurant(target, editedRestaurant);
     }
 
     //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Restaurant} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedRestaurantDirectory}
      */
     @Override
     public ObservableList<Restaurant> getFilteredRestaurantList() {
@@ -140,7 +141,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return restaurantDirectory.equals(otherModelManager.restaurantDirectory)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredRestaurants.equals(otherModelManager.filteredRestaurants);
     }

@@ -16,14 +16,14 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Adds a tag to an existing restaurant in the address book.
+ * Adds a tag to an existing restaurant in the restaurant directory.
  */
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the restaurant identified "
-            + "by the index number used in the displayed restaurant list. "
+            + "by the index number used in the displayed restaurant directory. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "

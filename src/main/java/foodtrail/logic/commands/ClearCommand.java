@@ -11,7 +11,7 @@ import foodtrail.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Restaurant list has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Restaurant directory has been cleared!";
 
 
     @Override

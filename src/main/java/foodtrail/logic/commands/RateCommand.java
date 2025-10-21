@@ -12,7 +12,7 @@ import foodtrail.model.restaurant.Rating;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
- * Rates a restaurant from 0 to 5 (inclusive).
+ * Rates a restaurant from 0 to 5 (inclusive) in the restaurant directory.
  */
 public class RateCommand extends Command {
 

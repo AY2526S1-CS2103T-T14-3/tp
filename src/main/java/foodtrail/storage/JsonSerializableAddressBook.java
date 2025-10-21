@@ -19,7 +19,7 @@ import foodtrail.model.restaurant.Restaurant;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_RESTAURANT = "Restaurant list contains duplicate restaurant(s).";
+    public static final String MESSAGE_DUPLICATE_RESTAURANT = "Restaurant directory contains duplicate restaurant(s).";
 
     private final List<JsonAdaptedRestaurant> restaurants = new ArrayList<>();
 

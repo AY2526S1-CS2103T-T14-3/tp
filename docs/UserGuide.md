@@ -105,7 +105,8 @@ Edits an existing restaurant in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS]​`
 
-* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed 
+  restaurant directory. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the restaurant will be removed i.e adding of tags is not cumulative.
@@ -141,7 +142,7 @@ Deletes the specified restaurant from the address book.
 Format: `delete INDEX`
 
 * Deletes the restaurant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed restaurant list.
+* The index refers to the index number shown in the displayed restaurant directory.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:

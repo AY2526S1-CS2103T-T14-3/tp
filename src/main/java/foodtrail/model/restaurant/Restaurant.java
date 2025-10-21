@@ -11,7 +11,7 @@ import java.util.Set;
 import foodtrail.commons.util.ToStringBuilder;
 
 /**
- * Represents a Restaurant in the restaurant list.
+ * Represents a Restaurant in the restaurant directory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Restaurant {

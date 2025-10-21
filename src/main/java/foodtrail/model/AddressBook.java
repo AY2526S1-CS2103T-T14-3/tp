@@ -10,7 +10,7 @@ import foodtrail.model.restaurant.UniqueRestaurantList;
 import javafx.collections.ObservableList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the restaurant-directory level
  * Duplicates are not allowed (by .isSameRestaurant comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
@@ -41,7 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the restaurant list with {@code restaurants}.
+     * Replaces the contents of the restaurant directory with {@code restaurants}.
      * {@code restaurants} must not contain duplicate restaurants.
      */
     public void setRestaurants(List<Restaurant> restaurants) {

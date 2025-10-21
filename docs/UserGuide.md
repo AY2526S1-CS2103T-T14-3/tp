@@ -6,7 +6,7 @@
 
 # AB-3 User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+FoodTrail is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -33,7 +33,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    * `list` : Lists all restaurants.
 
    * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken` : Adds a restaurant 
-     named `KFC` to the Address Book.
+     named `KFC` to the restaurant directory.
 
    * `delete 3` : Deletes the 3rd restaurant shown in the current list.
 
@@ -80,7 +80,7 @@ Format: `help`
 
 ### Adding a restaurant: `add`
 
-Adds a restaurant to the address book.
+Adds a restaurant to the restaurant directory.
 
 Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
@@ -95,13 +95,13 @@ Examples:
 
 ### Listing all restaurants : `list`
 
-Shows a list of all restaurants in the address book.
+Shows a list of all restaurants in the restaurant directory.
 
 Format: `list`
 
 ### Editing a restaurant : `edit`
 
-Edits an existing restaurant in the address book.
+Edits an existing restaurant in the restaurant directory.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS]​`
 
@@ -113,19 +113,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS]​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
-*  `edit 2 n/KFC t/` Edits the name of the 2nd restaurant to be `KFC` and clears all existing tags.
+*  `edit 1 hp/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
+*  `edit 2 n/KFC` Edits the name of the 2nd restaurant to be `KFC`.
 
 ### Locating restaurants by name: `find`
 
-Finds restaurants whose names/address contain any of the given keywords.
+Finds restaurants whose name/address/phone number/tag contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords matters. e.g. `Hans Bo` will not match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Multiple keywords can be searched using the same command by seperating it with a `,`.
 
 Examples:
 * `find koi` returns `KOI Thé` and `KOI Thé Specialty`
@@ -134,7 +133,7 @@ Examples:
 
 ### Deleting a restaurant : `delete`
 
-Deletes the specified restaurant from the address book.
+Deletes the specified restaurant from the restaurant directory.
 
 Format: `delete INDEX`
 
@@ -143,12 +142,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd restaurant in the address book.
+* `list` followed by `delete 2` deletes the 2nd restaurant in the restaurant directory.
 * `find KFC` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the restaurant directory.
 
 Format: `clear`
 
@@ -160,17 +159,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+RestaurantDirectory data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+RestaurantDirectory data are saved automatically as a JSON file `[JAR file location]/data/foodtrail.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, RestaurantDirectory will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the RestaurantDirectory to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -182,7 +181,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RestaurantDirectory home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,10 +196,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken`
+**Add**    | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/KFC hp/68849301`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find KOI`
 **List**   | `list`
 **Help**   | `help`

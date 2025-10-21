@@ -18,8 +18,10 @@ import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Rating;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
@@ -85,16 +87,19 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Restaurant} with the details of {@code restaurantToEdit}
      * edited with {@code editRestaurantDescriptor}.
      */
-    private static Restaurant createEditedRestaurant(Restaurant restaurantToEdit,
+    public static Restaurant createEditedRestaurant(Restaurant restaurantToEdit,
                                                  EditRestaurantDescriptor editRestaurantDescriptor) {
         assert restaurantToEdit != null;
 
         Name updatedName = editRestaurantDescriptor.getName().orElse(restaurantToEdit.getName());
         Phone updatedPhone = editRestaurantDescriptor.getPhone().orElse(restaurantToEdit.getPhone());
         Address updatedAddress = editRestaurantDescriptor.getAddress().orElse(restaurantToEdit.getAddress());
-        Set<Tag> currentTags = restaurantToEdit.getTags();
+        // Fields not editable by EditCommand are preserved from the original restaurant
+        Set<Tag> originalTags = restaurantToEdit.getTags();
+        Optional<Rating> originalRating = restaurantToEdit.getRating();
+        IsMarked originalIsMarked = restaurantToEdit.getIsMarked();
 
-        return new Restaurant(updatedName, updatedPhone, updatedAddress, currentTags);
+        return new Restaurant(updatedName, updatedPhone, updatedAddress, originalTags, originalRating, originalIsMarked);
     }
 
     @Override
@@ -183,10 +188,10 @@ public class EditCommand extends Command {
                 return false;
             }
 
-            EditRestaurantDescriptor otherEditRestaurantDescriptor = (EditRestaurantDescriptor) other;
-            return Objects.equals(name, otherEditRestaurantDescriptor.name)
-                    && Objects.equals(phone, otherEditRestaurantDescriptor.phone)
-                    && Objects.equals(address, otherEditRestaurantDescriptor.address);
+            EditRestaurantDescriptor otherDesc = (EditRestaurantDescriptor) other;
+            return Objects.equals(name, otherDesc.name)
+                    && Objects.equals(phone, otherDesc.phone)
+                    && Objects.equals(address, otherDesc.address);
         }
 
         @Override

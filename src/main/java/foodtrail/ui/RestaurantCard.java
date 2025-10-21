@@ -42,6 +42,8 @@ public class RestaurantCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label rating;
+    @FXML
+    private Label isMarked;
 
     /**
      * Creates a {@code RestaurantCode} with the given {@code Restaurant} and index to
@@ -54,6 +56,11 @@ public class RestaurantCard extends UiPart<Region> {
         name.setText(restaurant.getName().fullName);
         phone.setText(restaurant.getPhone().value);
         address.setText(restaurant.getAddress().value);
+        if (restaurant.getIsMarked().isMarked) {
+            isMarked.setText("[ X ]");
+        } else {
+            isMarked.setText("[   ]");
+        }
         restaurant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

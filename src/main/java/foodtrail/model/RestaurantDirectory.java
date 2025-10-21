@@ -121,7 +121,7 @@ public class RestaurantDirectory implements ReadOnlyRestaurantDirectory {
         }
 
         RestaurantDirectory otherRestaurantDirectory = (RestaurantDirectory) other;
-        return restaurants.equals(otherRestaurantDirectory.restaurants);
+        return getRestaurantList().equals(otherRestaurantDirectory.getRestaurantList());
     }
 
     @Override

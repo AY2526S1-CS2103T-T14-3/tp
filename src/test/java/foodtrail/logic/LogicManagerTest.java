@@ -5,8 +5,10 @@ import static foodtrail.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static foodtrail.logic.commands.CommandTestUtil.ADDRESS_DESC_JOLLIBEE;
 import static foodtrail.logic.commands.CommandTestUtil.NAME_DESC_JOLLIBEE;
 import static foodtrail.logic.commands.CommandTestUtil.PHONE_DESC_JOLLIBEE;
+import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_JOLLIBEE;
+import static foodtrail.logic.commands.CommandTestUtil.VALID_NAME_JOLLIBEE;
+import static foodtrail.logic.commands.CommandTestUtil.VALID_PHONE_JOLLIBEE;
 import static foodtrail.testutil.Assert.assertThrows;
-import static foodtrail.testutil.TypicalRestaurants.JOLLIBEE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
@@ -39,11 +41,12 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private Model model;
     private Logic logic;
 
     @BeforeEach
     public void setUp() {
+        model = new ModelManager();
         JsonRestaurantDirectoryStorage restaurantDirectoryStorage =
                 new JsonRestaurantDirectoryStorage(temporaryFolder.resolve("foodtrail.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
@@ -109,7 +112,7 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
+     * Executes the. command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
@@ -165,7 +168,8 @@ public class LogicManagerTest {
 
         // Triggers the saveRestaurantDirectory method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_JOLLIBEE + PHONE_DESC_JOLLIBEE + ADDRESS_DESC_JOLLIBEE;
-        Restaurant expectedRestaurant = new RestaurantBuilder(JOLLIBEE).withTags().build();
+        Restaurant expectedRestaurant = new RestaurantBuilder().withName(VALID_NAME_JOLLIBEE)
+                .withPhone(VALID_PHONE_JOLLIBEE).withAddress(VALID_ADDRESS_JOLLIBEE).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addRestaurant(expectedRestaurant);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
 import foodtrail.model.restaurant.Rating;
@@ -23,31 +24,31 @@ public class SampleDataUtil {
             new Restaurant(new Name("McDonald's"), new Phone("67773777"),
                 new Address("200 Victoria St, #01-49 Bugis Junction, Singapore 188021"),
                 getTagSet("fastfood"),
-                Optional.empty()),
+                Optional.empty(), new IsMarked(false)),
             new Restaurant(new Name("KOI Thé"), new Phone("64812345"),
                 new Address("53 Ang Mo Kio Ave 3, #B2-08 AMK Hub, Singapore 569933"),
                 getTagSet("bubbletea", "drinks"),
-                Optional.of(new Rating(4))),
+                Optional.of(new Rating(4)), new IsMarked(false)),
             new Restaurant(new Name("Hawker Chan"), new Phone("62190000"),
                 new Address("78 Smith St, Singapore 058972"),
                 getTagSet(),
-                Optional.empty()),
+                Optional.empty(), new IsMarked(false)),
             new Restaurant(new Name("Astons Specialities"), new Phone("62351234"),
                 new Address("201 Victoria St, #04-06 Bugis+, Singapore 188067"),
                 getTagSet("western"),
-                Optional.empty()),
+                Optional.empty(), new IsMarked(false)),
             new Restaurant(new Name("Popeyes Louisiana Kitchen"), new Phone("65153456"),
                 new Address("3 Simei Street 6, #01-01 Eastpoint Mall, Singapore 528833"),
                 getTagSet(),
-                Optional.empty()),
+                Optional.empty(), new IsMarked(false)),
             new Restaurant(new Name("Subway"), new Phone("67890123"),
                 new Address("10 Tampines Central 1, #01-18 Tampines 1, Singapore 529536"),
                 getTagSet(),
-                Optional.empty()),
+                Optional.empty(), new IsMarked(false)),
             new Restaurant(new Name("Anna's Curry"), new Phone("61234567"),
                 new Address("123 Serangoon Rd, Singapore 218227"),
                 getTagSet(),
-                Optional.empty())
+                Optional.empty(), new IsMarked(false))
         };
     }
 

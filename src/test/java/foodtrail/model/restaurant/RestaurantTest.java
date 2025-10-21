@@ -3,7 +3,6 @@ package foodtrail.model.restaurant;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_NAME_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_PHONE_KFC;
-import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_HALAL;
 import static foodtrail.testutil.Assert.assertThrows;
 import static foodtrail.testutil.TypicalRestaurants.KOI;
@@ -34,7 +33,7 @@ public class RestaurantTest {
 
         // same name, all other attributes different -> returns true
         Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
-                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
+                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_HALAL).build();
         assertTrue(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // different name, all other attributes same -> returns false
@@ -87,10 +86,22 @@ public class RestaurantTest {
     }
 
     @Test
+    public void withMark_success() {
+        Restaurant markedRestaurant = MCDONALDS.withMark(new IsMarked(true));
+        assertTrue(markedRestaurant.getIsMarked().isMarked);
+
+        Restaurant unmarkedRestaurant = markedRestaurant.withMark(new IsMarked(false));
+        assertFalse(unmarkedRestaurant.getIsMarked().isMarked);
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Restaurant.class.getCanonicalName() + "{name=" + MCDONALDS.getName()
                 + ", phone=" + MCDONALDS.getPhone()
-                + ", address=" + MCDONALDS.getAddress() + ", tags=" + MCDONALDS.getTags() + "}";
+                + ", address=" + MCDONALDS.getAddress()
+                + ", rating=" + MCDONALDS.getRating()
+                + ", tags=" + MCDONALDS.getTags()
+                + ", isMarked=" + MCDONALDS.getIsMarked() + "}";
         assertEquals(expected, MCDONALDS.toString());
     }
 }

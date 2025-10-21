@@ -1,9 +1,11 @@
 package foodtrail.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
 import foodtrail.model.restaurant.Rating;
@@ -19,12 +21,14 @@ public class RestaurantBuilder {
     public static final String DEFAULT_NAME = "Pizza Hut";
     public static final String DEFAULT_PHONE = "62353535";
     public static final String DEFAULT_ADDRESS = "18 Yishun Ave 9, #01-82 Junction 9, Singapore 768897";
+    public static final boolean DEFAULT_IS_MARKED = false;
 
     private Name name;
     private Phone phone;
     private Address address;
     private Set<Tag> tags;
-    private Rating rating;
+    private Optional<Rating> rating;
+    private IsMarked isMarked;
 
     /**
      * Creates a {@code RestaurantBuilder} with the default details.
@@ -34,7 +38,8 @@ public class RestaurantBuilder {
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        rating = null;
+        rating = Optional.empty();
+        isMarked = new IsMarked(DEFAULT_IS_MARKED);
     }
 
     /**
@@ -45,7 +50,8 @@ public class RestaurantBuilder {
         phone = restaurantToCopy.getPhone();
         address = restaurantToCopy.getAddress();
         tags = new HashSet<>(restaurantToCopy.getTags());
-        rating = restaurantToCopy.getRating().orElse(null);
+        rating = restaurantToCopy.getRating();
+        isMarked = restaurantToCopy.getIsMarked();
     }
 
     /**
@@ -84,12 +90,20 @@ public class RestaurantBuilder {
      * Sets the {@code Rating} of the {@code Restaurant} that we are building.
      */
     public RestaurantBuilder withRating(int value) {
-        this.rating = new Rating(value);
+        this.rating = Optional.of(new Rating(value));
+        return this;
+    }
+
+    /**
+     * Sets the {@code isMarked} status of the {@code Restaurant} that we are building.
+     */
+    public RestaurantBuilder withMarked(boolean isMarked) {
+        this.isMarked = new IsMarked(isMarked);
         return this;
     }
 
     public Restaurant build() {
-        return new Restaurant(name, phone, address, tags);
+        return new Restaurant(name, phone, address, tags, rating, isMarked);
     }
 
 }

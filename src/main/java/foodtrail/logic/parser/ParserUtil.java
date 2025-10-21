@@ -105,4 +105,19 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String status} into a {@code boolean}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static boolean parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toLowerCase();
+        if (!trimmedStatus.equals("true") && !trimmedStatus.equals("false")) {
+            throw new ParseException("Status must be either 'true' or 'false'.");
+        }
+        return Boolean.parseBoolean(trimmedStatus);
+    }
 }

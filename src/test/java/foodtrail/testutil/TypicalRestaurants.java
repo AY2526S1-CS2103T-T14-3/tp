@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import foodtrail.model.AddressBook;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
@@ -74,10 +74,10 @@ public class TypicalRestaurants {
     private TypicalRestaurants() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical restaurants.
+     * Returns an {@code RestaurantDirectory} with all the typical restaurants.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantDirectory getTypicalRestaurantDirectory() {
+        RestaurantDirectory ab = new RestaurantDirectory();
         for (Restaurant restaurant : getTypicalRestaurants()) {
             ab.addRestaurant(restaurant);
         }

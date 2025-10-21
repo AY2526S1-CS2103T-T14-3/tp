@@ -6,7 +6,7 @@ import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.logic.commands.CommandTestUtil.showRestaurantAtIndex;
 import static foodtrail.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
-import static foodtrail.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,7 +28,7 @@ import foodtrail.model.restaurant.Restaurant;
  */
 public class RateCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
 
     @Test
     public void executeUnfilteredListValidIndexSuccess() {
@@ -38,7 +38,7 @@ public class RateCommandTest {
 
         RateCommand cmd = new RateCommand(INDEX_FIRST_RESTAURANT, newRatingValue);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.setRestaurant(target, edited);
         expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
@@ -67,7 +67,7 @@ public class RateCommandTest {
 
         RateCommand cmd = new RateCommand(INDEX_FIRST_RESTAURANT, newRatingValue);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
         expectedModel.setRestaurant(target, edited);
         expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);

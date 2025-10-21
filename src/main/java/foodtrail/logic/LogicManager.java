@@ -10,10 +10,10 @@ import foodtrail.commons.core.LogsCenter;
 import foodtrail.logic.commands.Command;
 import foodtrail.logic.commands.CommandResult;
 import foodtrail.logic.commands.exceptions.CommandException;
-import foodtrail.logic.parser.AddressBookParser;
+import foodtrail.logic.parser.RestaurantDirectoryParser;
 import foodtrail.logic.parser.exceptions.ParseException;
 import foodtrail.model.Model;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.storage.Storage;
 import javafx.collections.ObservableList;
@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final RestaurantDirectoryParser restaurantDirectoryParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        restaurantDirectoryParser = new RestaurantDirectoryParser();
     }
 
     @Override
@@ -47,11 +47,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = restaurantDirectoryParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveRestaurantDirectory(model.getRestaurantDirectory());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,8 +62,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyRestaurantDirectory getRestaurantDirectory() {
+        return model.getRestaurantDirectory();
     }
 
     @Override
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getgetRestaurantDirectoryFilePath() {
+        return model.getRestaurantDirectoryFilePath();
     }
 
     @Override

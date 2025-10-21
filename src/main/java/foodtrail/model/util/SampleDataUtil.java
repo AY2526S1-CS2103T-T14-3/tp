@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import foodtrail.model.AddressBook;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.restaurant.Address;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
@@ -15,7 +15,7 @@ import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code RestaurantDirectory} with sample data.
  */
 public class SampleDataUtil {
     public static Restaurant[] getSampleRestaurants() {
@@ -51,8 +51,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyRestaurantDirectory getSampleRestaurantDirectory() {
+        RestaurantDirectory sampleAb = new RestaurantDirectory();
         for (Restaurant sampleRestaurant : getSampleRestaurants()) {
             sampleAb.addRestaurant(sampleRestaurant);
         }

@@ -2,11 +2,11 @@ package foodtrail.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
+import foodtrail.model.RestaurantDirectory;
 
 /**
- * Clears the address book.
+ * Clears the restaurant directory.
  */
 public class ClearCommand extends Command {
 
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setRestaurantDirectory(new RestaurantDirectory());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

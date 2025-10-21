@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.GuiSettings;
 import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
-import foodtrail.testutil.AddressBookBuilder;
+import foodtrail.testutil.RestaurantDirectoryBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new RestaurantDirectory(), new RestaurantDirectory(modelManager.getRestaurantDirectory()));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setRestaurantDirectoryFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setRestaurantDirectoryFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,15 +61,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setRestaurantDirectoryFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setRestaurantDirectoryFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setRestaurantDirectoryFilePath_validPath_setsRestaurantDirectoryFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setRestaurantDirectoryFilePath(path);
+        assertEquals(path, modelManager.getRestaurantDirectoryFilePath());
     }
 
     @Test
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasRestaurant_restaurantNotInAddressBook_returnsFalse() {
+    public void hasRestaurant_restaurantNotInRestaurantDirectory_returnsFalse() {
         assertFalse(modelManager.hasRestaurant(MCDONALDS));
     }
 
     @Test
-    public void hasRestaurant_restaurantInAddressBook_returnsTrue() {
+    public void hasRestaurant_restaurantInRestaurantDirectory_returnsTrue() {
         modelManager.addRestaurant(MCDONALDS);
         assertTrue(modelManager.hasRestaurant(MCDONALDS));
     }
@@ -95,13 +95,14 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withRestaurant(MCDONALDS).withRestaurant(KOI).build();
-        AddressBook differentAddressBook = new AddressBook();
+        RestaurantDirectory restaurantDirectory =
+                new RestaurantDirectoryBuilder().withRestaurant(MCDONALDS).withRestaurant(KOI).build();
+        RestaurantDirectory differentRestaurantDirectory = new RestaurantDirectory();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(restaurantDirectory, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(restaurantDirectory, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -113,20 +114,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different restaurantDirectory -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentRestaurantDirectory, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = MCDONALDS.getName().fullName.split("\\s+");
         modelManager.updateFilteredRestaurantList(new RestaurantContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(restaurantDirectory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setRestaurantDirectoryFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(restaurantDirectory, differentUserPrefs)));
     }
 }

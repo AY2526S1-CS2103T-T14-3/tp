@@ -7,7 +7,7 @@ import foodtrail.logic.commands.CommandResult;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.logic.parser.exceptions.ParseException;
 import foodtrail.model.Model;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 import javafx.collections.ObservableList;
 
@@ -25,19 +25,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the RestaurantDirectory.
      *
-     * @see Model#getAddressBook()
+     * @see Model#getRestaurantDirectory()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyRestaurantDirectory getRestaurantDirectory();
 
     /** Returns an unmodifiable view of the filtered list of restaurants */
     ObservableList<Restaurant> getFilteredRestaurantList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' restaurant directory file path.
      */
-    Path getAddressBookFilePath();
+    Path getgetRestaurantDirectoryFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -14,8 +14,8 @@ import java.util.List;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.exceptions.CommandException;
-import foodtrail.model.AddressBook;
 import foodtrail.model.Model;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 import foodtrail.testutil.EditRestaurantDescriptorBuilder;
@@ -98,11 +98,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        RestaurantDirectory expectedRestaurantDirectory = new RestaurantDirectory(actualModel.getRestaurantDirectory());
         List<Restaurant> expectedFilteredList = new ArrayList<>(actualModel.getFilteredRestaurantList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedRestaurantDirectory, actualModel.getRestaurantDirectory());
         assertEquals(expectedFilteredList, actualModel.getFilteredRestaurantList());
     }
     /**

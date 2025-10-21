@@ -9,53 +9,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import foodtrail.commons.exceptions.IllegalValueException;
-import foodtrail.model.AddressBook;
-import foodtrail.model.ReadOnlyAddressBook;
+import foodtrail.model.ReadOnlyRestaurantDirectory;
+import foodtrail.model.RestaurantDirectory;
 import foodtrail.model.restaurant.Restaurant;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable RestaurantDirectory that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "restaurantdirectory")
+class JsonSerializableRestaurantDirectory {
 
     public static final String MESSAGE_DUPLICATE_RESTAURANT = "Restaurant directory contains duplicate restaurant(s).";
 
     private final List<JsonAdaptedRestaurant> restaurants = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given restaurants.
+     * Constructs a {@code JsonSerializableRestaurantDirectory} with the given restaurants.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("restaurants") List<JsonAdaptedRestaurant> restaurants) {
+    public JsonSerializableRestaurantDirectory(@JsonProperty("restaurants") List<JsonAdaptedRestaurant> restaurants) {
         this.restaurants.addAll(restaurants);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyRestaurantDirectory} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableRestaurantDirectory}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableRestaurantDirectory(ReadOnlyRestaurantDirectory source) {
         restaurants.addAll(source.getRestaurantList().stream()
                 .map(JsonAdaptedRestaurant::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this restaurant directory into the model's {@code RestaurantDirectory} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public RestaurantDirectory toModelType() throws IllegalValueException {
+        RestaurantDirectory restaurantDirectory = new RestaurantDirectory();
         for (JsonAdaptedRestaurant jsonAdaptedRestaurant : restaurants) {
             Restaurant restaurant = jsonAdaptedRestaurant.toModelType();
-            if (addressBook.hasRestaurant(restaurant)) {
+            if (restaurantDirectory.hasRestaurant(restaurant)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RESTAURANT);
             }
-            addressBook.addRestaurant(restaurant);
+            restaurantDirectory.addRestaurant(restaurant);
         }
-        return addressBook;
+        return restaurantDirectory;
     }
 
 }

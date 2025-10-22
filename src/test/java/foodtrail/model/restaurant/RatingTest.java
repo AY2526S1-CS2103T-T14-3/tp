@@ -66,5 +66,4 @@ public class RatingTest {
         assertEquals("0", new Rating(0).toString());
         assertEquals("5", new Rating(5).toString());
     }
-
 }

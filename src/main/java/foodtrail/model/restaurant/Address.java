@@ -65,17 +65,9 @@ public class Address {
             return false; // Address part before comma is empty
         }
 
-        if (!addressPart.matches("^[a-zA-Z0-9\\s,#\\'-/.]*$")) {
+        if (!addressPart.matches("^[a-zA-Z0-9\\s,#\\'./-]*$")) {
             return false;
         }
-
-        // Validate postal code part
-        String cleanedPostalCode = rawPostalCode.replaceAll("\\s", "");
-        if (!cleanedPostalCode.matches("\\d{6}")) {
-            // This is a safeguard, the main regex should have caught this.
-            return false;
-        }
-
         return true;
     }
 

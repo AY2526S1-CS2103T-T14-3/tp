@@ -39,7 +39,9 @@ public class AddressTest {
         assertFalse(Address.isValidAddress("  , Singapore 123456")); // empty address part
         assertFalse(Address.isValidAddress("123 Main Street Singapore 123456")); // missing comma before Singapore
         assertFalse(Address.isValidAddress("123 Main Street, Singapore123456")); // missing space after Singapore
-        assertFalse(Address.isValidAddress("123 Main Street!, Singapore 12345")); // invalid character in address
+        assertFalse(Address.isValidAddress("123 Main St!, Singapore 123456")); // invalid character '!'
+        assertFalse(Address.isValidAddress("Baker & Cook, Singapore 123456")); // invalid character '&'
+        assertFalse(Address.isValidAddress("123 (Main) St, Singapore 123456")); // invalid characters '()'
 
         // valid addresses
         assertTrue(Address.isValidAddress("50 Sixth Avenue, Singapore 276496"));

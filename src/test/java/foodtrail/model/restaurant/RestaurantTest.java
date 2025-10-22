@@ -88,9 +88,14 @@ public class RestaurantTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Restaurant.class.getCanonicalName() + "{name=" + MCDONALDS.getName()
+        String expected = Restaurant.class.getCanonicalName() + "{" // Start with class name and opening brace
+                + "name=" + MCDONALDS.getName()
                 + ", phone=" + MCDONALDS.getPhone()
-                + ", address=" + MCDONALDS.getAddress() + ", tags=" + MCDONALDS.getTags() + "}";
+                + ", address=" + MCDONALDS.getAddress()
+                + ", tags=" + MCDONALDS.getTags()
+                + ", rating=" + MCDONALDS.getRating().orElse(null) // Include rating, which will be null for MCDONALDS
+                + ", isMarked=" + MCDONALDS.getIsMarked() // Include isMarked, which will be [   ] for MCDONALDS
+                + "}"; // Closing brace
         assertEquals(expected, MCDONALDS.toString());
     }
 }

@@ -74,11 +74,11 @@ public class AddressTest {
         Address address2 = new Address("123 Main St, Singapore 123456");
         Address differentAddress = new Address("456 Oak Ave, Singapore 654321");
 
-        // Contract: equal objects must have equal hash codes
+        // Equal objects must have equal hash codes
         assertTrue(address1.equals(address2));
         assertEquals(address1.hashCode(), address2.hashCode());
 
-        // Good practice: unequal objects should ideally have different hash codes
+        // Unequal objects should have different hash codes
         assertFalse(address1.equals(differentAddress));
         assertNotEquals(address1.hashCode(), differentAddress.hashCode());
     }

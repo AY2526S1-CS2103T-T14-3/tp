@@ -11,12 +11,12 @@ Participant "command:EditCommand" as ec LOGIC_COLOR
 activate logic
 logic -> abp ++: parseCommand(commandText)
 create ecp
-abp -> ecp
-abp -> ecp ++: parse(arguments)
+rdp -> ecp
+rdp -> ecp ++: parse(arguments)
 create ec
 ecp -> ec ++: index, editRestaurantDescriptor
 ec --> ecp --
-ecp --> abp --: command
-abp --> logic --: command
+ecp --> rdp --: command
+rdp --> logic --: command
 
 @enduml

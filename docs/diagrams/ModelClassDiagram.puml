@@ -18,6 +18,7 @@ Class Address
 Class Name
 Class Phone
 Class Tag
+Class Rating
 
 Class I #FFFFFF
 }
@@ -36,10 +37,11 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 RestaurantDirectory *--> "1" UniqueRestaurantList
 UniqueRestaurantList --> "~* all" Restaurant
-Restaurant *--> Name
-Restaurant *--> Phone
-Restaurant *--> Address
+Restaurant *--> "1" Name
+Restaurant *--> "1" Phone
+Restaurant *--> "1" Address
 Restaurant *--> "*" Tag
+Restaurant *--> "0..1" Rating
 
 Restaurant -[hidden]up--> I
 UniqueRestaurantList -[hidden]right-> I

@@ -1,7 +1,9 @@
 package foodtrail.model.restaurant;
 
 import static foodtrail.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -32,6 +34,21 @@ public class NameTest {
         assertTrue(Name.isValidName("KFC")); // only alphabets
         assertTrue(Name.isValidName("McDonald's")); // with apostrophe
         assertTrue(Name.isValidName("KOI Thé")); // accent characters
+    }
+
+    @Test
+    public void hashCode_test() {
+        Name name1 = new Name("KFC");
+        Name name2 = new Name("KFC");
+        Name differentName = new Name("Jollibee");
+
+        // Equal objects must have equal hash codes
+        assertTrue(name1.equals(name2));
+        assertEquals(name1.hashCode(), name2.hashCode());
+
+        // Unequal objects should have different hash codes
+        assertFalse(name1.equals(differentName));
+        assertNotEquals(name1.hashCode(), differentName.hashCode());
     }
 
     @Test

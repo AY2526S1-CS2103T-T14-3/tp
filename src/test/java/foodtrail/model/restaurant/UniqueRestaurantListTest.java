@@ -7,10 +7,12 @@ import static foodtrail.testutil.TypicalRestaurants.KOI;
 import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -172,6 +174,57 @@ public class UniqueRestaurantListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () ->
                 uniqueRestaurantList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void iterator() {
+        uniqueRestaurantList.add(MCDONALDS);
+        uniqueRestaurantList.add(KOI);
+        Iterator<Restaurant> iterator = uniqueRestaurantList.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(MCDONALDS, iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(KOI, iterator.next());
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void equals() {
+        uniqueRestaurantList.add(MCDONALDS);
+        UniqueRestaurantList sameList = new UniqueRestaurantList();
+        sameList.add(MCDONALDS);
+        UniqueRestaurantList differentList = new UniqueRestaurantList();
+        differentList.add(KOI);
+
+        // same object -> returns true
+        assertTrue(uniqueRestaurantList.equals(uniqueRestaurantList));
+
+        // same content -> returns true
+        assertTrue(uniqueRestaurantList.equals(sameList));
+
+        // null -> returns false
+        assertFalse(uniqueRestaurantList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueRestaurantList.equals(5));
+
+        // different content -> returns false
+        assertFalse(uniqueRestaurantList.equals(differentList));
+    }
+
+    @Test
+    public void hashCode_test() {
+        uniqueRestaurantList.add(MCDONALDS);
+        UniqueRestaurantList sameList = new UniqueRestaurantList();
+        sameList.add(MCDONALDS);
+        UniqueRestaurantList differentList = new UniqueRestaurantList();
+        differentList.add(KOI);
+
+        // same content -> same hashcode
+        assertEquals(uniqueRestaurantList.hashCode(), sameList.hashCode());
+
+        // different content -> different hashcode
+        assertNotEquals(uniqueRestaurantList.hashCode(), differentList.hashCode());
     }
 
     @Test

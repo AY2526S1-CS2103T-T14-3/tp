@@ -9,7 +9,7 @@ Participant "command:EditCommand" as ec LOGIC_COLOR
 
 [-> logic : execute
 activate logic
-logic -> abp ++: parseCommand(commandText)
+logic -> rdp ++: parseCommand(commandText)
 create ecp
 rdp -> ecp
 rdp -> ecp ++: parse(arguments)

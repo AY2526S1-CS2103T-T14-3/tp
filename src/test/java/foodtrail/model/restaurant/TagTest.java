@@ -23,4 +23,9 @@ public class TagTest {
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
     }
 
+    @Test
+    public void equals() {
+
+    }
+
 }

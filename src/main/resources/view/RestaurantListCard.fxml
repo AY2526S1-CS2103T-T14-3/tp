@@ -26,6 +26,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" />
+        <Label fx:id="isMarkedStatus" styleClass="cell_small_label" /> <!-- Moved IsMarked status label to the right of name -->
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true" />

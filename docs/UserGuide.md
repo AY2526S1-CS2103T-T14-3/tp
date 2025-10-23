@@ -269,7 +269,7 @@ users are welcome to update data directly by editing that data file.
 
 **Caution:**
 If your changes to the data file makes its format invalid, FoodTrail will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the FoodTrail app to behave in unexpected ways (e.g., if a value entered is 
+Furthermore, certain edits can cause the FoodTrail app to behave in unexpected ways (e.g. if a value entered is 
 outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -291,19 +291,19 @@ outside the acceptable range). Therefore, edit the data file only if you are con
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                            |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken` |
-| **Clear**  | `clear`                                                                                                                                                     |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                         |
-| **Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/KFC hp/68849301`                                                           |
-| **Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g., `find koi, subway`                                                                                                |
-| **List**   | `list`                                                                                                                                                      |
-| **Mark**   | `mark INDEX`<br> e.g., `mark 3`                                                                                                                             |
-| **Unmark** | `mark INDEX`<br> e.g., `mark 3`                                                                                                                             |
-| **Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 5`                                                                                                                    |
-| **Sort**   | `sort`                                                                                                                                                      |
-| **Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `tag 3 t/fastfood t/halal`                                                                                        |
-| **Untag**  | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `untag 3 t/fastfood t/halal`                                                                                    |
-| **Help**   | `help`                                                                                                                                                      |
-| **Exit**   | `exit`                                                                                                                                                      |
+| Action     | Format, Examples                                                                                                                                           |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken` |
+| **Clear**  | `clear`                                                                                                                                                    |
+| **Delete** | `delete INDEX`<br> e.g. `delete 3`                                                                                                                         |
+| **Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/KFC hp/68849301`                                                          |
+| **Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g. `find koi, subway`                                                                                                |
+| **List**   | `list`                                                                                                                                                     |
+| **Mark**   | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
+| **Unmark** | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
+| **Rate**   | `rate INDEX RATING`<br> e.g. `rate 1 5`                                                                                                                    |
+| **Sort**   | `sort`                                                                                                                                                     |
+| **Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `tag 3 t/fastfood t/halal`                                                                                        |
+| **Untag**  | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `untag 3 t/fastfood t/halal`                                                                                    |
+| **Help**   | `help`                                                                                                                                                     |
+| **Exit**   | `exit`                                                                                                                                                     |

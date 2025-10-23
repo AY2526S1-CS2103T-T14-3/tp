@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import foodtrail.commons.exceptions.IllegalValueException;
 import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
 import foodtrail.model.restaurant.Rating;
@@ -30,6 +31,7 @@ class JsonAdaptedRestaurant {
     private final String address;
     private final Integer rating;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final Boolean isMarked;
 
     /**
      * Constructs a {@code JsonAdaptedRestaurant} with the given restaurant details.
@@ -38,7 +40,8 @@ class JsonAdaptedRestaurant {
     public JsonAdaptedRestaurant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                  @JsonProperty("address") String address,
                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                                 @JsonProperty("rating") Integer rating) {
+                                 @JsonProperty("rating") Integer rating,
+                                 @JsonProperty("isMarked") Boolean isMarked) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -46,6 +49,7 @@ class JsonAdaptedRestaurant {
             this.tags.addAll(tags);
         }
         this.rating = rating;
+        this.isMarked = isMarked;
     }
 
     /**
@@ -58,7 +62,8 @@ class JsonAdaptedRestaurant {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        this.rating = source.getRating().map(r -> r.value).orElse(null);
+        rating = source.getRating().map(r -> r.value).orElse(null);
+        isMarked = source.getIsMarked().isVisited();
     }
 
     /**
@@ -100,13 +105,12 @@ class JsonAdaptedRestaurant {
 
         final Set<Tag> modelTags = new HashSet<>(restaurantTags);
 
-        Optional<Rating> modelRating = (rating == null) ? java.util.Optional.empty()
+        final Optional<Rating> modelRating = (rating == null) ? java.util.Optional.empty()
                 : java.util.Optional.of(new Rating(rating));
 
-        if (rating != null) {
-            modelRating = Optional.of(new Rating(rating));
-        }
-        return new Restaurant(modelName, modelPhone, modelAddress, modelTags, modelRating);
+        final IsMarked modelIsMarked = new IsMarked(isMarked != null && isMarked);
+
+        return new Restaurant(modelName, modelPhone, modelAddress, modelTags, modelRating, modelIsMarked);
     }
 
 }

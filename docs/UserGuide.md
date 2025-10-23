@@ -57,7 +57,7 @@ restaurants done faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/KFC`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/KFC t/fastfood` or as `n/KFC`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/KFC t/fastfood` or as `n/KFC`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/fastfood`, `t/fastfood t/halal` etc.
@@ -77,7 +77,7 @@ restaurants done faster than traditional GUI apps.
 
 Shows a message explaining how to access the help page.
 
-<img src="images/helpMessage.png" width=40% height=40%>
+<img src="images/helpMessage.png" width=40% height=40% alt="helpMessage">
 
 Format: `help`
 
@@ -131,7 +131,7 @@ Finds restaurants in the restaurant directory via their name, address, phone num
 
 Format: `find KEYWORD[, MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `kfc` will match `KFC`.
+* The search is case-insensitive. e.g. `kfc` will match `KFC`.
 * The order of the keywords matters. e.g. `chan hawker` will not match `Hawker Chan`.
 * Multiple keywords can be specified by separating them with a `,`, and restaurants that contain any of these 
   keywords will be listed.
@@ -291,19 +291,19 @@ outside the acceptable range). Therefore, edit the data file only if you are con
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/KFC hp/68849301`
-**Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g., `find koi, subway`
-**List**   | `list`
-**Mark**   | `mark INDEX`<br> e.g., `mark 3`
-**Unmark** | `mark INDEX`<br> e.g., `mark 3`
-**Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 5`
-**Sort**   | `sort`
-**Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `tag 3 t/fastfood t/halal`
-**Untag**  | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `untag 3 t/fastfood t/halal`
-**Help**   | `help`
-**Exit**   | `exit`
+| Action     | Format, Examples                                                                                                                                            |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g., `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken` |
+| **Clear**  | `clear`                                                                                                                                                     |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                         |
+| **Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/KFC hp/68849301`                                                           |
+| **Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g., `find koi, subway`                                                                                                |
+| **List**   | `list`                                                                                                                                                      |
+| **Mark**   | `mark INDEX`<br> e.g., `mark 3`                                                                                                                             |
+| **Unmark** | `mark INDEX`<br> e.g., `mark 3`                                                                                                                             |
+| **Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 5`                                                                                                                    |
+| **Sort**   | `sort`                                                                                                                                                      |
+| **Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `tag 3 t/fastfood t/halal`                                                                                        |
+| **Untag**  | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `untag 3 t/fastfood t/halal`                                                                                    |
+| **Help**   | `help`                                                                                                                                                      |
+| **Exit**   | `exit`                                                                                                                                                      |

@@ -32,16 +32,16 @@ restaurants done faster than traditional GUI apps.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all restaurants.
+   * `list`: Lists all restaurants.
 
-   * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken` : Adds a restaurant 
+   * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`: Adds a restaurant 
      named `KFC` to the restaurant directory.
 
-   * `delete 3` : Deletes the 3rd restaurant shown in the current list.
+   * `delete 3`: Deletes the 3rd restaurant shown in the current list.
 
-   * `clear` : Deletes all restaurants.
+   * `clear`: Deletes all restaurants.
 
-   * `exit` : Exits the app.
+   * `exit`: Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -73,7 +73,7 @@ restaurants done faster than traditional GUI apps.
 
 <br>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -100,7 +100,7 @@ Examples:
 
 <br>
 
-### Listing all restaurants : `list`
+### Listing all restaurants: `list`
 
 Shows a list of all restaurants in the restaurant directory.
 
@@ -108,7 +108,7 @@ Format: `list`
 
 <br>
 
-### Editing a restaurant : `edit`
+### Editing a restaurant: `edit`
 
 Edits an existing restaurant in the restaurant directory.
 
@@ -146,7 +146,7 @@ Examples:
 
 <br>
 
-### Deleting a restaurant : `delete`
+### Deleting a restaurant: `delete`
 
 Deletes the specified restaurant from the restaurant directory.
 
@@ -237,7 +237,7 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 
 <br>
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the restaurant directory.
 
@@ -245,7 +245,7 @@ Format: `clear`
 
 <br>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 

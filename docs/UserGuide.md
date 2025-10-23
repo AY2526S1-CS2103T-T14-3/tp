@@ -27,7 +27,7 @@ restaurants done faster than traditional GUI apps.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar foodtrail.jar` 
    command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-    <img src="images/Ui.png" width=50% height=50% alt="Ui">
+    <img src="images/Ui.png" width=65% height=65% alt="Ui">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -142,7 +142,7 @@ Examples:
 * `find bugis` returns `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
 
 
-  <img src="images/findBugisResult.png" width=50% height=50% alt="findBugisResult">
+  <img src="images/findBugisResult.png" width=65% height=65% alt="findBugisResult">
 
 <br>
 

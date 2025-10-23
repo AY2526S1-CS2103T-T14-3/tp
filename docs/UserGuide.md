@@ -20,7 +20,7 @@ restaurants done faster than traditional GUI apps.
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/tag/v1.3).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/tag/v1.4).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FoodTrail app.
 
@@ -88,7 +88,7 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A restaurant can have any number of tags (including 0)
+**Tip:** A restaurant can have any number of tags (including 0).
 </box>
 
 Examples:
@@ -108,12 +108,9 @@ Edits an existing restaurant in the restaurant directory.
 Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
 
 * Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed 
-  restaurant directory. The index **must be a positive integer** 1, 2, 3, …​
+  restaurant directory. The index **must be a positive integer** (1, 2, 3, …​).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the restaurant will be removed i.e adding of tags is not cumulative.
-* You can remove all the restaurant’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 hp/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
@@ -123,16 +120,18 @@ Examples:
 
 Finds restaurants whose name/address/phone number/tag contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD[, MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords matters. e.g. `Hans Bo` will not match `Bo Hans`
-* Multiple keywords can be searched using the same command by seperating it with a `,`.
+* The search is case-insensitive. e.g `kfc` will match `KFC`.
+* The order of the keywords matters. e.g. `chan hawker` will not match `Hawker Chan`.
+* Multiple keywords can be specified by separating them with a `,`, and restaurants that contain any of these 
+  keywords will be listed.
 
 Examples:
-* `find koi` returns `KOI Thé` and `KOI Thé Specialty`
-* `find subway, kfc` returns `Subway`, `KFC`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find koi` returns `KOI Thé` and `KOI Thé Specialty`.
+* `find subway, kfc` returns `Subway` and `KFC`.
+* `find bugis` returns `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
+  ![result for 'find bugis'](images/findBugisResult.png)
 
 ### Deleting a restaurant : `delete`
 
@@ -142,7 +141,7 @@ Format: `delete INDEX`
 
 * Deletes the restaurant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed restaurant directory.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** (1, 2, 3, …​).
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd restaurant in the restaurant directory.
@@ -178,10 +177,6 @@ Furthermore, certain edits can cause the FoodTrail app to behave in unexpected w
 outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -206,6 +201,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/KFC hp/68849301`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find KOI`
+**Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g., `find koi, subway`
 **List**   | `list`
 **Help**   | `help`

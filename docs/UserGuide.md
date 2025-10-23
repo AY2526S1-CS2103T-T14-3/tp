@@ -75,9 +75,9 @@ restaurants done faster than traditional GUI apps.
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Shows a command list and a link to the user guide.
 
-<img src="images/helpMessage.png" width=40% height=40% alt="helpMessage">
+<img src="images/helpMessage.png" width=45% height=45% alt="helpMessage">
 
 Format: `help`
 

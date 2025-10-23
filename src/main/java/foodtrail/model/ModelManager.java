@@ -4,6 +4,7 @@ import static foodtrail.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -41,7 +42,8 @@ public class ModelManager implements Model {
         this(new RestaurantDirectory(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -76,7 +78,8 @@ public class ModelManager implements Model {
         userPrefs.setRestaurantDirectoryFilePath(restaurantDirectoryFilePath);
     }
 
-    //=========== RestaurantDirectory ================================================================================
+    // =========== RestaurantDirectory
+    // ================================================================================
 
     @Override
     public void setRestaurantDirectory(ReadOnlyRestaurantDirectory restaurantDirectory) {
@@ -112,10 +115,21 @@ public class ModelManager implements Model {
         restaurantDirectory.setRestaurant(target, editedRestaurant);
     }
 
-    //=========== Filtered Restaurant List Accessors =============================================================
+    @Override
+    public void sortRestaurantListByName() {
+        // Sorts the backing list; FilteredList reflects the new order automatically.
+        restaurantDirectory.sortRestaurant(Comparator.comparing(r -> r.getName().fullName.toLowerCase()));
+        // Keep current filter predicate as-is so the user’s filtered view remains, just
+        // sorted.
+        filteredRestaurants.setPredicate(filteredRestaurants.getPredicate());
+    }
+
+    // =========== Filtered Restaurant List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Restaurant} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Restaurant} backed by the
+     * internal list of
      * {@code versionedRestaurantDirectory}
      */
     @Override

@@ -10,10 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,20 +64,17 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurant_nullTargetRestaurant_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () ->
-                uniqueRestaurantList.setRestaurant(null, MCDONALDS));
+        assertThrows(NullPointerException.class, () -> uniqueRestaurantList.setRestaurant(null, MCDONALDS));
     }
 
     @Test
     public void setRestaurant_nullEditedRestaurant_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () ->
-                uniqueRestaurantList.setRestaurant(MCDONALDS, null));
+        assertThrows(NullPointerException.class, () -> uniqueRestaurantList.setRestaurant(MCDONALDS, null));
     }
 
     @Test
     public void setRestaurant_targetRestaurantNotInList_throwsRestaurantNotFoundException() {
-        assertThrows(RestaurantNotFoundException.class, () ->
-                uniqueRestaurantList.setRestaurant(MCDONALDS, MCDONALDS));
+        assertThrows(RestaurantNotFoundException.class, () -> uniqueRestaurantList.setRestaurant(MCDONALDS, MCDONALDS));
     }
 
     @Test
@@ -134,8 +133,9 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurants_nullUniqueRestaurantList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () ->
-                uniqueRestaurantList.setRestaurants((UniqueRestaurantList) null));
+        assertThrows(NullPointerException.class, () -> uniqueRestaurantList
+                .setRestaurants((UniqueRestaurantList) null)
+        );
     }
 
     @Test
@@ -149,8 +149,7 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurants_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () ->
-                uniqueRestaurantList.setRestaurants((List<Restaurant>) null));
+        assertThrows(NullPointerException.class, () -> uniqueRestaurantList.setRestaurants((List<Restaurant>) null));
     }
 
     @Test
@@ -166,8 +165,55 @@ public class UniqueRestaurantListTest {
     @Test
     public void setRestaurants_listWithDuplicateRestaurants_throwsDuplicateRestaurantException() {
         List<Restaurant> listWithDuplicateRestaurants = Arrays.asList(MCDONALDS, MCDONALDS);
-        assertThrows(DuplicateRestaurantException.class, () ->
-                uniqueRestaurantList.setRestaurants(listWithDuplicateRestaurants));
+        assertThrows(DuplicateRestaurantException.class, () -> uniqueRestaurantList
+                .setRestaurants(listWithDuplicateRestaurants)
+        );
+    }
+
+    @Test
+    public void sortInPlaceSortedAscendingCaseInsensitive() {
+        UniqueRestaurantList uniqueRestaurantList = new UniqueRestaurantList();
+
+        // Mixed case + accent to demonstrate case-insensitive behavior
+        uniqueRestaurantList.add(new RestaurantBuilder().withName("beta Bites").build());
+        uniqueRestaurantList.add(new RestaurantBuilder().withName("Alpha Sushi").build());
+        uniqueRestaurantList.add(new RestaurantBuilder().withName("KOI Thé").build());
+        uniqueRestaurantList.add(MCDONALDS); // "McDonald's"
+
+        Comparator<Restaurant> byNameIgnoreCase = Comparator.comparing(r -> r.getName().fullName.toLowerCase());
+
+        // Build expected order by sorting a copy of current view
+        var before = new ArrayList<>(uniqueRestaurantList.asUnmodifiableObservableList());
+        var expected = before.stream().sorted(byNameIgnoreCase).collect(Collectors.toList());
+
+        uniqueRestaurantList.sort(byNameIgnoreCase);
+        var after = uniqueRestaurantList.asUnmodifiableObservableList();
+
+        assertEquals(expected, after);
+    }
+
+    @Test
+    public void sortTwiceIdempotentSecondCallKeepsOrder() {
+        UniqueRestaurantList uniqueRestaurantList = new UniqueRestaurantList();
+        uniqueRestaurantList.add(new RestaurantBuilder().withName("zeta cafe").build());
+        uniqueRestaurantList.add(new RestaurantBuilder().withName("alpha").build());
+        uniqueRestaurantList.add(new RestaurantBuilder().withName("Delta").build());
+
+        Comparator<Restaurant> byNameIgnoreCase = Comparator.comparing(r -> r.getName().fullName.toLowerCase());
+
+        uniqueRestaurantList.sort(byNameIgnoreCase);
+        var first = new ArrayList<>(uniqueRestaurantList.asUnmodifiableObservableList());
+        uniqueRestaurantList.sort(byNameIgnoreCase);
+        var second = uniqueRestaurantList.asUnmodifiableObservableList();
+
+        assertEquals(first, second);
+    }
+
+    @Test
+    public void sortNullComparatorThrowsNullPointerExceptionUniqueList() {
+        UniqueRestaurantList uniqueRestaurantList = new UniqueRestaurantList();
+        uniqueRestaurantList.add(MCDONALDS);
+        assertThrows(NullPointerException.class, () -> uniqueRestaurantList.sort(null));
     }
 
     @Test

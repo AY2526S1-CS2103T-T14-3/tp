@@ -19,6 +19,7 @@ import foodtrail.logic.commands.HelpCommand;
 import foodtrail.logic.commands.ListCommand;
 import foodtrail.logic.commands.MarkCommand;
 import foodtrail.logic.commands.RateCommand;
+import foodtrail.logic.commands.SortCommand;
 import foodtrail.logic.commands.TagCommand;
 import foodtrail.logic.commands.UnmarkCommand;
 import foodtrail.logic.commands.UntagCommand;
@@ -51,7 +52,8 @@ public class RestaurantDirectoryParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
+        // Note to developers: Change the log level in config.json to enable lower level
+        // (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
@@ -96,6 +98,9 @@ public class RestaurantDirectoryParser {
 
         case RateCommand.COMMAND_WORD:
             return new RateCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

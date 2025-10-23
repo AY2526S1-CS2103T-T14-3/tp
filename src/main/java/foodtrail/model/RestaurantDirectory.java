@@ -2,6 +2,7 @@ package foodtrail.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import foodtrail.commons.util.ToStringBuilder;
@@ -18,20 +19,25 @@ public class RestaurantDirectory implements ReadOnlyRestaurantDirectory {
     private final UniqueRestaurantList restaurants;
 
     /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     * The 'unusual' code block below is a non-static initialization block,
+     * sometimes used to avoid duplication
+     * between constructors. See
+     * https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
+     * Note that non-static init blocks are not recommended to use. There are other
+     * ways to avoid duplication
+     * among constructors.
      */
     {
         restaurants = new UniqueRestaurantList();
     }
 
-    public RestaurantDirectory() {}
+    public RestaurantDirectory() {
+    }
 
     /**
-     * Creates an RestaurantDirectory using the Restaurants in the {@code toBeCopied}
+     * Creates an RestaurantDirectory using the Restaurants in the
+     * {@code toBeCopied}
      */
     public RestaurantDirectory(ReadOnlyRestaurantDirectory toBeCopied) {
         this();
@@ -49,7 +55,8 @@ public class RestaurantDirectory implements ReadOnlyRestaurantDirectory {
     }
 
     /**
-     * Resets the existing data of this {@code RestaurantDirectory} with {@code newData}.
+     * Resets the existing data of this {@code RestaurantDirectory} with
+     * {@code newData}.
      */
     public void resetData(ReadOnlyRestaurantDirectory newData) {
         requireNonNull(newData);
@@ -60,7 +67,8 @@ public class RestaurantDirectory implements ReadOnlyRestaurantDirectory {
     //// restaurant-level operations
 
     /**
-     * Returns true if a restaurant with the same identity as {@code restaurant} exists in the restaurant directory.
+     * Returns true if a restaurant with the same identity as {@code restaurant}
+     * exists in the restaurant directory.
      */
     public boolean hasRestaurant(Restaurant restaurant) {
         requireNonNull(restaurant);
@@ -75,8 +83,15 @@ public class RestaurantDirectory implements ReadOnlyRestaurantDirectory {
         restaurants.add(p);
     }
 
+    /** Sorts restaurants using the provided comparator. */
+    public void sortRestaurant(Comparator<Restaurant> comparator) {
+        requireNonNull(comparator);
+        restaurants.sort(comparator);
+    }
+
     /**
-     * Replaces the given restaurant {@code target} in the list with {@code editedRestaurant}.
+     * Replaces the given restaurant {@code target} in the list with
+     * {@code editedRestaurant}.
      * {@code target} must exist in the restaurant directory.
      * The restaurant identity of {@code editedRestaurant} must not be
      * the same as another existing restaurant in the restaurant directory.

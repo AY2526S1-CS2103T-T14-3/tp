@@ -71,6 +71,8 @@ restaurants done faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<br>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -79,6 +81,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<br>
 
 ### Adding a restaurant: `add`
 
@@ -95,11 +98,15 @@ Examples:
 * `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572`
 * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`
 
+<br>
+
 ### Listing all restaurants : `list`
 
 Shows a list of all restaurants in the restaurant directory.
 
 Format: `list`
+
+<br>
 
 ### Editing a restaurant : `edit`
 
@@ -116,9 +123,11 @@ Examples:
 *  `edit 1 hp/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
 *  `edit 2 n/KFC` Edits the name of the 2nd restaurant to be `KFC`.
 
-### Locating restaurants by name: `find`
+<br>
 
-Finds restaurants whose name/address/phone number/tag contain any of the given keywords.
+### Locating restaurants: `find`
+
+Finds restaurants in the restaurant directory via their name, address, phone number, or tag.
 
 Format: `find KEYWORD[, MORE_KEYWORDS]`
 
@@ -132,6 +141,8 @@ Examples:
 * `find subway, kfc` returns `Subway` and `KFC`.
 * `find bugis` returns `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
   ![result for 'find bugis'](images/findBugisResult.png)
+
+<br>
 
 ### Deleting a restaurant : `delete`
 
@@ -147,11 +158,90 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd restaurant in the restaurant directory.
 * `find KFC` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 
+<br>
+
+### Marking a restaurant: `mark`
+
+Marks the specified restaurant from the restaurant directory as visited.
+
+Format: `mark INDEX`
+
+* Marks the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+
+<br>
+
+### Unmarking a restaurant: `unmark`
+
+Marks the specified restaurant from the restaurant directory as not visited.
+
+Format: `unmark INDEX`
+
+* Marks the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+
+<br>
+
+### Rating a restaurant: `rate`
+
+Rates the specified restaurant from the restaurant directory.
+
+Format: `rate INDEX RATING`
+
+* Rates the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* The rating **must be a number from 0 to 5**.
+
+<br>
+
+### Sorting the restaurant directory: `sort`
+
+Sorts the restaurant directory by alphabetical order.
+
+Format: `sort`
+
+<br>
+
+### Tagging a restaurant: `tag`
+
+Adds the specified tag to the specified restaurant from the restaurant directory.
+
+Format: `tag INDEX t/TAG [t/MORE_TAGS]`
+
+* Tags the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* Multiple tags can be added by entering more `t/` and specifying additional tags. 
+
+Examples:
+* `tag 1 t/halal` tags the 1st restaurant with a `halal` tag.
+* `tag 1 t/halal t/fastfood` tags the 1st restaurant with a `halal` and a `fastfood` tag.
+
+<br>
+
+### Untagging a restaurant: `untag`
+
+Removes the specified tag from the specified restaurant from the restaurant directory.
+
+Format: `untag INDEX t/TAG [t/MORE_TAGS]`
+
+* Untags the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* Multiple tags can be removed by entering more `t/` and specifying additional tags.
+
+<br>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the restaurant directory.
 
 Format: `clear`
+
+<br>
 
 ### Exiting the program : `exit`
 
@@ -159,10 +249,14 @@ Exits the program.
 
 Format: `exit`
 
+<br>
+
 ### Saving the data
 
 FoodTrail data are saved in the hard disk automatically after any command that changes the data. There is no need to 
 save manually.
+
+<br>
 
 ### Editing the data file
 
@@ -203,4 +297,11 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/KFC hp/68849301`
 **Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g., `find koi, subway`
 **List**   | `list`
+**Mark**   | `mark INDEX`<br> e.g., `mark 3`
+**Unmark** | `mark INDEX`<br> e.g., `mark 3`
+**Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 5`
+**Sort**   | `sort`
+**Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `tag 3 t/fastfood t/halal`
+**Untag**  | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g., `untag 3 t/fastfood t/halal`
 **Help**   | `help`
+**Exit**   | `exit`

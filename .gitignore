@@ -24,3 +24,5 @@ docs/_site/
 docs/_markbind/logs/
 
 .class
+
+preferences.json

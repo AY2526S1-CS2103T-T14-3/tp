@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import foodtrail.commons.exceptions.IllegalValueException;
 import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
 import foodtrail.model.restaurant.Rating;
@@ -29,6 +30,7 @@ class JsonAdaptedRestaurant {
     private final String phone;
     private final String address;
     private final Integer rating;
+    private final boolean isMarked; // Added isMarked field
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,7 +40,8 @@ class JsonAdaptedRestaurant {
     public JsonAdaptedRestaurant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                  @JsonProperty("address") String address,
                                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                                 @JsonProperty("rating") Integer rating) {
+                                 @JsonProperty("rating") Integer rating,
+                                 @JsonProperty("isMarked") boolean isMarked) { // Added isMarked to constructor
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -46,6 +49,7 @@ class JsonAdaptedRestaurant {
             this.tags.addAll(tags);
         }
         this.rating = rating;
+        this.isMarked = isMarked; // Initialize isMarked
     }
 
     /**
@@ -59,6 +63,7 @@ class JsonAdaptedRestaurant {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         this.rating = source.getRating().map(r -> r.value).orElse(null);
+        this.isMarked = source.getIsMarked().isVisited(); // Extract isMarked status
     }
 
     /**
@@ -106,7 +111,8 @@ class JsonAdaptedRestaurant {
         if (rating != null) {
             modelRating = Optional.of(new Rating(rating));
         }
-        return new Restaurant(modelName, modelPhone, modelAddress, modelTags, modelRating);
+        // Pass the isMarked status to the Restaurant constructor
+        return new Restaurant(modelName, modelPhone, modelAddress, modelTags, modelRating, new IsMarked(isMarked));
     }
 
 }

@@ -24,31 +24,30 @@ public class Restaurant {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Optional<Rating> rating;
-    private final IsMarked isMarked; // Added IsMarked field
+    private final IsMarked isMarked;
 
     /**
      * Every field must be present and not null.
      */
     public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags,
                       Optional<Rating> rating, IsMarked isMarked) {
-        requireAllNonNull(name, phone, address, tags, isMarked); // Added isMarked to non-null check
+        requireAllNonNull(name, phone, address, tags, rating, isMarked);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.tags.addAll(tags);
-        this.rating = rating == null ? Optional.empty() : rating;
-        this.isMarked = isMarked; // Initialize isMarked
+        this.rating = rating;
+        this.isMarked = isMarked;
     }
 
-    // Backward-compatible 4-arg constructor (no rating provided -> blank)
-    // This constructor needs to be updated to provide a default IsMarked
+    // Backward-compatible 4-arg constructor
     public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags) {
-        this(name, phone, address, tags, Optional.empty(), new IsMarked(false)); // Default to not visited
+        this(name, phone, address, tags, Optional.empty(), new IsMarked(false));
     }
 
-    // New constructor to handle rating but not IsMarked (default to not visited)
+    // Constructor to handle rating but not IsMarked
     public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags, Optional<Rating> rating) {
-        this(name, phone, address, tags, rating, new IsMarked(false)); // Default to not visited
+        this(name, phone, address, tags, rating, new IsMarked(false));
     }
 
     public Name getName() {
@@ -67,7 +66,7 @@ public class Restaurant {
         return rating;
     }
 
-    public IsMarked getIsMarked() { // Getter for IsMarked
+    public IsMarked getIsMarked() {
         return isMarked;
     }
 
@@ -128,13 +127,14 @@ public class Restaurant {
                 && phone.equals(otherRestaurant.phone)
                 && address.equals(otherRestaurant.address)
                 && tags.equals(otherRestaurant.tags)
-                && isMarked.equals(otherRestaurant.isMarked); // Added isMarked to equals
+                && rating.equals(otherRestaurant.rating)
+                && isMarked.equals(otherRestaurant.isMarked);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, tags, isMarked); // Added isMarked to hashCode
+        return Objects.hash(name, phone, address, tags, rating, isMarked);
     }
 
     @Override
@@ -144,8 +144,8 @@ public class Restaurant {
                 .add("phone", phone)
                 .add("address", address)
                 .add("tags", tags)
-                .add("rating", rating.orElse(null)) // Added rating to toString
-                .add("isMarked", isMarked) // Added isMarked to toString
+                .add("rating", rating.orElse(null))
+                .add("isMarked", isMarked)
                 .toString();
     }
 

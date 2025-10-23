@@ -64,7 +64,7 @@ public class TagCommand extends Command {
 
         Restaurant editedRestaurant = new Restaurant(
                 restaurantToEdit.getName(), restaurantToEdit.getPhone(),
-                restaurantToEdit.getAddress(), newTags);
+                restaurantToEdit.getAddress(), newTags, restaurantToEdit.getRating(), restaurantToEdit.getIsMarked());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);

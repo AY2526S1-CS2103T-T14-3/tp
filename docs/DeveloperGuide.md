@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,9 +58,9 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
@@ -259,7 +259,7 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+The data archiving feature will allow users to export their restaurant data in various formats (CSV, JSON) and import data from external sources. This feature will be implemented as a separate command that interacts with the Storage component to provide data export/import functionality.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -280,7 +280,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* food lovers who want to keep track of restaurants they have visited or are interested in
+* food enthusiasts who want to keep track of restaurants they have visited or are interested in
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -291,7 +291,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * maintain a curated record of dining experiences
 * eliminates the need for scattered notes or relying on memory
-* helps to keep track of favourite restaurants
+* helps users keep track of favourite restaurants
 
 
 ### User stories
@@ -458,7 +458,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -476,7 +476,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.

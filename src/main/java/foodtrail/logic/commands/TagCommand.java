@@ -4,9 +4,10 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
@@ -29,8 +30,9 @@ public class TagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "halal";
 
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to restaurant: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists for the restaurant.";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added %1$s tag(s) to restaurant:\n%2$s";
+    public static final String MESSAGE_DUPLICATE_TAG = "The following tag(s) already exist for this restaurant: ";
+    public static final String MESSAGE_EMPTY_TAG = "Tag name cannot be empty.";
 
     private final Index index;
     private final Set<Tag> tag;
@@ -59,17 +61,38 @@ public class TagCommand extends Command {
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> existingTags = restaurantToEdit.getTags();
 
-        Set<Tag> newTags = new HashSet<>(existingTags);
-        newTags.addAll(tag);
+        Set<Tag> duplicateTags = new LinkedHashSet<>(this.tag);
+        duplicateTags.retainAll(existingTags);
+
+        if (!duplicateTags.isEmpty()) {
+            String duplicateTagsString = duplicateTags.stream()
+                    .map(t -> t.tagName)
+                    .collect(Collectors.joining(", "));
+            throw new CommandException(MESSAGE_DUPLICATE_TAG + duplicateTagsString);
+        }
+
+        Set<Tag> newTags = new LinkedHashSet<>(existingTags);
+        newTags.addAll(this.tag);
 
         Restaurant editedRestaurant = new Restaurant(
                 restaurantToEdit.getName(), restaurantToEdit.getPhone(),
-                restaurantToEdit.getAddress(), newTags);
+                restaurantToEdit.getAddress(), newTags, restaurantToEdit.getRating(), restaurantToEdit.getIsMarked());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant)));
+        String tagsAddedString = this.tag.stream()
+                .map(t -> "'" + t.tagName + "'")
+                .collect(Collectors.joining(", "));
+
+        String restaurantDetails = "Name: " + editedRestaurant.getName() + "\n"
+                + "Phone: " + editedRestaurant.getPhone() + "\n"
+                + "Address: " + editedRestaurant.getAddress() + "\n"
+                + "Tags: " + editedRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
+        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, tagsAddedString, restaurantDetails));
     }
 
     @Override

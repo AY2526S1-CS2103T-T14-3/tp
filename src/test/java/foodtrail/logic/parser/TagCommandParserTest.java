@@ -10,9 +10,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import foodtrail.commons.core.index.Index;
 import org.junit.jupiter.api.Test;
 
+import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.TagCommand;
 import foodtrail.model.restaurant.Tag;
 
@@ -33,7 +33,7 @@ public class TagCommandParserTest {
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no tag specified
-        assertParseFailure(parser, "1 t/",TagCommand.MESSAGE_EMPTY_TAG);
+        assertParseFailure(parser, "1 t/", TagCommand.MESSAGE_EMPTY_TAG);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -89,4 +89,5 @@ public class TagCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
 }

@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.index.Index;
@@ -33,8 +35,15 @@ public class MarkCommandTest {
         Restaurant restaurantToMark = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_RESTAURANT);
 
+        String restaurantDetails = "\n" + "Name: " + restaurantToMark.getName() + "\n"
+                + "Phone: " + restaurantToMark.getPhone() + "\n"
+                + "Address: " + restaurantToMark.getAddress() + "\n"
+                + "Tags: " + restaurantToMark.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_RESTAURANT_SUCCESS,
-                Messages.format(restaurantToMark));
+                restaurantDetails);
 
         ModelManager expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         Restaurant markedRestaurant = new RestaurantBuilder(restaurantToMark).withIsMarked(true).build();
@@ -58,10 +67,17 @@ public class MarkCommandTest {
         Restaurant alreadyMarkedRestaurant = new RestaurantBuilder(restaurantToMark).withIsMarked(true).build();
         model.setRestaurant(restaurantToMark, alreadyMarkedRestaurant);
 
+        String restaurantDetails = "\n" + "Name: " + alreadyMarkedRestaurant.getName() + "\n"
+                + "Phone: " + alreadyMarkedRestaurant.getPhone() + "\n"
+                + "Address: " + alreadyMarkedRestaurant.getAddress() + "\n"
+                + "Tags: " + alreadyMarkedRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_RESTAURANT);
 
         assertCommandFailure(markCommand, model, String.format(MarkCommand.MESSAGE_RESTAURANT_ALREADY_MARKED,
-                Messages.format(alreadyMarkedRestaurant)));
+                restaurantDetails));
     }
 
     @Test
@@ -71,8 +87,15 @@ public class MarkCommandTest {
         Restaurant restaurantToMark = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_RESTAURANT);
 
+        String restaurantDetails = "\n" + "Name: " + restaurantToMark.getName() + "\n"
+                + "Phone: " + restaurantToMark.getPhone() + "\n"
+                + "Address: " + restaurantToMark.getAddress() + "\n"
+                + "Tags: " + restaurantToMark.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_RESTAURANT_SUCCESS,
-                Messages.format(restaurantToMark));
+                restaurantDetails);
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         Restaurant markedRestaurant = new RestaurantBuilder(restaurantToMark).withIsMarked(true).build();

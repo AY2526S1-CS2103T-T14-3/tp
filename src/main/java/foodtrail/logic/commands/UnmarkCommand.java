@@ -3,6 +3,7 @@ package foodtrail.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.commons.util.ToStringBuilder;
@@ -25,7 +26,7 @@ public class UnmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UNMARK_RESTAURANT_SUCCESS = "Unmarked restaurant as not visited: %1$s";
+    public static final String MESSAGE_UNMARK_RESTAURANT_SUCCESS = "Marked restaurant as not visited: %1$s";
     public static final String MESSAGE_RESTAURANT_NOT_MARKED = "This restaurant is not marked as visited: %1$s";
 
     private final Index targetIndex;
@@ -45,15 +46,21 @@ public class UnmarkCommand extends Command {
 
         Restaurant restaurantToUnmark = lastShownList.get(targetIndex.getZeroBased());
 
+        String restaurantDetails = "\n" + "Name: " + restaurantToUnmark.getName() + "\n"
+                + "Phone: " + restaurantToUnmark.getPhone() + "\n"
+                + "Address: " + restaurantToUnmark.getAddress() + "\n"
+                + "Tags: " + restaurantToUnmark.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         if (!restaurantToUnmark.getIsMarked().isVisited()) {
-            throw new CommandException(String.format(MESSAGE_RESTAURANT_NOT_MARKED,
-                    Messages.format(restaurantToUnmark)));
+            throw new CommandException(String.format(MESSAGE_RESTAURANT_NOT_MARKED, restaurantDetails));
         }
 
         Restaurant unmarkedRestaurant = restaurantToUnmark.withIsMarked(new IsMarked(false));
 
         model.setRestaurant(restaurantToUnmark, unmarkedRestaurant);
-        return new CommandResult(String.format(MESSAGE_UNMARK_RESTAURANT_SUCCESS, Messages.format(unmarkedRestaurant)));
+        return new CommandResult(String.format(MESSAGE_UNMARK_RESTAURANT_SUCCESS, restaurantDetails));
     }
 
     @Override

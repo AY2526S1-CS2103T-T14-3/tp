@@ -197,6 +197,27 @@ Format: `rate INDEX RATING`
 * The index **must be a positive integer** (1, 2, 3, …​).
 * The rating **must be a number from 0 to 5**.
 
+Examples:
+* `rate 1 5` rates the 1st restaurant with 5 stars.
+* `rate 3 3` rates the 3rd restaurant with 3 stars.
+
+<br>
+
+### Removing a restaurant rating: `unrate`
+
+Removes the rating from the specified restaurant in the restaurant directory.
+
+Format: `unrate INDEX`
+
+* Removes the rating from the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* The restaurant must have an existing rating to remove.
+
+Examples:
+* `unrate 1` removes the rating from the 1st restaurant.
+* `unrate 3` removes the rating from the 3rd restaurant.
+
 <br>
 
 ### Sorting the restaurant directory: `sort`
@@ -302,6 +323,7 @@ outside the acceptable range). Therefore, edit the data file only if you are con
 | **Mark**   | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
 | **Unmark** | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
 | **Rate**   | `rate INDEX RATING`<br> e.g. `rate 1 5`                                                                                                                    |
+| **Unrate** | `unrate INDEX`<br> e.g. `unrate 1`                                                                                                                         |
 | **Sort**   | `sort`                                                                                                                                                     |
 | **Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `tag 3 t/fastfood t/halal`                                                                                        |
 | **Untag**  | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `untag 3 t/fastfood t/halal`                                                                                    |

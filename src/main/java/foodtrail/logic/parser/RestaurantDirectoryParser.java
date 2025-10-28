@@ -22,6 +22,7 @@ import foodtrail.logic.commands.RateCommand;
 import foodtrail.logic.commands.SortCommand;
 import foodtrail.logic.commands.TagCommand;
 import foodtrail.logic.commands.UnmarkCommand;
+import foodtrail.logic.commands.UnrateCommand;
 import foodtrail.logic.commands.UntagCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
 
@@ -98,6 +99,9 @@ public class RestaurantDirectoryParser {
 
         case RateCommand.COMMAND_WORD:
             return new RateCommandParser().parse(arguments);
+
+        case UnrateCommand.COMMAND_WORD:
+            return new UnrateCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommand();

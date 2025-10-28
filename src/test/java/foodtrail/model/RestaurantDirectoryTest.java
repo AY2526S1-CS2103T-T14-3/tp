@@ -1,6 +1,5 @@
 package foodtrail.model;
 
-import static foodtrail.logic.commands.CommandTestUtil.VALID_ADDRESS_KFC;
 import static foodtrail.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static foodtrail.testutil.Assert.assertThrows;
 import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
@@ -48,9 +47,9 @@ public class RestaurantDirectoryTest {
 
     @Test
     public void resetData_withDuplicateRestaurants_throwsDuplicateRestaurantException() {
-        // Two restaurants with the same identity fields
+        // Two restaurants with the same identity fields (Name, Address, Phone)
         Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
-                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
+                .withTags(VALID_TAG_FASTFOOD).build();
         List<Restaurant> newRestaurants = Arrays.asList(MCDONALDS, editedMcdonalds);
         RestaurantDirectoryStub newData = new RestaurantDirectoryStub(newRestaurants);
 
@@ -77,7 +76,7 @@ public class RestaurantDirectoryTest {
     public void hasRestaurant_restaurantWithSameIdentityFieldsInRestaurantDirectory_returnsTrue() {
         restaurantDirectory.addRestaurant(MCDONALDS);
         Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
-                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
+                .withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(restaurantDirectory.hasRestaurant(editedMcdonalds));
     }
 

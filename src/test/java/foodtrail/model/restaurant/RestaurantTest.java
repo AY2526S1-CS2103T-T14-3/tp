@@ -32,13 +32,20 @@ public class RestaurantTest {
         // null -> returns false
         assertFalse(MCDONALDS.isSameRestaurant(null));
 
-        // same name, all other attributes different -> returns true
-        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
-                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
+        // same name, same address, same phone number, all other attributes different -> returns true
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS).withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // different name, all other attributes same -> returns false
         editedMcdonalds = new RestaurantBuilder(MCDONALDS).withName(VALID_NAME_KFC).build();
+        assertFalse(MCDONALDS.isSameRestaurant(editedMcdonalds));
+
+        // different phone number, all other attributes same -> returns false
+        editedMcdonalds = new RestaurantBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC).build();
+        assertFalse(MCDONALDS.isSameRestaurant(editedMcdonalds));
+
+        // different address, all other attributes same -> returns false
+        editedMcdonalds = new RestaurantBuilder(MCDONALDS).withAddress(VALID_ADDRESS_KFC).build();
         assertFalse(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // name differs in case, all other attributes same -> returns false

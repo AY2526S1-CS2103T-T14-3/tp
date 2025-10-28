@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.index.Index;
@@ -32,8 +34,15 @@ public class DeleteCommandTest {
         Restaurant restaurantToDelete = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESTAURANT);
 
+        String restaurantDetails = "\n" + "Name: " + restaurantToDelete.getName() + "\n"
+                + "Phone: " + restaurantToDelete.getPhone() + "\n"
+                + "Address: " + restaurantToDelete.getAddress() + "\n"
+                + "Tags: " + restaurantToDelete.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESTAURANT_SUCCESS,
-                Messages.format(restaurantToDelete));
+                restaurantDetails);
 
         ModelManager expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.deleteRestaurant(restaurantToDelete);
@@ -56,8 +65,15 @@ public class DeleteCommandTest {
         Restaurant restaurantToDelete = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RESTAURANT);
 
+        String restaurantDetails = "\n" + "Name: " + restaurantToDelete.getName() + "\n"
+                + "Phone: " + restaurantToDelete.getPhone() + "\n"
+                + "Address: " + restaurantToDelete.getAddress() + "\n"
+                + "Tags: " + restaurantToDelete.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RESTAURANT_SUCCESS,
-                Messages.format(restaurantToDelete));
+                restaurantDetails);
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.deleteRestaurant(restaurantToDelete);

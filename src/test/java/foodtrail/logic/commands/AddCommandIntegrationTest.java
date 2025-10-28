@@ -4,10 +4,11 @@ import static foodtrail.logic.commands.CommandTestUtil.assertCommandFailure;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import foodtrail.logic.Messages;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.UserPrefs;
@@ -30,11 +31,18 @@ public class AddCommandIntegrationTest {
     public void execute_newRestaurant_success() {
         Restaurant validRestaurant = new RestaurantBuilder().build();
 
+        String restaurantDetails = "\n" + "Name: " + validRestaurant.getName() + "\n"
+                + "Phone: " + validRestaurant.getPhone() + "\n"
+                + "Address: " + validRestaurant.getAddress() + "\n"
+                + "Tags: " + validRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.addRestaurant(validRestaurant);
 
         assertCommandSuccess(new AddCommand(validRestaurant), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validRestaurant)),
+                String.format(AddCommand.MESSAGE_SUCCESS, restaurantDetails),
                 expectedModel);
     }
 

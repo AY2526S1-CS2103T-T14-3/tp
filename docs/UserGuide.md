@@ -216,7 +216,8 @@ Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 * Tags the restaurant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed restaurant directory.
 * The index **must be a positive integer** (1, 2, 3, …​).
-* Multiple tags can be added by entering more `t/` and specifying additional tags. 
+* Multiple tags can be added by entering more `t/` and specifying additional tags.
+* Tags are displayed in alphabetical order.
 
 Examples:
 * `tag 1 t/halal` tags the 1st restaurant with a `halal` tag.
@@ -234,6 +235,7 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 * The index refers to the index number shown in the displayed restaurant directory.
 * The index **must be a positive integer** (1, 2, 3, …​).
 * Multiple tags can be removed by entering more `t/` and specifying additional tags.
+* Tags are displayed in alphabetical order.
 
 <br>
 

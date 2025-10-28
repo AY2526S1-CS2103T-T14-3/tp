@@ -128,6 +128,21 @@ public class TagCommandTest {
     }
 
     @Test
+    public void execute_duplicateTag_throwsCommandException() {
+        // Get a restaurant that has at least one tag
+        Restaurant restaurantWithTags = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
+        assertTrue(!restaurantWithTags.getTags().isEmpty(), "Test requires the restaurant to have at least one tag.");
+
+        // Get an existing tag to try and add again
+        Tag existingTag = restaurantWithTags.getTags().iterator().next();
+        Set<Tag> duplicateTagSet = Collections.singleton(existingTag);
+
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, duplicateTagSet);
+        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_DUPLICATE_TAG + existingTag.tagName);
+    }
+
+
+    @Test
     public void equals() {
         Set<Tag> newTags = new LinkedHashSet<>();
         newTags.add(new Tag(TAG_STUB));

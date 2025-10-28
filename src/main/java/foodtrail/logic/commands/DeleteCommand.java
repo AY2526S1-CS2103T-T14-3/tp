@@ -3,6 +3,7 @@ package foodtrail.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.commons.util.ToStringBuilder;
@@ -42,7 +43,15 @@ public class DeleteCommand extends Command {
 
         Restaurant restaurantToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRestaurant(restaurantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, Messages.format(restaurantToDelete)));
+
+        String restaurantDetails = "\n" + "Name: " + restaurantToDelete.getName() + "\n"
+                + "Phone: " + restaurantToDelete.getPhone() + "\n"
+                + "Address: " + restaurantToDelete.getAddress() + "\n"
+                + "Tags: " + restaurantToDelete.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
+        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, restaurantDetails));
     }
 
     @Override

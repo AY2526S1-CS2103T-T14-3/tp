@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.commons.util.CollectionUtil;
@@ -78,7 +79,15 @@ public class EditCommand extends Command {
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_RESTAURANT_SUCCESS, Messages.format(editedRestaurant)));
+
+        String restaurantDetails = "\n" + "Name: " + editedRestaurant.getName() + "\n"
+                + "Phone: " + editedRestaurant.getPhone() + "\n"
+                + "Address: " + editedRestaurant.getAddress() + "\n"
+                + "Tags: " + editedRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_RESTAURANT_SUCCESS, restaurantDetails));
     }
 
     /**

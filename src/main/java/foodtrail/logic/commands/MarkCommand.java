@@ -3,6 +3,7 @@ package foodtrail.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.commons.util.ToStringBuilder;
@@ -45,15 +46,23 @@ public class MarkCommand extends Command {
 
         Restaurant restaurantToMark = lastShownList.get(targetIndex.getZeroBased());
 
+        String restaurantDetails = "\n" + "Name: " + restaurantToMark.getName() + "\n"
+                + "Phone: " + restaurantToMark.getPhone() + "\n"
+                + "Address: " + restaurantToMark.getAddress() + "\n"
+                + "Tags: " + restaurantToMark.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         if (restaurantToMark.getIsMarked().isVisited()) {
-            throw new CommandException(String.format(MESSAGE_RESTAURANT_ALREADY_MARKED,
-                    Messages.format(restaurantToMark)));
+            throw new CommandException(String.format(MESSAGE_RESTAURANT_ALREADY_MARKED, restaurantDetails));
         }
 
         Restaurant markedRestaurant = restaurantToMark.withIsMarked(new IsMarked(true));
 
         model.setRestaurant(restaurantToMark, markedRestaurant);
-        return new CommandResult(String.format(MESSAGE_MARK_RESTAURANT_SUCCESS, Messages.format(markedRestaurant)));
+
+
+        return new CommandResult(String.format(MESSAGE_MARK_RESTAURANT_SUCCESS, restaurantDetails));
     }
 
     @Override

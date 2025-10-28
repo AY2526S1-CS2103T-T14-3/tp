@@ -9,8 +9,10 @@ import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirector
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,14 +37,25 @@ public class TagCommandTest {
     @Test
     public void execute_addTagUnfilteredList_success() {
         Restaurant firstRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(firstRestaurant.getTags());
-        newTags.add(new Tag(TAG_STUB));
+        Set<Tag> tagsToAdd = Collections.singleton(new Tag(TAG_STUB));
+
+        Set<Tag> allTags = new LinkedHashSet<>(firstRestaurant.getTags());
+        allTags.addAll(tagsToAdd);
+
         Restaurant editedRestaurant = new Restaurant(firstRestaurant.getName(), firstRestaurant.getPhone(),
-                firstRestaurant.getAddress(), newTags);
+                firstRestaurant.getAddress(), allTags, firstRestaurant.getRating(), firstRestaurant.getIsMarked());
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, newTags);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, tagsToAdd);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
+        String tagsAddedString = tagsToAdd.stream()
+                .map(t -> "'" + t.tagName + "'")
+                .collect(Collectors.joining(", "));
+        String restaurantDetails = "Name: " + editedRestaurant.getName() + "\n"
+                + "Phone: " + editedRestaurant.getPhone() + "\n"
+                + "Address: " + editedRestaurant.getAddress() + "\n"
+                + "Tags: " + editedRestaurant.getTags().stream().map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, tagsAddedString, restaurantDetails);
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
@@ -57,15 +70,27 @@ public class TagCommandTest {
 
         Restaurant restaurantInFilteredList = model.getFilteredRestaurantList()
                 .get(INDEX_FIRST_RESTAURANT.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(restaurantInFilteredList.getTags());
-        newTags.add(new Tag(TAG_STUB));
+        Set<Tag> tagsToAdd = Collections.singleton(new Tag(TAG_STUB));
+
+        Set<Tag> allTags = new LinkedHashSet<>(restaurantInFilteredList.getTags());
+        allTags.addAll(tagsToAdd);
+
         Restaurant editedRestaurant = new Restaurant(restaurantInFilteredList.getName(),
                 restaurantInFilteredList.getPhone(),
-                restaurantInFilteredList.getAddress(), newTags);
+                restaurantInFilteredList.getAddress(), allTags,
+                restaurantInFilteredList.getRating(), restaurantInFilteredList.getIsMarked());
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, newTags);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, tagsToAdd);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, Messages.format(editedRestaurant));
+        String tagsAddedString = tagsToAdd.stream()
+                .map(t -> "'" + t.tagName + "'")
+                .collect(Collectors.joining(", "));
+        String restaurantDetails = "Name: " + editedRestaurant.getName() + "\n"
+                + "Phone: " + editedRestaurant.getPhone() + "\n"
+                + "Address: " + editedRestaurant.getAddress() + "\n"
+                + "Tags: " + editedRestaurant.getTags().stream().map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, tagsAddedString, restaurantDetails);
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
@@ -76,7 +101,7 @@ public class TagCommandTest {
 
     @Test
     public void execute_invalidRestaurantIndexUnfilteredList_failure() {
-        Set<Tag> newTags = new HashSet<>();
+        Set<Tag> newTags = new LinkedHashSet<>();
         newTags.add(new Tag(TAG_STUB));
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRestaurantList().size() + 1);
         TagCommand tagCommand = new TagCommand(outOfBoundIndex, newTags);
@@ -92,7 +117,7 @@ public class TagCommandTest {
     public void execute_invalidRestaurantIndexFilteredList_failure() {
         showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
         Index outOfBoundIndex = INDEX_SECOND_RESTAURANT;
-        Set<Tag> newTags = new HashSet<>();
+        Set<Tag> newTags = new LinkedHashSet<>();
         newTags.add(new Tag(TAG_STUB));
         // ensures that outOfBoundIndex is still in bounds of restaurant directory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantDirectory().getRestaurantList().size());
@@ -104,7 +129,7 @@ public class TagCommandTest {
 
     @Test
     public void equals() {
-        Set<Tag> newTags = new HashSet<>();
+        Set<Tag> newTags = new LinkedHashSet<>();
         newTags.add(new Tag(TAG_STUB));
         final TagCommand standardCommand = new TagCommand(INDEX_FIRST_RESTAURANT, newTags);
 
@@ -125,7 +150,7 @@ public class TagCommandTest {
         assertFalse(standardCommand.equals(new TagCommand(INDEX_SECOND_RESTAURANT, newTags)));
 
         // different tag -> returns false
-        Set<Tag> diffTags = new HashSet<>();
+        Set<Tag> diffTags = new LinkedHashSet<>();
         diffTags.add(new Tag("OtherTag"));
         assertFalse(standardCommand.equals(new TagCommand(INDEX_FIRST_RESTAURANT, diffTags)));
     }

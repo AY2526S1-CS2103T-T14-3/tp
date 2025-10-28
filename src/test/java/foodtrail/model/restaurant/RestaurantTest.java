@@ -33,8 +33,7 @@ public class RestaurantTest {
         assertFalse(MCDONALDS.isSameRestaurant(null));
 
         // same name, all other attributes different -> returns true
-        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS).withPhone(VALID_PHONE_KFC)
-                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
+        Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS).withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(MCDONALDS.isSameRestaurant(editedMcdonalds));
 
         // different name, all other attributes same -> returns false

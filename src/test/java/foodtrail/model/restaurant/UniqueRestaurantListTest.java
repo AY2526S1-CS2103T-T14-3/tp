@@ -48,7 +48,7 @@ public class UniqueRestaurantListTest {
     public void contains_restaurantWithSameIdentityFieldsInList_returnsTrue() {
         uniqueRestaurantList.add(MCDONALDS);
         Restaurant editedMcdonalds = new RestaurantBuilder(MCDONALDS)
-                .withAddress(VALID_ADDRESS_KFC).withTags(VALID_TAG_FASTFOOD).build();
+                .withTags(VALID_TAG_FASTFOOD).build();
         assertTrue(uniqueRestaurantList.contains(editedMcdonalds));
     }
 

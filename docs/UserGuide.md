@@ -6,9 +6,9 @@
 
 # FoodTrail User Guide
 
-FoodTrail is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you can type fast, FoodTrail can log your favourite 
-restaurants done faster than traditional GUI apps.
+FoodTrail is a **desktop app for managing restaurants, optimized for use via a Command Line Interface** (CLI) while still 
+having the benefits of a Graphical User Interface (GUI). If you can type fast, FoodTrail can help you manage your favourite 
+restaurants faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,7 +17,7 @@ restaurants done faster than traditional GUI apps.
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` or above installed on your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/tag/v1.4).
@@ -172,6 +172,10 @@ Format: `mark INDEX`
 * The index refers to the index number shown in the displayed restaurant directory.
 * The index **must be a positive integer** (1, 2, 3, …​).
 
+Examples:
+* `mark 1` marks the 1st restaurant as visited.
+* `mark 3` marks the 3rd restaurant as visited.
+
 <br>
 
 ### Unmarking a restaurant: `unmark`
@@ -180,9 +184,13 @@ Marks the specified restaurant from the restaurant directory as not visited.
 
 Format: `unmark INDEX`
 
-* Marks the restaurant at the specified `INDEX`.
+* Unmarks the restaurant at the specified `INDEX`.
 * The index refers to the index number shown in the displayed restaurant directory.
 * The index **must be a positive integer** (1, 2, 3, …​).
+
+Examples:
+* `unmark 1` unmarks the 1st restaurant as not visited.
+* `unmark 3` unmarks the 3rd restaurant as not visited.
 
 <br>
 
@@ -201,9 +209,16 @@ Format: `rate INDEX RATING`
 
 ### Sorting the restaurant directory: `sort`
 
-Sorts the restaurant directory by alphabetical order.
+Sorts the restaurant directory by alphabetical order based on restaurant names.
 
 Format: `sort`
+
+* The restaurants will be displayed in alphabetical order by name (A to Z).
+* The sorting is case-insensitive.
+* After sorting, the index numbers will be updated accordingly.
+
+Examples:
+* `sort` sorts all restaurants alphabetically by name.
 
 <br>
 
@@ -300,7 +315,7 @@ outside the acceptable range). Therefore, edit the data file only if you are con
 | **Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g. `find koi, subway`                                                                                                |
 | **List**   | `list`                                                                                                                                                     |
 | **Mark**   | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
-| **Unmark** | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
+| **Unmark** | `unmark INDEX`<br> e.g. `unmark 3`                                                                                                                             |
 | **Rate**   | `rate INDEX RATING`<br> e.g. `rate 1 5`                                                                                                                    |
 | **Sort**   | `sort`                                                                                                                                                     |
 | **Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `tag 3 t/fastfood t/halal`                                                                                        |

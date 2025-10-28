@@ -4,8 +4,7 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,7 +60,7 @@ public class TagCommand extends Command {
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> existingTags = restaurantToEdit.getTags();
 
-        Set<Tag> newTags = new HashSet<>(existingTags);
+        Set<Tag> newTags = new LinkedHashSet<>(existingTags);
         newTags.addAll(this.tag);
 
         Restaurant editedRestaurant = new Restaurant(
@@ -72,7 +71,6 @@ public class TagCommand extends Command {
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsAddedString = this.tag.stream()
-                .sorted(Comparator.comparing(t -> t.tagName))
                 .map(t -> "'" + t.tagName + "'")
                 .collect(Collectors.joining(", "));
 
@@ -80,7 +78,6 @@ public class TagCommand extends Command {
                 + "Phone: " + editedRestaurant.getPhone() + "\n"
                 + "Address: " + editedRestaurant.getAddress() + "\n"
                 + "Tags: " + editedRestaurant.getTags().stream()
-                .sorted(Comparator.comparing(t -> t.tagName))
                 .map(t -> t.tagName)
                 .collect(Collectors.joining(", "));
 

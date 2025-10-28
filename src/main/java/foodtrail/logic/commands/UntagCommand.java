@@ -4,6 +4,7 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +31,7 @@ public class UntagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "halal";
 
-    public static final String MESSAGE_UNTAG_SUCCESS = "Removed tag(s) %2$s from restaurant: %1$s";
+    public static final String MESSAGE_UNTAG_SUCCESS = "Removed %1$s tag(s) from restaurant:\n%2$s";
     public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this restaurant: ";
 
     private final Index index;
@@ -63,7 +64,7 @@ public class UntagCommand extends Command {
         if (!existingTags.containsAll(tags)) {
             Set<Tag> invalidTags = new HashSet<>(tags);
             invalidTags.removeAll(existingTags);
-            String invalidTagsString = invalidTags.stream().map(Tag::toString)
+            String invalidTagsString = invalidTags.stream().map(t -> "'" + t.tagName + "'")
                     .collect(Collectors.joining(", "));
             throw new CommandException(MESSAGE_TAG_NOT_FOUND + invalidTagsString);
         }
@@ -73,13 +74,25 @@ public class UntagCommand extends Command {
 
         Restaurant editedRestaurant = new Restaurant(
                 restaurantToEdit.getName(), restaurantToEdit.getPhone(),
-                restaurantToEdit.getAddress(), newTags);
+                restaurantToEdit.getAddress(), newTags, restaurantToEdit.getRating(), restaurantToEdit.getIsMarked());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
-        String tagsString = tags.stream().map(Tag::toString).collect(Collectors.joining(", "));
-        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, Messages.format(editedRestaurant), tagsString));
+        String tagsRemovedString = tags.stream()
+                .sorted(Comparator.comparing(t -> t.tagName))
+                .map(t -> "'" + t.tagName + "'")
+                .collect(Collectors.joining(", "));
+
+        String restaurantDetails = "Name: " + editedRestaurant.getName() + "\n"
+                + "Phone: " + editedRestaurant.getPhone() + "\n"
+                + "Address: " + editedRestaurant.getAddress() + "\n"
+                + "Tags: " + editedRestaurant.getTags().stream()
+                .sorted(Comparator.comparing(t -> t.tagName))
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
+        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, tagsRemovedString, restaurantDetails));
     }
 
     @Override

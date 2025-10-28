@@ -33,6 +33,7 @@ public class UntagCommand extends Command {
 
     public static final String MESSAGE_UNTAG_SUCCESS = "Removed %1$s tag(s) from restaurant:\n%2$s";
     public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this restaurant: ";
+    public static final String MESSAGE_EMPTY_TAG = "Tag name cannot be empty.";
 
     private final Index index;
     private final Set<Tag> tags;

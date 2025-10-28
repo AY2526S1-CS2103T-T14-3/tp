@@ -21,7 +21,7 @@ public class IsMarked {
 
     @Override
     public String toString() {
-        return visited ? "[ X ]" : "[   ]";
+        return visited ? "[ X ] " : "[   ] ";
     }
 
     @Override

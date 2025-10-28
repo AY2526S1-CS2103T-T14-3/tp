@@ -61,16 +61,6 @@ public class TagCommand extends Command {
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> existingTags = restaurantToEdit.getTags();
 
-        Set<Tag> duplicateTags = new LinkedHashSet<>(this.tag);
-        duplicateTags.retainAll(existingTags);
-
-        if (!duplicateTags.isEmpty()) {
-            String duplicateTagsString = duplicateTags.stream()
-                    .map(t -> t.tagName)
-                    .collect(Collectors.joining(", "));
-            throw new CommandException(MESSAGE_DUPLICATE_TAG + duplicateTagsString);
-        }
-
         Set<Tag> newTags = new LinkedHashSet<>(existingTags);
         newTags.addAll(this.tag);
 

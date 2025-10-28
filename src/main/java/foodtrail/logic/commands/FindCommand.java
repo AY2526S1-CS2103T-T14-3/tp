@@ -31,6 +31,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredRestaurantList(predicate);
+        model.sortRestaurantListByName();
         return new CommandResult(
                 String.format(Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW, model.getFilteredRestaurantList().size()));
     }

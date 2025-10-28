@@ -104,7 +104,9 @@ public class Restaurant {
         }
 
         return otherRestaurant != null
-                && otherRestaurant.getName().equals(getName());
+                && otherRestaurant.getName().equals(getName())
+                && otherRestaurant.getAddress().equals(getAddress())
+                && otherRestaurant.getPhone().equals(getPhone());
     }
 
     /**

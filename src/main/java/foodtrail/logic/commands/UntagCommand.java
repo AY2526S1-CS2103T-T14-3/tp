@@ -5,7 +5,7 @@ import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -63,14 +63,14 @@ public class UntagCommand extends Command {
         Set<Tag> existingTags = restaurantToEdit.getTags();
 
         if (!existingTags.containsAll(tags)) {
-            Set<Tag> invalidTags = new HashSet<>(tags);
+            Set<Tag> invalidTags = new LinkedHashSet<>(tags);
             invalidTags.removeAll(existingTags);
             String invalidTagsString = invalidTags.stream().map(t -> "'" + t.tagName + "'")
                     .collect(Collectors.joining(", "));
             throw new CommandException(MESSAGE_TAG_NOT_FOUND + invalidTagsString);
         }
 
-        Set<Tag> newTags = new HashSet<>(existingTags);
+        Set<Tag> newTags = new LinkedHashSet<>(existingTags);
         newTags.removeAll(tags);
 
         Restaurant editedRestaurant = new Restaurant(
@@ -81,19 +81,23 @@ public class UntagCommand extends Command {
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsRemovedString = tags.stream()
-                .sorted(Comparator.comparing(t -> t.tagName))
                 .map(t -> "'" + t.tagName + "'")
                 .collect(Collectors.joining(", "));
 
-        String restaurantDetails = "Name: " + editedRestaurant.getName() + "\n"
-                + "Phone: " + editedRestaurant.getPhone() + "\n"
-                + "Address: " + editedRestaurant.getAddress() + "\n"
-                + "Tags: " + editedRestaurant.getTags().stream()
-                .sorted(Comparator.comparing(t -> t.tagName))
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("Name: ").append(editedRestaurant.getName()).append("\n");
+        detailsBuilder.append("Phone: ").append(editedRestaurant.getPhone()).append("\n");
+        detailsBuilder.append("Address: ").append(editedRestaurant.getAddress());
 
-        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, tagsRemovedString, restaurantDetails));
+        if (!editedRestaurant.getTags().isEmpty()) {
+            String tagsString = editedRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(t -> t.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
+
+        return new CommandResult(String.format(MESSAGE_UNTAG_SUCCESS, tagsRemovedString, detailsBuilder.toString()));
     }
 
     @Override

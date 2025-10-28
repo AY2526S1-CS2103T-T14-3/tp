@@ -30,7 +30,10 @@ public class TagCommandParserTest {
         assertParseFailure(parser, PREFIX_TAG + "halal", MESSAGE_INVALID_FORMAT);
 
         // no tag specified
-        assertParseFailure(parser, "1", TagCommand.MESSAGE_EMPTY_TAG);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
+
+        // no tag specified
+        assertParseFailure(parser, "1 t/",TagCommand.MESSAGE_EMPTY_TAG);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

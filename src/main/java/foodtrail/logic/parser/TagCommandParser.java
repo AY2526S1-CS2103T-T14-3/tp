@@ -37,15 +37,17 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         Collection<String> tagNames = argMultimap.getAllValues(PREFIX_TAG);
 
-        if (tagNames.isEmpty() || tagNames.stream().anyMatch(String::isEmpty)) {
+        // Handles `tag 1` - no tag prefix provided
+        if (tagNames.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
+
+        // Handles `tag 1 t/` - tag prefix is present but empty
+        if (tagNames.stream().anyMatch(String::isEmpty)) {
             throw new ParseException(TagCommand.MESSAGE_EMPTY_TAG);
         }
 
         Set<Tag> tagSet = ParserUtil.parseTags(tagNames);
-
-        if (tagSet.isEmpty()) {
-            throw new ParseException(TagCommand.MESSAGE_EMPTY_TAG);
-        }
 
         return new TagCommand(index, tagSet);
     }

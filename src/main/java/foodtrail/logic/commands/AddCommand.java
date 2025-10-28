@@ -55,6 +55,7 @@ public class AddCommand extends Command {
         }
 
         model.addRestaurant(toAdd);
+        model.sortRestaurantListByName();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

@@ -72,6 +72,7 @@ public class TagCommand extends Command {
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsAddedString = this.tag.stream()
+                .sorted(Comparator.comparing(t -> t.tagName))
                 .map(t -> "'" + t.tagName + "'")
                 .collect(Collectors.joining(", "));
 

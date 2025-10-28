@@ -50,6 +50,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
         expectedModel.setRestaurant(restaurantToEdit, finalExpectedRestaurant);
+        expectedModel.sortRestaurantListByName();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -72,6 +73,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
         expectedModel.setRestaurant(lastRestaurant, editedRestaurant);
+        expectedModel.sortRestaurantListByName();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -86,6 +88,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
+        expectedModel.sortRestaurantListByName();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -107,6 +110,7 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
         expectedModel.setRestaurant(model.getFilteredRestaurantList().get(0), editedRestaurant);
+        expectedModel.sortRestaurantListByName();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

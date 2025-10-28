@@ -6,8 +6,9 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Collectors;
+
 import foodtrail.commons.util.ToStringBuilder;
-import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.restaurant.Restaurant;
@@ -56,7 +57,13 @@ public class AddCommand extends Command {
 
         model.addRestaurant(toAdd);
         model.sortRestaurantListByName();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        String restaurantDetails = "\n" + "Name: " + toAdd.getName() + "\n"
+                + "Phone: " + toAdd.getPhone() + "\n"
+                + "Address: " + toAdd.getAddress() + "\n"
+                + "Tags: " + toAdd.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, restaurantDetails));
     }
 
     @Override

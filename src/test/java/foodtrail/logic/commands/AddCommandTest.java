@@ -11,11 +11,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.GuiSettings;
-import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.ReadOnlyRestaurantDirectory;
@@ -37,9 +37,16 @@ public class AddCommandTest {
         ModelStubAcceptingRestaurantAdded modelStub = new ModelStubAcceptingRestaurantAdded();
         Restaurant validRestaurant = new RestaurantBuilder().build();
 
+        String restaurantDetails = "\n" + "Name: " + validRestaurant.getName() + "\n"
+                + "Phone: " + validRestaurant.getPhone() + "\n"
+                + "Address: " + validRestaurant.getAddress() + "\n"
+                + "Tags: " + validRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         CommandResult commandResult = new AddCommand(validRestaurant).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validRestaurant)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, restaurantDetails),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validRestaurant), modelStub.restaurantsAdded);
     }

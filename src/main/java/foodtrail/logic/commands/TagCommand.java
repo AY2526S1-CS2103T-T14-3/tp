@@ -24,7 +24,7 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the restaurant identified "
-            + "by the index number used in the displayed restaurant directory. "
+            + "by the index number used in the displayed restaurant directory.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "

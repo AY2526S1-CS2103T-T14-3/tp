@@ -40,8 +40,10 @@ public class RestaurantListPanel extends UiPart<Region> {
             if (empty || restaurant == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: transparent;"); // Force empty cells to be transparent
             } else {
                 setGraphic(new RestaurantCard(restaurant, getIndex() + 1).getRoot());
+                setStyle(null); // Allow non-empty cells to be styled by CSS
             }
         }
     }

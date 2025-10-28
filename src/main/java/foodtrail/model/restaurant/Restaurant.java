@@ -3,8 +3,7 @@ package foodtrail.model.restaurant;
 import static foodtrail.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ public class Restaurant {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags = new LinkedHashSet<>();
     private final Optional<Rating> rating;
     private final IsMarked isMarked; // Added IsMarked field
 
@@ -134,7 +133,7 @@ public class Restaurant {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, tags, isMarked); // Added isMarked to hashCode
+        return name.hashCode() ^ phone.hashCode() ^ address.hashCode() ^ tags.hashCode() ^ isMarked.hashCode();
     }
 
     @Override

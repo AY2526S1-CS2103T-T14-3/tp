@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import foodtrail.commons.core.index.Index;
@@ -35,10 +37,17 @@ public class UnmarkCommandTest {
         Restaurant markedRestaurant = new RestaurantBuilder(restaurantToUnmark).withIsMarked(true).build();
         model.setRestaurant(restaurantToUnmark, markedRestaurant);
 
+        String restaurantDetails = "\n" + "Name: " + markedRestaurant.getName() + "\n"
+                + "Phone: " + markedRestaurant.getPhone() + "\n"
+                + "Address: " + markedRestaurant.getAddress() + "\n"
+                + "Tags: " + markedRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_RESTAURANT);
 
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_RESTAURANT_SUCCESS,
-                Messages.format(markedRestaurant));
+                restaurantDetails);
 
         ModelManager expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         Restaurant unmarkedRestaurant = new RestaurantBuilder(markedRestaurant).withIsMarked(false).build();
@@ -64,8 +73,15 @@ public class UnmarkCommandTest {
 
         UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_RESTAURANT);
 
+        String restaurantDetails = "\n" + "Name: " + notMarkedRestaurant.getName() + "\n"
+                + "Phone: " + notMarkedRestaurant.getPhone() + "\n"
+                + "Address: " + notMarkedRestaurant.getAddress() + "\n"
+                + "Tags: " + notMarkedRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         assertCommandFailure(unmarkCommand, model, String.format(UnmarkCommand.MESSAGE_RESTAURANT_NOT_MARKED,
-                Messages.format(notMarkedRestaurant)));
+                restaurantDetails));
     }
 
     @Test
@@ -79,8 +95,15 @@ public class UnmarkCommandTest {
 
         UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_RESTAURANT);
 
+        String restaurantDetails = "\n" + "Name: " + markedRestaurant.getName() + "\n"
+                + "Phone: " + markedRestaurant.getPhone() + "\n"
+                + "Address: " + markedRestaurant.getAddress() + "\n"
+                + "Tags: " + markedRestaurant.getTags().stream()
+                .map(t -> t.tagName)
+                .collect(Collectors.joining(", "));
+
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_RESTAURANT_SUCCESS,
-                Messages.format(markedRestaurant));
+                restaurantDetails);
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
@@ -93,6 +116,8 @@ public class UnmarkCommandTest {
         Restaurant expectedUnmarkedRestaurant = new RestaurantBuilder(expectedMarkedRestaurant)
                 .withIsMarked(false).build();
         expectedModel.setRestaurant(expectedMarkedRestaurant, expectedUnmarkedRestaurant);
+
+
 
         assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }

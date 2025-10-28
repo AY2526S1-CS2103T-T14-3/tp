@@ -78,6 +78,7 @@ public class EditCommand extends Command {
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        model.sortRestaurantListByName();
         return new CommandResult(String.format(MESSAGE_EDIT_RESTAURANT_SUCCESS, Messages.format(editedRestaurant)));
     }
 

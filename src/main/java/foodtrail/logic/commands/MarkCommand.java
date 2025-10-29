@@ -2,6 +2,7 @@ package foodtrail.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,23 +47,28 @@ public class MarkCommand extends Command {
 
         Restaurant restaurantToMark = lastShownList.get(targetIndex.getZeroBased());
 
-        String restaurantDetails = "\n" + "Name: " + restaurantToMark.getName() + "\n"
-                + "Phone: " + restaurantToMark.getPhone() + "\n"
-                + "Address: " + restaurantToMark.getAddress() + "\n"
-                + "Tags: " + restaurantToMark.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(restaurantToMark.getName());
+        detailsBuilder.append("\nPhone: ").append(restaurantToMark.getPhone());
+        detailsBuilder.append("\nAddress: ").append(restaurantToMark.getAddress());
+
+        if (!restaurantToMark.getTags().isEmpty()) {
+            String tagsString = restaurantToMark.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         if (restaurantToMark.getIsMarked().isVisited()) {
-            throw new CommandException(String.format(MESSAGE_RESTAURANT_ALREADY_MARKED, restaurantDetails));
+            throw new CommandException(String.format(MESSAGE_RESTAURANT_ALREADY_MARKED, detailsBuilder.toString()));
         }
 
         Restaurant markedRestaurant = restaurantToMark.withIsMarked(new IsMarked(true));
 
         model.setRestaurant(restaurantToMark, markedRestaurant);
 
-
-        return new CommandResult(String.format(MESSAGE_MARK_RESTAURANT_SUCCESS, restaurantDetails));
+        return new CommandResult(String.format(MESSAGE_MARK_RESTAURANT_SUCCESS, detailsBuilder.toString()));
     }
 
     @Override

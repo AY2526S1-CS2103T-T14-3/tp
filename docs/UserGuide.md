@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # FoodTrail User Guide
@@ -12,6 +12,30 @@ restaurants faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
+## Table of Contents
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Adding a restaurant: `add`](#adding-a-restaurant-add)
+    * [Listing all restaurants: `list`](#listing-all-restaurants-list)
+    * [Editing a restaurant: `edit`](#editing-a-restaurant-edit)
+    * [Locating restaurants: `find`](#locating-restaurants-find)
+    * [Deleting a restaurant: `delete`](#deleting-a-restaurant-delete)
+    * [Marking a restaurant: `mark`](#marking-a-restaurant-mark)
+    * [Unmarking a restaurant: `unmark`](#unmarking-a-restaurant-unmark)
+    * [Rating a restaurant: `rate`](#rating-a-restaurant-rate)
+    * [Removing a restaurant rating: `unrate`](#removing-a-restaurant-rating-unrate)
+    * [Sorting the restaurant directory: `sort`](#sorting-the-restaurant-directory-sort)
+    * [Tagging a restaurant: `tag`](#tagging-a-restaurant-tag)
+    * [Untagging a restaurant: `untag`](#untagging-a-restaurant-untag)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+    * [Exiting the program: `exit`](#exiting-the-program-exit)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -329,20 +353,20 @@ outside the acceptable range). Therefore, edit the data file only if you are con
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                           |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken` |
-| **Clear**  | `clear`                                                                                                                                                    |
-| **Delete** | `delete INDEX`<br> e.g. `delete 3`                                                                                                                         |
-| **Edit**   | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/KFC hp/68849301`                                                          |
-| **Find**   | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g. `find koi, subway`                                                                                                |
-| **List**   | `list`                                                                                                                                                     |
-| **Mark**   | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
-| **Unmark** | `unmark INDEX`<br> e.g. `unmark 3`                                                                                                                             |
-| **Rate**   | `rate INDEX RATING`<br> e.g. `rate 1 5`                                                                                                                    |
-| **Unrate** | `unrate INDEX`<br> e.g. `unrate 1`                                                                                                                         |
-| **Sort**   | `sort`                                                                                                                                                     |
-| **Tag**    | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `tag 3 t/fastfood t/halal`                                                                                        |
-| **Untag**  | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `untag 3 t/fastfood t/halal`                                                                                    |
-| **Help**   | `help`                                                                                                                                                     |
-| **Exit**   | `exit`                                                                                                                                                     |
+| Action                                       | Format, Examples                                                                                                                                           |
+|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-restaurant-add)          | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken` |
+| [**Clear**](#clearing-all-entries-clear)     | `clear`                                                                                                                                                    |
+| [**Delete**](#deleting-a-restaurant-delete)  | `delete INDEX`<br> e.g. `delete 3`                                                                                                                         |
+| [**Edit**](#editing-a-restaurant-edit)       | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/KFC hp/68849301`                                                          |
+| [**Find**](#locating-restaurants-find)       | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g. `find koi, subway`                                                                                                |
+| [**List**](#listing-all-restaurants-list)    | `list`                                                                                                                                                     |
+| [**Mark**](#marking-a-restaurant-mark)       | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
+| [**Unmark**](#unmarking-a-restaurant-unmark) | `unmark INDEX`<br> e.g. `unmark 3`                                                                                                                             |
+| [**Rate**](#rating-a-restaurant-rate)       | `rate INDEX RATING`<br> e.g. `rate 1 5`                                                                                                                    |
+| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`<br> e.g. `unrate 1`                                                                                                                         |
+| [**Sort**](#sorting-the-restaurant-directory-sort)     | `sort`                                                                                                                                                     |
+| [**Tag**](#tagging-a-restaurant-tag)         | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `tag 3 t/fastfood t/halal`                                                                                        |
+| [**Untag**](#untagging-a-restaurant-untag)   | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `untag 3 t/fastfood t/halal`                                                                                    |
+| [**Help**](#viewing-help-help)               | `help`                                                                                                                                                     |
+| [**Exit**](#exiting-the-program-exit)        | `exit`                                                                                                                                                     |

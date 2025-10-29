@@ -27,6 +27,7 @@ import foodtrail.logic.commands.HelpCommand;
 import foodtrail.logic.commands.ListCommand;
 import foodtrail.logic.commands.SortCommand;
 import foodtrail.logic.commands.TagCommand;
+import foodtrail.logic.commands.UnrateCommand;
 import foodtrail.logic.commands.UntagCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
 import foodtrail.model.restaurant.Restaurant;
@@ -138,10 +139,17 @@ public class RestaurantDirectoryParserTest {
     }
 
     @Test
+    public void parseCommand_unrate() throws Exception {
+        UnrateCommand command = (UnrateCommand) parser.parseCommand(
+                UnrateCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased());
+        assertEquals(new UnrateCommand(INDEX_FIRST_RESTAURANT), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("")
-        );
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand(""));
     }
 
     @Test

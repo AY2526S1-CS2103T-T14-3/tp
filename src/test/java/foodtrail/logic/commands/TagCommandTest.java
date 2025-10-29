@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,7 +54,8 @@ public class TagCommandTest {
         String restaurantDetails = "Name: " + editedRestaurant.getName() + "\n"
                 + "Phone: " + editedRestaurant.getPhone() + "\n"
                 + "Address: " + editedRestaurant.getAddress() + "\n"
-                + "Tags: " + editedRestaurant.getTags().stream().map(t -> t.tagName)
+                + "Tags: " + editedRestaurant.getTags().stream().sorted(Comparator.comparing(t -> t.tagName))
+                .map(t -> t.tagName)
                 .collect(Collectors.joining(", "));
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, tagsAddedString, restaurantDetails);
 
@@ -88,13 +90,16 @@ public class TagCommandTest {
         String restaurantDetails = "Name: " + editedRestaurant.getName() + "\n"
                 + "Phone: " + editedRestaurant.getPhone() + "\n"
                 + "Address: " + editedRestaurant.getAddress() + "\n"
-                + "Tags: " + editedRestaurant.getTags().stream().map(t -> t.tagName)
+                + "Tags: " + editedRestaurant.getTags().stream().sorted(Comparator.comparing(t -> t.tagName))
+                .map(t -> t.tagName)
                 .collect(Collectors.joining(", "));
         String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_SUCCESS, tagsAddedString, restaurantDetails);
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
-        expectedModel.setRestaurant(model.getFilteredRestaurantList().get(0), editedRestaurant);
+        showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
+        Restaurant restaurantToEditInExpectedModel = expectedModel.getFilteredRestaurantList().get(0);
+        expectedModel.setRestaurant(restaurantToEditInExpectedModel, editedRestaurant);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }

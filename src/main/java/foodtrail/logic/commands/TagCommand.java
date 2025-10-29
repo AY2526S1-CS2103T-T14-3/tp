@@ -1,9 +1,9 @@
 package foodtrail.logic.commands;
 
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the restaurant identified "
-            + "by the index number used in the displayed restaurant directory. "
+            + "by the index number used in the displayed restaurant directory.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -79,9 +79,9 @@ public class TagCommand extends Command {
                 restaurantToEdit.getAddress(), newTags, restaurantToEdit.getRating(), restaurantToEdit.getIsMarked());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
-        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsAddedString = this.tag.stream()
+                //.sorted(Comparator.comparing(tag -> tag.tagName))
                 .map(t -> "'" + t.tagName + "'")
                 .collect(Collectors.joining(", "));
 
@@ -89,6 +89,7 @@ public class TagCommand extends Command {
                 + "Phone: " + editedRestaurant.getPhone() + "\n"
                 + "Address: " + editedRestaurant.getAddress() + "\n"
                 + "Tags: " + editedRestaurant.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
                 .map(t -> t.tagName)
                 .collect(Collectors.joining(", "));
 

@@ -188,7 +188,7 @@ Examples:
 
 ### Marking a restaurant: `mark`
 
-Marks the specified restaurant from the restaurant directory as visited.
+To indicate that you've visited this restaurant, you can mark it as visited using this command.
 
 Format: `mark INDEX`
 
@@ -204,7 +204,7 @@ Examples:
 
 ### Unmarking a restaurant: `unmark`
 
-Marks the specified restaurant from the restaurant directory as not visited.
+If you make an error and wish to unmark the restaurant as unvisited, you can use this command.
 
 Format: `unmark INDEX`
 
@@ -317,7 +317,7 @@ Format: `exit`
 
 ### Saving the data
 
-FoodTrail data are saved in the hard disk automatically after any command that changes the data. There is no need to 
+FoodTrail data are saved in your hard disk automatically after any command that changes the data. There is no need to 
 save manually.
 
 <br>
@@ -339,6 +339,8 @@ outside the acceptable range). Therefore, edit the data file only if you are con
 
 ## FAQ
 
+**Q**: Where is my restaurant data stored?<br>
+**A**: FoodTrail stores your data locally on your computer. The exact location is usually within the application's data directory, ensuring your information is private and accessible offline. <br>
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FoodTrail home folder.
 

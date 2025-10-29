@@ -1,7 +1,6 @@
 package foodtrail.logic.commands;
 
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;

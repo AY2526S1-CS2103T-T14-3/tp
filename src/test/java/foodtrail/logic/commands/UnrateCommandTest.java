@@ -44,7 +44,6 @@ public class UnrateCommandTest {
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.setRestaurant(withRating, edited);
-        expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String expectedMsg = String.format(UnrateCommand.MESSAGE_UNRATE_SUCCESS, edited.getName());
         assertCommandSuccess(cmd, model, expectedMsg, expectedModel);
@@ -78,7 +77,6 @@ public class UnrateCommandTest {
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
         expectedModel.setRestaurant(withRating, edited);
-        expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String expectedMsg = String.format(UnrateCommand.MESSAGE_UNRATE_SUCCESS, edited.getName());
         assertCommandSuccess(cmd, model, expectedMsg, expectedModel);

@@ -50,11 +50,6 @@ public class HelpWindow extends UiPart<Stage> {
         Text listCommand = new Text("list\n\n");
         listCommand.getStyleClass().add("h3");
 
-        Text sortRest = new Text("Sort the restaurants\n");
-        sortRest.getStyleClass().add("h2");
-        Text sortCommand = new Text("sort\n\n");
-        sortCommand.getStyleClass().add("h3");
-
         Text markRest = new Text("Mark a restaurant as visited\n");
         markRest.getStyleClass().add("h2");
         Text markCommand = new Text("mark <index>\n");
@@ -92,27 +87,34 @@ public class HelpWindow extends UiPart<Stage> {
         Text exampleRate = new Text("Example: rate 1 5\n\n");
         exampleRate.getStyleClass().add("h3");
 
+        Text unrateRest = new Text("Remove a restaurant's rating\n");
+        unrateRest.getStyleClass().add("h2");
+        Text unrateCommand = new Text("unrate <index>\n");
+        unrateCommand.getStyleClass().add("h3");
+        Text exampleUnrate = new Text("Example: unrate 1\n\n");
+        exampleUnrate.getStyleClass().add("h3");
+
         Text findRest = new Text("Find a restaurant\n");
         findRest.getStyleClass().add("h2");
         Text findCommand = new Text("find <keyword>\n");
         findCommand.getStyleClass().add("h3");
         Text exampleFind = new Text("Example: find mcdonald\n");
         exampleFind.getStyleClass().add("h3");
-        Text exampleFind2 = new Text("Example: find halal, fastfood\n\n");
+        Text exampleFind2 = new Text("Example: find halal, fast food\n\n");
         exampleFind2.getStyleClass().add("h3");
 
         Text tagRest = new Text("Tag a restaurant\n");
         tagRest.getStyleClass().add("h2");
         Text tagCommand = new Text("tag <index> t/TAG\n");
         tagCommand.getStyleClass().add("h3");
-        Text exampleTag = new Text("Example: tag 3 t/fantastic t/halal\n\n");
+        Text exampleTag = new Text("Example: tag 3 t/fast food t/halal\n\n");
         exampleTag.getStyleClass().add("h3");
 
         Text untagRest = new Text("Untag a restaurant\n");
         untagRest.getStyleClass().add("h2");
         Text untagCommand = new Text("untag <index> t/TAG\n");
         untagCommand.getStyleClass().add("h3");
-        Text exampleUntag = new Text("Example: untag 3 t/fantastic t/halal\n\n");
+        Text exampleUntag = new Text("Example: untag 3 t/fast food t/halal\n\n");
         exampleUntag.getStyleClass().add("h3");
 
         Text clearRest = new Text("Clear all restaurants\n");
@@ -129,13 +131,12 @@ public class HelpWindow extends UiPart<Stage> {
         userGuide.getStyleClass().add("h3");
 
         textFlow.getChildren().setAll(
-                commandList, addRest, addCommand, exampleAdd, exampleAdd2, listRest, listCommand, sortRest,
-                sortCommand, markRest, markCommand, exampleMark, unmarkRest, unmarkCommand, exampleUnmark,
+                commandList, addRest, addCommand, exampleAdd, exampleAdd2, listRest, listCommand,
+                markRest, markCommand, exampleMark, unmarkRest, unmarkCommand, exampleUnmark,
                 deleteRest, deleteCommand, exampleDelete, editRest, editCommand, exampleEdit,
-                exampleEdit2, rateRest, rateCommand, exampleRate, findRest, findCommand,
-                exampleFind, exampleFind2, tagRest, tagCommand, exampleTag, untagRest, untagCommand,
-                exampleUntag, clearRest, clearCommand, exitRest, exitCommand, userGuide);
-
+                exampleEdit2, rateRest, rateCommand, exampleRate, unrateRest, unrateCommand, exampleUnrate,
+                findRest, findCommand, exampleFind, exampleFind2, tagRest, tagCommand, exampleTag,
+                untagRest, untagCommand, exampleUntag, clearRest, clearCommand, exitRest, exitCommand, userGuide);
     }
 
     /**

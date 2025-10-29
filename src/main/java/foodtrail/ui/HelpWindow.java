@@ -12,16 +12,14 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-
 /**
  * Controller for a help page
  */
 
-
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t14-3.github.io/tp/UserGuide.html";
-    //May not be needed later
+    // May not be needed later
     public static final String USER_COMMANDS = """
             Commands List:
             Add a restaurant
@@ -40,6 +38,9 @@ public class HelpWindow extends UiPart<Stage> {
             Rate a restaurant from 0 to 5 stars
             rate <index> <rating>
             Example: rate 1 5\n
+            Remove a restaurant rating
+            unrate <index>
+            Example: unrate 1\n
             Find a restaurant
             find <keyword>
             Example: find mcdonald
@@ -56,8 +57,8 @@ public class HelpWindow extends UiPart<Stage> {
             exit
             """;
 
-    public static final String HELP_MESSAGE =
-            USER_COMMANDS + "\nFor more information, refer to the user guide:\n" + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = USER_COMMANDS + "\nFor more information, refer to the user guide:\n"
+            + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -65,13 +66,12 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button copyButton;
 
-    //Comment later
+    // Comment later
     @FXML
     private Label helpMessage;
 
     @FXML
     private TextFlow textFlow;
-
 
     /**
      * Creates a new HelpWindow.
@@ -183,8 +183,7 @@ public class HelpWindow extends UiPart<Stage> {
                 deleteRest, deleteCommand, exampleDelete, editRest, editCommand, exampleEdit,
                 exampleEdit2, rateRest, rateCommand, exampleRate, findRest, findCommand,
                 exampleFind, exampleFind2, tagRest, tagCommand, exampleTag, untagRest, untagCommand,
-                exampleUntag, clearRest, clearCommand, exitRest, exitCommand, userGuide
-        );
+                exampleUntag, clearRest, clearCommand, exitRest, exitCommand, userGuide);
 
     }
 
@@ -197,21 +196,24 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
+     *
      * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
+     *                               <ul>
+     *                               <li>
+     *                               if this method is called on a thread other than
+     *                               the JavaFX Application Thread.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called during animation or
+     *                               layout processing.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called on the primary stage.
+     *                               </li>
+     *                               <li>
+     *                               if {@code dialogStage} is already showing.
+     *                               </li>
+     *                               </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");
@@ -220,14 +222,14 @@ public class HelpWindow extends UiPart<Stage> {
 
         // Open the USERGUIDE_URL in a browser tab
         /*
-        try {
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
-            }
-        } catch (Exception e) {
-            logger.warning("Failed to open user guide in browser: " + e.getMessage());
-        }
-        */
+         * try {
+         * if (Desktop.isDesktopSupported()) {
+         * Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
+         * }
+         * } catch (Exception e) {
+         * logger.warning("Failed to open user guide in browser: " + e.getMessage());
+         * }
+         */
 
     }
 

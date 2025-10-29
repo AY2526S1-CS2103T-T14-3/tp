@@ -100,7 +100,6 @@ public class TagCommandTest {
         showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
         Restaurant restaurantToEditInExpectedModel = expectedModel.getFilteredRestaurantList().get(0);
         expectedModel.setRestaurant(restaurantToEditInExpectedModel, editedRestaurant);
-        expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
         assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }

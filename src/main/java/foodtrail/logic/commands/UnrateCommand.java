@@ -52,7 +52,6 @@ public class UnrateCommand extends Command {
         Restaurant edited = restaurantToEdit.withRating(null);
 
         model.setRestaurant(restaurantToEdit, edited);
-        model.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
         return new CommandResult(String.format(MESSAGE_UNRATE_SUCCESS, edited.getName()));
     }
 

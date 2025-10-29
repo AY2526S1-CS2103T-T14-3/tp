@@ -1,7 +1,6 @@
 package foodtrail.logic.commands;
 
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
@@ -78,7 +77,6 @@ public class UntagCommand extends Command {
                 restaurantToEdit.getAddress(), newTags, restaurantToEdit.getRating(), restaurantToEdit.getIsMarked());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
-        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsRemovedString = tags.stream()
                 .map(t -> "'" + t.tagName + "'")

@@ -40,7 +40,6 @@ public class RateCommandTest {
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.setRestaurant(target, edited);
-        expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String expectedMsg = String.format(RateCommand.MESSAGE_RATE_SUCCESS, edited.getName(), newRatingValue);
         assertCommandSuccess(cmd, model, expectedMsg, expectedModel);
@@ -70,7 +69,6 @@ public class RateCommandTest {
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
         expectedModel.setRestaurant(target, edited);
-        expectedModel.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String expectedMsg = String.format(RateCommand.MESSAGE_RATE_SUCCESS, edited.getName(), newRatingValue);
         assertCommandSuccess(cmd, model, expectedMsg, expectedModel);

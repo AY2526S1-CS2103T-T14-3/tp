@@ -24,6 +24,7 @@ public class ListCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalRestaurantDirectory(), new UserPrefs());
         expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
+        expectedModel.sortRestaurantListByName();
     }
 
     @Test

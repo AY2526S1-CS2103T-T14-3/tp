@@ -209,6 +209,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortRestaurantListByName() {
+            // This method is called by AddCommand, but not needed for this test.
+        }
+
+        @Override
         public ReadOnlyRestaurantDirectory getRestaurantDirectory() {
             return new RestaurantDirectory();
         }

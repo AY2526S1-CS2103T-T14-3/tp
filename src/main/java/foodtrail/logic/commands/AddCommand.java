@@ -56,6 +56,7 @@ public class AddCommand extends Command {
         }
 
         model.addRestaurant(toAdd);
+        model.sortRestaurantListByName();
         String restaurantDetails = "\n" + "Name: " + toAdd.getName() + "\n"
                 + "Phone: " + toAdd.getPhone() + "\n"
                 + "Address: " + toAdd.getAddress() + "\n"

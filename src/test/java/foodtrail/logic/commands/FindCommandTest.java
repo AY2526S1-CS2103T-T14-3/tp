@@ -63,6 +63,7 @@ public class FindCommandTest {
                 new RestaurantContainsKeywordsPredicate(Collections.emptyList());
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRestaurantList(predicate);
+        expectedModel.sortRestaurantListByName();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRestaurantList());
     }
@@ -73,8 +74,9 @@ public class FindCommandTest {
         RestaurantContainsKeywordsPredicate predicate = preparePredicate("McDonald's, KOI, Hawker");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRestaurantList(predicate);
+        expectedModel.sortRestaurantListByName();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MCDONALDS, KOI, HAWKERCHAN), model.getFilteredRestaurantList());
+        assertEquals(Arrays.asList(HAWKERCHAN, KOI, MCDONALDS), model.getFilteredRestaurantList());
     }
 
     @Test

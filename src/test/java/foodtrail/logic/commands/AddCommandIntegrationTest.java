@@ -40,6 +40,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.addRestaurant(validRestaurant);
+        expectedModel.sortRestaurantListByName();
 
         assertCommandSuccess(new AddCommand(validRestaurant), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, restaurantDetails),

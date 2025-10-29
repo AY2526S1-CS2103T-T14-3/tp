@@ -79,6 +79,7 @@ public class EditCommand extends Command {
         }
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
+        model.sortRestaurantListByName();
 
         String restaurantDetails = "\n" + "Name: " + editedRestaurant.getName() + "\n"
                 + "Phone: " + editedRestaurant.getPhone() + "\n"

@@ -19,7 +19,6 @@ import foodtrail.logic.commands.HelpCommand;
 import foodtrail.logic.commands.ListCommand;
 import foodtrail.logic.commands.MarkCommand;
 import foodtrail.logic.commands.RateCommand;
-import foodtrail.logic.commands.SortCommand;
 import foodtrail.logic.commands.TagCommand;
 import foodtrail.logic.commands.UnmarkCommand;
 import foodtrail.logic.commands.UnrateCommand;
@@ -102,9 +101,6 @@ public class RestaurantDirectoryParser {
 
         case UnrateCommand.COMMAND_WORD:
             return new UnrateCommandParser().parse(arguments);
-
-        case SortCommand.COMMAND_WORD:
-            return new SortCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -3,7 +3,6 @@ package foodtrail.logic.commands;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
-import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -19,8 +18,10 @@ import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Rating;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
@@ -78,7 +79,6 @@ public class EditCommand extends Command {
         }
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
-        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String restaurantDetails = "\n" + "Name: " + editedRestaurant.getName() + "\n"
                 + "Phone: " + editedRestaurant.getPhone() + "\n"
@@ -102,8 +102,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editRestaurantDescriptor.getPhone().orElse(restaurantToEdit.getPhone());
         Address updatedAddress = editRestaurantDescriptor.getAddress().orElse(restaurantToEdit.getAddress());
         Set<Tag> currentTags = restaurantToEdit.getTags();
+        Optional<Rating> currentRating = restaurantToEdit.getRating();
+        IsMarked currentIsMarked = restaurantToEdit.getIsMarked();
 
-        return new Restaurant(updatedName, updatedPhone, updatedAddress, currentTags);
+        return new Restaurant(updatedName, updatedPhone, updatedAddress, currentTags, currentRating, currentIsMarked);
     }
 
     @Override

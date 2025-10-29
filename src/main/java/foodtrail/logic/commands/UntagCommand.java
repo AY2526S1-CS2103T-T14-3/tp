@@ -78,7 +78,6 @@ public class UntagCommand extends Command {
                 restaurantToEdit.getAddress(), newTags, restaurantToEdit.getRating(), restaurantToEdit.getIsMarked());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
-        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsRemovedString = tags.stream()
                 .map(t -> "'" + t.tagName + "'")

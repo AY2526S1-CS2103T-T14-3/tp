@@ -80,7 +80,6 @@ public class TagCommand extends Command {
                 restaurantToEdit.getAddress(), newTags, restaurantToEdit.getRating(), restaurantToEdit.getIsMarked());
 
         model.setRestaurant(restaurantToEdit, editedRestaurant);
-        model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsAddedString = this.tag.stream()
                 //.sorted(Comparator.comparing(tag -> tag.tagName))

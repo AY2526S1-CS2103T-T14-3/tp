@@ -49,7 +49,6 @@ public class RateCommand extends Command {
         Restaurant edited = restaurantToEdit.withRating(new Rating(ratingValue));
 
         model.setRestaurant(restaurantToEdit, edited);
-        model.updateFilteredRestaurantList(Model.PREDICATE_SHOW_ALL_RESTAURANTS);
         return new CommandResult(String.format(MESSAGE_RATE_SUCCESS, edited.getName(), ratingValue));
     }
 

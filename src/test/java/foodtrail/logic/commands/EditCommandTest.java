@@ -140,7 +140,8 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
-        expectedModel.setRestaurant(restaurantInFilteredList, editedRestaurant);
+        showRestaurantAtIndex(expectedModel, INDEX_FIRST_RESTAURANT);
+        expectedModel.setRestaurant(model.getFilteredRestaurantList().get(0), editedRestaurant);
         expectedModel.sortRestaurantListByName();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

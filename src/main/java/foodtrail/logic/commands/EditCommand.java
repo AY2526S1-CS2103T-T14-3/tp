@@ -19,8 +19,10 @@ import foodtrail.logic.Messages;
 import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.restaurant.Address;
+import foodtrail.model.restaurant.IsMarked;
 import foodtrail.model.restaurant.Name;
 import foodtrail.model.restaurant.Phone;
+import foodtrail.model.restaurant.Rating;
 import foodtrail.model.restaurant.Restaurant;
 import foodtrail.model.restaurant.Tag;
 
@@ -102,8 +104,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editRestaurantDescriptor.getPhone().orElse(restaurantToEdit.getPhone());
         Address updatedAddress = editRestaurantDescriptor.getAddress().orElse(restaurantToEdit.getAddress());
         Set<Tag> currentTags = restaurantToEdit.getTags();
+        Optional<Rating> currentRating = restaurantToEdit.getRating();
+        IsMarked currentIsMarked = restaurantToEdit.getIsMarked();
 
-        return new Restaurant(updatedName, updatedPhone, updatedAddress, currentTags);
+        return new Restaurant(updatedName, updatedPhone, updatedAddress, currentTags, currentRating, currentIsMarked);
     }
 
     @Override

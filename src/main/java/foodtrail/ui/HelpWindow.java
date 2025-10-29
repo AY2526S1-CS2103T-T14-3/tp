@@ -4,8 +4,6 @@ import java.util.logging.Logger;
 
 import foodtrail.commons.core.LogsCenter;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.text.Text;
@@ -19,56 +17,9 @@ import javafx.stage.Stage;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s1-cs2103t-t14-3.github.io/tp/UserGuide.html";
-    // May not be needed later
-    public static final String USER_COMMANDS = """
-            Commands List:
-            Add a restaurant
-            add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]
-            Example: add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572
-            Example: add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken\n
-            List all restaurants
-            list\n
-            Delete a restaurant
-            delete <index>
-            Example: delete 3\n
-            Edit a restaurant
-            edit <index> n/NAME a/ADDRESS hp/PHONE_NUMBER
-            Example: edit 1 n/Subway hp/66591189
-            Example: edit 2 a/701A Yishun Ave 5, #01-02, Singapore 761701\n
-            Rate a restaurant from 0 to 5 stars
-            rate <index> <rating>
-            Example: rate 1 5\n
-            Remove a restaurant rating
-            unrate <index>
-            Example: unrate 1\n
-            Find a restaurant
-            find <keyword>
-            Example: find mcdonald
-            Example: find halal, fastfood\n
-            Tag a restaurant
-            tag <index> t/TAG
-            Example: tag 3 t/fantastic t/halal\n
-            Untag a restaurant
-            untag <index> t/TAG
-            Example: untag 3 t/fantastic t/halal\n
-            Clear all restaurants
-            clear\n
-            Exit the program
-            exit
-            """;
-
-    public static final String HELP_MESSAGE = USER_COMMANDS + "\nFor more information, refer to the user guide:\n"
-            + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-
-    @FXML
-    private Button copyButton;
-
-    // Comment later
-    @FXML
-    private Label helpMessage;
 
     @FXML
     private TextFlow textFlow;
@@ -174,7 +125,7 @@ public class HelpWindow extends UiPart<Stage> {
         Text exitCommand = new Text("exit\n\n");
         exitCommand.getStyleClass().add("h3");
 
-        Text userGuide = new Text("For more information, refer to the user guide.");
+        Text userGuide = new Text("For more information, refer to the user guide. " + USERGUIDE_URL + "\n");
         userGuide.getStyleClass().add("h3");
 
         textFlow.getChildren().setAll(

@@ -1,5 +1,7 @@
 package foodtrail.ui;
 
+import java.util.Comparator;
+
 import foodtrail.model.restaurant.Restaurant;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -55,6 +57,7 @@ public class RestaurantCard extends UiPart<Region> {
         phone.setText(restaurant.getPhone().value);
         address.setText(restaurant.getAddress().value);
         restaurant.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         restaurant.getRating().ifPresentOrElse(r -> {

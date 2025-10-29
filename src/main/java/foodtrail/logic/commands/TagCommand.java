@@ -4,6 +4,7 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -82,6 +83,7 @@ public class TagCommand extends Command {
         model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         String tagsAddedString = this.tag.stream()
+                //.sorted(Comparator.comparing(tag -> tag.tagName))
                 .map(t -> "'" + t.tagName + "'")
                 .collect(Collectors.joining(", "));
 
@@ -89,6 +91,7 @@ public class TagCommand extends Command {
                 + "Phone: " + editedRestaurant.getPhone() + "\n"
                 + "Address: " + editedRestaurant.getAddress() + "\n"
                 + "Tags: " + editedRestaurant.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
                 .map(t -> t.tagName)
                 .collect(Collectors.joining(", "));
 

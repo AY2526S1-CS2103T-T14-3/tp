@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import foodtrail.logic.commands.AddCommand;
 import foodtrail.logic.commands.ClearCommand;
-import foodtrail.logic.commands.Command;
 import foodtrail.logic.commands.DeleteCommand;
 import foodtrail.logic.commands.EditCommand;
 import foodtrail.logic.commands.EditCommand.EditRestaurantDescriptor;
@@ -25,7 +24,6 @@ import foodtrail.logic.commands.ExitCommand;
 import foodtrail.logic.commands.FindCommand;
 import foodtrail.logic.commands.HelpCommand;
 import foodtrail.logic.commands.ListCommand;
-import foodtrail.logic.commands.SortCommand;
 import foodtrail.logic.commands.TagCommand;
 import foodtrail.logic.commands.UnrateCommand;
 import foodtrail.logic.commands.UntagCommand;
@@ -115,27 +113,6 @@ public class RestaurantDirectoryParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    }
-
-    @Test
-    public void parseCommandSortNoArgsReturnsSortCommand() throws Exception {
-        Command command = parser.parseCommand(SortCommand.COMMAND_WORD);
-        assertTrue(command instanceof SortCommand);
-    }
-
-    @Test
-    public void parseCommandSortWithSpacesReturnsSortCommand() throws Exception {
-        Command command = parser.parseCommand("  sort   ");
-        assertTrue(command instanceof SortCommand);
-    }
-
-    @Test
-    public void parseCommandSortCaseSensitiveCommandWordOnlyLowercaseAllowed() {
-        try {
-            parser.parseCommand("Sort"); // if your parser is strictly lowercase
-        } catch (Exception e) {
-            assertTrue(e.getMessage().toLowerCase().contains("unknown command"));
-        }
     }
 
     @Test

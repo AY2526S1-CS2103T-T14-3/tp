@@ -22,8 +22,8 @@ public class UnrateCommand extends Command {
             + "Parameters: INDEX (positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
 
-    public static final String MESSAGE_UNRATE_SUCCESS = "Removed rating from %1$s";
-    public static final String MESSAGE_RESTAURANT_NOT_RATED = "This restaurant has no rating to remove: %1$s";
+    public static final String MESSAGE_UNRATE_SUCCESS = "Removed rating from %1$s.";
+    public static final String MESSAGE_RESTAURANT_NOT_RATED = "This restaurant has no rating to remove: %1$s.";
 
     private final Index index;
 

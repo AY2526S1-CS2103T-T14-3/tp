@@ -15,7 +15,7 @@ Tired of forgetting that amazing little restaurant you found last month? **FoodT
 * [Installation Guide](#installation-guide)
 * [Parameters](#parameters)
 * [Features](#features)
-    * [Viewing help: `help`](#viewing-help-help)
+    * [See all commands: `help`](#see-all-commands-help)
     * [Adding a restaurant: `add`](#adding-a-restaurant-add)
     * [Listing all restaurants: `list`](#listing-all-restaurants-list)
     * [Editing a restaurant: `edit`](#editing-a-restaurant-edit)
@@ -446,7 +446,7 @@ To avoid data loss, you should make a backup before editing.
 
 | Action                                             | Format                                                        | Examples                                                                                         |
 |----------------------------------------------------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [**Help**](#viewing-help-help)                     | `help`                                                        | `help`                                                                                           |
+| [**Help**](#see-all-commands-help)                     | `help`                                                        | `help`                                                                                           |
 | [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`              | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
 | [**List**](#listing-all-restaurants-list)          | `list`                                                        | `list`                                                                                           |
 | [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/KFC hp/68849301`                                                                       |

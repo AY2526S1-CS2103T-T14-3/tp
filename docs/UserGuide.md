@@ -6,9 +6,7 @@ pageNav: 3
 
 # FoodTrail User Guide
 
-FoodTrail is a **desktop app for managing restaurants, optimized for use via a Command Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you can type fast, FoodTrail can help you manage your favourite 
-restaurants faster than traditional GUI apps.
+Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've visited or want to try. If you're comfortable typing, you'll find FoodTrail a superfast way to **organize your culinary adventures**.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -47,24 +45,24 @@ restaurants faster than traditional GUI apps.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your FoodTrail app.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar foodtrail.jar` 
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar foodtrail.jar`
    command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-    <img src="images/Ui.png" width=65% height=65% alt="Ui">
+   <img src="images/Ui.png" width=65% height=65% alt="Ui">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list`: Lists all restaurants.
+    * `list`: Lists all restaurants.
 
-   * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`: Adds a restaurant 
-     named `KFC` to the restaurant directory.
+    * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`: Adds a restaurant
+      named `KFC` to the restaurant directory.
 
-   * `delete 3`: Deletes the 3rd restaurant shown in the current list.
+    * `delete 3`: Deletes the 3rd restaurant shown in the current list.
 
-   * `clear`: Deletes all restaurants.
+    * `clear`: Deletes all restaurants.
 
-   * `exit`: Exits the app.
+    * `exit`: Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -98,7 +96,7 @@ restaurants faster than traditional GUI apps.
 
 ### See all commands: `help`
 
-If you are unsure of what commands there are, you can view all the commands by typing `help`. 
+If you are unsure of what commands there are, you can view all the commands by typing `help`.
 
 <img src="images/helpMessage.png" width=45% height=45% alt="helpMessage">
 
@@ -125,7 +123,7 @@ Examples:
 
 ### Listing all restaurants: `list`
 
-You can get a list of all the restaurants currently in the restaurant directory using `list`.
+You can get a list of all the restaurants in the restaurant directory using `list`.
 
 Format: `list`
 
@@ -133,11 +131,22 @@ Format: `list`
 
 ### Editing a restaurant: `edit`
 
-Edits an existing restaurant in the restaurant directory.
+Maybe a restaurant moved or changed its phone number? Keep their details updated using `edit`.
+
+<box type="tip" seamless>
+
+**Tip:** You can edit all details at once, or just a single field — name `n/`, phone `hp/`, or address `a/`.
+</box>
+
+<box type="info" seamless>
+
+**Notes:**
+* Only the name, phone number, and address can be edited.
+</box>
 
 Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
 
-* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed 
+* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed
   restaurant directory. The index **must be a positive integer** (1, 2, 3, …​).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -150,14 +159,17 @@ Examples:
 
 ### Locating restaurants: `find`
 
-Finds restaurants in the restaurant directory via their name, address, phone number, or tag.
+You can search for restaurants in the directory by their name, address, phone number, or tag.
+
+<box type="tip" seamless>
+
+**Tip:** Want broader results? Add more keywords, separated by commas — any restaurant matching one will appear in the list.
+</box>
 
 Format: `find KEYWORD[, MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `kfc` will match `KFC`.
 * The order of the keywords matters. e.g. `chan hawker` will not match `Hawker Chan`.
-* Multiple keywords can be specified by separating them with a `,`, and restaurants that contain any of these 
-  keywords will be listed.
 
 Examples:
 * `find koi` returns `KOI Thé` and `KOI Thé Specialty`.
@@ -171,7 +183,7 @@ Examples:
 
 ### Deleting a restaurant: `delete`
 
-Deletes the specified restaurant from the restaurant directory.
+You can delete a restaurant from the directory.
 
 Format: `delete INDEX`
 
@@ -187,7 +199,7 @@ Examples:
 
 ### Marking a restaurant: `mark`
 
-To indicate that you've visited this restaurant, you can mark it as visited using this command.
+To indicate that you've visited this restaurant, you can mark it as visited.
 
 Format: `mark INDEX`
 
@@ -203,7 +215,7 @@ Examples:
 
 ### Unmarking a restaurant: `unmark`
 
-If you make an error and wish to unmark the restaurant as unvisited, you can use this command.
+If you accidentally marked a restaurant as visited, you can unmark it using `unmark`.
 
 Format: `unmark INDEX`
 
@@ -219,7 +231,7 @@ Examples:
 
 ### Rating a restaurant: `rate`
 
-Rates the specified restaurant from the restaurant directory.
+You can give a rating to a restaurant in the directory.
 
 Format: `rate INDEX RATING`
 
@@ -236,7 +248,7 @@ Examples:
 
 ### Removing a restaurant rating: `unrate`
 
-Removes the rating from the specified restaurant in the restaurant directory.
+You can remove a rating for a restaurant.
 
 Format: `unrate INDEX`
 
@@ -253,7 +265,12 @@ Examples:
 
 ### Tagging a restaurant: `tag`
 
-Adds the specified tag to the specified restaurant from the restaurant directory.
+You can add a tag to a restaurant in the directory. 
+
+<box type="tip" seamless>
+
+**Tip:** Tags let you include extra details or keywords, such as “halal,” “cozy,” or “open late,” to help describe the restaurant better.
+</box>
 
 Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 
@@ -271,7 +288,7 @@ Examples:
 
 ### Untagging a restaurant: `untag`
 
-Removes the specified tag from the specified restaurant from the restaurant directory.
+You can remove tags from the restaurants in the directory.
 
 Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 
@@ -285,7 +302,7 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the restaurant directory.
+You can remove all the restaurants from the current directory. Use this command if you want to start with a fresh restaurant directory.
 
 Format: `clear`
 
@@ -293,7 +310,7 @@ Format: `clear`
 
 ### Exiting the program: `exit`
 
-Exits the program.
+You can exit the application.
 
 Format: `exit`
 
@@ -301,21 +318,21 @@ Format: `exit`
 
 ### Saving the data
 
-FoodTrail data are saved in your hard disk automatically after any command that changes the data. There is no need to 
+FoodTrail data are saved in the hard disk automatically after any command that changes the data. There is no need to 
 save manually.
 
 <br>
 
 ### Editing the data file
 
-FoodTrail data are saved automatically as a JSON file `[JAR file location]/data/foodtrail.json`. Advanced 
+FoodTrail data are saved automatically as a JSON file `[JAR file location]/data/foodtrail.json`. Advanced
 users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, FoodTrail will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the FoodTrail app to behave in unexpected ways (e.g. if a value entered is 
+Furthermore, certain edits can cause the FoodTrail app to behave in unexpected ways (e.g. if a value entered is
 outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 

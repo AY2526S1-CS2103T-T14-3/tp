@@ -63,7 +63,7 @@ public class AddressTest {
         assertFalse(address.equals(null));
 
         // different types -> returns false
-        assertFalse(address.equals(5.0f));
+        assertFalse(address.equals(new Object()));
 
         // different values -> returns false
         assertFalse(address.equals(new Address("180 Kitchener Rd, Singapore 208539")));

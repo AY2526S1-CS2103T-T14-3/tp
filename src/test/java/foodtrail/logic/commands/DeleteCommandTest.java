@@ -108,7 +108,7 @@ public class DeleteCommandTest {
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(deleteFirstCommand.equals(new Object()));
 
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));

@@ -65,7 +65,7 @@ public class NameTest {
         assertFalse(name.equals(null));
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertFalse(name.equals(new Object()));
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));

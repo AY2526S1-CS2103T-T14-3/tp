@@ -52,7 +52,7 @@ public class IndexTest {
         assertFalse(fifthRestaurantIndex.equals(null));
 
         // different types -> returns false
-        assertFalse(fifthRestaurantIndex.equals(5.0f));
+        assertFalse(fifthRestaurantIndex.equals(new Object()));
 
         // different index -> returns false
         assertFalse(fifthRestaurantIndex.equals(Index.fromOneBased(1)));

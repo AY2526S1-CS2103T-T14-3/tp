@@ -112,7 +112,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(null));
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertFalse(modelManager.equals(new Object()));
 
         // different restaurantDirectory -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentRestaurantDirectory, userPrefs)));

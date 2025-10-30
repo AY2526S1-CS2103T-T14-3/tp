@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Names should not be empty, and can be at most 60 characters";
     public static final String VALIDATION_REGEX = ".*\\S.*";
     public final String fullName;
 
@@ -28,6 +28,9 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
+        if (test.length() > 60) {
+            return false;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 

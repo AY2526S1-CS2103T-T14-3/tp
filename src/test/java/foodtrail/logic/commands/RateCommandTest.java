@@ -34,7 +34,7 @@ public class RateCommandTest {
     @Test
     public void executeUnfilteredListValidIndexSuccess() {
         Restaurant target = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
-        int newRatingValue = 4;
+        int newRatingValue = 2;
         Restaurant edited = target.withRating(new Rating(newRatingValue));
 
         RateCommand cmd = new RateCommand(INDEX_FIRST_RESTAURANT, newRatingValue);
@@ -55,6 +55,13 @@ public class RateCommandTest {
         Index outOfBounds = Index.fromOneBased(model.getFilteredRestaurantList().size() + 1);
         RateCommand cmd = new RateCommand(outOfBounds, 3);
         assertCommandFailure(cmd, model, MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void executeUnfilteredListSameRatingThrowsCommandException() {
+        int identicalRatingValue = 4;
+        RateCommand cmd = new RateCommand(INDEX_FIRST_RESTAURANT, identicalRatingValue);
+        assertCommandFailure(cmd, model, String.format(RateCommand.MESSAGE_DUPLICATE_RATING, identicalRatingValue));
     }
 
     @Test

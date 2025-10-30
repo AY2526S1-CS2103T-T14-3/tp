@@ -2,6 +2,7 @@ package foodtrail.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,14 +45,20 @@ public class DeleteCommand extends Command {
         Restaurant restaurantToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRestaurant(restaurantToDelete);
 
-        String restaurantDetails = "\n" + "Name: " + restaurantToDelete.getName() + "\n"
-                + "Phone: " + restaurantToDelete.getPhone() + "\n"
-                + "Address: " + restaurantToDelete.getAddress() + "\n"
-                + "Tags: " + restaurantToDelete.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(restaurantToDelete.getName());
+        detailsBuilder.append("\nPhone: ".toString()).append(restaurantToDelete.getPhone());
+        detailsBuilder.append("\nAddress: ").append(restaurantToDelete.getAddress());
 
-        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, restaurantDetails));
+        if (!restaurantToDelete.getTags().isEmpty()) {
+            String tagsString = restaurantToDelete.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_RESTAURANT_SUCCESS, detailsBuilder.toString()));
     }
 
     @Override

@@ -29,11 +29,13 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
+        assertFalse(Name.isValidName("abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS Ta")); // 61 characters
 
         // valid name
         assertTrue(Name.isValidName("KFC")); // only alphabets
         assertTrue(Name.isValidName("McDonald's")); // with apostrophe
         assertTrue(Name.isValidName("KOI Thé")); // accent characters
+        assertTrue(Name.isValidName("abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS T")); // 60 characters
     }
 
     @Test
@@ -65,7 +67,7 @@ public class NameTest {
         assertFalse(name.equals(null));
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertFalse(name.equals(new Object()));
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));

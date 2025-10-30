@@ -5,6 +5,7 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -81,14 +82,20 @@ public class EditCommand extends Command {
         model.setRestaurant(restaurantToEdit, editedRestaurant);
         model.sortRestaurantListByName();
 
-        String restaurantDetails = "\n" + "Name: " + editedRestaurant.getName() + "\n"
-                + "Phone: " + editedRestaurant.getPhone() + "\n"
-                + "Address: " + editedRestaurant.getAddress() + "\n"
-                + "Tags: " + editedRestaurant.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(editedRestaurant.getName());
+        detailsBuilder.append("\nPhone: ").append(editedRestaurant.getPhone());
+        detailsBuilder.append("\nAddress: ").append(editedRestaurant.getAddress());
 
-        return new CommandResult(String.format(MESSAGE_EDIT_RESTAURANT_SUCCESS, restaurantDetails));
+        if (!editedRestaurant.getTags().isEmpty()) {
+            String tagsString = editedRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
+
+        return new CommandResult(String.format(MESSAGE_EDIT_RESTAURANT_SUCCESS, detailsBuilder.toString()));
     }
 
     /**

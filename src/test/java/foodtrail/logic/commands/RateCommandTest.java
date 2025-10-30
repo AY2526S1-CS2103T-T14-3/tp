@@ -9,6 +9,7 @@ import static foodtrail.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
 import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
@@ -93,7 +94,7 @@ public class RateCommandTest {
         assertTrue(a.equals(a)); // same object
         assertTrue(a.equals(b)); // same values
         assertFalse(a.equals(null)); // null
-        assertFalse(a.equals(new ClearCommand())); // different type
+        assertNotEquals(a, new ClearCommand()); // different type
         assertFalse(a.equals(c)); // different rating
         assertFalse(a.equals(d)); // different index
     }

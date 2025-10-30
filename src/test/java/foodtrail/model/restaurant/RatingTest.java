@@ -39,7 +39,7 @@ public class RatingTest {
         assertFalse(rating.equals(null));
 
         // different types -> returns false
-        assertFalse(rating.equals(5.0f));
+        assertFalse(rating.equals(new Object()));
 
         // different values -> returns false
         assertFalse(rating.equals(new Rating(4)));

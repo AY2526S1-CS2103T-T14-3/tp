@@ -60,7 +60,7 @@ public class AppParametersTest {
         assertFalse(appParameters.equals(null));
 
         // different types -> returns false
-        assertFalse(appParameters.equals(5.0f));
+        assertFalse(appParameters.equals(new Object()));
 
         // different config path -> returns false
         AppParameters otherAppParameters = new AppParameters();

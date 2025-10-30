@@ -59,10 +59,10 @@
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
     -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -135,17 +135,17 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-background-radius: 8;
+    -fx-background-color: derive(#4f372C, 20%);
+    -fx-background-radius: 8;
 }
 
 .pane-with-border {
-     -fx-background-color: transparent;
-     -fx-border-width: 0;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#4f372C, 30%);
 }
 
 .result-display {
@@ -195,7 +195,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#4f372C, 20%);
 }
 
 .menu-bar .label {
@@ -231,8 +231,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -284,11 +284,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(lightgray, 20%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#4f372C, 50%);
     -fx-background-insets: 3;
 }
 

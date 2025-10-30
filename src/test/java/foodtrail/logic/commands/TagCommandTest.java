@@ -164,7 +164,7 @@ public class TagCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new Object()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new TagCommand(INDEX_SECOND_RESTAURANT, newTags)));

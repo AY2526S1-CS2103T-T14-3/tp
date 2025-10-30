@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -43,19 +44,24 @@ public class EditCommandTest {
         EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder(editedRestaurant).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESTAURANT, descriptor);
 
-
         Restaurant finalExpectedRestaurant = new Restaurant(editedRestaurant.getName(), editedRestaurant.getPhone(),
                 editedRestaurant.getAddress(), restaurantToEdit.getTags());
 
-        String restaurantDetails = "\n" + "Name: " + finalExpectedRestaurant.getName() + "\n"
-                + "Phone: " + finalExpectedRestaurant.getPhone() + "\n"
-                + "Address: " + finalExpectedRestaurant.getAddress() + "\n"
-                + "Tags: " + finalExpectedRestaurant.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(finalExpectedRestaurant.getName());
+        detailsBuilder.append("\nPhone: ").append(finalExpectedRestaurant.getPhone());
+        detailsBuilder.append("\nAddress: ").append(finalExpectedRestaurant.getAddress());
+
+        if (!finalExpectedRestaurant.getTags().isEmpty()) {
+            String tagsString = finalExpectedRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
-                restaurantDetails);
+                detailsBuilder.toString());
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
@@ -77,15 +83,21 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_KFC).build();
         EditCommand editCommand = new EditCommand(indexLastRestaurant, descriptor);
 
-        String restaurantDetails = "\n" + "Name: " + editedRestaurant.getName() + "\n"
-                + "Phone: " + editedRestaurant.getPhone() + "\n"
-                + "Address: " + editedRestaurant.getAddress() + "\n"
-                + "Tags: " + editedRestaurant.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(editedRestaurant.getName());
+        detailsBuilder.append("\nPhone: ").append(editedRestaurant.getPhone());
+        detailsBuilder.append("\nAddress: ").append(editedRestaurant.getAddress());
+
+        if (!editedRestaurant.getTags().isEmpty()) {
+            String tagsString = editedRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
-                restaurantDetails);
+                detailsBuilder.toString());
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
@@ -100,15 +112,21 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESTAURANT, new EditRestaurantDescriptor());
         Restaurant editedRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
 
-        String restaurantDetails = "\n" + "Name: " + editedRestaurant.getName() + "\n"
-                + "Phone: " + editedRestaurant.getPhone() + "\n"
-                + "Address: " + editedRestaurant.getAddress() + "\n"
-                + "Tags: " + editedRestaurant.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(editedRestaurant.getName());
+        detailsBuilder.append("\nPhone: ").append(editedRestaurant.getPhone());
+        detailsBuilder.append("\nAddress: ").append(editedRestaurant.getAddress());
+
+        if (!editedRestaurant.getTags().isEmpty()) {
+            String tagsString = editedRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
-                restaurantDetails);
+                detailsBuilder.toString());
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());
@@ -128,15 +146,21 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESTAURANT,
                 new EditRestaurantDescriptorBuilder().withName(VALID_NAME_KFC).build());
 
-        String restaurantDetails = "\n" + "Name: " + editedRestaurant.getName() + "\n"
-                + "Phone: " + editedRestaurant.getPhone() + "\n"
-                + "Address: " + editedRestaurant.getAddress() + "\n"
-                + "Tags: " + editedRestaurant.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(editedRestaurant.getName());
+        detailsBuilder.append("\nPhone: ").append(editedRestaurant.getPhone());
+        detailsBuilder.append("\nAddress: ").append(editedRestaurant.getAddress());
+
+        if (!editedRestaurant.getTags().isEmpty()) {
+            String tagsString = editedRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS,
-                restaurantDetails);
+                detailsBuilder.toString());
 
         Model expectedModel = new ModelManager(new RestaurantDirectory(model.getRestaurantDirectory()),
                 new UserPrefs());

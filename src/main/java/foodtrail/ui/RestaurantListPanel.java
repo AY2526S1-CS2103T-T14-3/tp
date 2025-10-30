@@ -1,8 +1,4 @@
 package foodtrail.ui;
-
-import java.util.logging.Logger;
-
-import foodtrail.commons.core.LogsCenter;
 import foodtrail.model.restaurant.Restaurant;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +11,6 @@ import javafx.scene.layout.Region;
  */
 public class RestaurantListPanel extends UiPart<Region> {
     private static final String FXML = "RestaurantListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(RestaurantListPanel.class);
 
     @FXML
     private ListView<Restaurant> restaurantListView;

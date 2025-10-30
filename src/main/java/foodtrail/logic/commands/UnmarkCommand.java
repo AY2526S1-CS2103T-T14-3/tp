@@ -2,6 +2,7 @@ package foodtrail.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,21 +47,27 @@ public class UnmarkCommand extends Command {
 
         Restaurant restaurantToUnmark = lastShownList.get(targetIndex.getZeroBased());
 
-        String restaurantDetails = "\n" + "Name: " + restaurantToUnmark.getName() + "\n"
-                + "Phone: " + restaurantToUnmark.getPhone() + "\n"
-                + "Address: " + restaurantToUnmark.getAddress() + "\n"
-                + "Tags: " + restaurantToUnmark.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(restaurantToUnmark.getName());
+        detailsBuilder.append("\nPhone: ").append(restaurantToUnmark.getPhone());
+        detailsBuilder.append("\nAddress: ").append(restaurantToUnmark.getAddress());
+
+        if (!restaurantToUnmark.getTags().isEmpty()) {
+            String tagsString = restaurantToUnmark.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         if (!restaurantToUnmark.getIsMarked().isVisited()) {
-            throw new CommandException(String.format(MESSAGE_RESTAURANT_NOT_MARKED, restaurantDetails));
+            throw new CommandException(String.format(MESSAGE_RESTAURANT_NOT_MARKED, detailsBuilder.toString()));
         }
 
         Restaurant unmarkedRestaurant = restaurantToUnmark.withIsMarked(new IsMarked(false));
 
         model.setRestaurant(restaurantToUnmark, unmarkedRestaurant);
-        return new CommandResult(String.format(MESSAGE_UNMARK_RESTAURANT_SUCCESS, restaurantDetails));
+        return new CommandResult(String.format(MESSAGE_UNMARK_RESTAURANT_SUCCESS, detailsBuilder.toString()));
     }
 
     @Override

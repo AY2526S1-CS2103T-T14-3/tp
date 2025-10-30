@@ -17,7 +17,6 @@ public class Address {
             Address should not be empty, not exceed 100 characters,
             and must end with ', Singapore' followed by a 6-digit postal code.
             Preferred format: [Street Address], [Building Name], Singapore [Postal Code].
-            Spaces within the postal code will be ignored for validation.
             """;
 
     public final String value;
@@ -49,7 +48,7 @@ public class Address {
 
         // 3. Use regex to split address into main part and postal code
         // The postal code must be preceded by a comma, "Singapore", and mandatory whitespace.
-        Pattern addressPattern = Pattern.compile("^(.*),\\s+Singapore\\s+((\\d\\s*){6})$", Pattern.CASE_INSENSITIVE);
+        Pattern addressPattern = Pattern.compile("^(.*),\\s+Singapore\\s+((\\d\\s*){6})$");
         Matcher addressMatcher = addressPattern.matcher(test);
 
         if (!addressMatcher.matches()) {

@@ -77,7 +77,7 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 3. To start FoodTrail, type `java -jar foodtrail.jar` and press Enter. 
    * A window similar to the one below should appear shortly, pre-loaded with some sample data.
 
-<img src="images/labelledUi.png" alt="Ui"> <br>
+<img src="images/labelledUi.png" width="70%" height="70%" alt="Ui"> <br>
 
 **Installation complete!**
 * You can now type commands into the command box and press Enter to execute them.
@@ -110,31 +110,36 @@ This section explains all available commands and how to use them. If you’re al
 
 * `UPPER_CASE` words represent parameters you need to provide.<br>
     <box>
+
     *Example:* `add n/NAME`, `NAME` is a parameter.
     </box>
 
 * Square brackets `[ ]` indicate **optional** items.<br>
     <box>
+
     *Example:* `n/NAME [t/TAG]` can be used as `n/KFC t/fast food` or simply `n/KFC`.
     </box>
 
 * An ellipsis `…`​ after an item means it can be repeated any number of times (including zero).<br>
     <box>
+
     *Example:* `[t/TAG]…` can be empty (` `), `t/fast food`, or `t/fast food t/halal` and so on.
     </box>
 
 * Parameters can appear in any order.<br>
     <box>
+
     *Example:* `add n/NAME hp/PHONE_NUMBER a/ADDRESS` is the same as `add hp/PHONE_NUMBER a/ADDRESS n/NAME`.
     </box>
 
 * Extra parameters are ignored for commands that don’t take any parameters (e.g. `help`, `list`, `exit`, `clear`).<br>
     <box>
+
     *Example:* Typing `help 123` will be treated the same as `help`.
     </box>
 </box>
 
-<box type="caution" seamless>
+<box type="warning" seamless>
 
 **Caution:**<br>
 When copying commands that span multiple lines, make sure that the spaces around line breaks are preserved as some PDF readers may omit them.
@@ -148,13 +153,13 @@ If you are unsure of what commands there are, you can view all the commands by t
 
 Format: `help`
 
-<img src="images/helpMessage.png" width=55% height=55% alt="helpMessage">
+<img src="images/helpMessage.png" width=55% height=55% alt="helpMessage"> <br>
 
 <br>
 
 ### Adding a restaurant: `add`
 
-Want to keep track of a restaurant? You can do so by adding a restaurant to restaurant directory using `add`.
+Want to keep track of a restaurant? You can do so by adding a restaurant to the directory using `add`.
 
 Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
@@ -180,7 +185,7 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
 ### Listing all restaurants: `list`
 
-You can get a list of all the restaurants in the restaurant directory using `list`.
+You can get a list of all the restaurants in the directory using `list`.
 
 Format: `list`
 
@@ -201,6 +206,7 @@ Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
 
 **Important:**
 * Only the name, phone number, and address can be edited.
+* To edit tags, you can use the [tag](#tagging-a-restaurant-tag) command instead.
 </box>
 
 <box type="tip" seamless>

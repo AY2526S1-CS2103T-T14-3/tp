@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -48,7 +48,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/louist3ng.png" width="200px">
 
 [[github](http://github.com/louist3ng)]
-[[portfolio](team/louist3ng.md)]
 
-* Role: Idk
-* Responsibilities: Idk
+* Role: Developer

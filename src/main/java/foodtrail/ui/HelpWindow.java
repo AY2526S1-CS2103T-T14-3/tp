@@ -142,10 +142,18 @@ public class HelpWindow extends UiPart<Stage> {
         scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
     }
 
+    /**
+     * Creates a new HelpWindow.
+     */
+    public HelpWindow() {
+        this(new Stage());
+    }
+
     private VBox createCommandBox(String title, String... lines) {
         VBox box = new VBox();
         box.setSpacing(5);
-        box.setStyle("-fx-border-color: grey; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 10; -fx-background-color: white");
+        box.setStyle("-fx-border-color: grey; -fx-border-width: 1; -fx-border-radius: 5; "
+                + "-fx-padding: 10; -fx-background-color: white");
 
         Label titleLabel = new Label(title);
         titleLabel.getStyleClass().add("h2");
@@ -168,20 +176,14 @@ public class HelpWindow extends UiPart<Stage> {
             for (int i = 1; i < lines.length; i++) {
                 Label exampleLabel = new Label(lines[i]);
                 exampleLabel.getStyleClass().add("h3");
-                exampleLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: #5C4033; -fx-font-family: Consolas");
+                exampleLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: #5C4033; "
+                        + "-fx-font-family: Consolas");
                 exampleLabel.setWrapText(true);
                 exampleContainer.getChildren().add(exampleLabel);
             }
             box.getChildren().add(exampleContainer);
         }
         return box;
-    }
-
-    /**
-     * Creates a new HelpWindow.
-     */
-    public HelpWindow() {
-        this(new Stage());
     }
 
     /**

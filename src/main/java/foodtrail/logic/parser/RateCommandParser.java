@@ -23,11 +23,12 @@ public class RateCommandParser implements Parser<RateCommand> {
         }
 
         String[] tokens = trimmed.split("\\s+");
+        Index index = ParserUtil.parseIndex(tokens[0]);
+
         if (tokens.length < 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(tokens[0]);
 
         String ratingToken = tokens[1];
         if (ratingToken.startsWith("r/")) { // allow "rate 2 r/4"

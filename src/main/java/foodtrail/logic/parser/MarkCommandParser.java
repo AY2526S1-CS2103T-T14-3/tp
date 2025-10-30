@@ -4,6 +4,7 @@ import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.commands.MarkCommand;
+import foodtrail.logic.commands.UnmarkCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
 
 /**
@@ -17,13 +18,9 @@ public class MarkCommandParser implements Parser<MarkCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new MarkCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE), pe);
-        }
+        Index index = ParserUtil.parseIndex(args);
+
+        return new MarkCommand(index);
     }
 
 }

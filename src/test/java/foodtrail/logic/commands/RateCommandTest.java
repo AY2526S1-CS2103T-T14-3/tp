@@ -34,7 +34,7 @@ public class RateCommandTest {
     @Test
     public void executeUnfilteredListValidIndexSuccess() {
         Restaurant target = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
-        int newRatingValue = 4;
+        int newRatingValue = 2;
         Restaurant edited = target.withRating(new Rating(newRatingValue));
 
         RateCommand cmd = new RateCommand(INDEX_FIRST_RESTAURANT, newRatingValue);

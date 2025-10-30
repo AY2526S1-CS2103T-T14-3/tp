@@ -20,12 +20,9 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <BorderPane fx:id="helpMessageContainer">
+      <BorderPane fx:id="helpMessageContainer" style="-fx-background-color: #FAF3E0;">
         <center>
-          <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
-            <content>
-              <javafx.scene.text.TextFlow fx:id="textFlow" />
-            </content>
+          <ScrollPane fx:id="scrollPane" fitToWidth="true" BorderPane.alignment="CENTER">
             <padding>
               <Insets right="5.0" />
             </padding>
@@ -34,7 +31,7 @@
         <bottom>
           <HBox alignment="BOTTOM_RIGHT">
             <children>
-              <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" />
+              <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy link" />
             </children>
           </HBox>
         </bottom>

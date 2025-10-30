@@ -25,6 +25,8 @@ public class RateCommand extends Command {
 
     public static final String MESSAGE_RATE_SUCCESS = "Rated %1$s: %2$d/5";
 
+    public static final String MESSAGE_DUPLICATE_RATING = "This restaurant already has a rating of %1$d/5.";
+
     private final Index index;
     private final int ratingValue;
 
@@ -46,6 +48,11 @@ public class RateCommand extends Command {
         }
 
         Restaurant restaurantToEdit = lastShownList.get(index.getZeroBased());
+
+        if (restaurantToEdit.getRating().isPresent() && restaurantToEdit.getRating().get().value == ratingValue) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_RATING, ratingValue));
+        }
+
         Restaurant edited = restaurantToEdit.withRating(new Rating(ratingValue));
 
         model.setRestaurant(restaurantToEdit, edited);

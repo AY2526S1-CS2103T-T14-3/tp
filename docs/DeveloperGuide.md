@@ -158,112 +158,6 @@ Classes used by multiple components are in the `foodtrail.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedRestaurantDirectory`. It extends `RestaurantDirectory` with an undo/redo history, stored internally as an `restaurantDirectoryStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedRestaurantDirectory#commit()` — Saves the current restaurant directory state in its history.
-* `VersionedRestaurantDirectory#undo()` — Restores the previous restaurant directory state from its history.
-* `VersionedRestaurantDirectory#redo()` — Restores a previously undone restaurant directory state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitRestaurantDirectory()`, `Model#undoRestaurantDirectory()` and `Model#redoRestaurantDirectory()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedRestaurantDirectory` will be initialized with the initial restaurant directory state, and the `currentStatePointer` pointing to that single restaurant directory state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th restaurant in the restaurant directory. The `delete` command calls `Model#commitRestaurantDirectoryk()`, causing the modified state of the restaurant directory after the `delete 5` command executes to be saved in the `restaurantDirectoryStateList`, and the `currentStatePointer` is shifted to the newly inserted restaurant directory state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new restaurant. The `add` command also calls 
-`Model#commitRestaurantDirectoryk()`, causing another modified restaurant directory state to be saved into the 
-`restaurantDirectoryStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitRestaurantDirectory()`, so the restaurant directory state will not be saved into the `restaurantDirectoryStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the restaurant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoRestaurantDirectory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous restaurant directory state, and restores the restaurant directory to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial RestaurantDirectory state, then there are no previous RestaurantDirectory states to restore. The `undo` command uses `Model#canUndoRestaurantDirectory()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoRestaurantDirectory()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the restaurant directory to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `restaurantDirectoryStateList.size() - 1`, pointing to the latest restaurant directory state, then there are no undone RestaurantDirectory states to restore. The `redo` command uses `Model#canRedoRestaurantDirectory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the restaurant directory, such as `list`, will usually not call `Model#commitRestaurantDirectory()`, `Model#undoRestaurantDirectory()` or `Model#redoARestaurantDirectory()`. Thus, the `restaurantDirectoryStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitRestaurantDirectory()`. Since the `currentStatePointer` is not pointing at the end of the `restaurantDirectoryStateList`, all restaurant directory states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire restaurant directory.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the restaurant being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-The data archiving feature will allow users to export their restaurant data in various formats (CSV, JSON) and import data from external sources. This feature will be implemented as a separate command that interacts with the Storage component to provide data export/import functionality.
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -460,14 +354,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a restaurant
 
@@ -483,13 +376,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

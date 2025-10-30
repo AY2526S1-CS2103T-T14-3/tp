@@ -77,7 +77,7 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 3. To start FoodTrail, type `java -jar foodtrail.jar` and press Enter. 
    * A window similar to the one below should appear shortly, pre-loaded with some sample data.
 
-<img src="images/labelledUi.png" alt="Ui"> <br>
+<img src="images/labelledUi.png" width="70%" height="70%" alt="Ui"> <br>
 
 **Installation complete!**
 * You can now type commands into the command box and press Enter to execute them.
@@ -148,7 +148,7 @@ If you are unsure of what commands there are, you can view all the commands by t
 
 Format: `help`
 
-<img src="images/helpMessage.png" width=55% height=55% alt="helpMessage">
+<img src="images/helpMessage.png" width=55% height=55% alt="helpMessage"> <br>
 
 <br>
 

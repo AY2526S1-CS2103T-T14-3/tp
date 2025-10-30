@@ -59,10 +59,7 @@ public class RateCommandTest {
 
     @Test
     public void executeUnfilteredListSameRatingThrowsCommandException() {
-        Restaurant target = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
         int identicalRatingValue = 4;
-        Restaurant edited = target.withRating(new Rating(identicalRatingValue));
-
         RateCommand cmd = new RateCommand(INDEX_FIRST_RESTAURANT, identicalRatingValue);
         assertCommandFailure(cmd, model, String.format(RateCommand.MESSAGE_DUPLICATE_RATING, identicalRatingValue));
     }

@@ -1,45 +1,70 @@
 ---
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
-# AB-3 User Guide
+# FoodTrail User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've visited or want to try. If you're comfortable typing, you'll find FoodTrail a superfast way to **organize your culinary adventures**.
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
+## Table of Contents
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Adding a restaurant: `add`](#adding-a-restaurant-add)
+    * [Listing all restaurants: `list`](#listing-all-restaurants-list)
+    * [Editing a restaurant: `edit`](#editing-a-restaurant-edit)
+    * [Locating restaurants: `find`](#locating-restaurants-find)
+    * [Deleting a restaurant: `delete`](#deleting-a-restaurant-delete)
+    * [Marking a restaurant: `mark`](#marking-a-restaurant-mark)
+    * [Unmarking a restaurant: `unmark`](#unmarking-a-restaurant-unmark)
+    * [Rating a restaurant: `rate`](#rating-a-restaurant-rate)
+    * [Removing a restaurant rating: `unrate`](#removing-a-restaurant-rating-unrate)
+    * [Tagging a restaurant: `tag`](#tagging-a-restaurant-tag)
+    * [Untagging a restaurant: `untag`](#untagging-a-restaurant-untag)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+    * [Exiting the program: `exit`](#exiting-the-program-exit)
+* [Saving the data](#saving-the-data)
+* [Editing the data file](#editing-the-data-file)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` or above installed on your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/tag/v1.4).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your FoodTrail app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar foodtrail.jar`
+   command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" width=65% height=65% alt="Ui">
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list`: Lists all restaurants.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`: Adds a restaurant
+      named `KFC` to the restaurant directory.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3`: Deletes the 3rd restaurant shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear`: Deletes all restaurants.
 
-   * `exit` : Exits the app.
+    * `exit`: Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,16 +75,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/KFC`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/KFC t/fastfood` or as `n/KFC`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/fastfood`, `t/fastfood t/halal` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME hp/PHONE_NUMBER`, `hp/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -67,122 +92,258 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+<br>
 
-Shows a message explaining how to access the help page.
+### See all commands: `help`
 
-![help message](images/helpMessage.png)
+If you are unsure of what commands there are, you can view all the commands by typing `help`.
+
+<img src="images/helpMessage.png" width=45% height=45% alt="helpMessage">
 
 Format: `help`
 
+<br>
 
-### Adding a person: `add`
+### Adding a restaurant: `add`
 
-Adds a person to the address book.
+Want to keep track of a restaurant? You can do so by adding a restaurant to restaurant directory using `add`. The main details of the restaurant that you must include are the name, address and phone number.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A restaurant can have any number of tags (including 0).
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572`
+* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`
 
-### Listing all persons : `list`
+<br>
 
-Shows a list of all persons in the address book.
+### Listing all restaurants: `list`
+
+You can get a list of all the restaurants in the restaurant directory using `list`.
 
 Format: `list`
 
-### Editing a person : `edit`
+<br>
 
-Edits an existing person in the address book.
+### Editing a restaurant: `edit`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Maybe a restaurant moved or changed its phone number? Keep their details updated using `edit`.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+<box type="tip" seamless>
+
+**Tip:** You can edit all details at once, or just a single field — name `n/`, phone `hp/`, or address `a/`.
+</box>
+
+<box type="info" seamless>
+
+**Notes:**
+* Only the name, phone number, and address can be edited.
+</box>
+
+Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
+
+* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed
+  restaurant directory. The index **must be a positive integer** (1, 2, 3, …​).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 hp/91234567` Edits the phone number of the 1st restaurant to be `91234567`.
+*  `edit 2 n/KFC` Edits the name of the 2nd restaurant to be `KFC`.
 
-### Locating persons by name: `find`
+<br>
 
-Finds persons whose names contain any of the given keywords.
+### Locating restaurants: `find`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+You can search for restaurants in the directory by their name, address, phone number, or tag.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+<box type="tip" seamless>
+
+**Tip:** Want broader results? Add more keywords, separated by commas — any restaurant matching one will appear in the list.
+</box>
+
+Format: `find KEYWORD[, MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `kfc` will match `KFC`.
+* The order of the keywords matters. e.g. `chan hawker` will not match `Hawker Chan`.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find koi` returns `KOI Thé` and `KOI Thé Specialty`.
+* `find subway, kfc` returns `Subway` and `KFC`.
+* `find bugis` returns `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
 
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+  <img src="images/findBugisResult.png" width=65% height=65% alt="findBugisResult">
+
+<br>
+
+### Deleting a restaurant: `delete`
+
+You can delete a restaurant from the directory.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd restaurant in the restaurant directory.
+* `find KFC` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 
-### Clearing all entries : `clear`
+<br>
 
-Clears all entries from the address book.
+### Marking a restaurant: `mark`
+
+To indicate that you've visited this restaurant, you can mark it as visited.
+
+Format: `mark INDEX`
+
+* Marks the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+
+Examples:
+* `mark 1` marks the 1st restaurant as visited.
+* `mark 3` marks the 3rd restaurant as visited.
+
+<br>
+
+### Unmarking a restaurant: `unmark`
+
+If you accidentally marked a restaurant as visited, you can unmark it using `unmark`.
+
+Format: `unmark INDEX`
+
+* Unmarks the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+
+Examples:
+* `unmark 1` unmarks the 1st restaurant as not visited.
+* `unmark 3` unmarks the 3rd restaurant as not visited.
+
+<br>
+
+### Rating a restaurant: `rate`
+
+You can give a rating to a restaurant in the directory.
+
+Format: `rate INDEX RATING`
+
+* Rates the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* The rating **must be a number from 0 to 5**.
+
+Examples:
+* `rate 1 5` rates the 1st restaurant with 5 stars.
+* `rate 3 3` rates the 3rd restaurant with 3 stars.
+
+<br>
+
+### Removing a restaurant rating: `unrate`
+
+You can remove a rating for a restaurant.
+
+Format: `unrate INDEX`
+
+* Removes the rating from the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* The restaurant must have an existing rating to remove.
+
+Examples:
+* `unrate 1` removes the rating from the 1st restaurant.
+* `unrate 3` removes the rating from the 3rd restaurant.
+
+<br>
+
+### Tagging a restaurant: `tag`
+
+You can add a tag to a restaurant in the directory. 
+
+<box type="tip" seamless>
+
+**Tip:** Tags let you include extra details or keywords, such as “halal,” “cozy,” or “open late,” to help describe the restaurant better.
+</box>
+
+Format: `tag INDEX t/TAG [t/MORE_TAGS]`
+
+* Tags the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* Multiple tags can be added by entering more `t/` and specifying additional tags.
+* Tags are displayed in alphabetical order.
+
+Examples:
+* `tag 1 t/halal` tags the 1st restaurant with a `halal` tag.
+* `tag 1 t/halal t/fastfood` tags the 1st restaurant with a `halal` and a `fastfood` tag.
+
+<br>
+
+### Untagging a restaurant: `untag`
+
+You can remove tags from the restaurants in the directory.
+
+Format: `untag INDEX t/TAG [t/MORE_TAGS]`
+
+* Untags the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant directory.
+* The index **must be a positive integer** (1, 2, 3, …​).
+* Multiple tags can be removed by entering more `t/` and specifying additional tags.
+* Tags are displayed in alphabetical order.
+
+<br>
+
+### Clearing all entries: `clear`
+
+You can remove all the restaurants from the current directory. Use this command if you want to start with a fresh restaurant directory.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+<br>
 
-Exits the program.
+### Exiting the program: `exit`
+
+You can exit the application.
 
 Format: `exit`
 
+<br>
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FoodTrail data are saved in the hard disk automatically after any command that changes the data. There is no need to 
+save manually.
+
+<br>
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+FoodTrail data are saved automatically as a JSON file `[JAR file location]/data/foodtrail.json`. Advanced
+users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, FoodTrail will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the FoodTrail app to behave in unexpected ways (e.g. if a value entered is
+outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
+**Q**: Where is my restaurant data stored?<br>
+**A**: FoodTrail stores your data locally on your computer. The exact location is usually within the application's data directory, ensuring your information is private and accessible offline. <br>
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FoodTrail home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,12 +356,19 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action                                             | Format, Examples                                                                                                                                           |
+|----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​` <br> e.g. `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken` |
+| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                                                                                                                    |
+| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`<br> e.g. `delete 3`                                                                                                                         |
+| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/KFC hp/68849301`                                                          |
+| [**Find**](#locating-restaurants-find)             | `find KEYWORD[, MORE_KEYWORDS]`<br> e.g. `find koi, subway`                                                                                                |
+| [**List**](#listing-all-restaurants-list)          | `list`                                                                                                                                                     |
+| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`<br> e.g. `mark 3`                                                                                                                             |
+| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`<br> e.g. `unmark 3`                                                                                                                         |
+| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX RATING`<br> e.g. `rate 1 5`                                                                                                                    |
+| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`<br> e.g. `unrate 1`                                                                                                                         | |
+| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `tag 3 t/fastfood t/halal`                                                                                        |
+| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`<br> e.g. `untag 3 t/fastfood t/halal`                                                                                    |
+| [**Help**](#viewing-help-help)                     | `help`                                                                                                                                                     |
+| [**Exit**](#exiting-the-program-exit)              | `exit`                                                                                                                                                     |

@@ -23,6 +23,14 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+        // invalid tag name
+        assertFalse(Tag.isValidTagName("")); // empty string
+        assertFalse(Tag.isValidTagName("abc def ghi jkl mno pqrs tuv we")); // 31 characters
+
+        // valid tag names
+        assertTrue(Tag.isValidTagName("halal"));
+        assertTrue(Tag.isValidTagName("abc def ghi jkl mno pqrs tuv w")); // 30 characters (spaces)
+        assertTrue(Tag.isValidTagName("abcedefeghiejklemnoepqrsetuvew")); // 30 characters (no spaces)
     }
 
     @Test

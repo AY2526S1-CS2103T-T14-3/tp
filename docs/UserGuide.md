@@ -206,6 +206,7 @@ Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
 
 **Important:**
 * Only the name, phone number, and address can be edited.
+* To edit tags, use the [tag](#tagging-a-restaurant-tag) command instead.
 </box>
 
 <box type="tip" seamless>

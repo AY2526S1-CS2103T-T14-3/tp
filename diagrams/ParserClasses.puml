@@ -21,10 +21,10 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> RestaurantDirectoryParser
 
-RestaurantDirectoryParser .down.> XYZCommandParser: <<create>>
+RestaurantDirectoryParser .down.> XYZCommandParser: creates
 
-XYZCommandParser ..> XYZCommand : <<create>>
-RestaurantDirectoryParser ..> Command : <<use>>
+XYZCommandParser ..> XYZCommand : creates
+RestaurantDirectoryParser ..> Command : uses
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer

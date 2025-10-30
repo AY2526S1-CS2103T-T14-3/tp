@@ -50,9 +50,6 @@
         "model-component": "Model component",
         "storage-component": "Storage component",
         "common-classes": "Common classes",
-        "implementation": "Implementation",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -62,8 +59,7 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-restaurant": "Deleting a restaurant",
-        "saving-data": "Saving data"
+        "deleting-a-restaurant": "Deleting a restaurant"
       },
       "headingKeywords": {}
     },
@@ -109,7 +105,9 @@
       "headings": {
         "foodtrail-user-guide": "FoodTrail User Guide",
         "table-of-contents": "Table of Contents",
-        "quick-start": "Quick start",
+        "introduction": "Introduction",
+        "installation-guide": "Installation Guide",
+        "parameters": "Parameters",
         "features": "Features",
         "see-all-commands-help": "See all commands: help",
         "adding-a-restaurant-add": "Adding a restaurant: add",

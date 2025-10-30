@@ -37,7 +37,7 @@ public class TagTest {
         assertTrue(tag.equals(tagCopy));
 
         // different types -> returns false
-        assertFalse(tag.equals(1));
+        assertFalse(tag.equals(new Object()));
 
         // null -> returns false
         assertFalse(tag.equals(null));

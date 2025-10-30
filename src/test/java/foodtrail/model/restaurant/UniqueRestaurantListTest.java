@@ -253,7 +253,7 @@ public class UniqueRestaurantListTest {
         assertFalse(uniqueRestaurantList.equals(null));
 
         // different type -> returns false
-        assertFalse(uniqueRestaurantList.equals(5));
+        assertFalse(uniqueRestaurantList.equals(new Object()));
 
         // different content -> returns false
         assertFalse(uniqueRestaurantList.equals(differentList));

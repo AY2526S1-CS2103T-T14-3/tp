@@ -21,7 +21,8 @@ public class RestaurantTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Restaurant restaurant = new RestaurantBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> restaurant.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> restaurant
+                .getTags().remove(new Tag(VALID_TAG_FASTFOOD)));
     }
 
     @Test
@@ -71,7 +72,7 @@ public class RestaurantTest {
         assertFalse(MCDONALDS.equals(null));
 
         // different type -> returns false
-        assertFalse(MCDONALDS.equals(5));
+        assertFalse(MCDONALDS.equals(new Object()));
 
         // different restaurant -> returns false
         assertFalse(MCDONALDS.equals(KOI));

@@ -33,7 +33,7 @@ public class RestaurantContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertFalse(firstPredicate.equals(new Object()));
 
         // null -> returns false
         assertFalse(firstPredicate.equals(null));

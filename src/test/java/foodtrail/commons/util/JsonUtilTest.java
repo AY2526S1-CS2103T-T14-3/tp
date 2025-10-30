@@ -39,7 +39,26 @@ public class JsonUtilTest {
         assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
     }
 
-    //TODO: @Test jsonUtil_readJsonStringToObjectInstance_correctObject()
+    @Test
+    public void jsonUtil_readJsonStringToObjectInstance_correctObject() throws IOException {
+        SerializableTestClass serializableTestClass = JsonUtil
+                .fromJsonString(SerializableTestClass.JSON_STRING_REPRESENTATION, SerializableTestClass.class);
 
-    //TODO: @Test jsonUtil_writeThenReadObjectToJson_correctObject()
+        assertEquals(serializableTestClass.getName(), SerializableTestClass.getNameTestValue());
+        assertEquals(serializableTestClass.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
+        assertEquals(serializableTestClass.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
+    }
+
+    @Test
+    public void jsonUtil_writeThenReadObjectToJson_correctObject() throws IOException {
+        SerializableTestClass original = new SerializableTestClass();
+        original.setTestValues();
+
+        String json = JsonUtil.toJsonString(original);
+        SerializableTestClass deserialized = JsonUtil.fromJsonString(json, SerializableTestClass.class);
+
+        assertEquals(deserialized.getName(), SerializableTestClass.getNameTestValue());
+        assertEquals(deserialized.getListOfLocalDateTimes(), SerializableTestClass.getListTestValues());
+        assertEquals(deserialized.getMapOfIntegerToString(), SerializableTestClass.getHashMapTestValues());
+    }
 }

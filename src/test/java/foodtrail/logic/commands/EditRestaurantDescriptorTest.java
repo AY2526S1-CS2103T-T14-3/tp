@@ -29,7 +29,7 @@ public class EditRestaurantDescriptorTest {
         assertFalse(DESC_JOLLIBEE.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_JOLLIBEE.equals(5));
+        assertFalse(DESC_JOLLIBEE.equals(new Object()));
 
         // different values -> returns false
         assertFalse(DESC_JOLLIBEE.equals(DESC_KFC));

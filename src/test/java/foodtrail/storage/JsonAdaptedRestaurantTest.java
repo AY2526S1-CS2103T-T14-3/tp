@@ -29,7 +29,6 @@ public class JsonAdaptedRestaurantTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = KOI.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final Integer VALID_RATING = 4;
     private static final Boolean VALID_IS_MARKED = KOI.getIsMarked().isVisited();
 
     @Test

@@ -77,7 +77,7 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 3. To start FoodTrail, type `java -jar foodtrail.jar` and press Enter. 
    * A window similar to the one below should appear shortly, pre-loaded with some sample data.
 
-<img src="images/labelledUi.png" width=50% height=50% alt="Ui">
+<img src="images/labelledUi.png" alt="Ui"> <br>
 
 **Installation complete!**
 * You can now type commands into the command box and press Enter to execute them.
@@ -115,12 +115,12 @@ This section explains all available commands and how to use them. If you’re al
 
 * Square brackets `[ ]` indicate **optional** items.<br>
     <box>
-    *Example:* `n/NAME [t/TAG]` can be used as `n/KFC t/fastfood` or simply `n/KFC`.
+    *Example:* `n/NAME [t/TAG]` can be used as `n/KFC t/fast food` or simply `n/KFC`.
     </box>
 
 * An ellipsis `…`​ after an item means it can be repeated any number of times (including zero).<br>
     <box>
-    *Example:* `[t/TAG]…` can be empty (` `), `t/fastfood`, or `t/fastfood t/halal` and so on.
+    *Example:* `[t/TAG]…` can be empty (` `), `t/fast food`, or `t/fast food t/halal` and so on.
     </box>
 
 * Parameters can appear in any order.<br>
@@ -146,9 +146,9 @@ When copying commands that span multiple lines, make sure that the spaces around
 
 If you are unsure of what commands there are, you can view all the commands by typing `help`.
 
-<img src="images/helpMessage.png" width=45% height=45% alt="helpMessage">
-
 Format: `help`
+
+<img src="images/helpMessage.png" width=55% height=55% alt="helpMessage">
 
 <br>
 
@@ -174,7 +174,7 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
 **Examples:**
 * `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572`
-* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fastfood t/chicken`
+* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fast food t/chicken`
 </box>
 <br>
 
@@ -243,7 +243,7 @@ Format: `find KEYWORD[, MORE_KEYWORDS]`
 * `find bugis` returns `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
 </box>
 
-<img src="images/findBugisResult.png" width=65% height=65% alt="findBugisResult">
+<img src="images/findBugisResult.png" width=65% height=65% alt="findBugisResult"> <br>
 
 <br>
 
@@ -340,7 +340,7 @@ Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 
 **Examples:**
 * `tag 1 t/halal` tags the 1st restaurant with a `halal` tag.
-* `tag 1 t/halal t/fastfood` tags the 1st restaurant with a `halal` and a `fastfood` tag.
+* `tag 1 t/halal t/fast food` tags the 1st restaurant with a `halal` and a `fast food` tag.
 </box>
 <br>
 
@@ -367,7 +367,7 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 
 **Examples:**
 * `untag 1 t/halal` removes the `halal` tag from the 1st restaurant.
-* `untag 1 t/halal t/fastfood` removes the `halal` and `fastfood` tags from the 1st restaurant.
+* `untag 1 t/halal t/fast food` removes the `halal` and `fast food` tags from the 1st restaurant.
 </box>
 <br>
 
@@ -432,25 +432,25 @@ To avoid data loss, you should make a backup before editing.
 
 | Problem                                                    | Description                                                                                                                                                                                           | Fix                                                                                                                                                                              |
 |------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Application opens off-screen after using multiple monitors | If you move the application to a secondary screen and later disconnect that screen (returning to a single display setup), the application window may open off-screen.                                 | Close the application and delete the preferences.json file created by the app. Then restart the application as it will reopen on your main screen with default display settings. |
+| Application opens off-screen after using multiple monitors | If you move the application to a secondary screen and later disconnect that screen (returning to a single display setup), the application window may open off-screen.                                 | Close the application and delete the `preferences.json` file created by the app. Then restart the application as it will reopen on your main screen with default display settings. |
 | Help Window does not appear when reopened                  | If you minimize the Help Window and then try to open it again (using the help command, the Help menu, or the F1 shortcut), the existing Help Window will stay minimized instead of opening a new one. | Manually restore the minimized Help Window from your taskbar or dock.                                                                                                            |
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action                                             | Format                                                        | Examples                                                                                        |
-|----------------------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| [**Help**](#viewing-help-help)                     | `help`                                                        | `help`                                                                                          |
-| [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`              | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fastfood t/chicken` |
-| [**List**](#listing-all-restaurants-list)          | `list`                                                        | `list`                                                                                          |
-| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/KFC hp/68849301`                                                                      |
-| [**Find**](#locating-restaurants-find)             | `find KEYWORD[, MORE_KEYWORDS]`                               | `find koi, subway`                                                                              |
-| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                                | `delete 3`                                                                                      |                                                                                                      | 
-| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                  | `mark 3`                                                                                        |
-| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                                | `unmark 3`                                                                                      |
-| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX RATING`                                           | `rate 1 5`                                                                                      |
-| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                                | `unrate 1`                                                                                      |                                                                                                      |
-| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                           | `tag 3 t/fastfood t/halal`                                                                      |
-| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                             | `untag 3 t/fastfood t/halal`                                                                    |
-| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                       | `clear`                                                                                         |
-| [**Exit**](#exiting-the-program-exit)              | `exit`                                                        | `exit`                                                                                          |
+| Action                                             | Format                                                        | Examples                                                                                         |
+|----------------------------------------------------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| [**Help**](#viewing-help-help)                     | `help`                                                        | `help`                                                                                           |
+| [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`              | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
+| [**List**](#listing-all-restaurants-list)          | `list`                                                        | `list`                                                                                           |
+| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/KFC hp/68849301`                                                                       |
+| [**Find**](#locating-restaurants-find)             | `find KEYWORD[, MORE_KEYWORDS]`                               | `find koi, subway`                                                                               |
+| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                                | `delete 3`                                                                                       |                                                                                                      | 
+| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                  | `mark 3`                                                                                         |
+| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                                | `unmark 3`                                                                                       |
+| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX RATING`                                           | `rate 1 5`                                                                                       |
+| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                                | `unrate 1`                                                                                       |                                                                                                      |
+| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                           | `tag 3 t/fast food t/halal`                                                                      |
+| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                             | `untag 3 t/fast food t/halal`                                                                    |
+| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                       | `clear`                                                                                          |
+| [**Exit**](#exiting-the-program-exit)              | `exit`                                                        | `exit`                                                                                           |

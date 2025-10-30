@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -37,16 +38,22 @@ public class AddCommandTest {
         ModelStubAcceptingRestaurantAdded modelStub = new ModelStubAcceptingRestaurantAdded();
         Restaurant validRestaurant = new RestaurantBuilder().build();
 
-        String restaurantDetails = "\n" + "Name: " + validRestaurant.getName() + "\n"
-                + "Phone: " + validRestaurant.getPhone() + "\n"
-                + "Address: " + validRestaurant.getAddress() + "\n"
-                + "Tags: " + validRestaurant.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(validRestaurant.getName());
+        detailsBuilder.append("\nPhone: ").append(validRestaurant.getPhone());
+        detailsBuilder.append("\nAddress: ").append(validRestaurant.getAddress());
+
+        if (!validRestaurant.getTags().isEmpty()) {
+            String tagsString = validRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         CommandResult commandResult = new AddCommand(validRestaurant).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, restaurantDetails),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, detailsBuilder.toString()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validRestaurant), modelStub.restaurantsAdded);
     }

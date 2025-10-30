@@ -4,6 +4,7 @@ import static foodtrail.logic.commands.CommandTestUtil.assertCommandFailure;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,19 +32,25 @@ public class AddCommandIntegrationTest {
     public void execute_newRestaurant_success() {
         Restaurant validRestaurant = new RestaurantBuilder().build();
 
-        String restaurantDetails = "\n" + "Name: " + validRestaurant.getName() + "\n"
-                + "Phone: " + validRestaurant.getPhone() + "\n"
-                + "Address: " + validRestaurant.getAddress() + "\n"
-                + "Tags: " + validRestaurant.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(validRestaurant.getName());
+        detailsBuilder.append("\nPhone: ").append(validRestaurant.getPhone());
+        detailsBuilder.append("\nAddress: ").append(validRestaurant.getAddress());
+
+        if (!validRestaurant.getTags().isEmpty()) {
+            String tagsString = validRestaurant.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
 
         Model expectedModel = new ModelManager(model.getRestaurantDirectory(), new UserPrefs());
         expectedModel.addRestaurant(validRestaurant);
         expectedModel.sortRestaurantListByName();
 
         assertCommandSuccess(new AddCommand(validRestaurant), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, restaurantDetails),
+                String.format(AddCommand.MESSAGE_SUCCESS, detailsBuilder.toString()),
                 expectedModel);
     }
 

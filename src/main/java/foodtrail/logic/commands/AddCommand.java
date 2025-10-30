@@ -6,6 +6,7 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import foodtrail.commons.util.ToStringBuilder;
@@ -57,13 +58,21 @@ public class AddCommand extends Command {
 
         model.addRestaurant(toAdd);
         model.sortRestaurantListByName();
-        String restaurantDetails = "\n" + "Name: " + toAdd.getName() + "\n"
-                + "Phone: " + toAdd.getPhone() + "\n"
-                + "Address: " + toAdd.getAddress() + "\n"
-                + "Tags: " + toAdd.getTags().stream()
-                .map(t -> t.tagName)
-                .collect(Collectors.joining(", "));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, restaurantDetails));
+
+        StringBuilder detailsBuilder = new StringBuilder();
+        detailsBuilder.append("\nName: ").append(toAdd.getName());
+        detailsBuilder.append("\nPhone: ").append(toAdd.getPhone());
+        detailsBuilder.append("\nAddress: ").append(toAdd.getAddress());
+
+        if (!toAdd.getTags().isEmpty()) {
+            String tagsString = toAdd.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .map(tag -> tag.tagName)
+                    .collect(Collectors.joining(", "));
+            detailsBuilder.append("\nTags: ").append(tagsString);
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, detailsBuilder.toString()));
     }
 
     @Override

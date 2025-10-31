@@ -6,7 +6,12 @@ pageNav: 3
 
 # FoodTrail User Guide
 
-Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've visited or want to try. If you're comfortable typing, you'll find **FoodTrail** a superfast way to **organize your culinary adventures**. <br>
+Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! 
+It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've 
+visited or want to try. If you're a fast typer, you'll find **FoodTrail** an effective way to **organize your culinary 
+adventures**. 
+
+<br>
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,7 +20,7 @@ Tired of forgetting that amazing little restaurant you found last month? **FoodT
 * [Installation Guide](#installation-guide)
 * [Parameters](#parameters)
 * [Features](#features)
-    * [See all commands: `help`](#see-all-commands-help)
+    * [Viewing all commands: `help`](#viewing-all-commands-help)
     * [Adding a restaurant: `add`](#adding-a-restaurant-add)
     * [Listing all restaurants: `list`](#listing-all-restaurants-list)
     * [Editing a restaurant: `edit`](#editing-a-restaurant-edit)
@@ -36,7 +41,7 @@ Tired of forgetting that amazing little restaurant you found last month? **FoodT
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-## Introduction
+## How to use this guide
 
 This guide is designed to support all users, from first-time beginners to experienced users, in learning and using **FoodTrail** smoothly.
 
@@ -77,10 +82,22 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 3. To start FoodTrail, type `java -jar foodtrail.jar` and press Enter. 
    * A window similar to the one below should appear shortly, pre-loaded with some sample data.
 
-<img src="images/labelledUi.png" width="70%" height="70%" alt="Ui"> <br>
+<figure>
+  <img src="images/labelledUi.png" width="70%" height="70%" style="display: block; margin: 0 auto;" alt="Ui"> 
+  <figcaption style="text-align: center; font-style: italic">FoodTrail user interface labelled</figcaption>
+</figure>
+
+<br>
 
 **Installation complete!**
 * You can now type commands into the command box and press Enter to execute them.
+* Here are some commands you can try:
+  * `list`: lists all restaurants.
+  * `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572` adds a restaurant 
+    amed `McDonald's` to the directory.
+  * `delete 3`: deletes the 3rd restaurant shown in the current directory.
+  * `clear`: deletes all restaurants.
+  * `exit`: exits the app.
 * Refer to the [Features](#features) section below for a detailed explanation of every command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -98,6 +115,7 @@ This section describes all the parameters used in FoodTrail commands, along with
 | `KEYWORD`      | Information associated with the restaurant    | No constraints.                                                                                                                               |
 | `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                       |
 
+<br>
 <br>
 
 ## Features
@@ -146,15 +164,20 @@ When copying commands that span multiple lines, make sure that the spaces around
 </box>
 
 <br>
+<br>
 
-### See all commands: `help`
+### Viewing all commands: `help`
 
 If you are unsure of what commands there are, you can view all the commands by typing `help`.
 
 Format: `help`
 
-<img src="images/helpMessage.png" width=55% height=55% alt="helpMessage"> <br>
+<figure>
+  <img src="images/helpMessage.png" width=55% height=55% style="display: block; margin: 0 auto;" alt="helpMessage"> 
+  <figcaption style="text-align: center; font-style: italic">Help window that opens after entering "help"</figcaption>
+</figure>
 
+<br>
 <br>
 
 ### Adding a restaurant: `add`
@@ -181,6 +204,8 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 * `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572`
 * `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fast food t/chicken`
 </box>
+
+<br>
 <br>
 
 ### Listing all restaurants: `list`
@@ -194,6 +219,8 @@ Format: `list`
 **Important:**
 * Restaurants are sorted by alphabetical order.
 </box>
+
+<br>
 <br>
 
 ### Editing a restaurant: `edit`
@@ -221,6 +248,8 @@ You can edit all details at once, or just a single field — name `n/`, phone `h
 *  `edit 1 hp/91234567` edits the phone number of the 1st restaurant in the directory to be `91234567`.
 *  `edit 2 n/KFC` edits the name of the 2nd restaurant in the directory to be `KFC`.
 </box>
+
+<br>
 <br>
 
 ### Locating restaurants: `find`
@@ -244,13 +273,17 @@ Format: `find KEYWORD[, MORE_KEYWORDS]`
 <box>
 
 **Examples:**
-* `find koi` returns `KOI Thé` and `KOI Thé Specialty`.
-* `find subway, kfc` returns `Subway` and `KFC`.
-* `find bugis` returns `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
+* `find koi` returns a filtered list containing a restaurant named `KOI Thé`.
+* `find subway, kfc` returns a filtered list containing restaurants named `Subway` and `KFC`.
+* `find bugis` returns a filtered list containing restaurants named `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
 </box>
 
-<img src="images/findBugisResult.png" width=65% height=65% alt="findBugisResult"> <br>
+<figure>
+  <img src="images/findBugisResult.png" width="65%" height="65%" style="display: block; margin: 0 auto;" alt="findBugisResult"> 
+  <figcaption style="text-align: center; font-style: italic">Result after entering "find bugis"</figcaption>
+</figure>
 
+<br>
 <br>
 
 ### Deleting a restaurant: `delete`
@@ -265,6 +298,8 @@ Format: `delete INDEX`
 * `list` followed by `delete 2` deletes the 2nd restaurant in the restaurant directory.
 * `find KFC` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 </box>
+
+<br>
 <br>
 
 ### Marking a restaurant: `mark`
@@ -279,6 +314,8 @@ Format: `mark INDEX`
 * `mark 1` marks the 1st restaurant as visited.
 * `mark 3` marks the 3rd restaurant as visited.
 </box>
+
+<br>
 <br>
 
 ### Unmarking a restaurant: `unmark`
@@ -293,6 +330,8 @@ Format: `unmark INDEX`
 * `unmark 1` unmarks the 1st restaurant as not visited.
 * `unmark 3` unmarks the 3rd restaurant as not visited.
 </box>
+
+<br>
 <br>
 
 ### Rating a restaurant: `rate`
@@ -307,6 +346,8 @@ Format: `rate INDEX RATING`
 * `rate 1 5` rates the 1st restaurant with 5 stars.
 * `rate 3 3` rates the 3rd restaurant with 3 stars.
 </box>
+
+<br>
 <br>
 
 ### Removing a restaurant rating: `unrate`
@@ -321,6 +362,8 @@ Format: `unrate INDEX`
 * `unrate 1` removes the rating from the 1st restaurant.
 * `unrate 3` removes the rating from the 3rd restaurant.
 </box>
+
+<br>
 <br>
 
 ### Tagging a restaurant: `tag`
@@ -348,6 +391,8 @@ Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 * `tag 1 t/halal` tags the 1st restaurant with a `halal` tag.
 * `tag 1 t/halal t/fast food` tags the 1st restaurant with a `halal` and a `fast food` tag.
 </box>
+
+<br>
 <br>
 
 ### Untagging a restaurant: `untag`
@@ -375,6 +420,8 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 * `untag 1 t/halal` removes the `halal` tag from the 1st restaurant.
 * `untag 1 t/halal t/fast food` removes the `halal` and `fast food` tags from the 1st restaurant.
 </box>
+
+<br>
 <br>
 
 ### Clearing all entries: `clear`
@@ -390,6 +437,7 @@ This command will delete all the data in the app.
 </box>
 
 <br>
+<br>
 
 ### Exiting the program: `exit`
 
@@ -398,11 +446,13 @@ You can exit the application.
 Format: `exit`
 
 <br>
+<br>
 
 ### Saving the data
 
 FoodTrail automatically saves your data to your computer whenever you make a change. You don’t need to save anything manually.
 
+<br>
 <br>
 
 ### Editing the data file
@@ -429,7 +479,7 @@ To avoid data loss, you should make a backup before editing.
 
 **Q**: Where is my restaurant data stored?<br>
 **A**: FoodTrail stores your data locally on your computer. The exact location is usually within the application's data directory, ensuring your information is private and accessible offline. <br>
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FoodTrail home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -446,7 +496,7 @@ To avoid data loss, you should make a backup before editing.
 
 | Action                                             | Format                                                        | Examples                                                                                         |
 |----------------------------------------------------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [**Help**](#see-all-commands-help)                     | `help`                                                        | `help`                                                                                           |
+| [**Help**](#viewing-all-commands-help)             | `help`                                                        | `help`                                                                                           |
 | [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`              | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
 | [**List**](#listing-all-restaurants-list)          | `list`                                                        | `list`                                                                                           |
 | [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/KFC hp/68849301`                                                                       |

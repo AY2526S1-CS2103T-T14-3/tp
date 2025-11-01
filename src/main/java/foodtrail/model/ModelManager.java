@@ -118,7 +118,9 @@ public class ModelManager implements Model {
     @Override
     public void sortRestaurantListByName() {
         // Sorts the backing list; FilteredList reflects the new order automatically.
-        restaurantDirectory.sortRestaurant(Comparator.comparing(r -> r.getName().fullName.toLowerCase()));
+        restaurantDirectory.sortRestaurant(
+                Comparator.comparing((Restaurant r) -> r.getName().fullName, String.CASE_INSENSITIVE_ORDER)
+                        .thenComparing(r -> r.getName().fullName));
         // Keep current filter predicate as-is so the user’s filtered view remains, just
         // sorted.
         filteredRestaurants.setPredicate(filteredRestaurants.getPredicate());

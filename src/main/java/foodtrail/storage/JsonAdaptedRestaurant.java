@@ -105,8 +105,16 @@ class JsonAdaptedRestaurant {
 
         final Set<Tag> modelTags = new HashSet<>(restaurantTags);
 
-        final Optional<Rating> modelRating = (rating == null) ? java.util.Optional.empty()
-                : java.util.Optional.of(new Rating(rating));
+        final Optional<Rating> modelRating;
+        if (rating == null) {
+            modelRating = Optional.empty();
+        } else {
+            try {
+                modelRating = Optional.of(new Rating(rating));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS, e);
+            }
+        }
 
         final IsMarked modelIsMarked = new IsMarked(isMarked != null && isMarked);
 

@@ -102,17 +102,17 @@ public class JsonAdaptedRestaurantTest {
     }
 
     @Test
-    public void toModelType_invalidRatingNegative_throwsIllegalArgumentException() {
+    public void toModelType_invalidRatingNegative_throwsIllegalValueException() {
         JsonAdaptedRestaurant restaurant =
                 new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, -1, VALID_IS_MARKED);
-        assertThrows(IllegalArgumentException.class, Rating.MESSAGE_CONSTRAINTS, restaurant::toModelType);
+        assertThrows(IllegalValueException.class, Rating.MESSAGE_CONSTRAINTS, restaurant::toModelType);
     }
 
     @Test
-    public void toModelType_invalidRatingTooLarge_throwsIllegalArgumentException() {
+    public void toModelType_invalidRatingTooLarge_throwsIllegalValueException() {
         JsonAdaptedRestaurant restaurant =
                 new JsonAdaptedRestaurant(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, 10, VALID_IS_MARKED);
-        assertThrows(IllegalArgumentException.class, Rating.MESSAGE_CONSTRAINTS, restaurant::toModelType);
+        assertThrows(IllegalValueException.class, Rating.MESSAGE_CONSTRAINTS, restaurant::toModelType);
     }
 
     @Test

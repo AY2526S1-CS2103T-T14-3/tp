@@ -13,10 +13,10 @@ import foodtrail.logic.parser.exceptions.ParseException;
  */
 public class RateCommandParser implements Parser<RateCommand> {
 
-    private static final String MESSAGE_INVALID_RATING = "Rating must be an integer between 0 and 5 (inclusive).";
     static final String MESSAGE_MISSING_RATING_PREFIX = String.format(
             "Rating must be provided with the %s prefix (e.g. %s4).",
             PREFIX_RATING, PREFIX_RATING);
+    private static final String MESSAGE_INVALID_RATING = "Rating must be an integer between 0 and 5 (inclusive).";
 
     @Override
     public RateCommand parse(String args) throws ParseException {

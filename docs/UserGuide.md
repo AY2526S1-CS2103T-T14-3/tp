@@ -94,7 +94,7 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 * Here are some commands you can try:
   * `list`: lists all restaurants.
   * `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572` adds a restaurant 
-    amed `McDonald's` to the directory.
+    named `McDonald's` to the directory.
   * `delete 3`: deletes the 3rd restaurant shown in the current directory.
   * `clear`: deletes all restaurants.
   * `exit`: exits the app.
@@ -195,15 +195,26 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A restaurant can have any number of tags (including 0).
+**Tip:** 
+* A restaurant is considered a duplicate if it has the same name, address, and phone number.
+* A restaurant can have any number of tags (including 0).
 </box>
 
 <box>
 
 **Examples:**
-* `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572`
-* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fast food t/chicken`
+* `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572` adds a restaurant
+  named `McDonald's` to the directory, with the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 
+  677743` and phone number `68928572`. 
+* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fast food t/chicken` adds a restaurant 
+  named `KFC` to the directory, with the address `701A Yishun Ave 5, #01-02, Singapore 761701`, the phone number 
+  `62226111`, and the tags `fast food` and `chicken`. 
 </box>
+
+<figure>
+  <img src="images/addMcDonalds.png" width=55% height=55% style="display: block; margin: 0 auto;" alt="helpMessage"> 
+  <figcaption style="text-align: center; font-style: italic">Restaurant added after entering "add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572"</figcaption>
+</figure>
 
 <br>
 <br>
@@ -494,19 +505,19 @@ To avoid data loss, you should make a backup before editing.
 
 ## Command summary
 
-| Action                                             | Format                                                        | Examples                                                                                         |
-|----------------------------------------------------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [**Help**](#viewing-all-commands-help)             | `help`                                                        | `help`                                                                                           |
-| [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`              | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
-| [**List**](#listing-all-restaurants-list)          | `list`                                                        | `list`                                                                                           |
-| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/KFC hp/68849301`                                                                       |
-| [**Find**](#locating-restaurants-find)             | `find KEYWORD[, MORE_KEYWORDS]`                               | `find koi, subway`                                                                               |
-| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                                | `delete 3`                                                                                       |                                                                                                      | 
-| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                  | `mark 3`                                                                                         |
-| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                                | `unmark 3`                                                                                       |
-| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX RATING`                                           | `rate 1 5`                                                                                       |
-| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                                | `unrate 1`                                                                                       |                                                                                                      |
-| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                           | `tag 3 t/fast food t/halal`                                                                      |
-| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                             | `untag 3 t/fast food t/halal`                                                                    |
-| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                       | `clear`                                                                                          |
-| [**Exit**](#exiting-the-program-exit)              | `exit`                                                        | `exit`                                                                                           |
+| Action                                             | Format                                                       | Examples                                                                                         |
+|----------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| [**Help**](#viewing-all-commands-help)             | `help`                                                       | `help`                                                                                           |
+| [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`             | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
+| [**List**](#listing-all-restaurants-list)          | `list`                                                       | `list`                                                                                           |
+| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]` | `edit 2 n/KFC hp/68849301`                                                                       |
+| [**Find**](#locating-restaurants-find)             | `find KEYWORD[, MORE_KEYWORDS]`                              | `find koi, subway`                                                                               |
+| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                               | `delete 3`                                                                                       |                                                                                                      | 
+| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                 | `mark 3`                                                                                         |
+| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                               | `unmark 3`                                                                                       |
+| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX RATING`                                          | `rate 1 5`                                                                                       |
+| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                               | `unrate 1`                                                                                       |                                                                                                      |
+| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                          | `tag 3 t/fast food t/halal`                                                                      |
+| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                            | `untag 3 t/fast food t/halal`                                                                    |
+| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                      | `clear`                                                                                          |
+| [**Exit**](#exiting-the-program-exit)              | `exit`                                                       | `exit`                                                                                           |

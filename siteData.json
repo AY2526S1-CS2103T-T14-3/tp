@@ -105,11 +105,11 @@
       "headings": {
         "foodtrail-user-guide": "FoodTrail User Guide",
         "table-of-contents": "Table of Contents",
-        "introduction": "Introduction",
+        "how-to-use-this-guide": "How to use this guide",
         "installation-guide": "Installation Guide",
         "parameters": "Parameters",
         "features": "Features",
-        "see-all-commands-help": "See all commands: help",
+        "viewing-all-commands-help": "Viewing all commands: help",
         "adding-a-restaurant-add": "Adding a restaurant: add",
         "listing-all-restaurants-list": "Listing all restaurants: list",
         "editing-a-restaurant-edit": "Editing a restaurant: edit",

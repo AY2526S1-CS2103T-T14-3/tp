@@ -190,7 +190,8 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
 **Important:** 
 * Restaurant details must include name, address and phone number.
-* There must be a space between the `,` and `Singapore` for the address (e.g `..., Singapore`).
+* For the address, there must be a space between the `,` and `Singapore`. Similarly, there must be a space between 
+  `Singapore` and the postal code. (e.g. `..., Singapore 123456`).
 </box>
 
 <box type="tip" seamless>

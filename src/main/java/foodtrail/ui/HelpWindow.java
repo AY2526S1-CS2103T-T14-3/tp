@@ -87,8 +87,8 @@ public class HelpWindow extends UiPart<Stage> {
 
         VBox rateBox = createCommandBox(
                 "Rate a restaurant from 0 to 5 stars",
-                "rate INDEX RATING",
-                "Example: rate 1 5"
+                "rate INDEX r/RATING",
+                "Example: rate 1 r/5"
         );
         container.getChildren().add(rateBox);
 

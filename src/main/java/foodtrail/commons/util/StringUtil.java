@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.Normalizer;
 import java.util.Arrays;
 
 /**
@@ -40,10 +41,11 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code substring}.
-     *   Ignores case.
+     *   Ignores case and accents.
      *   <br>examples:<pre>
      *       containsSubstringIgnoreCase("ABc def", "ab") == true
      *       containsSubstringIgnoreCase("ABc def", "dEf") == true
+     *       containsSubstringIgnoreCase("KOI Thé", "koi the") == true
      *       </pre>
      * @param sentence cannot be null
      * @param substring cannot be null
@@ -56,7 +58,13 @@ public class StringUtil {
         if (preppedSubstring.isEmpty()) {
             return true; // Or false, depending on desired behavior for empty substring
         }
-        return sentence.toLowerCase().contains(preppedSubstring.toLowerCase());
+
+        String normalizedSentence = Normalizer.normalize(sentence, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        String normalizedSubstring = Normalizer.normalize(preppedSubstring, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+
+        return normalizedSentence.toLowerCase().contains(normalizedSubstring.toLowerCase());
     }
 
     /**

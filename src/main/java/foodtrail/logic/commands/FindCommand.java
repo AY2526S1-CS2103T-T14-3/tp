@@ -9,17 +9,17 @@ import foodtrail.model.restaurant.RestaurantContainsKeywordsPredicate;
 
 /**
  * Finds and lists all restaurants in restaurant directory whose attributes contain any of the argument keywords.
- * Keywords are comma-separated. Keyword matching is case-insensitive and based on substrings.
+ * Keyword matching is case-insensitive and based on substrings.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all restaurants whose attributes contain any of "
-            + "the specified, comma-separated keywords (case-insensitive). "
-            + "The search is performed on name, phone, address, and tags.\n"
-            + "Parameters: KEYWORD[, MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " ang mo kio, serangoon";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all restaurants whose attributes contain "
+            + "the specified keyword (case-insensitive). "
+            + "The search is performed on name, phone number, address, and tags.\n"
+            + "Parameters: KEYWORD\n"
+            + "Example: " + COMMAND_WORD + " kfc";
 
     private final RestaurantContainsKeywordsPredicate predicate;
 
@@ -31,7 +31,6 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredRestaurantList(predicate);
-        model.sortRestaurantListByName();
         return new CommandResult(
                 String.format(Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW, model.getFilteredRestaurantList().size()));
     }

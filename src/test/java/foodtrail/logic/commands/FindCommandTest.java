@@ -2,8 +2,8 @@ package foodtrail.logic.commands;
 
 import static foodtrail.logic.Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static foodtrail.testutil.TypicalRestaurants.HAWKERCHAN;
-import static foodtrail.testutil.TypicalRestaurants.KOI;
+import static foodtrail.testutil.TypicalRestaurants.ANNAS;
+import static foodtrail.testutil.TypicalRestaurants.ASTONS;
 import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
 import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -60,23 +58,22 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noRestaurantFound() {
         String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 0);
         RestaurantContainsKeywordsPredicate predicate =
-                new RestaurantContainsKeywordsPredicate(Collections.emptyList());
+                new RestaurantContainsKeywordsPredicate(Collections.singletonList("zzzzzz"));
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRestaurantList(predicate);
-        expectedModel.sortRestaurantListByName();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRestaurantList());
     }
 
     @Test
-    public void execute_multipleKeywords_multipleRestaurantsFound() {
+    public void execute_singleKeyword_multipleRestaurantsFound() {
         String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 3);
-        RestaurantContainsKeywordsPredicate predicate = preparePredicate("McDonald's, KOI, Hawker");
+        RestaurantContainsKeywordsPredicate predicate =
+                new RestaurantContainsKeywordsPredicate(Collections.singletonList("on"));
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRestaurantList(predicate);
-        expectedModel.sortRestaurantListByName();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(HAWKERCHAN, KOI, MCDONALDS), model.getFilteredRestaurantList());
+        assertEquals(Arrays.asList(MCDONALDS, ASTONS, ANNAS), model.getFilteredRestaurantList());
     }
 
     @Test
@@ -86,16 +83,5 @@ public class FindCommandTest {
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code RestaurantContainsKeywordsPredicate}.
-     */
-    private RestaurantContainsKeywordsPredicate preparePredicate(String userInput) {
-        List<String> keywords = Arrays.stream(userInput.split(","))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toList());
-        return new RestaurantContainsKeywordsPredicate(keywords);
     }
 }

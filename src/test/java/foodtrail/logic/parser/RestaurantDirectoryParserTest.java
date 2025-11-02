@@ -97,7 +97,7 @@ public class RestaurantDirectoryParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("foo");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(",")));
         assertEquals(new FindCommand(new RestaurantContainsKeywordsPredicate(keywords)), command);

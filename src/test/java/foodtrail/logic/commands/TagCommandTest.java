@@ -143,7 +143,8 @@ public class TagCommandTest {
         Set<Tag> duplicateTagSet = Collections.singleton(existingTag);
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_RESTAURANT, duplicateTagSet);
-        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_DUPLICATE_TAG + existingTag.tagName);
+        String expectedMessage = String.format(TagCommand.MESSAGE_DUPLICATE_TAG, "'" + existingTag.tagName + "'");
+        assertCommandFailure(tagCommand, model, expectedMessage);
     }
 
 

@@ -261,6 +261,8 @@ Format: `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]​`
   * To edit tags, you can use the [tag](#tagging-a-restaurant-tag) command instead. 
 </box>
 
+<box>
+   
 **Examples:**
 *  `edit 1 hp/91234567` edits the phone number of the 1st restaurant in the directory to be `91234567`.
 *  `edit 2 n/KFC` edits the name of the 2nd restaurant in the directory to be `KFC`.
@@ -290,6 +292,7 @@ Format: `find KEYWORD`
   * Note: After filtering restaurants by a keyword, editing a restaurant by that keyword may cause the restaurant to 
     disappear from the filtered directory. However, the restaurant still remains in the restaurant directory and 
     can be viewed again using the [list](#listing-all-restaurants-list) command.
+</box>
 
 <box>
 

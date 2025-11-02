@@ -101,7 +101,8 @@ public class UntagCommandTest {
                 .collect(Collectors.joining(", "));
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_RESTAURANT, nonExistentTags);
 
-        assertCommandFailure(untagCommand, model, UntagCommand.MESSAGE_TAG_NOT_FOUND + nonExistentTagString);
+        assertCommandFailure(untagCommand, model, String.format(UntagCommand.MESSAGE_TAG_NOT_FOUND,
+                nonExistentTagString));
     }
 
     @Test

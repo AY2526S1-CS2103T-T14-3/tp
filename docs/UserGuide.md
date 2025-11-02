@@ -501,7 +501,7 @@ offline.
 **A**: Inside the folder where the app is stored, your restaurant data is kept in the `data` folder as a `foodtrail.json` file.
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: To transfer your data, you can follow the steps below:
+**A**: To transfer your data, you can follow the steps below.
 <box>
 
 **Steps**:

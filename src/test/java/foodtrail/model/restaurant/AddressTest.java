@@ -41,12 +41,13 @@ public class AddressTest {
         assertFalse(Address.isValidAddress("123 Main Street, Singapore123456")); // missing space after Singapore
         assertFalse(Address.isValidAddress("123 Main St!, Singapore 123456")); // invalid character '!'
         assertFalse(Address.isValidAddress("Baker & Cook, Singapore 123456")); // invalid character '&'
+        assertFalse(Address.isValidAddress("Baker ** Cook, Singapore 123456")); // invalid character '&'
         assertFalse(Address.isValidAddress("1 Raffles Place, #39-01, singapore 048616")); // lowercase singapore
+        assertFalse(Address.isValidAddress("456 Oak Avenue, Singapore 1 2 3 4 5 6")); // postal code with spaces
 
         // valid addresses
         assertTrue(Address.isValidAddress("50 Sixth Avenue, Singapore 276496"));
-        assertTrue(Address.isValidAddress(" 2 Orchard Turn, #4-01 ION Orchard, Singapore 238801")); // long address
-        assertTrue(Address.isValidAddress("456 Oak Avenue, Singapore 1 2 3 4 5 6")); // postal code with spaces
+        assertTrue(Address.isValidAddress("2 Orchard Turn, #4-01 ION Orchard, Singapore 238801")); // long address
     }
 
     @Test

@@ -9,7 +9,13 @@ import static java.util.Objects.requireNonNull;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should not be empty, and can be at most 60 characters";
+    public static final String MESSAGE_CONSTRAINTS =
+            """
+            Invalid name format. Please adhere to the following rules:
+            1. The name cannot be empty.
+            2. The name must be 1 to 60 characters long.
+            Example: McDonald's
+            """;
     public static final String VALIDATION_REGEX = ".*\\S.*";
     public final String fullName;
 

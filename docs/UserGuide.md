@@ -6,7 +6,12 @@ pageNav: 3
 
 # FoodTrail User Guide
 
-Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've visited or want to try. If you're comfortable typing, you'll find **FoodTrail** a superfast way to **organize your culinary adventures**. <br>
+Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! 
+It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've 
+visited or want to try. If you're a fast typer, you'll find **FoodTrail** an effective way to **organize your culinary 
+adventures**. 
+
+<br>
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,7 +20,7 @@ Tired of forgetting that amazing little restaurant you found last month? **FoodT
 * [Installation Guide](#installation-guide)
 * [Parameters](#parameters)
 * [Features](#features)
-    * [See all commands: `help`](#see-all-commands-help)
+    * [Viewing all commands: `help`](#viewing-all-commands-help)
     * [Adding a restaurant: `add`](#adding-a-restaurant-add)
     * [Listing all restaurants: `list`](#listing-all-restaurants-list)
     * [Editing a restaurant: `edit`](#editing-a-restaurant-edit)
@@ -36,7 +41,7 @@ Tired of forgetting that amazing little restaurant you found last month? **FoodT
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-## Introduction
+## How to use this guide
 
 This guide is designed to support all users, from first-time beginners to experienced users, in learning and using **FoodTrail** smoothly.
 
@@ -58,18 +63,31 @@ This guide is designed to support all users, from first-time beginners to experi
 
 This guide will act as a walkthrough on **installing FoodTrail** and **teach you how to use it**.
 
-**Step 1: Install Java**
-* FoodTrail needs a software called **Java** to run.
-  * Check that you have **Java version 17** or higher installed on your computer.
-  * If you are a Mac user, follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html) to install the correct version of the Java Development Kit (JDK).
+**Step 1: Ensure Java 17 is installed**
+1. Open a command terminal.
+    * On Windows: Search for "Command Prompt" and open it.
+    * On Mac/Linux: Search for "Terminal" and open it.
+2. In the command terminal, type `java -version` and press Enter.
+3. If you have Java 17, the output should look something like this.
+
+<figure>
+  <img src="images/javaVersion.png" width="70%" height="70%" style="display: block; margin: 0 auto;" alt="Ui"> 
+  <figcaption style="text-align: center; font-style: italic">Output of "java -version" showing Java 17</figcaption>
+</figure>
+
+* If you do not have Java 17, follow the instructions below to install the correct version of the Java Development Kit 
+  (JDK).
+  * On Windows: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html).
+  * On Mac/Linux: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 **Step 2: Download the app file**
-1. Click [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.5/foodtrail.jar) to download the latest version of FoodTrail.
+1. Click [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.6/foodtrail.jar) to download the 
+   latest version of FoodTrail.
 2. Store the downloaded file into a dedicated folder on your computer. This will be where FoodTrail stores all your data.
 
 **Step 3: Run the app from the command terminal**
 1. Open a command terminal.
-   * On Windows: Search for "Command Prompt" or "PowerShell" and open it.
+   * On Windows: Search for "Command Prompt" and open it.
    * On Mac/Linux: Search for "Terminal" and open it.
 2. Navigate to the folder where you stored FoodTrail in.
    * In the command terminal, type `cd /path/to/your/folder` and press Enter. 
@@ -77,10 +95,21 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 3. To start FoodTrail, type `java -jar foodtrail.jar` and press Enter. 
    * A window similar to the one below should appear shortly, pre-loaded with some sample data.
 
-<img src="images/labelledUi.png" width="70%" height="70%" alt="Ui"> <br>
+<figure>
+  <img src="images/labelledUi.png" width="70%" height="70%" style="display: block; margin: 0 auto;" alt="Ui"> 
+  <figcaption style="text-align: center; font-style: italic">FoodTrail user interface labelled</figcaption>
+</figure>
+
+<br>
 
 **Installation complete!**
 * You can now type commands into the command box and press Enter to execute them.
+* Here are some commands you can try:
+  * `list`: lists all restaurants.
+  * `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572` adds a restaurant 
+    named `McDonald's` to the directory.
+  * `delete 3`: deletes the 3rd restaurant shown in the current directory.
+  * `exit`: exits the app.
 * Refer to the [Features](#features) section below for a detailed explanation of every command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -88,16 +117,17 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 
 This section describes all the parameters used in FoodTrail commands, along with their meanings and any input rules or constraints.
 
-| Parameter      | Description                                   | Constraints                                                                                                                                   |
-|----------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | Name of the restaurant                        | <li>Cannot be empty. <li>Maximum length of 60 characters.</li>                                                                                |
-| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                                                  |
-| `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Must end with ', Singapore' followed by a 6-digit postal code. </li> |
-| `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                           |
-| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts numbers.</li><li>Number must correspond to a restaurant in the directory.</li>                                               |
-| `KEYWORD`      | Information associated with the restaurant    | No constraints.                                                                                                                               |
-| `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                       |
+| Parameter      | Description                                   | Constraints                                                                                                                                                                                             |
+|----------------|-----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Name of the restaurant                        | <li>Cannot be empty. <li>Maximum length of 60 characters.</li>                                                                                                                                          |
+| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Cannot have spaces. <br/></li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                                                                          |
+| `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Only accepts certain special characters. (`/'.+-,#`)</li><li>Must end with `, Singapore <6-digit postal code>` </li> |
+| `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                                                                                     |
+| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts positive numbers. (1, 2, 3, ...)</li><li>Number must correspond to a restaurant in the current directory.</li>                                                                         |
+| `KEYWORD`      | Information associated with the restaurant    | —                                                                                                                                                                                                       |
+| `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                                                                                 |
 
+<br>
 <br>
 
 ## Features
@@ -146,15 +176,20 @@ When copying commands that span multiple lines, make sure that the spaces around
 </box>
 
 <br>
+<br>
 
-### See all commands: `help`
+### Viewing all commands: `help`
 
 If you are unsure of what commands there are, you can view all the commands by typing `help`.
 
 Format: `help`
 
-<img src="images/helpMessage.png" width=55% height=55% alt="helpMessage"> <br>
+<figure>
+  <img src="images/helpMessage.png" width=55% height=55% style="display: block; margin: 0 auto;" alt="helpMessage"> 
+  <figcaption style="text-align: center; font-style: italic">Help window that opens after entering "help"</figcaption>
+</figure>
 
+<br>
 <br>
 
 ### Adding a restaurant: `add`
@@ -166,21 +201,35 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 <box type="info" seamless>
 
 **Important:** 
-* Restaurant details must include name, address and phone number.
-* There must be a space between the `,` and `Singapore` for the address (e.g `..., Singapore`).
+* A restaurant can only have one name, one address, and one phone number.
+* For the address, there must be a space between the `,` and `Singapore`. Similarly, there must be a space between 
+  `Singapore` and the postal code. (e.g. `..., Singapore 123456`).
 </box>
 
 <box type="tip" seamless>
 
-**Tip:** A restaurant can have any number of tags (including 0).
+**Tips:** 
+* A restaurant is considered a duplicate if it has the same name, address, and phone number.
+* A restaurant can have any number of tags (including 0).
 </box>
 
 <box>
 
 **Examples:**
-* `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572`
-* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fast food t/chicken`
+* `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572` adds a restaurant
+  named `McDonald's` to the directory, with the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 
+  677743` and phone number `68928572`. 
+* `add n/KFC a/701A Yishun Ave 5, #01-02, Singapore 761701 hp/62226111 t/fast food t/chicken` adds a restaurant 
+  named `KFC` to the directory, with the address `701A Yishun Ave 5, #01-02, Singapore 761701`, the phone number 
+  `62226111`, and the tags `fast food` and `chicken`. 
 </box>
+
+<figure>
+  <img src="images/addMcDonalds.png" width=55% height=55% style="display: block; margin: 0 auto;" alt="helpMessage"> 
+  <figcaption style="text-align: center; font-style: italic">Restaurant added after entering "add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572"</figcaption>
+</figure>
+
+<br>
 <br>
 
 ### Listing all restaurants: `list`
@@ -194,63 +243,67 @@ Format: `list`
 **Important:**
 * Restaurants are sorted by alphabetical order.
 </box>
+
+<br>
 <br>
 
 ### Editing a restaurant: `edit`
 
 Maybe a restaurant moved or changed its phone number? Keep their details updated using `edit`.
 
-Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
+Format: `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]​`
 
 <box type="info" seamless>
 
 **Important:**
+* At least one field (name, phone number, or address) must be specified.
 * Only the name, phone number, and address can be edited.
-* To edit tags, you can use the [tag](#tagging-a-restaurant-tag) command instead.
+  * To edit tags, you can use the [tag](#tagging-a-restaurant-tag) command instead. 
 </box>
-
-<box type="tip" seamless>
-
-**Tip:** <br>
-You can edit all details at once, or just a single field — name `n/`, phone `hp/`, or address `a/`.
-</box>
-
-<box>
 
 **Examples:**
 *  `edit 1 hp/91234567` edits the phone number of the 1st restaurant in the directory to be `91234567`.
 *  `edit 2 n/KFC` edits the name of the 2nd restaurant in the directory to be `KFC`.
 </box>
+
+<br>
 <br>
 
 ### Locating restaurants: `find`
 
-You can search for restaurants in the directory by their name, address, phone number, or tag.
+You can enter a keyword to locate specific restaurants in the directory. The keyword searches across the 
+name, address, phone number, and tags all at once.
 
-Format: `find KEYWORD[, MORE_KEYWORDS]`
+Format: `find KEYWORD`
 
 <box type="info" seamless>
 
 **Important:**
 * The search is case-insensitive. e.g. `kfc` will match `KFC`.
-* The order of the keywords matters. e.g. `chan hawker` will not match `Hawker Chan`.
+* The order of the keyword matters. e.g. `food fast` will not match `fast food`.
 </box>
 
 <box type="tip" seamless>
 
-**Tip:** Want broader results? Add more keywords, separated by commas — any restaurant matching one will appear in the list.
-</box>
+**Tips:**
+* Operations can be done on a filtered directory. (e.g. [edit](#editing-a-restaurant-edit), [delete](#deleting-a-restaurant-delete), [mark](#marking-a-restaurant-mark), [tag](#tagging-a-restaurant-tag), [rate](#rating-a-restaurant-rate))
+  * Note: After filtering restaurants by a keyword, editing a restaurant by that keyword may cause the restaurant to 
+    disappear from the filtered directory. However, the restaurant still remains in the restaurant directory and 
+    can be viewed again using the [list](#listing-all-restaurants-list) command.
 
 <box>
 
 **Examples:**
-* `find koi` returns `KOI Thé` and `KOI Thé Specialty`.
-* `find subway, kfc` returns `Subway` and `KFC`.
-* `find bugis` returns `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
+* `find koi` returns a filtered directory containing a restaurant named `KOI Thé`.
+* `find bugis` returns a filtered directory containing restaurants named `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
 </box>
 
-<img src="images/findBugisResult.png" width=65% height=65% alt="findBugisResult"> <br>
+<figure>
+  <img src="images/findBugisResult.png" width="65%" height="65%" style="display: block; margin: 0 auto;" alt="findBugisResult"> 
+  <figcaption style="text-align: center; font-style: italic">Result after entering "find bugis"</figcaption>
+</figure>
 
+<br>
 <br>
 
 ### Deleting a restaurant: `delete`
@@ -265,6 +318,8 @@ Format: `delete INDEX`
 * `list` followed by `delete 2` deletes the 2nd restaurant in the restaurant directory.
 * `find KFC` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 </box>
+
+<br>
 <br>
 
 ### Marking a restaurant: `mark`
@@ -279,6 +334,8 @@ Format: `mark INDEX`
 * `mark 1` marks the 1st restaurant as visited.
 * `mark 3` marks the 3rd restaurant as visited.
 </box>
+
+<br>
 <br>
 
 ### Unmarking a restaurant: `unmark`
@@ -293,20 +350,24 @@ Format: `unmark INDEX`
 * `unmark 1` unmarks the 1st restaurant as not visited.
 * `unmark 3` unmarks the 3rd restaurant as not visited.
 </box>
+
+<br>
 <br>
 
 ### Rating a restaurant: `rate`
 
 You can give a rating to a restaurant in the directory.
 
-Format: `rate INDEX RATING`
+Format: `rate INDEX r/RATING`
 
 <box>
 
 **Examples:**
-* `rate 1 5` rates the 1st restaurant with 5 stars.
-* `rate 3 3` rates the 3rd restaurant with 3 stars.
+* `rate 1 r/5` rates the 1st restaurant with 5 stars.
+* `rate 3 r/3` rates the 3rd restaurant with 3 stars.
 </box>
+
+<br>
 <br>
 
 ### Removing a restaurant rating: `unrate`
@@ -321,15 +382,17 @@ Format: `unrate INDEX`
 * `unrate 1` removes the rating from the 1st restaurant.
 * `unrate 3` removes the rating from the 3rd restaurant.
 </box>
+
+<br>
 <br>
 
 ### Tagging a restaurant: `tag`
 
-You can add a tag to a restaurant in the directory.
+You can add a customized tag to a restaurant in the directory.
 
 Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 
-<box type="info">
+<box type="info" seamless>
 
 **Important:**
 * Tags are displayed in alphabetical order.
@@ -338,7 +401,7 @@ Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 <box type="tip" seamless>
 
 **Tips:**
-* Tags let you include extra details or keywords, such as “halal,” “cozy,” or “open late,” to help describe the restaurant better.
+* Tags let you include extra details or keywords, such as `halal`, `cozy`, or `open late` to help describe the restaurant better.
 * Multiple tags can be added by entering more `t/` and specifying additional tags.
 </box>
 
@@ -348,6 +411,8 @@ Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 * `tag 1 t/halal` tags the 1st restaurant with a `halal` tag.
 * `tag 1 t/halal t/fast food` tags the 1st restaurant with a `halal` and a `fast food` tag.
 </box>
+
+<br>
 <br>
 
 ### Untagging a restaurant: `untag`
@@ -365,7 +430,7 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 
 <box type="tip" seamless>
 
-**Tips:** <br>
+**Tip:** <br>
 * Multiple tags can be removed by entering more `t/` and specifying additional tags.
 </box>
 
@@ -375,6 +440,8 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 * `untag 1 t/halal` removes the `halal` tag from the 1st restaurant.
 * `untag 1 t/halal t/fast food` removes the `halal` and `fast food` tags from the 1st restaurant.
 </box>
+
+<br>
 <br>
 
 ### Clearing all entries: `clear`
@@ -390,6 +457,7 @@ This command will delete all the data in the app.
 </box>
 
 <br>
+<br>
 
 ### Exiting the program: `exit`
 
@@ -398,11 +466,13 @@ You can exit the application.
 Format: `exit`
 
 <br>
+<br>
 
 ### Saving the data
 
 FoodTrail automatically saves your data to your computer whenever you make a change. You don’t need to save anything manually.
 
+<br>
 <br>
 
 ### Editing the data file
@@ -413,24 +483,41 @@ If you’re an advanced user, you can also edit this file directly to update you
 <box type="warning" seamless>
 
 **Caution:** <br>
-If the data file is edited incorrectly or becomes invalid, FoodTrail will reset and start with an empty file on the next run. <br>
+If `foodtrail.json` is edited incorrectly or becomes invalid, FoodTrail will reset and start with an empty file on the next run. <br>
 Be careful when making changes as incorrect values may cause the app to behave unexpectedly.
 
 <box type="tip" seamless>
 
 **Recommendation:** <br>
-To avoid data loss, you should make a backup before editing.
+To avoid data loss, you should make a copy of `foodtrail.json` before editing.
 </box>
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+**Q**: Is there a predefined list of tags?<br>
+**A**: There is no predefined list of tags. While the sample data provides an example of how users can make use of 
+tags, users can add their own customized tags.
+
+**Q**: How is my restaurant data stored?<br>
+**A**: FoodTrail stores your data locally on your computer, ensuring your information is private and accessible
+offline.
 
 **Q**: Where is my restaurant data stored?<br>
-**A**: FoodTrail stores your data locally on your computer. The exact location is usually within the application's data directory, ensuring your information is private and accessible offline. <br>
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FoodTrail home folder.
+**A**: Inside the folder where the app is stored, your restaurant data is kept in the `data` folder as a `foodtrail.json` file.
+
+**Q**: How do I transfer my data to another computer?<br>
+**A**: To transfer your data, you can follow the steps below.
+<box>
+
+**Steps**:
+1. Make sure you have [installed the FoodTrail app](#installation-guide) on the other computer.
+2. Find the folder where the app is stored. Inside it, there should be a `data` folder. If there isn't one,
+   create a new folder and name it `data`.
+3. Copy your existing `foodtrail.json` file (from your current computer) and paste it into the `data` folder on the
+   other computer. If a file with the same name already exists, choose `Replace` to overwrite it.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -444,19 +531,19 @@ To avoid data loss, you should make a backup before editing.
 
 ## Command summary
 
-| Action                                             | Format                                                        | Examples                                                                                         |
-|----------------------------------------------------|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [**Help**](#see-all-commands-help)                     | `help`                                                        | `help`                                                                                           |
-| [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`              | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
-| [**List**](#listing-all-restaurants-list)          | `list`                                                        | `list`                                                                                           |
-| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/KFC hp/68849301`                                                                       |
-| [**Find**](#locating-restaurants-find)             | `find KEYWORD[, MORE_KEYWORDS]`                               | `find koi, subway`                                                                               |
-| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                                | `delete 3`                                                                                       |                                                                                                      | 
-| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                  | `mark 3`                                                                                         |
-| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                                | `unmark 3`                                                                                       |
-| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX RATING`                                           | `rate 1 5`                                                                                       |
-| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                                | `unrate 1`                                                                                       |                                                                                                      |
-| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                           | `tag 3 t/fast food t/halal`                                                                      |
-| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                             | `untag 3 t/fast food t/halal`                                                                    |
-| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                       | `clear`                                                                                          |
-| [**Exit**](#exiting-the-program-exit)              | `exit`                                                        | `exit`                                                                                           |
+| Action                                             | Format                                                       | Examples                                                                                       |
+|----------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [**Help**](#viewing-all-commands-help)             | `help`                                                       | `help`                                                                                         |
+| [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`             | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
+| [**List**](#listing-all-restaurants-list)          | `list`                                                       | `list`                                                                                         |
+| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]` | `edit 2 n/KFC hp/68849301`                                                                     |
+| [**Find**](#locating-restaurants-find)             | `find KEYWORD`                              | `find koi`                                                                               |
+| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                               | `delete 3`                                                                                     |                                                                                                      | 
+| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                 | `mark 3`                                                                                       |
+| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                               | `unmark 3`                                                                                     |
+| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX r/RATING`                                        | `rate 1 r/5`                                                                                   |
+| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                               | `unrate 1`                                                                                     |                                                                                                      |
+| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                          | `tag 3 t/fast food t/halal`                                                                    |
+| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                            | `untag 3 t/fast food t/halal`                                                                  |
+| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                      | `clear`                                                                                        |
+| [**Exit**](#exiting-the-program-exit)              | `exit`                                                       | `exit`                                                                                         |

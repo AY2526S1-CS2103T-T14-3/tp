@@ -104,15 +104,15 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 
 This section describes all the parameters used in FoodTrail commands, along with their meanings and any input rules or constraints.
 
-| Parameter      | Description                                   | Constraints                                                                                                                                   |
-|----------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | Name of the restaurant                        | <li>Cannot be empty. <li>Maximum length of 60 characters.</li>                                                                                |
-| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Cannot have spaces. <br/></li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                |
-| `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Must end with ', Singapore' followed by a 6-digit postal code. </li> |
-| `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                           |
-| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts positive numbers. (1, 2, 3, ...)</li><li>Number must correspond to a restaurant in the current directory.</li>               |
-| `KEYWORD`      | Information associated with the restaurant    | —                                                                                                                                             |
-| `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                       |
+| Parameter      | Description                                   | Constraints                                                                                                                                                                                                          |
+|----------------|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Name of the restaurant                        | <li>Cannot be empty. <li>Maximum length of 60 characters.</li>                                                                                                                                                       |
+| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Cannot have spaces. <br/></li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                                                                                       |
+| `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Only accepts certain special characters. (`/'.+-,#`)</li><li>Must end with ', Singapore' followed by a 6-digit postal code. </li> |
+| `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                                                                                                  |
+| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts positive numbers. (1, 2, 3, ...)</li><li>Number must correspond to a restaurant in the current directory.</li>                                                                                      |
+| `KEYWORD`      | Information associated with the restaurant    | —                                                                                                                                                                                                                    |
+| `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                                                                                              |
 
 <br>
 <br>
@@ -377,7 +377,7 @@ Format: `unrate INDEX`
 
 ### Tagging a restaurant: `tag`
 
-You can add a tag to a restaurant in the directory.
+You can add a customized tag to a restaurant in the directory.
 
 Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 
@@ -485,6 +485,9 @@ To avoid data loss, you should make a copy of the data file before editing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+**Q**: Is there a predefined list of tags?<br>
+**A**: There is no predefined list of tags. While the sample data provides an example of how users can make use of 
+tags, users can add their own tags.
 
 **Q**: How is my restaurant data stored?<br>
 **A**: FoodTrail stores your data locally on your computer, ensuring your information is private and accessible

@@ -96,7 +96,6 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
   * `add n/McDonald's a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 hp/68928572` adds a restaurant 
     named `McDonald's` to the directory.
   * `delete 3`: deletes the 3rd restaurant shown in the current directory.
-  * `clear`: deletes all restaurants.
   * `exit`: exits the app.
 * Refer to the [Features](#features) section below for a detailed explanation of every command.
 
@@ -479,7 +478,7 @@ Be careful when making changes as incorrect values may cause the app to behave u
 <box type="tip" seamless>
 
 **Recommendation:** <br>
-To avoid data loss, you should make a backup before editing.
+To avoid data loss, you should make a copy of the data file before editing.
 </box>
 </box>
 
@@ -487,11 +486,20 @@ To avoid data loss, you should make a backup before editing.
 
 ## FAQ
 
-**Q**: Where is my restaurant data stored?<br>
-**A**: FoodTrail stores your data locally on your computer. The exact location is usually within the application's data directory, ensuring your information is private and accessible offline. <br>
-**Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FoodTrail home folder.
+**Q**: How is my restaurant data stored?<br>
+**A**: FoodTrail stores your data locally on your computer, ensuring your information is private and accessible
+offline.
 
+**Q**: Where is my restaurant data stored?<br>
+**A**: Inside the folder where the app is stored, your restaurant data is kept in the `data` folder as a `foodtrail.json` file.
+
+**Q**: How do I transfer my data to another computer?<br>
+**A**: To transfer your data, you can follow these steps: 
+1. Make sure you have [installed the FoodTrail app](#installation-guide) on the other computer. 
+2. Find the folder where the app is stored. Inside it, there should be a `data` folder. If there isn't one, 
+   create a new folder and name it `data`.
+3. Copy your existing `foodtrail.json` file (from your current computer) and paste it into the `data` folder on the 
+   other computer. If a file with the same name already exists, choose Replace to overwrite it.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues

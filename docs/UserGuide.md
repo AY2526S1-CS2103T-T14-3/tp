@@ -268,21 +268,18 @@ You can edit all details at once, or just a single field — name `n/`, phone `h
 
 You can search for restaurants in the directory by their name, address, phone number, or tag.
 
-Format: `find KEYWORD[, MORE_KEYWORDS]`
+Format: `find KEYWORD`
 
 <box type="info" seamless>
 
 **Important:**
 * The search is case-insensitive. e.g. `kfc` will match `KFC`.
-* The order of the keywords matters. e.g. `chan hawker` will not match `Hawker Chan`.
+* The order of the keyword matters. e.g. `chan hawker` will not match `Hawker Chan`.
+* After filtering restaurants by a keyword, [editing](#editing-a-restaurant-edit) a restaurant by that keyword may 
+  cause the restaurant to disappear from the filtered list. 
+  * Note: The restaurant still remains in the restaurant directory and can be seen using [list](#listing-all-restaurants-list).
+  
 </box>
-
-<box type="tip" seamless>
-
-**Tip:** Want broader results? Add more keywords, separated by commas — any restaurant matching one will appear in the list.
-</box>
-
-<box>
 
 **Examples:**
 * `find koi` returns a filtered list containing a restaurant named `KOI Thé`.
@@ -506,19 +503,19 @@ To avoid data loss, you should make a backup before editing.
 
 ## Command summary
 
-| Action                                             | Format                                                       | Examples                                                                                         |
-|----------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [**Help**](#viewing-all-commands-help)             | `help`                                                       | `help`                                                                                           |
+| Action                                             | Format                                                       | Examples                                                                                       |
+|----------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [**Help**](#viewing-all-commands-help)             | `help`                                                       | `help`                                                                                         |
 | [**Add**](#adding-a-restaurant-add)                | `add n/NAME hp/PHONE_NUMBER a/ADDRESS [t/TAG]…​`             | `add n/KFC a/701A Bukit Batok Ave 5, #01-02, Singapore 761721 hp/62226121 t/fast food t/chicken` |
-| [**List**](#listing-all-restaurants-list)          | `list`                                                       | `list`                                                                                           |
-| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]` | `edit 2 n/KFC hp/68849301`                                                                       |
-| [**Find**](#locating-restaurants-find)             | `find KEYWORD[, MORE_KEYWORDS]`                              | `find koi, subway`                                                                               |
-| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                               | `delete 3`                                                                                       |                                                                                                      | 
-| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                 | `mark 3`                                                                                         |
-| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                               | `unmark 3`                                                                                       |
-| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX r/RATING`                                        | `rate 1 r/5`                                                                                     |
-| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                               | `unrate 1`                                                                                       |                                                                                                      |
-| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                          | `tag 3 t/fast food t/halal`                                                                      |
-| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                            | `untag 3 t/fast food t/halal`                                                                    |
-| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                      | `clear`                                                                                          |
-| [**Exit**](#exiting-the-program-exit)              | `exit`                                                       | `exit`                                                                                           |
+| [**List**](#listing-all-restaurants-list)          | `list`                                                       | `list`                                                                                         |
+| [**Edit**](#editing-a-restaurant-edit)             | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]` | `edit 2 n/KFC hp/68849301`                                                                     |
+| [**Find**](#locating-restaurants-find)             | `find KEYWORD`                              | `find koi`                                                                               |
+| [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                               | `delete 3`                                                                                     |                                                                                                      | 
+| [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                 | `mark 3`                                                                                       |
+| [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                               | `unmark 3`                                                                                     |
+| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX r/RATING`                                        | `rate 1 r/5`                                                                                   |
+| [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                               | `unrate 1`                                                                                     |                                                                                                      |
+| [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                          | `tag 3 t/fast food t/halal`                                                                    |
+| [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                            | `untag 3 t/fast food t/halal`                                                                  |
+| [**Clear**](#clearing-all-entries-clear)           | `clear`                                                      | `clear`                                                                                        |
+| [**Exit**](#exiting-the-program-exit)              | `exit`                                                       | `exit`                                                                                         |

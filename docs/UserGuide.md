@@ -350,13 +350,13 @@ Format: `unmark INDEX`
 
 You can give a rating to a restaurant in the directory.
 
-Format: `rate INDEX RATING`
+Format: `rate INDEX r/RATING`
 
 <box>
 
 **Examples:**
-* `rate 1 5` rates the 1st restaurant with 5 stars.
-* `rate 3 3` rates the 3rd restaurant with 3 stars.
+* `rate 1 r/5` rates the 1st restaurant with 5 stars.
+* `rate 3 r/3` rates the 3rd restaurant with 3 stars.
 </box>
 
 <br>
@@ -516,7 +516,7 @@ To avoid data loss, you should make a backup before editing.
 | [**Delete**](#deleting-a-restaurant-delete)        | `delete INDEX`                                               | `delete 3`                                                                                       |                                                                                                      | 
 | [**Mark**](#marking-a-restaurant-mark)             | `mark INDEX`                                                 | `mark 3`                                                                                         |
 | [**Unmark**](#unmarking-a-restaurant-unmark)       | `unmark INDEX`                                               | `unmark 3`                                                                                       |
-| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX RATING`                                          | `rate 1 5`                                                                                       |
+| [**Rate**](#rating-a-restaurant-rate)              | `rate INDEX r/RATING`                                        | `rate 1 r/5`                                                                                     |
 | [**Unrate**](#removing-a-restaurant-rating-unrate) | `unrate INDEX`                                               | `unrate 1`                                                                                       |                                                                                                      |
 | [**Tag**](#tagging-a-restaurant-tag)               | `tag INDEX t/TAG [t/MORE_TAGS]`<br>                          | `tag 3 t/fast food t/halal`                                                                      |
 | [**Untag**](#untagging-a-restaurant-untag)         | `untag INDEX t/TAG [t/MORE_TAGS]`                            | `untag 3 t/fast food t/halal`                                                                    |

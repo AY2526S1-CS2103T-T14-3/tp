@@ -108,7 +108,7 @@ This section describes all the parameters used in FoodTrail commands, along with
 | Parameter      | Description                                   | Constraints                                                                                                                                   |
 |----------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAME`         | Name of the restaurant                        | <li>Cannot be empty. <li>Maximum length of 60 characters.</li>                                                                                |
-| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                                                  |
+| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Cannot have spaces. <br/></li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                |
 | `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Must end with ', Singapore' followed by a 6-digit postal code. </li> |
 | `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                           |
 | `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts positive numbers. (1, 2, 3, ...)</li><li>Number must correspond to a restaurant in the current directory.</li>               |

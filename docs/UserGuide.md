@@ -239,13 +239,14 @@ Format: `list`
 
 Maybe a restaurant moved or changed its phone number? Keep their details updated using `edit`.
 
-Format: `edit INDEX [n/NAME] [hp/PHONE] [a/ADDRESS]​`
+Format: `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]​`
 
 <box type="info" seamless>
 
 **Important:**
+* At least one field (name, phone number, or address) must be specified.
 * Only the name, phone number, and address can be edited.
-* To edit tags, you can use the [tag](#tagging-a-restaurant-tag) command instead.
+  * To edit tags, you can use the [tag](#tagging-a-restaurant-tag) command instead. 
 </box>
 
 <box type="tip" seamless>

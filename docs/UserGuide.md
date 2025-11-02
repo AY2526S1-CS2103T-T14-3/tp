@@ -111,8 +111,8 @@ This section describes all the parameters used in FoodTrail commands, along with
 | `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                                                  |
 | `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Must end with ', Singapore' followed by a 6-digit postal code. </li> |
 | `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                           |
-| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts numbers.</li><li>Number must correspond to a restaurant in the directory.</li>                                               |
-| `KEYWORD`      | Information associated with the restaurant    | No constraints.                                                                                                                               |
+| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts positive numbers. (1, 2, 3, ...)</li><li>Number must correspond to a restaurant in the current directory.</li>               |
+| `KEYWORD`      | Information associated with the restaurant    | —                                                                                                                                             |
 | `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                       |
 
 <br>
@@ -266,7 +266,8 @@ You can edit all details at once, or just a single field — name `n/`, phone `h
 
 ### Locating restaurants: `find`
 
-You can search for restaurants in the directory by their name, address, phone number, or tag.
+You can enter a keyword to locate specific restaurants in the directory. The keyword searches across the 
+name, address, phone number, and tags all at once.
 
 Format: `find KEYWORD`
 
@@ -274,17 +275,16 @@ Format: `find KEYWORD`
 
 **Important:**
 * The search is case-insensitive. e.g. `kfc` will match `KFC`.
-* The order of the keyword matters. e.g. `chan hawker` will not match `Hawker Chan`.
+* The order of the keyword matters. e.g. `food fast` will not match `fast food`.
 * After filtering restaurants by a keyword, [editing](#editing-a-restaurant-edit) a restaurant by that keyword may 
-  cause the restaurant to disappear from the filtered list. 
-  * Note: The restaurant still remains in the restaurant directory and can be seen using [list](#listing-all-restaurants-list).
+  cause the restaurant to disappear from the filtered directory. 
+  * Note: The restaurant still remains in the restaurant directory and can be viewed again using [list](#listing-all-restaurants-list).
   
 </box>
 
 **Examples:**
-* `find koi` returns a filtered list containing a restaurant named `KOI Thé`.
-* `find subway, kfc` returns a filtered list containing restaurants named `Subway` and `KFC`.
-* `find bugis` returns a filtered list containing restaurants named `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
+* `find koi` returns a filtered directory containing a restaurant named `KOI Thé`.
+* `find bugis` returns a filtered directory containing restaurants named `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
 </box>
 
 <figure>

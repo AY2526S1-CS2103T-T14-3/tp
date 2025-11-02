@@ -381,7 +381,7 @@ You can add a customized tag to a restaurant in the directory.
 
 Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 
-<box type="info">
+<box type="info" seamless>
 
 **Important:**
 * Tags are displayed in alphabetical order.

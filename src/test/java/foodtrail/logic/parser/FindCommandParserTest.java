@@ -24,7 +24,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new RestaurantContainsKeywordsPredicate(Collections.singletonList("kfc")));
+                new FindCommand(new RestaurantContainsKeywordsPredicate(Collections.singletonList("kfc")), "kfc");
         assertParseSuccess(parser, "kfc", expectedFindCommand);
 
         // leading and trailing whitespaces

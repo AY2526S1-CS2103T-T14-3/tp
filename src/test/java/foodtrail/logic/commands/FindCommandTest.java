@@ -1,6 +1,5 @@
 package foodtrail.logic.commands;
 
-import static foodtrail.logic.Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static foodtrail.testutil.TypicalRestaurants.ANNAS;
 import static foodtrail.testutil.TypicalRestaurants.ASTONS;
@@ -34,14 +33,14 @@ public class FindCommandTest {
         RestaurantContainsKeywordsPredicate secondPredicate =
                 new RestaurantContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicate, "first");
+        FindCommand findSecondCommand = new FindCommand(secondPredicate, "second");
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate, "first");
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -56,10 +55,11 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noRestaurantFound() {
-        String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 0);
+        String keyword = "zzzzzz";
+        String expectedMessage = String.format(FindCommand.MESSAGE_FIND_SUCCESS, 0, keyword);
         RestaurantContainsKeywordsPredicate predicate =
-                new RestaurantContainsKeywordsPredicate(Collections.singletonList("zzzzzz"));
-        FindCommand command = new FindCommand(predicate);
+                new RestaurantContainsKeywordsPredicate(Collections.singletonList(keyword));
+        FindCommand command = new FindCommand(predicate, keyword);
         expectedModel.updateFilteredRestaurantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredRestaurantList());
@@ -67,10 +67,11 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleKeyword_multipleRestaurantsFound() {
-        String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 3);
+        String keyword = "on";
+        String expectedMessage = String.format(FindCommand.MESSAGE_FIND_SUCCESS, 3, keyword);
         RestaurantContainsKeywordsPredicate predicate =
-                new RestaurantContainsKeywordsPredicate(Collections.singletonList("on"));
-        FindCommand command = new FindCommand(predicate);
+                new RestaurantContainsKeywordsPredicate(Collections.singletonList(keyword));
+        FindCommand command = new FindCommand(predicate, keyword);
         expectedModel.updateFilteredRestaurantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MCDONALDS, ASTONS, ANNAS), model.getFilteredRestaurantList());
@@ -78,10 +79,12 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
+        String keyword = "keyword";
         RestaurantContainsKeywordsPredicate predicate =
-                new RestaurantContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+                new RestaurantContainsKeywordsPredicate(Arrays.asList(keyword));
+        FindCommand findCommand = new FindCommand(predicate, keyword);
+        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate
+                + ", keyword=" + keyword + "}";
         assertEquals(expected, findCommand.toString());
     }
 }

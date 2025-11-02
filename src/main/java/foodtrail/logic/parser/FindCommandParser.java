@@ -2,9 +2,7 @@ package foodtrail.logic.parser;
 
 import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
 import foodtrail.logic.commands.FindCommand;
 import foodtrail.logic.parser.exceptions.ParseException;
@@ -27,19 +25,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] keywords = trimmedArgs.split(",");
-
-        List<String> keywordList = Arrays.stream(keywords)
-                .map(String::trim)
-                .filter(kw -> !kw.isEmpty())
-                .collect(Collectors.toList());
-
-        if (keywordList.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        return new FindCommand(new RestaurantContainsKeywordsPredicate(keywordList));
+        return new FindCommand(new RestaurantContainsKeywordsPredicate(Collections.singletonList(trimmedArgs)));
     }
 
 }

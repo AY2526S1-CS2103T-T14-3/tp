@@ -31,7 +31,7 @@ public class TagCommand extends Command {
             + PREFIX_TAG + "halal";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added %1$s tag(s) to restaurant:\n%2$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "The following tag(s) already exist for this restaurant: ";
+    public static final String MESSAGE_DUPLICATE_TAG = "The following tag(s) %1$s already exist for this restaurant.";
     public static final String MESSAGE_EMPTY_TAG = "Tag name cannot be empty.";
 
     private final Index index;
@@ -66,9 +66,10 @@ public class TagCommand extends Command {
 
         if (!duplicateTags.isEmpty()) {
             String duplicateTagsString = duplicateTags.stream()
-                    .map(t -> t.tagName)
+                    .map(t -> "'" + t.tagName + "'")
                     .collect(Collectors.joining(", "));
-            throw new CommandException(MESSAGE_DUPLICATE_TAG + duplicateTagsString);
+
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TAG, duplicateTagsString));
         }
 
         Set<Tag> newTags = new LinkedHashSet<>(existingTags);

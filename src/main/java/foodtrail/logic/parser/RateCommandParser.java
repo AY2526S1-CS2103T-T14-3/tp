@@ -1,6 +1,7 @@
 package foodtrail.logic.parser;
 
 import static foodtrail.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static foodtrail.logic.parser.CliSyntax.PREFIX_RATING;
 import static java.util.Objects.requireNonNull;
 
 import foodtrail.commons.core.index.Index;
@@ -12,6 +13,9 @@ import foodtrail.logic.parser.exceptions.ParseException;
  */
 public class RateCommandParser implements Parser<RateCommand> {
 
+    static final String MESSAGE_MISSING_RATING_PREFIX = String.format(
+            "Rating must be provided with the %s prefix (e.g. %s4).",
+            PREFIX_RATING, PREFIX_RATING);
     private static final String MESSAGE_INVALID_RATING = "Rating must be an integer between 0 and 5 (inclusive).";
 
     @Override
@@ -23,19 +27,24 @@ public class RateCommandParser implements Parser<RateCommand> {
         }
 
         String[] tokens = trimmed.split("\\s+");
-        if (tokens.length < 2) {
+        if (tokens.length != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
         }
 
         Index index = ParserUtil.parseIndex(tokens[0]);
 
         String ratingToken = tokens[1];
-        if (ratingToken.startsWith("r/")) { // allow "rate 2 r/4"
-            ratingToken = ratingToken.substring(2);
+        String ratingPrefix = PREFIX_RATING.getPrefix();
+        if (!ratingToken.startsWith(ratingPrefix)) {
+            throw new ParseException(MESSAGE_MISSING_RATING_PREFIX);
         }
+        ratingToken = ratingToken.substring(ratingPrefix.length());
 
         final int rating;
         try {
+            if (ratingToken.isEmpty()) {
+                throw new NumberFormatException("Missing rating value");
+            }
             rating = Integer.parseInt(ratingToken);
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_RATING);

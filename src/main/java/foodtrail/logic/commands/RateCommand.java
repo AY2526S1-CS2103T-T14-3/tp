@@ -1,6 +1,7 @@
 package foodtrail.logic.commands;
 
 import static foodtrail.logic.Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX;
+import static foodtrail.logic.parser.CliSyntax.PREFIX_RATING;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public class RateCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Rates a restaurant from 0 to 5.\n"
-            + "Parameters: INDEX (positive integer) RATING (integer 0–5)\n"
-            + "Example: " + COMMAND_WORD + " 2 4";
+            + "Parameters: INDEX (positive integer) " + PREFIX_RATING + "RATING (integer 0–5)\n"
+            + "Example: " + COMMAND_WORD + " 2 " + PREFIX_RATING + "4";
 
     public static final String MESSAGE_RATE_SUCCESS = "Rated %1$s: %2$d/5";
 

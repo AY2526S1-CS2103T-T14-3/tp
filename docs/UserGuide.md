@@ -63,18 +63,24 @@ This guide is designed to support all users, from first-time beginners to experi
 
 This guide will act as a walkthrough on **installing FoodTrail** and **teach you how to use it**.
 
-**Step 1: Install Java**
-* FoodTrail needs a software called **Java** to run.
-  * Check that you have **Java version 17** or higher installed on your computer.
-  * If you are a Mac user, follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html) to install the correct version of the Java Development Kit (JDK).
+**Step 1: Ensure Java 17 is installed**
+* Check that you have **Java version 17** or higher installed on your computer.
+1. Open a command terminal.
+    * On Windows: Search for "Command Prompt" and open it.
+    * On Mac/Linux: Search for "Terminal" and open it.
+2. In the command terminal, type `java -version` and press Enter. 
+  * If you do not have Java 17, follow these steps to install the correct version of the Java Development Kit (JDK).
+  * On Windows: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html)
+  * On Mac/Linux: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html)
 
 **Step 2: Download the app file**
-1. Click [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.5/foodtrail.jar) to download the latest version of FoodTrail.
+1. Click [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.6/foodtrail.jar) to download the 
+   latest version of FoodTrail.
 2. Store the downloaded file into a dedicated folder on your computer. This will be where FoodTrail stores all your data.
 
 **Step 3: Run the app from the command terminal**
 1. Open a command terminal.
-   * On Windows: Search for "Command Prompt" or "PowerShell" and open it.
+   * On Windows: Search for "Command Prompt" and open it.
    * On Mac/Linux: Search for "Terminal" and open it.
 2. Navigate to the folder where you stored FoodTrail in.
    * In the command terminal, type `cd /path/to/your/folder` and press Enter. 
@@ -188,7 +194,7 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 <box type="info" seamless>
 
 **Important:** 
-* Restaurant details can only include one name, address, and phone number.
+* A restaurant can only have one name, one address, and one phone number.
 * For the address, there must be a space between the `,` and `Singapore`. Similarly, there must be a space between 
   `Singapore` and the postal code. (e.g. `..., Singapore 123456`).
 </box>
@@ -470,13 +476,13 @@ If you’re an advanced user, you can also edit this file directly to update you
 <box type="warning" seamless>
 
 **Caution:** <br>
-If the data file is edited incorrectly or becomes invalid, FoodTrail will reset and start with an empty file on the next run. <br>
+If `foodtrail.json` is edited incorrectly or becomes invalid, FoodTrail will reset and start with an empty file on the next run. <br>
 Be careful when making changes as incorrect values may cause the app to behave unexpectedly.
 
 <box type="tip" seamless>
 
 **Recommendation:** <br>
-To avoid data loss, you should make a copy of the data file before editing.
+To avoid data loss, you should make a copy of `foodtrail.json` before editing.
 </box>
 </box>
 
@@ -485,7 +491,7 @@ To avoid data loss, you should make a copy of the data file before editing.
 ## FAQ
 **Q**: Is there a predefined list of tags?<br>
 **A**: There is no predefined list of tags. While the sample data provides an example of how users can make use of 
-tags, users can add their own tags.
+tags, users can add their own customized tags.
 
 **Q**: How is my restaurant data stored?<br>
 **A**: FoodTrail stores your data locally on your computer, ensuring your information is private and accessible
@@ -495,12 +501,17 @@ offline.
 **A**: Inside the folder where the app is stored, your restaurant data is kept in the `data` folder as a `foodtrail.json` file.
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: To transfer your data, you can follow these steps: 
-1. Make sure you have [installed the FoodTrail app](#installation-guide) on the other computer. 
-2. Find the folder where the app is stored. Inside it, there should be a `data` folder. If there isn't one, 
+**A**: To transfer your data, you can follow the steps below:
+<box>
+
+**Steps**:
+1. Make sure you have [installed the FoodTrail app](#installation-guide) on the other computer.
+2. Find the folder where the app is stored. Inside it, there should be a `data` folder. If there isn't one,
    create a new folder and name it `data`.
-3. Copy your existing `foodtrail.json` file (from your current computer) and paste it into the `data` folder on the 
-   other computer. If a file with the same name already exists, choose Replace to overwrite it.
+3. Copy your existing `foodtrail.json` file (from your current computer) and paste it into the `data` folder on the
+   other computer. If a file with the same name already exists, choose `Replace` to overwrite it.
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues

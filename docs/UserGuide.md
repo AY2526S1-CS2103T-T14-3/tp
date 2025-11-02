@@ -388,6 +388,7 @@ Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 
 **Important:**
 * Tags are displayed in alphabetical order.
+* Tags are case-insensitive.
 </box>
 
 <box type="tip" seamless>
@@ -418,6 +419,7 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 **Important:** <br>
 
 * Tags are displayed in alphabetical order.
+* Tags are case-insensitive.
 </box>
 
 <box type="tip" seamless>

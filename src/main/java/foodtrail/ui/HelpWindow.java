@@ -137,8 +137,8 @@ public class HelpWindow extends UiPart<Stage> {
 
         Label userGuide = new Label("For more information, refer to the user guide. " + USERGUIDE_URL);
         userGuide.getStyleClass().add("h3");
-        userGuide.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #5C4033;" +
-                " -fx-wrap-text: true");
+        userGuide.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #5C4033;"
+                + " -fx-wrap-text: true");
         container.getChildren().add(userGuide);
 
         scrollPane.setContent(container);

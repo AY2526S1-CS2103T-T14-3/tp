@@ -30,8 +30,8 @@ public class UntagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "halal";
 
-    public static final String MESSAGE_UNTAG_SUCCESS = "Removed %1$s tag(s) from restaurant:\n%2$s";
-    public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) does not exist for this restaurant: ";
+    public static final String MESSAGE_UNTAG_SUCCESS = "Removed %1$s tag(s) from restaurant:\n%2$s.";
+    public static final String MESSAGE_TAG_NOT_FOUND = "The tag(s) %1$s does not exist for this restaurant.";
     public static final String MESSAGE_EMPTY_TAG = "Tag name cannot be empty.";
 
     private final Index index;
@@ -66,7 +66,7 @@ public class UntagCommand extends Command {
             invalidTags.removeAll(existingTags);
             String invalidTagsString = invalidTags.stream().map(t -> "'" + t.tagName + "'")
                     .collect(Collectors.joining(", "));
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND + invalidTagsString);
+            throw new CommandException(String.format(MESSAGE_TAG_NOT_FOUND, invalidTagsString));
         }
 
         Set<Tag> newTags = new LinkedHashSet<>(existingTags);

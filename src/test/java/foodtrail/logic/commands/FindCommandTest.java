@@ -2,8 +2,8 @@ package foodtrail.logic.commands;
 
 import static foodtrail.logic.Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW;
 import static foodtrail.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static foodtrail.testutil.TypicalRestaurants.HAWKERCHAN;
-import static foodtrail.testutil.TypicalRestaurants.KOI;
+import static foodtrail.testutil.TypicalRestaurants.ANNAS;
+import static foodtrail.testutil.TypicalRestaurants.ASTONS;
 import static foodtrail.testutil.TypicalRestaurants.MCDONALDS;
 import static foodtrail.testutil.TypicalRestaurants.getTypicalRestaurantDirectory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,7 +58,7 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noRestaurantFound() {
         String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 0);
         RestaurantContainsKeywordsPredicate predicate =
-                new RestaurantContainsKeywordsPredicate(Collections.singletonList(" "));
+                new RestaurantContainsKeywordsPredicate(Collections.singletonList("zzzzzz"));
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRestaurantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -68,12 +68,12 @@ public class FindCommandTest {
     @Test
     public void execute_singleKeyword_multipleRestaurantsFound() {
         String expectedMessage = String.format(MESSAGE_RESTAURANTS_LISTED_OVERVIEW, 3);
-        RestaurantContainsKeywordsPredicate predicate = 
+        RestaurantContainsKeywordsPredicate predicate =
                 new RestaurantContainsKeywordsPredicate(Collections.singletonList("on"));
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRestaurantList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MCDONALDS, HAWKERCHAN, KOI), model.getFilteredRestaurantList());
+        assertEquals(Arrays.asList(MCDONALDS, ASTONS, ANNAS), model.getFilteredRestaurantList());
     }
 
     @Test

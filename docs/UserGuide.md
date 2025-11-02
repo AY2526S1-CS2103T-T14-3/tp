@@ -262,6 +262,7 @@ Format: `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]​`
 </box>
 
 <box>
+   
 **Examples:**
 *  `edit 1 hp/91234567` edits the phone number of the 1st restaurant in the directory to be `91234567`.
 *  `edit 2 n/KFC` edits the name of the 2nd restaurant in the directory to be `KFC`.

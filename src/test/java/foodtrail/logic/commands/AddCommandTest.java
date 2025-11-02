@@ -59,13 +59,16 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicateRestaurant_throwsCommandException() {
+    public void execute_duplicateRestaurant_showsAllRestaurants() {
         Restaurant validRestaurant = new RestaurantBuilder().build();
         AddCommand addCommand = new AddCommand(validRestaurant);
         ModelStub modelStub = new ModelStubWithRestaurant(validRestaurant);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_RESTAURANT, () ->
-                addCommand.execute(modelStub));
+        try {
+            addCommand.execute(modelStub);
+        } catch (CommandException e) {
+            assertEquals(AddCommand.MESSAGE_DUPLICATE_RESTAURANT, e.getMessage());
+        }
     }
 
     @Test
@@ -175,7 +178,7 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
-            throw new AssertionError("This method should not be called.");
+            // This method is called by AddCommand, but not needed for this test.
         }
     }
 

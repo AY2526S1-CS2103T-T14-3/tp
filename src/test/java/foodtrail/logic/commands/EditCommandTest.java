@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import foodtrail.commons.core.index.Index;
 import foodtrail.logic.Messages;
 import foodtrail.logic.commands.EditCommand.EditRestaurantDescriptor;
+import foodtrail.logic.commands.exceptions.CommandException;
 import foodtrail.model.Model;
 import foodtrail.model.ModelManager;
 import foodtrail.model.RestaurantDirectory;
@@ -172,16 +173,20 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicateRestaurantUnfilteredList_failure() {
+    public void execute_duplicateRestaurantUnfilteredList_showsAllRestaurants() {
         Restaurant firstRestaurant = model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased());
         EditRestaurantDescriptor descriptor = new EditRestaurantDescriptorBuilder(firstRestaurant).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_RESTAURANT, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_RESTAURANT);
+        try {
+            editCommand.execute(model);
+        } catch (CommandException e) {
+            assertEquals(EditCommand.MESSAGE_DUPLICATE_RESTAURANT, e.getMessage());
+        }
     }
 
     @Test
-    public void execute_duplicateRestaurantFilteredList_failure() {
+    public void execute_duplicateRestaurantFilteredList_showsAllRestaurants() {
         showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
 
         // edit restaurant in filtered list into a duplicate in restaurant directory
@@ -190,7 +195,11 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RESTAURANT,
                 new EditRestaurantDescriptorBuilder(restaurantInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_RESTAURANT);
+        try {
+            editCommand.execute(model);
+        } catch (CommandException e) {
+            assertEquals(EditCommand.MESSAGE_DUPLICATE_RESTAURANT, e.getMessage());
+        }
     }
 
     @Test

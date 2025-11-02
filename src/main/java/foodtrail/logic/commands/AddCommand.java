@@ -4,6 +4,7 @@ import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_TAG;
+import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
@@ -53,6 +54,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasRestaurant(toAdd)) {
+            model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
             throw new CommandException(MESSAGE_DUPLICATE_RESTAURANT);
         }
 

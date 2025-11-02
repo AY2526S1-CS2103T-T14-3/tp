@@ -14,9 +14,13 @@ public class Address {
 
     public static final String MESSAGE_CONSTRAINTS =
             """
-            Address should not be empty, not exceed 100 characters,
-            and must end with ', Singapore' followed by a 6-digit postal code.
-            Preferred format: [Street Address], [Building Name], Singapore [Postal Code].
+            Invalid address format. Please adhere to the following rules:
+            1. The address must not be empty.
+            2. The address must be 1 to 100 characters long.
+            3. The address part (before ", Singapore") can only contain letters, numbers, and these special characters:
+            # (hash), ' (apostrophe), / (forward slash), . (full stop), + (plus sign), - (hyphen), , (comma).
+            4. The address must end with ', Singapore ' then a 6-digit postal code with no spaces.
+            Example: 123 Clementi Ave 3, #01-01, Singapore 120123
             """;
 
     public final String value;
@@ -48,7 +52,7 @@ public class Address {
 
         // 3. Use regex to split address into main part and postal code
         // The postal code must be preceded by a comma, "Singapore", and mandatory whitespace.
-        Pattern addressPattern = Pattern.compile("^(.*),\\s+Singapore\\s+((\\d\\s*){6})$");
+        Pattern addressPattern = Pattern.compile("^(.*),\\s+Singapore\\s((\\d){6})$");
         Matcher addressMatcher = addressPattern.matcher(test);
 
         if (!addressMatcher.matches()) {
@@ -64,7 +68,7 @@ public class Address {
             return false; // Address part before comma is empty
         }
 
-        if (!addressPart.matches("^[a-zA-Z0-9\\s,#\\'-/.]*$")) {
+        if (!addressPart.matches("^[a-zA-Z0-9\\s,#'/.+-]*$")) {
             return false;
         }
 

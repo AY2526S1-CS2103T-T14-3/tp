@@ -11,8 +11,12 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, be exactly 8 digits, "
-                    + "and start with 6, 8 or 9.";
+            """
+            Invalid phone number format. Please adhere to the following rules:
+            1. The phone number cannot be empty or have spaces.
+            2. The phone number must have 8 digits, starting with 6, 8, or 9.
+            Example: 88882222
+            """;
     public static final String VALIDATION_REGEX = "^[689]\\d{7}$";
     public final String value;
 

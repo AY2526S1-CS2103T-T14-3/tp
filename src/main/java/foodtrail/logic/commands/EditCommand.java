@@ -3,6 +3,7 @@ package foodtrail.logic.commands;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_NAME;
 import static foodtrail.logic.parser.CliSyntax.PREFIX_PHONE;
+import static foodtrail.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
@@ -76,6 +77,7 @@ public class EditCommand extends Command {
         Restaurant editedRestaurant = createEditedRestaurant(restaurantToEdit, editRestaurantDescriptor);
 
         if (!restaurantToEdit.isSameRestaurant(editedRestaurant) && model.hasRestaurant(editedRestaurant)) {
+            model.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
             throw new CommandException(MESSAGE_DUPLICATE_RESTAURANT);
         }
 

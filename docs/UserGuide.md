@@ -282,6 +282,8 @@ Format: `find KEYWORD`
 
 **Important:**
 * The search is case-insensitive. e.g. `kfc` will match `KFC`.
+* The search ignores accented characters. e.g. `koi the` will match `KOI Thé`.
+* The search performs partial matching. e.g. `aston` will match `Astons Specialties`.
 * The order of the keyword matters. e.g. `food fast` will not match `fast food`.
 </box>
 
@@ -297,7 +299,7 @@ Format: `find KEYWORD`
 <box>
 
 **Examples:**
-* `find koi` returns a filtered directory containing a restaurant named `KOI Thé`.
+* `find mcd` returns a filtered directory containing a restaurant named `McDonald's`.
 * `find bugis` returns a filtered directory containing restaurants named `Astons Specialties` and `McDonald's` since their addresses contain `bugis`.
 </box>
 

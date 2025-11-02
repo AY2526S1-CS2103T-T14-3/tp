@@ -104,15 +104,15 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 
 This section describes all the parameters used in FoodTrail commands, along with their meanings and any input rules or constraints.
 
-| Parameter      | Description                                   | Constraints                                                                                                                                                                                                          |
-|----------------|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | Name of the restaurant                        | <li>Cannot be empty. <li>Maximum length of 60 characters.</li>                                                                                                                                                       |
-| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Cannot have spaces. <br/></li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                                                                                       |
-| `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Only accepts certain special characters. (`/'.+-,#`)</li><li>Must end with ', Singapore' followed by a 6-digit postal code. </li> |
-| `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                                                                                                  |
-| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts positive numbers. (1, 2, 3, ...)</li><li>Number must correspond to a restaurant in the current directory.</li>                                                                                      |
-| `KEYWORD`      | Information associated with the restaurant    | —                                                                                                                                                                                                                    |
-| `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                                                                                              |
+| Parameter      | Description                                   | Constraints                                                                                                                                                                                             |
+|----------------|-----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | Name of the restaurant                        | <li>Cannot be empty. <li>Maximum length of 60 characters.</li>                                                                                                                                          |
+| `PHONE_NUMBER` | Phone number of the restaurant                | <li>Cannot be empty. </li><li>Cannot have spaces. <br/></li><li>Only accepts 8-digit numbers that start with 6, 8, or 9. </li>                                                                          |
+| `ADDRESS`      | Address of the restaurant                     | <li>Cannot be empty. </li><li>Maximum length of 100 characters. </li><li>Only accepts certain special characters. (`/'.+-,#`)</li><li>Must end with `, Singapore <6-digit postal code>` </li> |
+| `TAG`          | Labels associated with the restaurant         | <li>Maximum length of 30 characters. </li><li>Accepts spaces. </li>                                                                                                                                     |
+| `INDEX`        | Position of the restaurant in the directory   | <li>Only accepts positive numbers. (1, 2, 3, ...)</li><li>Number must correspond to a restaurant in the current directory.</li>                                                                         |
+| `KEYWORD`      | Information associated with the restaurant    | —                                                                                                                                                                                                       |
+| `RATING`       | Rating of the restaurant                      | <li>Only accepts 0, 1, 2, 3, 4, 5.</li>                                                                                                                                                                 |
 
 <br>
 <br>
@@ -195,7 +195,7 @@ Format: `add n/NAME a/ADDRESS hp/PHONE_NUMBER [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** 
+**Tips:** 
 * A restaurant is considered a duplicate if it has the same name, address, and phone number.
 * A restaurant can have any number of tags (including 0).
 </box>
@@ -248,14 +248,6 @@ Format: `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]​`
   * To edit tags, you can use the [tag](#tagging-a-restaurant-tag) command instead. 
 </box>
 
-<box type="tip" seamless>
-
-**Tip:** <br>
-You can edit all details at once, or just a single field — name `n/`, phone `hp/`, or address `a/`.
-</box>
-
-<box>
-
 **Examples:**
 *  `edit 1 hp/91234567` edits the phone number of the 1st restaurant in the directory to be `91234567`.
 *  `edit 2 n/KFC` edits the name of the 2nd restaurant in the directory to be `KFC`.
@@ -276,11 +268,17 @@ Format: `find KEYWORD`
 **Important:**
 * The search is case-insensitive. e.g. `kfc` will match `KFC`.
 * The order of the keyword matters. e.g. `food fast` will not match `fast food`.
-* After filtering restaurants by a keyword, [editing](#editing-a-restaurant-edit) a restaurant by that keyword may 
-  cause the restaurant to disappear from the filtered directory. 
-  * Note: The restaurant still remains in the restaurant directory and can be viewed again using [list](#listing-all-restaurants-list).
-  
 </box>
+
+<box type="tip" seamless>
+
+**Tips:**
+* Operations can be done on a filtered directory. (e.g. [edit](#editing-a-restaurant-edit), [delete](#deleting-a-restaurant-delete), [mark](#marking-a-restaurant-mark), [tag](#tagging-a-restaurant-tag), [rate](#rating-a-restaurant-rate))
+  * Note: After filtering restaurants by a keyword, editing a restaurant by that keyword may cause the restaurant to 
+    disappear from the filtered directory. However, the restaurant still remains in the restaurant directory and 
+    can be viewed again using the [list](#listing-all-restaurants-list) command.
+
+<box>
 
 **Examples:**
 * `find koi` returns a filtered directory containing a restaurant named `KOI Thé`.
@@ -390,7 +388,7 @@ Format: `tag INDEX t/TAG [t/MORE_TAGS]`
 <box type="tip" seamless>
 
 **Tips:**
-* Tags let you include extra details or keywords, such as “halal,” “cozy,” or “open late,” to help describe the restaurant better.
+* Tags let you include extra details or keywords, such as `halal`, `cozy`, or `open late` to help describe the restaurant better.
 * Multiple tags can be added by entering more `t/` and specifying additional tags.
 </box>
 
@@ -419,7 +417,7 @@ Format: `untag INDEX t/TAG [t/MORE_TAGS]`
 
 <box type="tip" seamless>
 
-**Tips:** <br>
+**Tip:** <br>
 * Multiple tags can be removed by entering more `t/` and specifying additional tags.
 </box>
 

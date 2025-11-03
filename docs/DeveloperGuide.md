@@ -13,7 +13,17 @@
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). <br>
+* The icon image for the application is credited to **Phap Nguyen Huu**, with the link to the image being found [here](https://dribbble.com/shots/7057830-Food-Icon-Free-).
+* Use of AI Declaration:
+
+| Tool used | Person that used tool | Extent of Use                                                                                                                                                   |
+|-----------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Gemini    | Christopher Chong     | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
+| Gemini    | Chen Junyao           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li> <li>Suggestions for improved phrasing of sentences</li> |
+| Gemini    | Tan Weijun            | <li>Generation of background image for application</li> <li>Troubleshooting to find the specific location of the problem</li>                                   |
+| Gemini    | Justin Chan           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
+| Gemini    | Louis Teng            | <li>Troubleshooting to find the specific location of the problem</li>                                                                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -168,24 +178,54 @@ Classes used by multiple components are in the `foodtrail.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancements**
+
+### Planned Enhancements
+
+**Team size: 5**
+
+1. **Allow find command to filter by specific field**: The current find command searches across `Name`, `Phone`, 
+   `Address`, and `Tag` simultaneously, which does not give users an explicit way to search by a specific field. 
+    We plan to allow specifying a prefix so user can specify the field to search by.
+   * `find n/kfc` would search through `Name` in the restaurant directory for the keyword `kfc`.
+   * `find hp/283` would search through `Phone` in the restaurant directory for the keyword `283`.   
+2. **Allow find command to accept ratings**: The current find command searches across `Name`, `Phone`, `Address`,
+   and `Tag`, which does not allow users to search by their ratings. We plan to include support for ratings so users 
+   could
+   search for restaurants with specific ratings.
+   * `find r/4` would find all restaurants that the user has rated 4 stars.
+3. **Allow edit command to edit tags**: The current edit command only allows editing of `Name`, `Phone`,
+   `Address`, without being able to edit tags. We plan to include support for tags so that users do not need to 
+   resort to `untag` and `tag` to edit tags.
+    * `edit 1 ot/old_tag nt/new_tag` would edit the `old_tag` of the 1st restaurant in the current directory with `new_tag`.
+4. **Allow tag and untag command to accept multiple indexes**: The current tag and untag commands only allows modifying 
+   the tags of one restaurant.
+   We plan to allow listing more indexes so that multiple restaurants can be tagged/untagged at once.
+   * `tag 1 2 3 t/fast food` would add a `fast food` tag for the 1st, 2nd, and 3rd restaurant in the current directory.
+   * `untag 4 5 t/chicken` would remove the `chicken` tag for the 4th and 5th restaurant in the current directory.
+5. **Make Address error message more specific**: The current `Address` error message lists multiple 
+   constraints, which is too generic since it does not pinpoint the specific constraint that was violated. We 
+   plan to split the constraints into their own error messages and display only the violated constraints.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
-* food enthusiasts who want to keep track of restaurants they have visited or are interested in
+* food enthusiasts who want to keep track of restaurants in Singapore that they have visited or are interested in
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* food lovers that are young adults ranging from 21 to early 30s
 
 **Value proposition**:
 
 * maintain a curated record of dining experiences
 * eliminates the need for scattered notes or relying on memory
-* helps users keep track of favourite restaurants
+* helps users keep track of visited restaurants
 
 
 ### User stories
@@ -318,7 +358,7 @@ Extensions:
 6. Source code should be open-source.
 7. Code should be well-commented, and a user guide should be provided.
 8. Features should be implemented in separate modules for easier debugging and updates.
-9. Error messages should suggest corrective action, not just report failure.
+9. Error messages should be descriptive when reporting failure.
 10. Program should not crash upon encountering errors.
 
 ### Glossary
@@ -350,29 +390,85 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. [Download](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.6/foodtrail.jar) the jar file and copy into a folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
+   2. Double-click the jar file.<br>
+      Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 
 ### Deleting a restaurant
 
 1. Deleting a restaurant while all restaurants are being shown
 
-   1. Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+   * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message. Timestamp in the status bar is updated.
+      Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
+   2. Test case: `delete 0`<br>
+      Expected: No restaurant is deleted. Error details shown in the status message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+
+### Marking a restaurant as visited
+
+1. Marking a restaurant as visited while all restaurants are being shown
+
+    * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+
+    1. Test case: 'mark 1' <br>
+       Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the status message.
+
+    2. Test case: 'mark 0' <br>
+       Expected: No restaurant is marked as visited. Error details shown in the status message. 
+
+    3. Other incorrect mark commands to try: `mark`, `mark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Adding a restaurant
+
+1. Adding a restaurant while the list is empty
+    
+    * Prerequisites: List all restaurant using the `list` command. No restaurants in the list.
+
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
+       Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.
+
+### Rating a restaurant
+
+1. Rating an existing restaurant in the restaurant directory
+
+    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+
+    1. Test case: `rate 1 r/5` <br>
+       Expected: The rating of the restaurant is updated to 5. The output box shows the corresponding details of the updated restaurant.
+
+### Tagging a restaurant
+
+ 1. Tagging an existing restaurant in the restaurant directory
+
+    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+
+    1. Test case: `tag 1 t/halal` <br>
+       Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
+
+
+### Editing a restaurant
+
+1. Editing the details of an existing restaurant in the restaurant directory
+    
+    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+
+    1. Test case: `edit 1 hp/91234567` <br>
+       Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
+    2. Test case: `edit 2 n/KFC` <br>
+       Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.

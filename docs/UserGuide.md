@@ -7,8 +7,8 @@ pageNav: 3
 # FoodTrail User Guide
 
 Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! 
-It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've 
-visited or want to try. If you're a fast typer, you'll find **FoodTrail** an effective way to **organize your culinary 
+It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants in Singapore that you've 
+visited or want to try. If you're a **fast typer**, you'll find **FoodTrail** an effective way to **organize your culinary 
 adventures**. 
 
 <br>
@@ -78,7 +78,8 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 * If you do not have Java 17, follow the instructions below to install the correct version of the Java Development Kit 
   (JDK).
   * On Windows: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html).
-  * On Mac/Linux: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+  * On Mac: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+  * On Linux: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationLinux.html).
 
 **Step 2: Download the app file**
 1. Click [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.6/foodtrail.jar) to download the 

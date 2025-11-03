@@ -7,8 +7,8 @@ pageNav: 3
 # FoodTrail User Guide
 
 Tired of forgetting that amazing little restaurant you found last month? **FoodTrail** is here to help! 
-It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants you've 
-visited or want to try. If you're a fast typer, you'll find **FoodTrail** an effective way to **organize your culinary 
+It's a **desktop application** designed **for food lovers** like you to keep a diary of all the restaurants in Singapore that you've 
+visited or want to try. If you're a **fast typer**, you'll find **FoodTrail** an effective way to **organize your culinary 
 adventures**. 
 
 <br>

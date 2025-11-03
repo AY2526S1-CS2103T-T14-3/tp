@@ -61,7 +61,12 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-restaurant": "Deleting a restaurant"
+        "deleting-a-restaurant": "Deleting a restaurant",
+        "marking-a-restaurant-as-visited": "Marking a restaurant as visited",
+        "adding-a-restaurant": "Adding a restaurant",
+        "rating-a-restaurant": "Rating a restaurant",
+        "tagging-a-restaurant": "Tagging a restaurant",
+        "editing-a-restaurant": "Editing a restaurant"
       },
       "headingKeywords": {}
     },

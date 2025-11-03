@@ -268,9 +268,9 @@ Extensions:
 
       Use case resumes at step 1.
 
-* 1b. There are missing parameters or invalid syntax.
+* 1b. The enetered restaurant details matches an existing restaurant in the restaurant directory.
 
-    * 1b1. FoodTrail shows an error message, notifying the user about the syntax for add.
+    * 1b1. FoodTrail shows an error message, notifying the user that the restaurant already exists in the restaurant directory.
 
       Use case resumes at step 1.
 

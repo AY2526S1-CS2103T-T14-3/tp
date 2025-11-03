@@ -13,4 +13,5 @@ Restaurant *--> "1" Phone
 Restaurant *--> "0..1" Rating
 Restaurant *--> "1" Address
 Restaurant *--> "*" Tag
+Restaurant *--> "1" IsMarked
 @enduml

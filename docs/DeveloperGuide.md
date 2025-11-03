@@ -401,3 +401,33 @@ testers are expected to do more *exploratory* testing.
 
      1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
         Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.
+
+### Rating a restaurant
+
+1. Rating an existing restaurant in the restaurant directory
+
+    1. Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+
+     1. Test case: `rate 1 r/5` <br>
+        Expected: The rating of the restaurant is updated to 5. The output box shows the corresponding details of the updated restaurant.
+
+### Tagging a restaurant
+
+ 1. Tagging an existing restaurant in the restaurant directory
+
+    1. Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+
+    1. Test case: `tag 1 t/halal` <br>
+        Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
+
+
+### Editing a restaurant
+
+1. Editing the details of an existing restaurant in the restaurant directory
+    
+    1. Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+
+    1. Test case: `edit 1 hp/91234567` <br>
+        Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
+    2. Test case: 'edit 2 n/KFC' <br>
+        Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.

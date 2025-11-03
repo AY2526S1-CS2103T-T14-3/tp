@@ -14,8 +14,8 @@
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). <br>
-* The icon image for the application is credited to **Phap Nguyen Huu**, with the link to the image being found [here](https://dribbble.com/shots/7057830-Food-Icon-Free-).
-* Use of AI Declaration:
+* The [icon image](https://dribbble.com/shots/7057830-Food-Icon-Free-) for the application is credited to Phap Nguyen Huu.
+* Declaration of the use of AI:
 
 | Tool used | Person that used tool | Extent of Use                                                                                                                                                   |
 |-----------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -189,24 +189,24 @@ Classes used by multiple components are in the `foodtrail.commons` package.
     We plan to allow specifying a prefix so user can specify the field to search by.
    * `find n/kfc` would search through `Name` in the restaurant directory for the keyword `kfc`.
    * `find hp/283` would search through `Phone` in the restaurant directory for the keyword `283`.   
-2. **Allow find command to accept ratings**: The current find command searches across `Name`, `Phone`, `Address`,
+2. **Allow find command to search through ratings**: The current find command searches across `Name`, `Phone`, `Address`,
    and `Tag`, which does not allow users to search by their ratings. We plan to include support for ratings so users 
    could
-   search for restaurants with specific ratings.
+   search for restaurants based on specific ratings.
    * `find r/4` would find all restaurants that the user has rated 4 stars.
 3. **Allow edit command to edit tags**: The current edit command only allows editing of `Name`, `Phone`,
    `Address`, without being able to edit tags. We plan to include support for tags so that users do not need to 
    resort to `untag` and `tag` to edit tags.
     * `edit 1 ot/old_tag nt/new_tag` would edit the `old_tag` of the 1st restaurant in the current directory with `new_tag`.
 4. **Allow tag and untag command to accept multiple indexes**: The current tag and untag commands only allows modifying 
-   the tags of one restaurant.
+   the tags of one restaurant at a time.
    We plan to allow listing more indexes so that multiple restaurants can be tagged/untagged at once.
    * `tag 1 2 3 t/fast food` would add a `fast food` tag for the 1st, 2nd, and 3rd restaurant in the current directory.
    * `untag 4 5 t/chicken` would remove the `chicken` tag for the 4th and 5th restaurant in the current directory.
 5. **Make Address error message more specific**: The current `Address` error message lists multiple 
    constraints, which is too generic since it does not pinpoint the specific constraint that was violated. We 
    plan to split the constraints into their own error messages and display only the violated constraints.
-6. **Rename clear command to make it harder to execute**: The current clear command deletes all restaurant data once entered, and users could potentially enter the `clear` command when trying to delete a restaurant. 
+6. **Rename clear command to make it harder to enter by accident**: The current clear command deletes all restaurant data once entered, and users could potentially enter the `clear` command when trying to delete a restaurant. 
    We plan to rename the command to `clearalldata` so that it is harder to erase all data by accident.
 
 --------------------------------------------------------------------------------------------------------------------

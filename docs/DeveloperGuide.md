@@ -184,18 +184,17 @@ Classes used by multiple components are in the `foodtrail.commons` package.
 
 **Target user profile**:
 
-* food enthusiasts who want to keep track of restaurants they have visited or are interested in
+* food enthusiasts who want to keep track of restaurants in Singapore that they have visited or are interested in
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* food lovers that are young adults ranging from 21 to early 30s
 
 **Value proposition**:
 
 * maintain a curated record of dining experiences
 * eliminates the need for scattered notes or relying on memory
-* helps users keep track of favourite restaurants
+* helps users keep track of visited restaurants
 
 
 ### User stories

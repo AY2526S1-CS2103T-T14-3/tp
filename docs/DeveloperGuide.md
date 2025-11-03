@@ -178,6 +178,37 @@ Classes used by multiple components are in the `foodtrail.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancements**
+
+### Planned Enhancements
+
+**Team size: 5**
+
+1. **Allow find command to filter by specific field**: The current find command searches across `Name`, `Phone`, 
+   `Address`, and `Tag` simultaneously, which does not give users an explicit way to search by a specific field. 
+    We plan to allow specifying a prefix so user can specify the field to search by.
+   * `find n/kfc` would search through `Name` in the restaurant directory for the keyword `kfc`.
+   * `find hp/283` would search through `Phone` in the restaurant directory for the keyword `283`.   
+2. **Allow find command to accept ratings**: The current find command searches across `Name`, `Phone`, `Address`,
+   and `Tag`, which does not allow users to search by their ratings. We plan to include support for ratings so users 
+   could
+   search for restaurants with specific ratings.
+   * `find r/4` would find all restaurants that the user has rated 4 stars.
+3. **Allow edit command to edit tags**: The current edit command only allows editing of `Name`, `Phone`,
+   `Address`, without being able to edit tags. We plan to include support for tags so that users do not need to 
+   resort to `untag` and `tag` to edit tags.
+    * `edit 1 ot/old_tag nt/new_tag` would edit the `old_tag` of the 1st restaurant in the current directory with `new_tag`.
+4. **Allow tag and untag command to accept multiple indexes**: The current tag and untag commands only allows modifying 
+   the tags of one restaurant.
+   We plan to allow listing more indexes so that multiple restaurants can be tagged/untagged at once.
+   * `tag 1 2 3 t/fast food` would add a `fast food` tag for the 1st, 2nd, and 3rd restaurant in the current directory.
+   * `untag 4 5 t/chicken` would remove the `chicken` tag for the 4th and 5th restaurant in the current directory.
+5. **Make Address error message more specific**: The current `Address` error message lists multiple 
+   constraints, which is too generic since it does not pinpoint the specific constraint that was violated. We 
+   plan to split the constraints into their own error messages and display only the violated constraints.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product scope

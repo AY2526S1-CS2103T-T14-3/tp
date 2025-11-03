@@ -962,7 +962,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The rating of the 1st restaurant is updated to 5. The output box will display the restaurant name and the added rating.
    
     2. Test case: `rate 1 r/0` <br>
-       Expected: The rating of the 1st restaurant is updated to 0. The output box will display the restaurant name and the added rating.<br><br>
+       Expected: The rating of the 1st restaurant is updated to 0. The output box will display the restaurant name and the added rating.<br>
 
 2. Adding an invalid rating
     * Prerequisites: There must be at least one restaurant in the current directory.

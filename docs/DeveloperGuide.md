@@ -350,31 +350,32 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. [Download](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.6/foodtrail.jar) the jar file and copy into a folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
+   2. Double-click the jar file.<br>
+      Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 
 ### Deleting a restaurant
 
 1. Deleting a restaurant while all restaurants are being shown
 
-   1. Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+   * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   2. Test case: `delete 0`<br>
       Expected: No restaurant is deleted. Error details shown in the status message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 
@@ -382,52 +383,52 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking a restaurant as visited while all restaurants are being shown
 
-    1. Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+    * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
 
     1. Test case: 'mark 1' <br>
        Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the status message.
 
-    1. Test case: 'mark 0' <br>
+    2. Test case: 'mark 0' <br>
        Expected: No restaurant is marked as visited. Error details shown in the status message. 
 
-    1. Other incorrect mark commands to try: `mark`, `mark x`, `...` (where x is larger than the list size)<br>
+    3. Other incorrect mark commands to try: `mark`, `mark x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 ### Adding a restaurant
 
 1. Adding a restaurant while the list is empty
     
-    1. Prerequisites: List all restaurant using the `list` command. No restaurants in the list.
+    * Prerequisites: List all restaurant using the `list` command. No restaurants in the list.
 
-     1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
-        Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
+       Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.
 
 ### Rating a restaurant
 
 1. Rating an existing restaurant in the restaurant directory
 
-    1. Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
 
-     1. Test case: `rate 1 r/5` <br>
-        Expected: The rating of the restaurant is updated to 5. The output box shows the corresponding details of the updated restaurant.
+    1. Test case: `rate 1 r/5` <br>
+       Expected: The rating of the restaurant is updated to 5. The output box shows the corresponding details of the updated restaurant.
 
 ### Tagging a restaurant
 
  1. Tagging an existing restaurant in the restaurant directory
 
-    1. Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
 
     1. Test case: `tag 1 t/halal` <br>
-        Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
+       Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
 
 
 ### Editing a restaurant
 
 1. Editing the details of an existing restaurant in the restaurant directory
     
-    1. Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
 
     1. Test case: `edit 1 hp/91234567` <br>
-        Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
-    2. Test case: 'edit 2 n/KFC' <br>
-        Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.
+       Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
+    2. Test case: `edit 2 n/KFC` <br>
+       Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.

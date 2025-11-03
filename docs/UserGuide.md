@@ -91,8 +91,8 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
    * On Windows: Search for "Command Prompt" and open it.
    * On Mac/Linux: Search for "Terminal" and open it.
 2. Navigate to the folder where you stored FoodTrail in.
-   * In the command terminal, type `cd /path/to/your/folder` and press Enter. 
-     * Replace `/path/to/your/folder` with the actual path of the folder where you stored `foodtrail.jar`.
+   * In the command terminal, type `cd /Users/YourName/Desktop/FoodTrail` and press Enter. 
+     * Replace `/Users/YourName/Desktop/FoodTrail` with the actual path of the folder where you stored `foodtrail.jar`.
 3. To start FoodTrail, type `java -jar foodtrail.jar` and press Enter. 
    * A window similar to the one below should appear shortly, pre-loaded with some sample data.
 

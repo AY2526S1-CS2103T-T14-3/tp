@@ -330,7 +330,7 @@ Extensions:
 MSS:
 
 1. User requests to find restaurants matching a given keyword.
-2. FoodTrail displays a list of restaurants whose name,phone number or address matches the keyword.
+2. FoodTrail displays a list of restaurants whose name, phone number, address or tag matches the keyword.
 
     Use case ends.
 

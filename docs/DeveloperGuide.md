@@ -23,7 +23,7 @@
 | Gemini    | Chen Junyao           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li> <li>Suggestions for improved phrasing of sentences</li> |
 | Gemini    | Tan Weijun            | <li>Generation of background image for application</li> <li>Troubleshooting to find the specific location of the problem</li>                                   |
 | Gemini    | Justin Chan           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
-| Gemini    | Louis Teng            | <li>Troubleshooting to find the specific location of the problem</li>                                                                                           |
+| Gemini    | Louis Teng            | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -405,9 +405,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing all restaurants
 
-1. Listing all restaurants in the restaurant directory
+* Prerequisites: None.
 
-    * Prerequisites: None.
+1. Listing all restaurants in the restaurant directory
 
     1. Test case: `list`<br>
        Expected: All restaurants in the restaurant directory are shown.
@@ -418,19 +418,21 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a restaurant
 
-1. Adding a restaurant while the list is empty
+* Prerequisites: None.
 
-    * Prerequisites: None.
+1. Adding a restaurant to the restaurant directory
 
-    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
-       Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+    t/halal t/fast food` <br>
+       Expected: A new restaurant called `McDonald's` is added to the list, its phone number, address and tags are 
+       shown in the restaurant directory, the output box shows the corresponding details of the added restaurant as well.
 
 
 ### Deleting a restaurant
 
-1. Deleting a restaurant while all restaurants are being shown
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-   * Prerequisites: There must be at least one restaurant in the current directory.
+1. Deleting a restaurant while all restaurants are being shown
 
    1. Test case: `delete 1`<br>
       Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message.
@@ -444,9 +446,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a restaurant
 
-1. Editing the details of an existing restaurant in the restaurant directory
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-    * Prerequisites: There must be at least one restaurant in the current directory.
+1. Editing the details of an existing restaurant in the restaurant directory
 
     1. Test case: `edit 1 hp/91234567` <br>
        Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
@@ -457,16 +459,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Tagging a restaurant
 
-1. Adding a tag for an existing restaurant in the restaurant directory
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-    * Prerequisites: There must be at least one restaurant in the current directory.
+1. Adding a tag for an existing restaurant in the restaurant directory
 
     1. Test case: `tag 1 t/halal` <br>
        Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
 
 2. Removing a tag for an existing restaurant in the restaurant directory
-
-    * Prerequisites: There must be at least one restaurant in the current directory.
 
     1. Test case: `untag 1 t/halal` <br>
        Expected: The `halal` tag of the 1st restaurant is removed. The output box shows the corresponding details of 
@@ -475,9 +475,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding restaurants
 
-1. Finding restaurants by certain keywords
+* Prerequisites: None.
 
-    * Prerequisites: None.
+1. Finding restaurants by certain keywords
 
     1. Test case: `find aston` <br>
        Expected: The list is filtered to show only restaurants whose name, phone number or address contains the keyword.
@@ -488,9 +488,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking a restaurant as visited
 
-1. Marking a restaurant as visited while all restaurants are being shown
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-    * Prerequisites: There must be at least one restaurant in the current directory.
+1. Marking a restaurant as visited while all restaurants are being shown
 
     1. Test case: 'mark 1' <br>
        Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the status message.
@@ -502,8 +502,6 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 2. Marking a restaurant as not visited while all restaurants are being shown
-
-    * Prerequisites: There must be at least one restaurant in the current directory.
 
     1. Test case: 'unmark 1' <br>
        Expected: First restaurant is marked as not visited. Details of the unmarked restaurant shown in the status 
@@ -519,16 +517,23 @@ testers are expected to do more *exploratory* testing.
 
 ### Rating a restaurant
 
-1. Rating an existing restaurant in the restaurant directory
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-    * Prerequisites: There must be at least one restaurant in the current directory.
+1. Adding a rating for an existing restaurant in the restaurant directory
 
     1. Test case: `rate 1 r/5` <br>
-       Expected: The rating of the restaurant is updated to 5. The output box shows the corresponding details of the updated restaurant.
+       Expected: The rating of the restaurant is updated to 5.
+   
+    2. Test case: `rate 1 r/0` <br>
+       Expected: The rating of the restaurant is updated to 0.
 
-2. Removing a rating of an existing restaurant in the restaurant directory
+    3. Test case: `rate 1 r/6` <br>
+       Expected: No rating is added. Error message says to enter an integer from 0 to 5.
+    
+    4. Test case: `rate 1 5` <br>
+       Expected: No rating is added. Error message says to provide the `r/` prefix.
 
-    * Prerequisites: There must be at least one restaurant in the current directory.
+2. Removing a rating for an existing restaurant in the restaurant directory
 
     1. Test case: `unrate 1` (where 1st restaurant has an existing rating) <br>
        Expected: The rating of the 1st restaurant in the restaurant directory is removed.

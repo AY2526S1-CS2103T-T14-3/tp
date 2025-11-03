@@ -101,9 +101,9 @@ public class HelpWindow extends UiPart<Stage> {
 
         VBox findBox = createCommandBox(
                 "Find a restaurant",
-                "find KEYWORD[, MORE_KEYWORD]",
+                "find KEYWORD",
                 "Example: find mcdonald",
-                "Example: find halal, fast food"
+                "Example: find halal"
         );
         container.getChildren().add(findBox);
 

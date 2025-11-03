@@ -358,7 +358,7 @@ Extensions:
 6. Source code should be open-source.
 7. Code should be well-commented, and a user guide should be provided.
 8. Features should be implemented in separate modules for easier debugging and updates.
-9. Error messages should suggest corrective action, not just report failure.
+9. Error messages should be descriptive when reporting failure.
 10. Program should not crash upon encountering errors.
 
 ### Glossary

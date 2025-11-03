@@ -174,8 +174,10 @@ Classes used by multiple components are in the `foodtrail.commons` package.
 
 1. **Improve find command to accept ratings**: The current find command searches across `Name`, `Phone`, `Address`, 
    and `Tag`, which does not allow users to search by their ratings. We plan to include ratings so users could 
-   search for restaurants with specific ratings. E.g. `find 4 stars`
-2. 
+   search for restaurants with specific ratings.
+2. **Improve find command to filter by specific field**: The current find command searches across `Name`, `Phone`, `Address`,
+   and `Tag` simultaneously, which does not give users an explicit way to search by a specific field. We plan to add 
+   another parameter that can let the user specify the field to search by.   
 
 --------------------------------------------------------------------------------------------------------------------
 

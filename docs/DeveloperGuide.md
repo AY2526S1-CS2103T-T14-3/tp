@@ -864,8 +864,8 @@ testers are expected to do more *exploratory* testing.
 5. Missing prefix and value
     * Prerequisites: There must be at least one restaurant in the current directory.
 
-        1. Test case: `untag 1` <br>
-           Expected: No tag is removed from the 1st restaurant. The output box will display an error message indicating an invalid command and the syntax for the untag command.<br><br>
+    1. Test case: `untag 1` <br>
+       Expected: No tag is removed from the 1st restaurant. The output box will display an error message indicating an invalid command and the syntax for the untag command.<br><br>
 
 6. Missing index
     * Prerequisites: None.

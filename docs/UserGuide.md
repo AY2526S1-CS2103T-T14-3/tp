@@ -78,7 +78,8 @@ This guide will act as a walkthrough on **installing FoodTrail** and **teach you
 * If you do not have Java 17, follow the instructions below to install the correct version of the Java Development Kit 
   (JDK).
   * On Windows: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html).
-  * On Mac/Linux: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+  * On Mac: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+  * On Linux: follow the instructions [here](https://se-education.org/guides/tutorials/javaInstallationLinux.html).
 
 **Step 2: Download the app file**
 1. Click [here](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.6/foodtrail.jar) to download the 

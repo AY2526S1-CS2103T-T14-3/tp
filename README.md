@@ -18,3 +18,7 @@
 * For the detailed documentation of this project, see the **[FoodTrail Product Website](https://ay2526s1-cs2103t-t14-3.github.io/tp)**.
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+* The icon image for this application is credited to Phap Nguyen Huu.
+  * The link to the icon image can be found [here](https://dribbble.com/shots/7057830-Food-Icon-Free-).
+

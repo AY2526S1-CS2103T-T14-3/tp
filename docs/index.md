@@ -14,8 +14,7 @@
 user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using FoodTrail, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing FoodTrail, the [**Developer Guide**](DeveloperGuide.html) is a good place to 
-  start.
+* If you are interested about developing FoodTrail, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**

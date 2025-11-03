@@ -262,13 +262,13 @@ MSS:
 
 Extensions:
 
-* 1a. There are missing parameters or invalid syntax.
+* 1a. The input does not follow the command format.
 
-    * 1a1.  FoodTrail shows an error message, notifying the user about the syntax for add.
+    * 1a1.  FoodTrail shows an error message, notifying the user about the command format.
 
       Use case resumes at step 1.
 
-* 1b. The enetered restaurant details matches an existing restaurant in the restaurant directory.
+* 1b. The entered restaurant details matches an existing restaurant in the restaurant directory.
 
     * 1b1. FoodTrail shows an error message, notifying the user that the restaurant already exists in the restaurant directory.
 
@@ -286,24 +286,24 @@ MSS:
 
 Extensions:
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
 **Use case: UC03 - Edit a restaurant**
 
 MSS: 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to edit the details of a specific restaurant in the list.
-3. FoodTrail updates the restaurant's details with the provided information
+3. FoodTrail updates the restaurant's details with the provided information.
 
     Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for edit.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for edit.
 
       Use case resumes at step 2.
 
@@ -315,7 +315,7 @@ Extensions:
 
 * 2c. No prefix was provided.
 
-    * 2c1. FoodTrail shows an error message, notifying the user that one field must be provided
+    * 2c1. FoodTrail shows an error message, notifying the user that one field must be provided.
 
       Use case resumes at step 2.
 
@@ -354,7 +354,7 @@ Extensions:
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to delete a specific restaurant in the list.
 3. FoodTrail deletes the specified restaurant.
 
@@ -379,7 +379,7 @@ Extensions:
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to mark a specific restaurant in the list as visited.
 3. FoodTrail marks the specified restaurant as visited.
 
@@ -409,7 +409,7 @@ Extensions:
 
 MSS:
 
- 1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
  2. User requests to unmark a specific restaurant in the list as visited.
  3. FoodTrail unmarks the specified restaurant as visited.
 
@@ -439,7 +439,7 @@ Extensions:
 
 MSS:
 
- 1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
  2. User requests to rate a specific restaurant in the list from 0-5 stars.
  3. FoodTrail rates the specified restaurant with the number of stars provided.
 
@@ -469,7 +469,7 @@ Extensions:
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to remove a rating from a specific restaurant in the list
 3. FoodTrail removes the rating from the specified restaurant.
 
@@ -494,7 +494,7 @@ Extensions:
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to tag a specified restaurant in the list with a specified tag.
 3. FoodTrail tags the restaurant with the provided tag.
 
@@ -527,7 +527,7 @@ Extensions:
 
 MSS:
 
- 1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
  2. User requests to untag a specified restaurant in the list with a specified tag.
  3. FoodTrail untags the restaurant with the provided tag.
 

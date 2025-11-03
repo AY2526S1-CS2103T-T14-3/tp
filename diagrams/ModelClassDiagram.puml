@@ -19,6 +19,7 @@ Class Name
 Class Phone
 Class Tag
 Class Rating
+Class IsMarked
 
 Class I #FFFFFF
 }
@@ -42,6 +43,7 @@ Restaurant *--> "1" Phone
 Restaurant *--> "1" Address
 Restaurant *--> "*" Tag
 Restaurant *--> "0..1" Rating
+Restaurant *--> "1" IsMarked
 
 Restaurant -[hidden]up--> I
 UniqueRestaurantList -[hidden]right-> I

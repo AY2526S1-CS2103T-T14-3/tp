@@ -622,9 +622,7 @@ testers are expected to do more *exploratory* testing.
    2. Open a command terminal and `cd` into the folder where the jar file is downloaded.
    3. Launch the jar file using `java -jar foodtrail.jar`. <br>
       Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
-      
 <br>
-
 2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the application by entering `java -jar foodtrail.jar` in the command terminal.<br>
@@ -737,7 +735,7 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: `edit 1 n/McDonald's hp/91234567` <br>
        Expected: The name of the 1st restaurant is updated to `KFC` and the phone number is updated to `91234567`. 
-       The output box shows the corresponding details of the updated restaurant.<br><br>
+       The output box shows the corresponding details of the updated restaurant.<br>
 
 2. Editing a restaurant to become another duplicate restaurant
     * Prerequisites: There must be at least two restaurants in the current restaurant directory. The 1st restaurant is named `McDonald's` in the restaurant directory with the phone number
@@ -791,7 +789,7 @@ testers are expected to do more *exploratory* testing.
    
     2. Test case: `tag 1 t/halal t/fast food` <br>
        Expected: A `halal` and `fast food` tag is added to the 1st restaurant. The output box shows the corresponding details of
-       the updated restaurant.<br><br>
+       the updated restaurant.<br>
 
 2. Adding a duplicate tag 
     * Prerequisites: There must be at least one restaurant in the current directory. The 1st restaurant has a `halal` 
@@ -893,7 +891,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The current directory is filtered to show only restaurants whose name, phone number, address, or tag contains `aston`.
 
     2. Test case: `find fast food` <br>
-       Expected: The current directory is filtered to show only restaurants whose name, phone number, address, or tag contains `fast food`.<br><br>
+       Expected: The current directory is filtered to show only restaurants whose name, phone number, address, or tag contains `fast food`.<br>
 
 2. Missing keyword
     * Prerequisites: None.

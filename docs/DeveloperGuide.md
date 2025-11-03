@@ -369,10 +369,35 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message. Timestamp in the status bar is updated.
+      Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No restaurant is deleted. Error details shown in the status message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+
+### Marking a restaurant as visited
+
+1. Marking a restaurant as visited while all restaurants are being shown
+
+    1. Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+
+    1. Test case: 'mark 1' <br>
+       Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the status message.
+
+    1. Test case: 'mark 0' <br>
+       Expected: No restaurant is marked as visited. Error details shown in the status message. 
+
+    1. Other incorrect mark commands to try: `mark`, `mark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Adding a restaurant
+
+1. Adding a restaurant while the list is empty
+    
+    1. Prerequisites: List all restaurant using the `list` command. No restaurants in the list.
+
+     1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
+        Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.

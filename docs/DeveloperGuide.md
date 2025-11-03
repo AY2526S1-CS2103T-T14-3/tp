@@ -39,7 +39,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the application.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -52,9 +52,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the application.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the application in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -603,7 +603,7 @@ Extensions:
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the application manually.
 
 <box type="info" seamless>
 
@@ -624,7 +624,7 @@ testers are expected to do more *exploratory* testing.
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   2. Re-launch the app by entering `java -jar foodtrail.jar` in the command terminal.<br>
+   2. Re-launch the application by entering `java -jar foodtrail.jar` in the command terminal.<br>
       Expected: The most recent window size and location is retained.
 
 <br>

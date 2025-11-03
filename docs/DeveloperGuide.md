@@ -17,11 +17,13 @@
 * The icon image for the application is credited to **Phap Nguyen Huu**, with the link to the image being found [here](https://dribbble.com/shots/7057830-Food-Icon-Free-).
 * Use of AI Declaration:
 
-| Tool used | Person that used tool | Extent of Use                                                                             |
-|-----------|-----------------------|-------------------------------------------------------------------------------------------|
-| Gemini    | Christopher Chong     | <li>Generation of test cases</li>                                                         |
-| Gemini    | Chen Junyao           | <li>Generation of test cases</li> <li>Suggestions for improved phrasing of sentences</li> |
-| Gemini    | Tan Weijun            | <li>Generation of background image for application</li>                                   |
+| Tool used | Person that used tool | Extent of Use                                                                                                                                                   |
+|-----------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Gemini    | Christopher Chong     | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
+| Gemini    | Chen Junyao           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li> <li>Suggestions for improved phrasing of sentences</li> |
+| Gemini    | Tan Weijun            | <li>Generation of background image for application</li> <li>Troubleshooting to find the specific location of the problem</li>                                   |
+| Gemini    | Justin Chan           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
+| Gemini    | Louis Teng            | <li>Troubleshooting to find the specific location of the problem</li>                                                                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 

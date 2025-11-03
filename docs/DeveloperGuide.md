@@ -403,82 +403,181 @@ testers are expected to do more *exploratory* testing.
       Expected: The most recent window size and location is retained.
 
 
-### Listing all restaurants
-
-* Prerequisites: None.
+### Listing all restaurants: list
 
 1. Listing all restaurants in the restaurant directory
 
-    1. Test case: `list`<br>
-       Expected: All restaurants in the restaurant directory are shown.
+   * Prerequisites: None.
 
-    2. Test case: `list x`<br>
-       Expected: Similar to previous.
+   1. Test case: `list`<br>
+      Expected: All restaurants in the restaurant directory are shown.
 
-
-### Adding a restaurant
-
-* Prerequisites: None.
-
-1. Adding a restaurant to the restaurant directory
-
-    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
-    t/halal t/fast food` <br>
-       Expected: A new restaurant called `McDonald's` is added to the list, its phone number, address and tags are 
-       shown in the restaurant directory, the output box shows the corresponding details of the added restaurant as well.
-
-
-### Deleting a restaurant
-
-* Prerequisites: There must be at least one restaurant in the current directory.
-
-1. Deleting a restaurant while all restaurants are being shown
-
-   1. Test case: `delete 1`<br>
-      Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message.
-
-   2. Test case: `delete 0`<br>
-      Expected: No restaurant is deleted. Error details shown in the status message. 
-
-   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   2. Test case: `list x`<br>
       Expected: Similar to previous.
 
 
-### Editing a restaurant
+### Adding a restaurant: add
 
-* Prerequisites: There must be at least one restaurant in the current directory.
+1. Adding a restaurant to the restaurant directory
+
+    * Prerequisites: There is no restaurant named `McDonald's` in the restaurant directory with the phone number 
+      `68928572` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`.
+    
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+       t/halal t/fast food` <br>
+       Expected: A new restaurant called `McDonald's` is added to the directory. The output box shows the details of 
+       the added restaurant as well.
+
+2. Adding a duplicate restaurant
+
+    * Prerequisites: There is a restaurant named `McDonald's` in the restaurant directory with the phone number
+      `68928572` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`.
+   
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+    t/halal t/fast food` <br> 
+       Expected: No restaurant is added. Error message says that an existing restaurant already exists.
+
+3. Providing an invalid input
+
+    * Prerequisites: None.
+
+    1. Test case: `add n/ hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+    t/halal t/fast food` (invalid name) <br>
+       Expected: No restaurant is added. Error message says that an invalid name is provided.
+   
+    2. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, singapore 77743 
+    t/halal t/fast food` (invalid address) <br>
+       Expected: No restaurant is added. Error message says that an invalid address is provided.
+   
+    3. Test case: `add n/McDonald's hp/58928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+    t/halal t/fast food` (invalid phone number) <br>
+       Expected: No restaurant is added. Error message says that an invalid phone number is provided.
+
+4. Missing a prefix or parameter
+
+    * Prerequisites: None.
+
+    1. Test case: `add KFC hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+    t/halal t/fast food` (missing `n/` prefix) <br>
+       Expected: No restaurant is added. Error message shows syntax for add command.
+
+    2. Other incorrect commands to try: missing `a/` prefix, missing `hp/` prefix <br>
+       Expected: Similar to previous.
+
+    3. Test case: `add hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+    t/halal t/fast food` (missing name) <br>
+       Expected: No restaurant is added. Error message shows syntax for add command.
+
+    4. Other incorrect commands to try: missing address, missing phone number <br>
+       Expected: Similar to previous.
+
+
+### Deleting a restaurant: delete
+
+1. Deleting a restaurant in the restaurant directory
+   
+   * Prerequisites: There must be at least one restaurant in the current directory.
+
+   1. Test case: `delete 1`<br>
+      Expected: The 1st restaurant is deleted from the list. Details of the deleted restaurant is shown in the output 
+      box.
+
+2. Providing an invalid index
+
+   * Prerequisites: There is less than 100 restaurants in the current directory.
+
+   1. Test case: `delete 100`<br>
+      Expected: No restaurant is deleted. Error details say invalid index is provided.
+
+
+### Editing a restaurant: edit
 
 1. Editing the details of an existing restaurant in the restaurant directory
 
+   * Prerequisites: There must be at least one restaurant in the current directory.
+
     1. Test case: `edit 1 hp/91234567` <br>
-       Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
+       Expected: The phone number of the 1st restaurant is updated to `91234567`. The output box shows the corresponding 
+       details of the updated restaurant.
    
-    2. Test case: `edit 2 n/KFC` <br>
-       Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.
+    2. Test case: `edit 1 n/KFC` <br>
+       Expected: The name of the 1st restaurant is updated to `KFC`. The output box shows the corresponding details of 
+       the updated restaurant.
+   
+    3. Test case: `edit 1 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743` <br>
+       Expected: The address of the 1st restaurant is updated to `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`. The output box shows the corresponding 
+       details of the updated restaurant.
 
+    4. Test case: `edit 1 n/KFC n/91234567` <br>
+       Expected: The name of the 1st restaurant is updated to `KFC` and the phone number is updated to `91234567`. 
+       The output box shows the corresponding details of the updated restaurant.
 
-### Tagging a restaurant
+2. Missing prefix of field 
 
-* Prerequisites: There must be at least one restaurant in the current directory.
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `edit 1 61234567`<br>
+       Expected: No restaurant is edited. Error message shows syntax for edit command.
+
+3. Missing value of field
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `edit 1 hp/`<br>
+       Expected: No restaurant is edited. Error message shows syntax for edit command.
+
+4. Missing prefix and value of field
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `edit 1`<br>
+       Expected: No restaurant is edited. Error details says to edit at least one field.
+
+5. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `edit 100 n/KFC`<br>
+       Expected: No restaurant is edited. Error details say invalid index is provided.
+
+       
+### Adding a tag to a restaurant: tag
 
 1. Adding a tag for an existing restaurant in the restaurant directory
 
+   * Prerequisites: There must be at least one restaurant in the current directory. The first restaurant does not 
+     have any tags.
+   
     1. Test case: `tag 1 t/halal` <br>
-       Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
+       Expected: A `halal` tag is added to the 1st restaurant. The output box shows the corresponding details of 
+       the updated restaurant.
 
-2. Removing a tag for an existing restaurant in the restaurant directory
+2. Adding a duplicate tag 
 
+    * Prerequisites: There must be at least one restaurant in the current directory. The first restaurant has a `halal` 
+      tag.
+
+    1. Test case: `tag 1 t/halal` <br>
+       Expected: No duplicate tag is added. Error details indicate existence of the `halal` tag for the restaurant.
+
+
+### Removing a tag from a restaurant: untag
+
+1. Removing a tag for an existing restaurant in the restaurant directory
+
+   * Prerequisites: There must be at least one restaurant in the current directory.
+   
     1. Test case: `untag 1 t/halal` <br>
        Expected: The `halal` tag of the 1st restaurant is removed. The output box shows the corresponding details of 
        the updated restaurant.
 
 
-### Finding restaurants
-
-* Prerequisites: None.
+### Finding restaurants: find
 
 1. Finding restaurants by certain keywords
 
+   * Prerequisites: None.
+   
     1. Test case: `find aston` <br>
        Expected: The list is filtered to show only restaurants whose name, phone number or address contains the keyword.
 
@@ -486,40 +585,48 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 
-### Marking a restaurant as visited
-
-* Prerequisites: There must be at least one restaurant in the current directory.
+### Marking a restaurant as visited: mark
 
 1. Marking a restaurant as visited while all restaurants are being shown
 
+   * Prerequisites: There must be at least one restaurant in the current directory.
+
     1. Test case: 'mark 1' <br>
-       Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the status message.
+       Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the output box.
 
     2. Test case: 'mark 0' <br>
-       Expected: No restaurant is marked as visited. Error details shown in the status message. 
+       Expected: No restaurant is marked as visited. Error details shown in the output box. 
 
     3. Other incorrect mark commands to try: `mark`, `mark x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. Marking a restaurant as not visited while all restaurants are being shown
+
+### Marking a restaurant as not visited: unmark
+
+1. Marking a restaurant in the restaurant directory as not visited 
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
 
     1. Test case: 'unmark 1' <br>
-       Expected: First restaurant is marked as not visited. Details of the unmarked restaurant shown in the status 
-       message.
+       Expected: The 1st restaurant is marked as not visited. Details of the unmarked restaurant is shown in the 
+       output box.
 
-    2. Test case: 'unmark 0' <br>
-       Expected: No restaurant is marked as visited. Error details shown in the status message.
+2. Providing an invalid index  
 
-    3. Other incorrect unmark commands to try: `unmark`, `unmark x`, `...` (where x is larger than the list size)<br>
+    * Prerequisites: None
+   
+    1. Test case: 'unmark 0' <br>
+       Expected: No restaurant is marked as visited. Error details shown in the output box.
+
+    2. Other incorrect unmark commands to try: `unmark`, `unmark x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 
-
-### Rating a restaurant
-
-* Prerequisites: There must be at least one restaurant in the current directory.
+### Adding a rating for a restaurant: rate
 
 1. Adding a rating for an existing restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
 
     1. Test case: `rate 1 r/5` <br>
        Expected: The rating of the restaurant is updated to 5.
@@ -527,19 +634,40 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `rate 1 r/0` <br>
        Expected: The rating of the restaurant is updated to 0.
 
-    3. Test case: `rate 1 r/6` <br>
+2. Adding an invalid rating for an existing restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `rate 1 r/6` <br>
        Expected: No rating is added. Error message says to enter an integer from 0 to 5.
-    
-    4. Test case: `rate 1 5` <br>
+
+3. Missing the prefix when adding a rating for an existing restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `rate 1 5` <br>
        Expected: No rating is added. Error message says to provide the `r/` prefix.
 
-2. Removing a rating for an existing restaurant in the restaurant directory
 
-    1. Test case: `unrate 1` (where 1st restaurant has an existing rating) <br>
+### Removing a rating from a restaurant: unrate
+
+1. Removing a rating from a restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `unrate 1` (while the 1st restaurant has an existing rating) <br>
        Expected: The rating of the 1st restaurant in the restaurant directory is removed.
-   
-    2. Test case: `unrate 1` (where 1st restaurant does not have an existing rating) <br>
-       Expected: No rating is removed. Error message shown in the status message.
-   
-    3. Test case: `unrate x` (where x is larger than the list size)<br>
-          Expected: No rating is removed. Error message indicates invalid index provided.
+
+2. Removing a rating for a restaurant that does not have an existing rating in the restaurant directory
+
+    * Prerequisites: The first restaurant does not have a rating.
+
+    1. Test case: `unrate 1` <br>
+       Expected: No rating is removed. Error message says the restaurant has no rating to remove.
+
+3. Removing a rating for a restaurant not in the restaurant directory
+    
+    * Prerequisites: None.
+
+    1. Test case: `unrate x` (where x is larger than the list size) <br>
+       Expected: No rating is removed. Error message indicates invalid index provided.

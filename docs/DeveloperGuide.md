@@ -23,7 +23,7 @@
 | Gemini    | Chen Junyao           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li> <li>Suggestions for improved phrasing of sentences</li> |
 | Gemini    | Tan Weijun            | <li>Generation of background image for application</li> <li>Troubleshooting to find the specific location of the problem</li>                                   |
 | Gemini    | Justin Chan           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
-| Gemini    | Louis Teng            | <li>Troubleshooting to find the specific location of the problem</li>                                                                                           |
+| Gemini    | Louis Teng            | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/Main.java) and 
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/Main.java) and
 [`MainApp`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -82,7 +82,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `RestaurantListPanel`, 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `RestaurantListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
@@ -113,7 +113,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `RestaurantDirectoryParser` object which in 
+1. When `Logic` is called upon to execute a command, it is passed to an `RestaurantDirectoryParser` object which in
    turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a restaurant).<br>
@@ -403,11 +403,36 @@ testers are expected to do more *exploratory* testing.
       Expected: The most recent window size and location is retained.
 
 
+### Listing all restaurants
+
+* Prerequisites: None.
+
+1. Listing all restaurants in the restaurant directory
+
+    1. Test case: `list`<br>
+       Expected: All restaurants in the restaurant directory are shown.
+
+    2. Test case: `list x`<br>
+       Expected: Similar to previous.
+
+
+### Adding a restaurant
+
+* Prerequisites: None.
+
+1. Adding a restaurant to the restaurant directory
+
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 
+    t/halal t/fast food` <br>
+       Expected: A new restaurant called `McDonald's` is added to the list, its phone number, address and tags are 
+       shown in the restaurant directory, the output box shows the corresponding details of the added restaurant as well.
+
+
 ### Deleting a restaurant
 
-1. Deleting a restaurant while all restaurants are being shown
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-   * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+1. Deleting a restaurant while all restaurants are being shown
 
    1. Test case: `delete 1`<br>
       Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message.
@@ -419,11 +444,53 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 
+### Editing a restaurant
+
+* Prerequisites: There must be at least one restaurant in the current directory.
+
+1. Editing the details of an existing restaurant in the restaurant directory
+
+    1. Test case: `edit 1 hp/91234567` <br>
+       Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
+   
+    2. Test case: `edit 2 n/KFC` <br>
+       Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.
+
+
+### Tagging a restaurant
+
+* Prerequisites: There must be at least one restaurant in the current directory.
+
+1. Adding a tag for an existing restaurant in the restaurant directory
+
+    1. Test case: `tag 1 t/halal` <br>
+       Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
+
+2. Removing a tag for an existing restaurant in the restaurant directory
+
+    1. Test case: `untag 1 t/halal` <br>
+       Expected: The `halal` tag of the 1st restaurant is removed. The output box shows the corresponding details of 
+       the updated restaurant.
+
+
+### Finding restaurants
+
+* Prerequisites: None.
+
+1. Finding restaurants by certain keywords
+
+    1. Test case: `find aston` <br>
+       Expected: The list is filtered to show only restaurants whose name, phone number or address contains the keyword.
+
+    2. Test case: `find 1234` <br>
+       Expected: Similar to previous.
+
+
 ### Marking a restaurant as visited
 
-1. Marking a restaurant as visited while all restaurants are being shown
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-    * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+1. Marking a restaurant as visited while all restaurants are being shown
 
     1. Test case: 'mark 1' <br>
        Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the status message.
@@ -434,41 +501,45 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect mark commands to try: `mark`, `mark x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-### Adding a restaurant
+2. Marking a restaurant as not visited while all restaurants are being shown
 
-1. Adding a restaurant while the list is empty
-    
-    * Prerequisites: List all restaurant using the `list` command. No restaurants in the list.
+    1. Test case: 'unmark 1' <br>
+       Expected: First restaurant is marked as not visited. Details of the unmarked restaurant shown in the status 
+       message.
 
-    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
-       Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.
+    2. Test case: 'unmark 0' <br>
+       Expected: No restaurant is marked as visited. Error details shown in the status message.
+
+    3. Other incorrect unmark commands to try: `unmark`, `unmark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
 
 ### Rating a restaurant
 
-1. Rating an existing restaurant in the restaurant directory
+* Prerequisites: There must be at least one restaurant in the current directory.
 
-    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+1. Adding a rating for an existing restaurant in the restaurant directory
 
     1. Test case: `rate 1 r/5` <br>
-       Expected: The rating of the restaurant is updated to 5. The output box shows the corresponding details of the updated restaurant.
+       Expected: The rating of the restaurant is updated to 5.
+   
+    2. Test case: `rate 1 r/0` <br>
+       Expected: The rating of the restaurant is updated to 0.
 
-### Tagging a restaurant
-
- 1. Tagging an existing restaurant in the restaurant directory
-
-    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
-
-    1. Test case: `tag 1 t/halal` <br>
-       Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
-
-
-### Editing a restaurant
-
-1. Editing the details of an existing restaurant in the restaurant directory
+    3. Test case: `rate 1 r/6` <br>
+       Expected: No rating is added. Error message says to enter an integer from 0 to 5.
     
-    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+    4. Test case: `rate 1 5` <br>
+       Expected: No rating is added. Error message says to provide the `r/` prefix.
 
-    1. Test case: `edit 1 hp/91234567` <br>
-       Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
-    2. Test case: `edit 2 n/KFC` <br>
-       Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.
+2. Removing a rating for an existing restaurant in the restaurant directory
+
+    1. Test case: `unrate 1` (where 1st restaurant has an existing rating) <br>
+       Expected: The rating of the 1st restaurant in the restaurant directory is removed.
+   
+    2. Test case: `unrate 1` (where 1st restaurant does not have an existing rating) <br>
+       Expected: No rating is removed. Error message shown in the status message.
+   
+    3. Test case: `unrate x` (where x is larger than the list size)<br>
+          Expected: No rating is removed. Error message indicates invalid index provided.

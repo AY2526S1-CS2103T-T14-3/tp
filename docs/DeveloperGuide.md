@@ -23,7 +23,7 @@
 | Gemini    | Chen Junyao           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li> <li>Suggestions for improved phrasing of sentences</li> |
 | Gemini    | Tan Weijun            | <li>Generation of background image for application</li> <li>Troubleshooting to find the specific location of the problem</li>                                   |
 | Gemini    | Justin Chan           | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
-| Gemini    | Louis Teng            | <li>Troubleshooting to find the specific location of the problem</li>                                                                                           |
+| Gemini    | Louis Teng            | <li>Generation of test cases</li> <li>Troubleshooting to find the specific location of the problem</li>                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/Main.java) and 
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/Main.java) and
 [`MainApp`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -82,7 +82,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `RestaurantListPanel`, 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `RestaurantListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/java/foodtrail/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-T14-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
@@ -113,7 +113,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `RestaurantDirectoryParser` object which in 
+1. When `Logic` is called upon to execute a command, it is passed to an `RestaurantDirectoryParser` object which in
    turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a restaurant).<br>
@@ -206,6 +206,8 @@ Classes used by multiple components are in the `foodtrail.commons` package.
 5. **Make Address error message more specific**: The current `Address` error message lists multiple 
    constraints, which is too generic since it does not pinpoint the specific constraint that was violated. We 
    plan to split the constraints into their own error messages and display only the violated constraints.
+6. **Rename clear command to make it harder to execute**: The current clear command deletes all restaurant data once entered, and users could potentially enter the `clear` command when trying to delete a restaurant. 
+   We plan to rename the command to `clearalldata` so that it is harder to erase all data by accident.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -251,23 +253,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `FoodTrail` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - List restaurants**
-
-MSS:
-
-1. User requests to list restaurants.
-2. FoodTrail shows a list of restaurants.
-
-    Use case ends.
-
-Extensions:
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-
-**Use case: UC02 - Add a restaurant**
+**Use case: UC01 - Add a restaurant**
 
 MSS:
 
@@ -278,18 +264,99 @@ MSS:
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 1a. The input does not follow the command format.
 
-    * 2a1.  FoodTrail shows an error message, notifying the user about the syntax for add.
+    * 1a1.  FoodTrail shows an error message, notifying the user about the command format.
+
+      Use case resumes at step 1.
+
+* 1b. The entered restaurant details matches an existing restaurant in the restaurant directory.
+
+    * 1b1. FoodTrail shows an error message, notifying the user that the restaurant already exists in the restaurant directory.
 
       Use case resumes at step 1.
 
 
-**Use case: UC03 - Delete a restaurant**
+**Use case: UC02 - List restaurants**
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User requests to list restaurants.
+2. FoodTrail shows a list of restaurants.
+
+    Use case ends.
+
+Extensions:
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC03 - Edit a restaurant**
+
+MSS: 
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+2. User requests to edit the details of a specific restaurant in the list.
+3. FoodTrail updates the restaurant's details with the provided information.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. The input does not follow the command format.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for edit.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. No prefix was provided.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that one field must be provided.
+
+      Use case resumes at step 2.
+
+* 2d. The edited details reflect an existing restaurant in the list
+
+    * 2d1. FoodTrail shows an error message, notifying the user about the duplicate restaurant.
+
+      Use case resumes at step 2.
+
+**Use case: UC04 - Find a restaurant**
+
+MSS:
+
+1. User requests to find restaurants matching a given keyword.
+2. FoodTrail displays a list of restaurants whose name, phone number, address or tag matches the keyword.
+
+    Use case ends.
+
+Extensions:
+
+* 1a. There are missing parameters or invalid syntax.
+
+    * 1a1. FoodTrail shows an error message, notifying the user about the syntax for find.
+
+      Use case resumes at step 1.
+
+* 1b. No restaurants matches the given keyword.
+
+    * 1b1. FoodTrail shows an error message, notifying the user about the no match.
+
+      Use case ends.
+
+
+
+**Use case: UC05 - Delete a restaurant**
+
+MSS:
+
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to delete a specific restaurant in the list.
 3. FoodTrail deletes the specified restaurant.
 
@@ -297,18 +364,24 @@ MSS:
 
 Extensions:
 
-* 3a. The given index is invalid.
+* 2a. There are missing parameters or invalid syntax.
 
-    * 3a1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrails shows an error message, notifying the user about the syntax for delete.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
 
       Use case resumes at step 2.
 
 
-**Use case: UC04 - Mark a restaurant as visited**
+**Use case: UC06 - Mark a restaurant as visited**
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to mark a specific restaurant in the list as visited.
 3. FoodTrail marks the specified restaurant as visited.
 
@@ -316,18 +389,114 @@ MSS:
 
 Extensions:
 
-* 3a. The given index is invalid.
+* 2a. There are missing parameters or invalid syntax.
 
-    * 3a1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for mark.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The restaurant of the specified index is already marked as visited.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant is already marked as visited.
+
+      Use case resumes at step 2.
+
+**Use case: UC07 - Unmark a restaurant as visited**
+
+MSS:
+
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+ 2. User requests to unmark a specific restaurant in the list as visited.
+ 3. FoodTrail unmarks the specified restaurant as visited.
+
+     Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for unmark.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The restaurant of the specified index is already unmarked as visited.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant is already unmarked as visited.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Rate a restaurant**
+
+MSS:
+
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+ 2. User requests to rate a specific restaurant in the list from 0-5 stars.
+ 3. FoodTrail rates the specified restaurant with the number of stars provided.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for rate.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The restaurant of the specified index already has the specified rating
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant already has the same rating
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Unrate a restaurant**
+
+MSS:
+
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+2. User requests to remove a rating from a specific restaurant in the list
+3. FoodTrail removes the rating from the specified restaurant.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for unrate.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
 
       Use case resumes at step 2.
 
 
-**Use case: UC05 - Tag a restaurant**
+**Use case: UC10 - Tag a restaurant**
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to tag a specified restaurant in the list with a specified tag.
 3. FoodTrail tags the restaurant with the provided tag.
 
@@ -335,18 +504,65 @@ MSS:
 
 Extensions:
 
-* 3a. There is missing index or tag.
+* 2a. There are missing parameters or invalid syntax.
 
-    * 3a1. FoodTrail shows an error message, instructing the user to provide an index and tag.
-
-    Use case resumes at step 2.
-
-
-* 3b. The given index is invalid.
-
-    * 3b1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for tag.
 
       Use case resumes at step 2.
+
+
+* 2b. There is missing index or tag.
+
+    * 2b1. FoodTrail shows an error message, instructing the user to provide an index and tag.
+
+        Use case resumes at step 2.
+
+
+* 2c. The given index is invalid.
+
+    * 2c1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+
+**Use case: UC11 - Untag a restaurant**
+
+MSS:
+
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+ 2. User requests to untag a specified restaurant in the list with a specified tag.
+ 3. FoodTrail untags the restaurant with the provided tag.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for untag.
+
+      Use case resumes at step 2.
+
+
+* 2b. There is missing index or tag.
+
+    * 2b1. FoodTrail shows an error message, instructing the user to provide an index and tag.
+
+        Use case resumes at step 2.
+
+
+* 2c. The given index is invalid.
+
+    * 2c1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2d. The given tag does not exist.
+
+    * 2d1. FoodTrails shows and error message, notifying the user that the tag does not exist for the restaurant.
+
+      Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
@@ -391,84 +607,460 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. [Download](https://github.com/AY2526S1-CS2103T-T14-3/tp/releases/download/v1.6/foodtrail.jar) the jar file and copy into a folder.
-
-   2. Double-click the jar file.<br>
+   2. Open a command terminal and `cd` into the folder where the jar file is downloaded.
+   3. Launch the jar file using `java -jar foodtrail.jar`.<br>
       Expected: Shows the GUI with a set of sample restaurants. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by entering `java -jar foodtrail.jar` in the command terminal.<br>
       Expected: The most recent window size and location is retained.
 
 
-### Deleting a restaurant
+### Listing all restaurants: list
 
-1. Deleting a restaurant while all restaurants are being shown
+1. Listing all restaurants in the restaurant directory
 
-   * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+   * Prerequisites: None.
 
-   1. Test case: `delete 1`<br>
-      Expected: First restaurant is deleted from the list. Details of the deleted restaurant shown in the status message.
+   1. Test case: `list`<br>
+      Expected: All restaurants in the restaurant directory are shown.
 
-   2. Test case: `delete 0`<br>
-      Expected: No restaurant is deleted. Error details shown in the status message. 
-
-   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   2. Test case: `list x`<br>
       Expected: Similar to previous.
 
 
-### Marking a restaurant as visited
+### Adding a restaurant: add
 
-1. Marking a restaurant as visited while all restaurants are being shown
+1. Adding a restaurant to the restaurant directory
 
-    * Prerequisites: List all restaurant using the `list` command. Multiple restaurants in the list.
+    * Prerequisites: There is no restaurant named `McDonald's` in the restaurant directory with the phone number 
+      `68928572` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`.
+    
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fast food` <br>
+       Expected: A new restaurant called `McDonald's` is added to the directory. The output box shows the details of 
+       the added restaurant as well.
 
-    1. Test case: 'mark 1' <br>
-       Expected: First restaurant is marked as visited. Details of the marked restaurant shown in the status message.
+2. Adding a duplicate restaurant
 
-    2. Test case: 'mark 0' <br>
-       Expected: No restaurant is marked as visited. Error details shown in the status message. 
+    * Prerequisites: There is an existing restaurant named `McDonald's` in the restaurant directory with the phone number
+      `68928572` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`.
+   
+    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fast food` <br> 
+       Expected: The restaurant is not added. The output box will display an error message indicating the restaurant already exists in the restaurant directory.
 
-    3. Other incorrect mark commands to try: `mark`, `mark x`, `...` (where x is larger than the list size)<br>
+3. Providing an invalid input
+
+    * Prerequisites: None.
+
+    1. Test case: `add n/ hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fast food` (invalid name) <br>
+       Expected: The restaurant is not added. The output box will display an error message indicating an invalid name is provided.
+   
+    2. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, singapore 77743 t/halal t/fast food` (invalid address) <br>
+       Expected: The restaurant is not added. The output box will display an error message indicating an invalid address is provided.
+   
+    3. Test case: `add n/McDonald's hp/58928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fast food` (invalid phone number) <br>
+       Expected: The restaurant is not added. The output box will display an error message indicating an invalid phone number is provided.
+
+4. Missing a prefix or parameter
+
+    * Prerequisites: None.
+
+    1. Test case: `add KFC hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fast food` (missing `n/` prefix) <br>
+       Expected: The restaurant is not added. The output box will display an error message indicating an invalid command and the syntax for the add command.
+
+    2. Other incorrect commands to try: missing `a/` prefix, missing `hp/` prefix <br>
        Expected: Similar to previous.
 
-### Adding a restaurant
+    3. Test case: `add hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fast food` (missing name) <br>
+       Expected: The restaurant is not added. The output box will display an error message indicating an invalid command and the syntax for the add command.
 
-1. Adding a restaurant while the list is empty
-    
-    * Prerequisites: List all restaurant using the `list` command. No restaurants in the list.
-
-    1. Test case: `add n/McDonald's hp/68928572 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743 t/halal t/fastfood` <br>
-       Expected: A new restaurant called McDonald's is added to the list, its phone number,address and tags are shown in the restaurant directory, the output box shows the corresponding details of the added restaurant aswell.
-
-### Rating a restaurant
-
-1. Rating an existing restaurant in the restaurant directory
-
-    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
-
-    1. Test case: `rate 1 r/5` <br>
-       Expected: The rating of the restaurant is updated to 5. The output box shows the corresponding details of the updated restaurant.
-
-### Tagging a restaurant
-
- 1. Tagging an existing restaurant in the restaurant directory
-
-    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
-
-    1. Test case: `tag 1 t/halal` <br>
-       Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
+    4. Other incorrect commands to try: missing address, missing phone number <br>
+       Expected: Similar to previous.
 
 
-### Editing a restaurant
+### Deleting a restaurant: delete
+
+1. Deleting a restaurant in the restaurant directory
+   
+   * Prerequisites: There must be at least one restaurant in the current restaurant directory.
+
+   1. Test case: `delete 1`<br>
+      Expected: The 1st restaurant is deleted from the restaurant directory. Details of the deleted restaurant is shown in the output box.
+
+2. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `delete`<br>
+       Expected: No restaurant is deleted. The output box will display an error message indicating an invalid command and the syntax for the delete command.
+
+3. Providing an invalid index
+
+   * Prerequisites: There is less than 100 restaurants in the current directory.
+
+   1. Test case: `delete 100`<br>
+      Expected: No restaurant is deleted. The output box will display an error message indicating an invalid index is provided.
+
+   2. Test case: `delete x`<br>
+      Expected: No restaurant is deleted. The output box will display an error message indicating an invalid command and the syntax for the delete command.
+
+
+### Editing a restaurant: edit
 
 1. Editing the details of an existing restaurant in the restaurant directory
-    
-    * Prerequisites: List all restaurant using the `list` command. At least 1 restaurant in the list.
+
+    * Prerequisites: There must be at least one restaurant in the current restaurant directory. There is no restaurant named `McDonald's` in the restaurant directory with the phone number
+     `91234567` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`.
 
     1. Test case: `edit 1 hp/91234567` <br>
-       Expected: The phone number of the restaurant is updated to 91234567. The output box shows the corresponding details of the updated restaurant.
-    2. Test case: `edit 2 n/KFC` <br>
-       Expected: The name of the restaurant is updated to KFC. The output box shows the corresponding details of the updated restaurant.
+       Expected: The phone number of the 1st restaurant is updated to `91234567`. The output box shows the corresponding 
+       details of the updated restaurant.
+   
+    2. Test case: `edit 1 n/McDonald's` <br>
+       Expected: The name of the 1st restaurant is updated to `McDonald's`. The output box shows the corresponding details of 
+       the updated restaurant.
+   
+    3. Test case: `edit 1 a/1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743` <br>
+       Expected: The address of the 1st restaurant is updated to `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`. The output box shows the corresponding 
+       details of the updated restaurant.
+
+    4. Test case: `edit 1 n/McDonald's hp/91234567` <br>
+       Expected: The name of the 1st restaurant is updated to `KFC` and the phone number is updated to `91234567`. 
+       The output box shows the corresponding details of the updated restaurant.
+
+2. Editing a restaurant to become another duplicate restaurant
+
+    * Prerequisites: There must be at least two restaurants in the current restaurant directory. The 1st restaurant is named `McDonald's` in the restaurant directory with the phone number
+      `91234567` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`. The 2nd restaurant is named `KFC` in the restaurant directory with the phone number
+      `91234567` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`.
+   
+    1. Test case: `edit 2 n/McDonald's` <br>
+       Expected: The 2nd restaurant is not edited. The output box will display an error message indicating the restaurant already exists in the restaurant directory.
+
+3. Missing prefix 
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `edit 1 61234567`<br>
+       Expected: The 1st restaurant is not edited. The output box will display an error message indicating an invalid command and the syntax for the edit command.
+
+4. Missing value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `edit 1 hp/`<br>
+       Expected: The 1st restaurant is not edited. The output box will display an error message indicating an invalid command and the syntax for the edit command.
+
+5. Missing prefix and value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `edit 1`<br>
+       Expected: The 1st restaurant is not edited. The output box will display an error message informing the user to edit at least one field.
+
+6. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `edit n/KFC`<br>
+       Expected: No restaurant is edited. The output box will display an error message indicating an invalid command and the syntax for the edit command.
+
+7. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `edit 100 n/KFC`<br>
+       Expected: No restaurant is edited. The output box will display an error message indicating an invalid index is provided.
+
+       
+### Adding a tag to a restaurant: tag
+
+1. Adding tags for an existing restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory. The 1st restaurant does not 
+     have any tags.
+   
+    1. Test case: `tag 1 t/halal` <br>
+       Expected: A `halal` tag is added to the 1st restaurant. The output box shows the corresponding details of 
+       the updated restaurant.
+   
+    2. Test case: `tag 1 t/halal t/fast food` <br>
+       Expected: A `halal` and `fast food` tag is added to the 1st restaurant. The output box shows the corresponding details of
+       the updated restaurant.
+
+2. Adding a duplicate tag 
+
+    * Prerequisites: There must be at least one restaurant in the current directory. The 1st restaurant has a `halal` 
+      tag.
+
+    1. Test case: `tag 1 t/halal` <br>
+       Expected: The `halal` tag is not added again to the 1st restaurant. The output box will display an error message indicating that the `halal` tag already exists for the 1st restaurant.
+
+3. Missing prefix
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `tag 1 halal`<br>
+       Expected: No tag is added to the 1st restaurant. The output box will display an error message indicating an invalid command and the syntax for the tag command.
+
+4. Missing value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `tag 1 t/` <br>
+       Expected: No tag is added to the 1st restaurant. The output box will display an error message indicating that the tag name cannot be empty.
+
+5. Missing prefix and value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+       1. Test case: `tag 1` <br>
+          Expected: No tag is added to the 1st restaurant. The output box will display an error message indicating an invalid command and the syntax for the tag command.
+
+6. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `tag t/halal`<br>
+       Expected: No tag is added. The output box will display an error message indicating an invalid command and the syntax for the tag command.
+
+7. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `tag 100 t/halal`<br>
+       Expected: No tag is added. The output box will display an error message indicating an invalid index is provided.
+
+    2. Test case: `tag x t/halal`<br>
+       Expected: No tag is added. The output box will display an error message indicating an invalid command and the syntax for the tag command.
+
+
+### Removing a tag from a restaurant: untag
+
+1. Removing a tag for an existing restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `untag 1 t/halal` <br>
+       Expected: The `halal` tag of the 1st restaurant is removed. The output box shows the corresponding details of the updated restaurant.
+
+2. Removing a non-existent tag for an existing restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory. The 1st restaurant has a `halal` tag.
+
+    1. Test case: `tag 1 t/fast food` <br>
+       Expected: No tag is removed from the 1st restaurant. The output box will display an error message indicating that the `fast food` tag does not exist for the 1st restaurant.
+
+3. Missing prefix
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `untag 1 halal`<br>
+       Expected: No tag is removed from the 1st restaurant. The output box will display an error message indicating an invalid command and the syntax for the untag command.
+
+4. Missing value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `untag 1 t/` <br>
+       Expected: No tag is removed from the 1st restaurant. The output box will display an error message indicating that the tag name cannot be empty.
+
+5. Missing prefix and value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+        1. Test case: `untag 1` <br>
+           Expected: No tag is removed from the 1st restaurant. The output box will display an error message indicating an invalid command and the syntax for the untag command.
+
+6. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `untag`<br>
+       Expected: No tag is removed. The output box will display an error message indicating an invalid command and the syntax for the untag command.
+
+7. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `untag 100`<br>
+       Expected: No tag is removed. The output box will display an error message indicating an invalid index is provided.
+
+    2. Test case: `untag x`<br>
+       Expected: No tag is removed. The output box will display an error message indicating an invalid command and the syntax for the untag command.
+
+
+### Finding restaurants: find
+
+1. Finding restaurants by a certain keyword
+
+    * Prerequisites: None.
+
+    1. Test case: `find aston` <br>
+       Expected: The current directory is filtered to show only restaurants whose name, phone number, address, or tag contains `aston`.
+
+    2. Test case: `find fast food` <br>
+       Expected: The current directory is filtered to show only restaurants whose name, phone number, address, or tag contains `fast food`.
+
+2. Missing keyword
+
+    * Prerequisites: None.
+
+    1. Test case: `find` <br>
+       Expected: The current directory remains unchanged. The output box will display an error message indicating an invalid command and the syntax for the find command.
+
+
+### Marking a restaurant as visited: mark
+
+1. Marking a restaurant as visited
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `mark 1` <br>
+       Expected: The 1st restaurant is marked as visited. The output box shows the corresponding details of the marked restaurant.
+
+2. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `mark`<br>
+       Expected: No restaurant is marked as visited. The output box will display an error message indicating an invalid command and the syntax for the mark command.
+
+3. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `mark 100`<br>
+       Expected: No restaurant is marked as visited. The output box will display an error message indicating an invalid index is provided.
+
+    2. Test case: `mark x`<br>
+       Expected: No restaurant is marked as visited. The output box will display an error message indicating an invalid command and the syntax for the mark command.
+
+
+### Marking a restaurant as not visited: unmark
+
+1. Marking a restaurant in the restaurant directory as not visited 
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `unmark 1` <br>
+       Expected: The 1st restaurant is unmarked. The output box shows the corresponding details of the unmarked restaurant.
+
+2. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `unmark`<br>
+       Expected: No restaurant is unmarked. The output box will display an error message indicating an invalid command and the syntax for the unmark command.
+
+3. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `unmark 100`<br>
+       Expected: No restaurant is unmarked. The output box will display an error message indicating an invalid index is provided.
+
+    2. Test case: `unmark x`<br>
+       Expected: No restaurant is unmarked. The output box will display an error message indicating an invalid command and the syntax for the unmark command.
+
+
+### Adding a rating for a restaurant: rate
+
+1. Adding a rating for an existing restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `rate 1 r/5` <br>
+       Expected: The rating of the 1st restaurant is updated to 5. The output box will display the restaurant name and the added rating.
+   
+    2. Test case: `rate 1 r/0` <br>
+       Expected: The rating of the 1st restaurant is updated to 0. The output box will display the restaurant name and the added rating.
+
+2. Adding an invalid rating
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `rate 1 r/6` <br>
+       Expected: No rating is added to the 1st restaurant. The output box will display an error message informing the user to enter an integer from 0 to 5.
+
+3. Adding the same rating
+
+    * Prerequisites: There must be at least one restaurant in the current directory. The 1st restaurant has a rating of 5.
+
+    1. Test case: `rate 1 r/5` <br>
+       Expected: The rating remains the same for the 1st restaurant. The output box will display an error message indicating the restaurant already has the same rating. 
+
+4. Missing prefix
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `rate 1 5` <br>
+       Expected: No rating is added to the 1st restaurant. The output box will display an error message informing the user to provide the `r/` prefix.
+
+5. Missing value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `rate 1 r/` <br>
+       Expected: No rating is added to the 1st restaurant. The output box will display an error message informing the user to enter an integer from 0 to 5.
+
+6. Missing prefix and value
+
+    * Prerequisites: There must be at least one restaurant in the current directory.
+
+    1. Test case: `rate 1` <br>
+       Expected: No rating is added to the 1st restaurant. The output box will display an error message indicating an invalid command and the syntax for the rate command.
+
+7. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `rate r/5`<br>
+       Expected: No rating is added. The output box will display an error message indicating an invalid command and the syntax for the rate command.
+
+8. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `rate 100 r/5`<br>
+       Expected: No rating is added. The output box will display an error message indicating an invalid index is provided.
+
+    2. Test case: `rate x r/5`<br>
+       Expected: No rating is added. The output box will display an error message indicating that the index is not a non-zero unsigned integer.
+
+
+### Removing a rating from a restaurant: unrate
+
+1. Removing a rating from a restaurant in the restaurant directory
+
+    * Prerequisites: There must be at least one restaurant in the current directory. The 1st restaurant has a rating.
+
+    1. Test case: `unrate 1` <br>
+       Expected: The rating of the 1st restaurant is removed. The output box will display a message that the rating is removed from the restaurant.
+
+2. Removing a rating for a restaurant without a rating 
+
+    * Prerequisites: There must be at least one restaurant in the current directory. The 1st restaurant does not have a rating.
+
+    1. Test case: `unrate 1` <br>
+       Expected: No rating is removed from the 1st restaurant. The output box will display an error message indicating the restaurant has no rating to remove.
+
+3. Missing index
+
+    * Prerequisites: None.
+
+    1. Test case: `unrate`<br>
+       Expected: No rating is removed. The output box will display an error message indicating an invalid command and the syntax for the unrate command.
+
+4. Providing an invalid index
+
+    * Prerequisites: There is less than 100 restaurants in the current directory.
+
+    1. Test case: `unrate 100`<br>
+       Expected: No rating is removed. The output box will display an error message indicating an invalid index is provided.
+
+    2. Test case: `unrate x`<br>
+       Expected: No rating is removed. The output box will display an error message indicating that the index is not a non-zero unsigned integer.
+

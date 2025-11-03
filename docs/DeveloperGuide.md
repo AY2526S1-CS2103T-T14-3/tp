@@ -428,7 +428,7 @@ testers are expected to do more *exploratory* testing.
        Expected: A new restaurant called `McDonald's` is added to the directory. The output box shows the details of 
        the added restaurant as well.
 
-2. Adding a duplicate restaurant to the restaurant directory
+2. Adding a duplicate restaurant
 
     * Prerequisites: There is a restaurant named `McDonald's` in the restaurant directory with the phone number
       `68928572` and the address `1 Jelebu Road, #02-01, Bukit Panjang Plaza, Singapore 677743`.
@@ -545,10 +545,20 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a tag for an existing restaurant in the restaurant directory
 
-   * Prerequisites: There must be at least one restaurant in the current directory.
+   * Prerequisites: There must be at least one restaurant in the current directory. The first restaurant does not 
+     have any tags.
    
     1. Test case: `tag 1 t/halal` <br>
-       Expected: The tag of the restaurant is updated to halal. The output box shows the corresponding details of the updated restaurant.
+       Expected: A `halal` tag is added to the 1st restaurant. The output box shows the corresponding details of 
+       the updated restaurant.
+
+2. Adding a duplicate tag 
+
+    * Prerequisites: There must be at least one restaurant in the current directory. The first restaurant has a `halal` 
+      tag.
+
+    1. Test case: `tag 1 t/halal` <br>
+       Expected: No duplicate tag is added. Error details indicate existence of the `halal` tag for the restaurant.
 
 
 ### Removing a tag from a restaurant: untag

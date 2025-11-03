@@ -251,7 +251,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `FoodTrail` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FoodTrail` and the **Actor** is the `User`, unless specified otherwise)
 
 **Use case: UC01 - Add a restaurant**
 
@@ -266,7 +266,7 @@ Extensions:
 
 * 1a. The input does not follow the command format.
 
-    * 1a1.  FoodTrail shows an error message, notifying the user about the command format.
+    * 1a1. FoodTrail shows an error message, notifying the user about the command format.
 
       Use case resumes at step 1.
 
@@ -276,6 +276,7 @@ Extensions:
 
       Use case resumes at step 1.
 
+<br>
 
 **Use case: UC02 - List restaurants**
 
@@ -284,7 +285,7 @@ MSS:
 1. User requests to list restaurants.
 2. FoodTrail shows a list of restaurants.
 
-    Use case ends.
+   Use case ends.
 
 Extensions:
 
@@ -292,14 +293,41 @@ Extensions:
 
   Use case ends.
 
-**Use case: UC03 - Edit a restaurant**
+<br>
 
-MSS: 
+**Use case: UC03 - Find a restaurant**
+
+MSS:
+
+1. User requests to find restaurants matching a given keyword.
+2. FoodTrail displays a filtered directory of restaurants whose name, phone number, address, or tag matches the keyword.
+
+   Use case ends.
+
+Extensions:
+
+* 1a. The input does not follow the command format.
+
+    * 1a1. FoodTrail shows an error message, notifying the user about command format for find.
+
+      Use case resumes at step 1.
+
+* 1b. No restaurants match the given keyword.
+
+    * 1b1. FoodTrail displays 0 restaurants in the current directory.
+
+      Use case ends.
+
+<br>
+
+**Use case: UC04 - Edit a restaurant**
+
+MSS:
 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
-2. User requests to edit the details of a specific restaurant in the list.
+2. User requests to edit the details of a specific restaurant in the current directory.
 3. FoodTrail updates the restaurant's details with the provided information.
 
-    Use case ends.
+   Use case ends.
 
 Extensions:
 
@@ -321,52 +349,29 @@ Extensions:
 
       Use case resumes at step 2.
 
-* 2d. The edited details reflect an existing restaurant in the list
+* 2d. The edited details reflect an existing restaurant in the current directory.
 
     * 2d1. FoodTrail shows an error message, notifying the user about the duplicate restaurant.
 
       Use case resumes at step 2.
 
-**Use case: UC04 - Find a restaurant**
-
-MSS:
-
-1. User requests to find restaurants matching a given keyword.
-2. FoodTrail displays a list of restaurants whose name, phone number, address or tag matches the keyword.
-
-    Use case ends.
-
-Extensions:
-
-* 1a. There are missing parameters or invalid syntax.
-
-    * 1a1. FoodTrail shows an error message, notifying the user about the syntax for find.
-
-      Use case resumes at step 1.
-
-* 1b. No restaurants matches the given keyword.
-
-    * 1b1. FoodTrail shows an error message, notifying the user about the no match.
-
-      Use case ends.
-
-
+<br>
 
 **Use case: UC05 - Delete a restaurant**
 
 MSS:
 
 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
-2. User requests to delete a specific restaurant in the list.
+2. User requests to delete a specific restaurant in the current directory.
 3. FoodTrail deletes the specified restaurant.
 
-    Use case ends.
+   Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrails shows an error message, notifying the user about the syntax for delete.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for delete.
 
       Use case resumes at step 2.
 
@@ -376,22 +381,23 @@ Extensions:
 
       Use case resumes at step 2.
 
+<br>
 
 **Use case: UC06 - Mark a restaurant as visited**
 
 MSS:
 
 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
-2. User requests to mark a specific restaurant in the list as visited.
+2. User requests to mark a specific restaurant in the current directory as visited.
 3. FoodTrail marks the specified restaurant as visited.
 
    Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for mark.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for mark.
 
       Use case resumes at step 2.
 
@@ -407,21 +413,23 @@ Extensions:
 
       Use case resumes at step 2.
 
+<br>
+
 **Use case: UC07 - Unmark a restaurant as visited**
 
 MSS:
 
- 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
- 2. User requests to unmark a specific restaurant in the list as visited.
- 3. FoodTrail unmarks the specified restaurant as visited.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+2. User requests to unmark a specific restaurant in the current directory as visited.
+3. FoodTrail unmarks the specified restaurant as visited.
 
-     Use case ends.
+   Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for unmark.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for unmark.
 
       Use case resumes at step 2.
 
@@ -431,27 +439,29 @@ Extensions:
 
       Use case resumes at step 2.
 
-* 2c. The restaurant of the specified index is already unmarked as visited.
+* 2c. The restaurant of the specified index is already unmarked.
 
-    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant is already unmarked as visited.
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant is already unmarked.
 
       Use case resumes at step 2.
+
+<br>
 
 **Use case: UC08 - Rate a restaurant**
 
 MSS:
 
- 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
- 2. User requests to rate a specific restaurant in the list from 0-5 stars.
- 3. FoodTrail rates the specified restaurant with the number of stars provided.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+2. User requests to rate a specific restaurant in the current directory.
+3. FoodTrail adds a rating for the specified restaurant.
 
-    Use case ends.
+   Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for rate.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for rate.
 
       Use case resumes at step 2.
 
@@ -461,27 +471,29 @@ Extensions:
 
       Use case resumes at step 2.
 
-* 2c. The restaurant of the specified index already has the specified rating
+* 2c. The specified restaurant already has the specified rating.
 
-    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant already has the same rating
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant already has the same rating.
 
       Use case resumes at step 2.
+
+<br>
 
 **Use case: UC09 - Unrate a restaurant**
 
 MSS:
 
 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
-2. User requests to remove a rating from a specific restaurant in the list
+2. User requests to remove a rating from a specific restaurant in the current directory.
 3. FoodTrail removes the rating from the specified restaurant.
 
-    Use case ends.
+   Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for unrate.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for unrate.
 
       Use case resumes at step 2.
 
@@ -491,75 +503,73 @@ Extensions:
 
       Use case resumes at step 2.
 
+* 2c. The specified restaurant does not have a rating.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant does not have a rating.
+
+      Use case resumes at step 2.
+
+<br>
 
 **Use case: UC10 - Tag a restaurant**
 
 MSS:
 
 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
-2. User requests to tag a specified restaurant in the list with a specified tag.
+2. User requests to add a tag to a specific restaurant in the current directory.
 3. FoodTrail tags the restaurant with the provided tag.
 
    Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for tag.
-
-      Use case resumes at step 2.
-
-
-* 2b. There is missing index or tag.
-
-    * 2b1. FoodTrail shows an error message, instructing the user to provide an index and tag.
-
-        Use case resumes at step 2.
-
-
-* 2c. The given index is invalid.
-
-    * 2c1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for tag.
 
       Use case resumes at step 2.
 
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The specified restaurant already has the provided tag.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the specified restaurant already has the provided tag.
+
+      Use case resumes at step 2.
+
+<br>
 
 **Use case: UC11 - Untag a restaurant**
 
 MSS:
 
- 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
- 2. User requests to untag a specified restaurant in the list with a specified tag.
- 3. FoodTrail untags the restaurant with the provided tag.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+2. User requests to remove a tag from a specific restaurant in the current directory.
+3. FoodTrail untags the restaurant with the provided tag.
 
-    Use case ends.
+   Use case ends.
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 2a. The input does not follow the command format.
 
-    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for untag.
-
-      Use case resumes at step 2.
-
-
-* 2b. There is missing index or tag.
-
-    * 2b1. FoodTrail shows an error message, instructing the user to provide an index and tag.
-
-        Use case resumes at step 2.
-
-
-* 2c. The given index is invalid.
-
-    * 2c1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for untag.
 
       Use case resumes at step 2.
 
-* 2d. The given tag does not exist.
+* 2b. The given index is invalid.
 
-    * 2d1. FoodTrails shows and error message, notifying the user that the tag does not exist for the restaurant.
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The specified restaurant does not have the provided tag.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the specified restaurant does not have the provided tag.
 
       Use case resumes at step 2.
 
@@ -617,6 +627,7 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by entering `java -jar foodtrail.jar` in the command terminal.<br>
       Expected: The most recent window size and location is retained.
 
+<br>
 
 ### Listing all restaurants: list
 
@@ -630,6 +641,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `list x`<br>
       Expected: Similar to previous.
 
+<br>
 
 ### Adding a restaurant: add
 
@@ -679,6 +691,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect commands to try: missing address, missing phone number <br>
        Expected: Similar to previous.
 
+<br>
 
 ### Deleting a restaurant: delete
 
@@ -706,6 +719,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `delete x`<br>
       Expected: No restaurant is deleted. The output box will display an error message indicating an invalid command and the syntax for the delete command.
 
+<br>
 
 ### Editing a restaurant: edit
 
@@ -774,7 +788,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit 100 n/KFC`<br>
        Expected: No restaurant is edited. The output box will display an error message indicating an invalid index is provided.
 
-       
+<br>
+
 ### Adding a tag to a restaurant: tag
 
 1. Adding tags for an existing restaurant in the restaurant directory
@@ -836,6 +851,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `tag x t/halal`<br>
        Expected: No tag is added. The output box will display an error message indicating an invalid command and the syntax for the tag command.
 
+<br>
 
 ### Removing a tag from a restaurant: untag
 
@@ -891,6 +907,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `untag x`<br>
        Expected: No tag is removed. The output box will display an error message indicating an invalid command and the syntax for the untag command.
 
+<br>
 
 ### Finding restaurants: find
 
@@ -911,6 +928,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `find` <br>
        Expected: The current directory remains unchanged. The output box will display an error message indicating an invalid command and the syntax for the find command.
 
+<br>
 
 ### Marking a restaurant as visited: mark
 
@@ -938,6 +956,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `mark x`<br>
        Expected: No restaurant is marked as visited. The output box will display an error message indicating an invalid command and the syntax for the mark command.
 
+<br>
 
 ### Marking a restaurant as not visited: unmark
 
@@ -965,6 +984,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `unmark x`<br>
        Expected: No restaurant is unmarked. The output box will display an error message indicating an invalid command and the syntax for the unmark command.
 
+<br>
 
 ### Adding a rating for a restaurant: rate
 
@@ -1030,6 +1050,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `rate x r/5`<br>
        Expected: No rating is added. The output box will display an error message indicating that the index is not a non-zero unsigned integer.
 
+<br>
 
 ### Removing a rating from a restaurant: unrate
 
@@ -1063,4 +1084,3 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `unrate x`<br>
        Expected: No rating is removed. The output box will display an error message indicating that the index is not a non-zero unsigned integer.
-

@@ -253,23 +253,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `FoodTrail` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - List restaurants**
-
-MSS:
-
-1. User requests to list restaurants.
-2. FoodTrail shows a list of restaurants.
-
-    Use case ends.
-
-Extensions:
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-
-**Use case: UC02 - Add a restaurant**
+**Use case: UC01 - Add a restaurant**
 
 MSS:
 
@@ -280,18 +264,99 @@ MSS:
 
 Extensions:
 
-* 2a. There are missing parameters or invalid syntax.
+* 1a. The input does not follow the command format.
 
-    * 2a1.  FoodTrail shows an error message, notifying the user about the syntax for add.
+    * 1a1.  FoodTrail shows an error message, notifying the user about the command format.
+
+      Use case resumes at step 1.
+
+* 1b. The entered restaurant details matches an existing restaurant in the restaurant directory.
+
+    * 1b1. FoodTrail shows an error message, notifying the user that the restaurant already exists in the restaurant directory.
 
       Use case resumes at step 1.
 
 
-**Use case: UC03 - Delete a restaurant**
+**Use case: UC02 - List restaurants**
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User requests to list restaurants.
+2. FoodTrail shows a list of restaurants.
+
+    Use case ends.
+
+Extensions:
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC03 - Edit a restaurant**
+
+MSS: 
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+2. User requests to edit the details of a specific restaurant in the list.
+3. FoodTrail updates the restaurant's details with the provided information.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. The input does not follow the command format.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about command format for edit.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. No prefix was provided.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that one field must be provided.
+
+      Use case resumes at step 2.
+
+* 2d. The edited details reflect an existing restaurant in the list
+
+    * 2d1. FoodTrail shows an error message, notifying the user about the duplicate restaurant.
+
+      Use case resumes at step 2.
+
+**Use case: UC04 - Find a restaurant**
+
+MSS:
+
+1. User requests to find restaurants matching a given keyword.
+2. FoodTrail displays a list of restaurants whose name, phone number, address or tag matches the keyword.
+
+    Use case ends.
+
+Extensions:
+
+* 1a. There are missing parameters or invalid syntax.
+
+    * 1a1. FoodTrail shows an error message, notifying the user about the syntax for find.
+
+      Use case resumes at step 1.
+
+* 1b. No restaurants matches the given keyword.
+
+    * 1b1. FoodTrail shows an error message, notifying the user about the no match.
+
+      Use case ends.
+
+
+
+**Use case: UC05 - Delete a restaurant**
+
+MSS:
+
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to delete a specific restaurant in the list.
 3. FoodTrail deletes the specified restaurant.
 
@@ -299,18 +364,24 @@ MSS:
 
 Extensions:
 
-* 3a. The given index is invalid.
+* 2a. There are missing parameters or invalid syntax.
 
-    * 3a1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrails shows an error message, notifying the user about the syntax for delete.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
 
       Use case resumes at step 2.
 
 
-**Use case: UC04 - Mark a restaurant as visited**
+**Use case: UC06 - Mark a restaurant as visited**
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to mark a specific restaurant in the list as visited.
 3. FoodTrail marks the specified restaurant as visited.
 
@@ -318,18 +389,114 @@ MSS:
 
 Extensions:
 
-* 3a. The given index is invalid.
+* 2a. There are missing parameters or invalid syntax.
 
-    * 3a1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for mark.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The restaurant of the specified index is already marked as visited.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant is already marked as visited.
+
+      Use case resumes at step 2.
+
+**Use case: UC07 - Unmark a restaurant as visited**
+
+MSS:
+
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+ 2. User requests to unmark a specific restaurant in the list as visited.
+ 3. FoodTrail unmarks the specified restaurant as visited.
+
+     Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for unmark.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The restaurant of the specified index is already unmarked as visited.
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant is already unmarked as visited.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Rate a restaurant**
+
+MSS:
+
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+ 2. User requests to rate a specific restaurant in the list from 0-5 stars.
+ 3. FoodTrail rates the specified restaurant with the number of stars provided.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for rate.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2c. The restaurant of the specified index already has the specified rating
+
+    * 2c1. FoodTrail shows an error message, notifying the user that the restaurant already has the same rating
+
+      Use case resumes at step 2.
+
+**Use case: UC09 - Unrate a restaurant**
+
+MSS:
+
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+2. User requests to remove a rating from a specific restaurant in the list
+3. FoodTrail removes the rating from the specified restaurant.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for unrate.
+
+      Use case resumes at step 2.
+
+* 2b. The given index is invalid.
+
+    * 2b1. FoodTrail shows an error message, notifying the user about the invalid index.
 
       Use case resumes at step 2.
 
 
-**Use case: UC05 - Tag a restaurant**
+**Use case: UC10 - Tag a restaurant**
 
 MSS:
 
-1. User <span style="text-decoration:underline">lists restaurants (UC01)</span>.
+1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
 2. User requests to tag a specified restaurant in the list with a specified tag.
 3. FoodTrail tags the restaurant with the provided tag.
 
@@ -337,18 +504,65 @@ MSS:
 
 Extensions:
 
-* 3a. There is missing index or tag.
+* 2a. There are missing parameters or invalid syntax.
 
-    * 3a1. FoodTrail shows an error message, instructing the user to provide an index and tag.
-
-    Use case resumes at step 2.
-
-
-* 3b. The given index is invalid.
-
-    * 3b1. FoodTrail shows an error message, notifying the user about the invalid index.
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for tag.
 
       Use case resumes at step 2.
+
+
+* 2b. There is missing index or tag.
+
+    * 2b1. FoodTrail shows an error message, instructing the user to provide an index and tag.
+
+        Use case resumes at step 2.
+
+
+* 2c. The given index is invalid.
+
+    * 2c1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+
+**Use case: UC11 - Untag a restaurant**
+
+MSS:
+
+ 1. User <span style="text-decoration:underline">lists restaurants (UC02)</span>.
+ 2. User requests to untag a specified restaurant in the list with a specified tag.
+ 3. FoodTrail untags the restaurant with the provided tag.
+
+    Use case ends.
+
+Extensions:
+
+* 2a. There are missing parameters or invalid syntax.
+
+    * 2a1. FoodTrail shows an error message, notifying the user about the syntax for untag.
+
+      Use case resumes at step 2.
+
+
+* 2b. There is missing index or tag.
+
+    * 2b1. FoodTrail shows an error message, instructing the user to provide an index and tag.
+
+        Use case resumes at step 2.
+
+
+* 2c. The given index is invalid.
+
+    * 2c1. FoodTrail shows an error message, notifying the user about the invalid index.
+
+      Use case resumes at step 2.
+
+* 2d. The given tag does not exist.
+
+    * 2d1. FoodTrails shows and error message, notifying the user that the tag does not exist for the restaurant.
+
+      Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 

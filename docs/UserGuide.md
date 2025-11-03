@@ -274,7 +274,7 @@ Format: `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [a/ADDRESS]​`
 
 ### Locating restaurants: `find`
 
-You can enter a keyword to locate specific restaurants in the directory. The keyword searches across the 
+Trying to search for a restaurant? You can enter a keyword to locate specific restaurants in the directory. The keyword searches across the 
 name, address, phone number, and tags all at once.
 
 Format: `find KEYWORD`
@@ -362,7 +362,7 @@ Format: `unmark INDEX`
 
 ### Rating a restaurant: `rate`
 
-You can give a rating to a restaurant in the directory.
+Want to remember your dining experience? You can give a rating to a restaurant in the directory.
 
 Format: `rate INDEX r/RATING`
 
